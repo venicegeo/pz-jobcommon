@@ -13,4 +13,6 @@ public interface PiazzaJob {
 	public String getType();
 
 	public String getJobId();
+	
+	public void setJobId(String jobId);
 }

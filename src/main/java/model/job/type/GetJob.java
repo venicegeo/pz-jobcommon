@@ -20,4 +20,8 @@ public class GetJob implements PiazzaJob {
 	public String getJobId() {
 		return jobId;
 	}
+
+	public void setJobId(String jobId) {
+		this.jobId = jobId;
+	}
 }

@@ -24,7 +24,8 @@ public class JobMessageFactory {
 	 * @throws JsonProcessingException
 	 *             The PiazzaJob cannot be serialized to JSON.
 	 */
-	public static ProducerRecord<String, String> getJobMessage(PiazzaJob piazzaJob) throws JsonProcessingException {
+	public static ProducerRecord<String, String> getJobMessage(PiazzaJob piazzaJob)
+			throws JsonProcessingException {
 		ObjectMapper mapper = new ObjectMapper();
 		return new ProducerRecord<String, String>(piazzaJob.getJobId(), "Job", mapper.writeValueAsString(piazzaJob));
 	}
