@@ -1,4 +1,4 @@
-# pz-jobcommon
+# Common Job Java API/Models
 Common Java models and factories shared between the Gateway/Dispatcher/JobManager components. This must be in your Maven repository before those components will build.
 
 ## Setup
