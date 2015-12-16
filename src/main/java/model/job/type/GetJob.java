@@ -24,4 +24,8 @@ public class GetJob implements PiazzaJob {
 	public void setJobId(String jobId) {
 		this.jobId = jobId;
 	}
+	
+	public boolean isSynchronous() {
+		return true;
+	}
 }

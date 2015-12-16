@@ -5,6 +5,7 @@ import model.job.PiazzaJob;
 public class AbortJob implements PiazzaJob {
 	public String jobId = null;
 	public final String type = "abort";
+	public String reason;
 
 	public AbortJob() {
 
@@ -26,4 +27,7 @@ public class AbortJob implements PiazzaJob {
 		this.jobId = jobId;
 	}
 
+	public boolean isSynchronous() {
+		return false;
+	}
 }

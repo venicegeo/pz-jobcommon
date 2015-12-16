@@ -15,4 +15,10 @@ public interface PiazzaJob {
 	public String getJobId();
 	
 	public void setJobId(String jobId);
+	
+	/**
+	 * Determines if this Job must be processed synchronously through REST, or asynchronously through Kafka.
+	 * @return
+	 */
+	public boolean isSynchronous();
 }
