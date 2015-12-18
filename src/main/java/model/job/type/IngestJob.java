@@ -5,6 +5,7 @@ import model.job.PiazzaJob;
 public class IngestJob implements PiazzaJob {
 	public String jobId = null;
 	public final String type = "ingest";
+	public final boolean synchronous = false;
 
 	public IngestJob() {
 
@@ -26,7 +27,7 @@ public class IngestJob implements PiazzaJob {
 		this.jobId = jobId;
 	}
 
-	public boolean isSynchronous() {
-		return false;
+	public boolean getSynchronous() {
+		return synchronous;
 	}
 }
