@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.joda.time.DateTime;
-import org.mongojack.ObjectId;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -23,14 +22,10 @@ public class Job {
 	public List<JobProgress> history = new ArrayList<JobProgress>();
 	public Object result = null; // TODO: How to represent this model?
 
-	@ObjectId
-	@JsonProperty("_id")
 	public String getJobId() {
 		return jobId;
 	}
 
-	@ObjectId
-	@JsonProperty("_id")
 	public void setJobId(String jobId) {
 		this.jobId = jobId;
 	}
