@@ -1,13 +1,12 @@
 package model.job.type;
 
-import model.job.PiazzaJob;
+import model.job.PiazzaJobType;
 
-public class AbortJob implements PiazzaJob {
+public class AbortJob implements PiazzaJobType {
 	public String jobId = null;
 	public final String type = "abort";
 	public String reason;
-	public final boolean synchronous = false;
-
+	
 	public AbortJob() {
 
 	}
@@ -28,7 +27,4 @@ public class AbortJob implements PiazzaJob {
 		this.jobId = jobId;
 	}
 
-	public boolean getSynchronous() {
-		return synchronous;
-	}
 }

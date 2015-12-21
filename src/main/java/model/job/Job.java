@@ -4,14 +4,32 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.joda.time.DateTime;
+import org.mongojack.ObjectId;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+@JsonInclude(Include.NON_NULL)
 public class Job {
 	public String jobId;
-	public PiazzaJob jobType;
+	public PiazzaJobType jobType;
 	public DateTime submitted;
-	public String submitter;
+	public String submitterApiKey;
 	public String status;
 	public JobProgress progress = new JobProgress();
 	public List<JobProgress> history = new ArrayList<JobProgress>();
 	public Object result = null; // TODO: How to represent this model?
+
+	@ObjectId
+	@JsonProperty("_id")
+	public String getJobId() {
+		return jobId;
+	}
+
+	@ObjectId
+	@JsonProperty("_id")
+	public void setJobId(String jobId) {
+		this.jobId = jobId;
+	}
 }

@@ -2,8 +2,8 @@ package messaging.job;
 
 import java.io.IOException;
 
-import model.job.PiazzaJob;
-import model.request.PiazzaRequest;
+import model.job.Job;
+import model.request.PiazzaJobRequest;
 
 import org.apache.kafka.clients.producer.ProducerRecord;
 
@@ -20,22 +20,27 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  * 
  */
 public class JobMessageFactory {
+	private static final String REQUEST_JOB_TOPIC_NAME = "Request-Job";
+	private static final String CREATE_JOB_TOPIC_NAME = "Create-Job";
+
 	/**
 	 * Creates a Kafka message for a Piazza Job to be created. This Topic is
 	 * listened to solely by the Dispatcher and acts as a simple pass-through
 	 * from the outer world to the internal Piazza components.
 	 * 
-	 * @param piazzaJob
+	 * @param piazzaRequest
 	 *            The Job to be created.
+	 * @param jobId
+	 *            The ID of the Job
 	 * @return Kafka message
 	 * @throws JsonProcessingException
 	 *             The PiazzaJob cannot be serialized to JSON.
 	 */
-	public static ProducerRecord<String, String> getRequestJobMessage(PiazzaJob piazzaJob)
+	public static ProducerRecord<String, String> getRequestJobMessage(PiazzaJobRequest piazzaRequest, String jobId)
 			throws JsonProcessingException {
 		ObjectMapper mapper = new ObjectMapper();
-		return new ProducerRecord<String, String>("Request-Job", piazzaJob.getJobId(),
-				mapper.writeValueAsString(piazzaJob));
+		return new ProducerRecord<String, String>(REQUEST_JOB_TOPIC_NAME, jobId,
+				mapper.writeValueAsString(piazzaRequest));
 	}
 
 	/**
@@ -44,17 +49,15 @@ public class JobMessageFactory {
 	 * the processing of such a job. The JobManager will also track this message
 	 * and use it to commit the job transaction record into the Job Tables.
 	 * 
-	 * @param piazzaJob
+	 * @param job
 	 *            The Job to be created.
 	 * @return Kafka message
 	 * @throws JsonProcessingException
 	 *             The PiazzaJob cannot be serialized to JSON.
 	 */
-	public static ProducerRecord<String, String> getCreateJobMessage(PiazzaJob piazzaJob)
-			throws JsonProcessingException {
+	public static ProducerRecord<String, String> getCreateJobMessage(Job job) throws JsonProcessingException {
 		ObjectMapper mapper = new ObjectMapper();
-		return new ProducerRecord<String, String>("Create-Job", piazzaJob.getJobId(),
-				mapper.writeValueAsString(piazzaJob));
+		return new ProducerRecord<String, String>(CREATE_JOB_TOPIC_NAME, job.getJobId(), mapper.writeValueAsString(job));
 	}
 
 	/**
@@ -66,9 +69,9 @@ public class JobMessageFactory {
 	 * @return PiazzaRequest object for the JSON Payload.
 	 * @throws Exception
 	 */
-	public static PiazzaRequest parseRequestJson(String json) throws IOException, JsonParseException,
+	public static PiazzaJobRequest parseRequestJson(String json) throws IOException, JsonParseException,
 			JsonMappingException {
-		PiazzaRequest request = new ObjectMapper().readValue(json, PiazzaRequest.class);
+		PiazzaJobRequest request = new ObjectMapper().readValue(json, PiazzaJobRequest.class);
 		return request;
 	}
 }

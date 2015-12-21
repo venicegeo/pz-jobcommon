@@ -1,11 +1,10 @@
 package model.job.type;
 
-import model.job.PiazzaJob;
+import model.job.PiazzaJobType;
 
-public class GetJob implements PiazzaJob {
+public class GetJob implements PiazzaJobType {
 	public String jobId = null;
 	public final String type = "get";
-	public final boolean synchronous = true;
 
 	public GetJob() {
 	}
@@ -24,9 +23,5 @@ public class GetJob implements PiazzaJob {
 
 	public void setJobId(String jobId) {
 		this.jobId = jobId;
-	}
-	
-	public boolean getSynchronous() {
-		return synchronous;
 	}
 }

@@ -14,18 +14,6 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 @JsonSubTypes({ @Type(value = GetJob.class, name = "get"), @Type(value = AbortJob.class, name = "abort"),
 		@Type(value = IngestJob.class, name = "ingest") })
 @JsonInclude(Include.NON_NULL)
-public interface PiazzaJob {
+public interface PiazzaJobType {
 	public String getType();
-
-	public String getJobId();
-
-	public void setJobId(String jobId);
-
-	/**
-	 * Determines if this Job must be processed synchronously through REST, or
-	 * asynchronously through Kafka.
-	 * 
-	 * @return
-	 */
-	public boolean getSynchronous();
 }
