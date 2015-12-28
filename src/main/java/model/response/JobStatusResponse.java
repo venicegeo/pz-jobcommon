@@ -1,5 +1,6 @@
 package model.response;
 
+import model.job.Job;
 import model.job.JobProgress;
 
 /**
@@ -16,7 +17,11 @@ public class JobStatusResponse extends PiazzaResponse {
 	public String status;
 	public JobProgress progress;
 
-	public JobStatusResponse(String jobId) {
-		super(jobId);
+	public JobStatusResponse(Job job) {
+		super(job.getJobId());
+		ready = job.result == null ? false : true;
+		result = job.result;
+		status = job.status;
+		progress = job.progress;
 	}
 }
