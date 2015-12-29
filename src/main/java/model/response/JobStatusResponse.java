@@ -12,10 +12,15 @@ import model.job.JobProgress;
  * 
  */
 public class JobStatusResponse extends PiazzaResponse {
+	private String type = "status";
 	public Boolean ready = false;
 	public Object result = null;
 	public String status;
 	public JobProgress progress;
+
+	public JobStatusResponse() {
+		super();
+	}
 
 	public JobStatusResponse(Job job) {
 		super(job.getJobId());
