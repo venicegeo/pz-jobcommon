@@ -3,7 +3,9 @@ package messaging.job;
 import java.io.IOException;
 
 import model.job.Job;
+import model.job.type.AbortJob;
 import model.request.PiazzaJobRequest;
+import model.status.StatusUpdate;
 
 import org.apache.kafka.clients.producer.ProducerRecord;
 
@@ -20,8 +22,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  * 
  */
 public class JobMessageFactory {
-	private static final String REQUEST_JOB_TOPIC_NAME = "Request-Job";
-	private static final String CREATE_JOB_TOPIC_NAME = "Create-Job";
+	public static final String REQUEST_JOB_TOPIC_NAME = "Request-Job";
+	public static final String CREATE_JOB_TOPIC_NAME = "Create-Job";
+	public static final String ABORT_JOB_TOPIC_NAME = "Abort-Job";
+	public static final String UPDATE_JOB_TOPIC_NAME = "Update-Job";
 
 	/**
 	 * Creates a Kafka message for a Piazza Job to be created. This Topic is
@@ -41,6 +45,41 @@ public class JobMessageFactory {
 		ObjectMapper mapper = new ObjectMapper();
 		return new ProducerRecord<String, String>(REQUEST_JOB_TOPIC_NAME, jobId,
 				mapper.writeValueAsString(piazzaRequest));
+	}
+
+	/**
+	 * Creates a Kafka message for a Piazza Job to be cancelled; referenced by
+	 * Job ID. This message is consumed by the Job Manager, which will update
+	 * the Job Tables, and any other components that are required to act on the
+	 * Job being cancelled.
+	 * 
+	 * @param abortJob
+	 *            The Job, describing the Job to abort and potential reason for
+	 *            requesting the cancellation.
+	 * @return Kafka Message
+	 * @throws JsonProcessingException
+	 */
+	public static ProducerRecord<String, String> getAbortJobMessage(AbortJob abortJob) throws JsonProcessingException {
+		ObjectMapper mapper = new ObjectMapper();
+		return new ProducerRecord<String, String>(ABORT_JOB_TOPIC_NAME, abortJob.getJobId(),
+				mapper.writeValueAsString(abortJob));
+	}
+
+	/**
+	 * Creates a Kafka message that wraps up a Status Update for a Job. This is
+	 * intended to be produced by the Worker component that owns this Job.
+	 * 
+	 * @param jobId
+	 *            The ID of the Job being updated
+	 * @param statusUpdate
+	 *            Status Update information
+	 * @return
+	 * @throws JsonProcessingException
+	 */
+	public static ProducerRecord<String, String> getUpdateStatusMessage(String jobId, StatusUpdate statusUpdate)
+			throws JsonProcessingException {
+		ObjectMapper mapper = new ObjectMapper();
+		return new ProducerRecord<String, String>(UPDATE_JOB_TOPIC_NAME, jobId, mapper.writeValueAsString(statusUpdate));
 	}
 
 	/**
