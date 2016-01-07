@@ -6,6 +6,8 @@ public class DeleteServiceJob implements PiazzaJobType {
 
 		public String jobId = null;
 		public final String type = "delete-service";
+		public String serviceID;
+		public String reason;
 
 		public DeleteServiceJob() {
 

@@ -6,6 +6,7 @@ public class ReadServiceMetadataJob implements PiazzaJobType {
 
 		public String jobId = null;
 		public final String type = "read-service";
+		public String serviceID;
 		
 		public ReadServiceMetadataJob() {
 
