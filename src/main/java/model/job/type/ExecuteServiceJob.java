@@ -5,7 +5,7 @@ import model.job.PiazzaJobType;
 public class ExecuteServiceJob implements PiazzaJobType {
 
 		public String jobId = null;
-		public final String type = "ExecuteService";
+		public final String type = "execute-service";
 		
 		public ExecuteServiceJob() {
 

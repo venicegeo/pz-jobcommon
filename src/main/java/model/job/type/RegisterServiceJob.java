@@ -5,7 +5,7 @@ import model.job.PiazzaJobType;
 public class RegisterServiceJob implements PiazzaJobType {
 
 		public String jobId = null;
-		public final String type = "RegisterService";
+		public final String type = "register-service";
 
 		
 		public RegisterServiceJob() {

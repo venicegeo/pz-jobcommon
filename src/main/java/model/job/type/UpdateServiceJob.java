@@ -5,7 +5,7 @@ import model.job.PiazzaJobType;
 public class UpdateServiceJob implements PiazzaJobType {
 
 		public String jobId = null;
-		public final String type = "UpdateService";
+		public final String type = "update-service";
 		
 		public UpdateServiceJob() {
 
