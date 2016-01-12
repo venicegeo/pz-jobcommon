@@ -1,16 +1,19 @@
 package model.job.metadata;
 
 
-import java.util.Map;
+import java.util.List;
 
 import org.joda.time.DateTime;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class ResourceMetadata {
 	
 	public String name;
-	public String serviceID;
+
+	@JsonProperty("_id") 
+	public String resourceId;
 	public String description;
 	public String url;
 	public String networks;
@@ -27,7 +30,8 @@ public class ResourceMetadata {
     public String method;
     public String mimeType;
     public String param;
-    public Map <String, String> params;
+    @JsonProperty("params")
+    public List <String> params;
     public String reason;
 	
 

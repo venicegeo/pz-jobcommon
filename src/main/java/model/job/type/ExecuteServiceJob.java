@@ -1,12 +1,27 @@
 package model.job.type;
 
+import java.util.Map;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import model.job.PiazzaJobType;
 
 public class ExecuteServiceJob implements PiazzaJobType {
 
 		public String jobId = null;
-		public String parameters;
-		public String serviceID;
+		@JsonProperty("values")
+		public Map<String, String> values;		
+		public String resourceId;
+		
+		public Map<String,String> getValues() {
+			return values;
+		}
+
+		public void setValues(Map<String,String> values) {
+			this.values = values;
+		}
+
+		
 		public final String type = "execute-service";
 		
 		public ExecuteServiceJob() {
