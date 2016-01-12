@@ -1,6 +1,8 @@
 package model.job.metadata;
 
 
+import java.util.Map;
+
 import org.joda.time.DateTime;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -24,7 +26,8 @@ public class ResourceMetadata {
     public String contacts;
     public String method;
     public String mimeType;
-    public String params;
+    public String param;
+    public Map <String, String> params;
     public String reason;
 	
 

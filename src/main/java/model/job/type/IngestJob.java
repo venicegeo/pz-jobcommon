@@ -5,7 +5,7 @@ import model.job.metadata.ResourceMetadata;
 
 public class IngestJob implements PiazzaJobType {
 	public final String type = "ingest";
-	public ResourceMetadata metadata;
+	public ResourceMetadata data;
 
 	public IngestJob() {
 
