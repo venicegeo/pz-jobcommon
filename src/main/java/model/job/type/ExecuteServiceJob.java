@@ -9,20 +9,35 @@ import model.job.PiazzaJobType;
 public class ExecuteServiceJob implements PiazzaJobType {
 
 		public String jobId = null;
-		@JsonProperty("values")
-		public Map<String, String> values;		
+		@JsonProperty("dataInputs")
+		public Map<String, String> dataInputs;	
+		public String dataInput;
 		public String resourceId;
-		
-		public Map<String,String> getValues() {
-			return values;
-		}
-
-		public void setValues(Map<String,String> values) {
-			this.values = values;
-		}
-
-		
 		public final String type = "execute-service";
+		
+		public Map<String, String> getDataInputs() {
+			return dataInputs;
+		}
+
+		public void setDataInputs(Map<String, String> dataInputs) {
+			this.dataInputs = dataInputs;
+		}
+
+		public String getDataInput() {
+			return dataInput;
+		}
+
+		public void setDataInput(String dataInput) {
+			this.dataInput = dataInput;
+		}
+
+		public String getResourceId() {
+			return resourceId;
+		}
+
+		public void setResourceId(String resourceId) {
+			this.resourceId = resourceId;
+		}		
 		
 		public ExecuteServiceJob() {
 
