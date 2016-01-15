@@ -28,11 +28,11 @@ public class ResourceMetadata {
 	public boolean preAuthRequired;
     public String contacts;
     public String method;
-    public String mimeType;
+    public String requestMimeType;
     public String param;
     @JsonProperty("params")
     public List <String> params;
+    public String responseMimeType;
     public String reason;
-	
 
 }
