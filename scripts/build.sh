@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -ex
 pwd
 pushd `dirname $0` > /dev/null
 base=$(pwd -P)
