@@ -1,4 +1,5 @@
 #!/bin/bash
+pwd
 pushd `dirname $0` > /dev/null
 base=$(pwd -P)
 popd > /dev/null
