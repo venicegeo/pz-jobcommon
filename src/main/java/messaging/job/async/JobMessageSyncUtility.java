@@ -16,16 +16,13 @@ import messaging.job.KafkaClientFactory;
  * 
  */
 public class JobMessageSyncUtility implements Callable<ConsumerRecord<String, String>> {
-
-	private String KAFKA_HOST = "kafka.dev";
-	private String KAFKA_PORT = "9092";
-	private String KAFKA_GROUP = "Test_Group";	
 	
 	private ProducerRecord<String, String> message;
 	private Producer<String, String> producer;
 	private Consumer<String, String> consumer;
 	
-	public JobMessageSyncUtility(ProducerRecord<String,String> msg) {
+	public JobMessageSyncUtility(final String KAFKA_HOST, final String KAFKA_PORT, 
+			final String KAFKA_GROUP, ProducerRecord<String,String> msg) {
 		producer = KafkaClientFactory.getProducer(KAFKA_HOST, KAFKA_PORT);
 		consumer = KafkaClientFactory.getConsumer(KAFKA_HOST, KAFKA_PORT, KAFKA_GROUP);
 
