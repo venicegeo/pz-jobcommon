@@ -9,3 +9,4 @@ mvn clean package
 # Path to output JAR
 jarfile=$base/../target/pz-jobcommon-1.0.0.BUILD-SNAPSHOT.jar
 
+
