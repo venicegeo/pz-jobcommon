@@ -100,6 +100,20 @@ public class JobMessageFactory {
 	}
 
 	/**
+	 * Creates a Kafka message for the Piazza Job Status. This Topic is designed 
+	 * to be consumed by the Piazza Gateway that will return the status to the end-user.
+	 * 
+	 * @param topic The topic to place the message on.
+	 * @param key A field representing a name for the JobId.
+	 * @param value A field representing the JobId value.
+	 *            
+	 * @return Kafka message
+	 */	
+	public static ProducerRecord<String, String> getJobReturnMessage(String topic, String key, String value) {
+		return new ProducerRecord<String, String>(topic, key, value);
+	}
+
+	/**
 	 * Parses the raw JSON Payload into the PiazzaRest backing models. No value
 	 * validation done here, only syntax.
 	 * 
