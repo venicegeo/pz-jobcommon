@@ -14,4 +14,8 @@ public class IngestJob implements PiazzaJobType {
 	public String getType() {
 		return type;
 	}
+
+	public ResourceMetadata getMetadata() {
+		return data;
+	}
 }
