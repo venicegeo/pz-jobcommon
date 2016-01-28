@@ -27,9 +27,9 @@ public class ResourceMetadata {
 	public String classType;
 	@JsonIgnore
 	public DateTime termDate;
-	public boolean clientCertRequired;
-	public boolean credentialsRequired;
-	public boolean preAuthRequired;
+	public Boolean clientCertRequired;
+	public Boolean credentialsRequired;
+	public Boolean preAuthRequired;
 	public String contacts;
 	public String method;
 	public String requestMimeType;
