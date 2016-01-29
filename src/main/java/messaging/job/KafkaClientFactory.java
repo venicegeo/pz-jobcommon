@@ -27,7 +27,7 @@ public class KafkaClientFactory {
 	 */
 	public static KafkaProducer<String, String> getProducer(String host, String port) {
 		Properties props = new Properties();
-		
+
 		props.put("bootstrap.servers", String.format("%s:%s", host, port));
 		props.put("acks", "all");
 		props.put("retries", 0);
@@ -54,15 +54,17 @@ public class KafkaClientFactory {
 	 */
 	public static KafkaConsumer<String, String> getConsumer(String host, String port, String group) {
 		Properties props = new Properties();
-		
+
 		props.put("bootstrap.servers", String.format("%s:%s", host, port));
 		props.put("group.id", group);
 		props.put("enable.auto.commit", "true");
 		props.put("auto.commit.interval.ms", "1000");
 		props.put("session.timeout.ms", "30000");
+		props.put("fetch.min.bytes", 1);
+		props.put("receive.buffer.bytes", "65536");
 		props.put("key.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
 		props.put("value.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
-		
+
 		return new KafkaConsumer<String, String>(props);
 	}
 }
