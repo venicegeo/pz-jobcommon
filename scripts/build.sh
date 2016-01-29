@@ -8,5 +8,5 @@ popd > /dev/null
 mvn clean package
 # Path to output JAR
 jarfile=$base/../target/pz-jobcommon-1.0.0.BUILD-SNAPSHOT.jar
-
-
+# Deploy to S3 Piazza Maven Repo
+mvn deploy
