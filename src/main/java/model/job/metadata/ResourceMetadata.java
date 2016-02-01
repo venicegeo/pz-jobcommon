@@ -13,7 +13,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class ResourceMetadata {
 
 	public String name;
-
+	@JsonProperty("_id")
 	public String id;
 	public String description;
 	public String url;
