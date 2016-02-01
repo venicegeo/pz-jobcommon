@@ -14,8 +14,7 @@ public class ResourceMetadata {
 
 	public String name;
 
-	@JsonProperty("_id")
-	public String resourceId;
+	public String id;
 	public String description;
 	public String url;
 	public String filePath;
