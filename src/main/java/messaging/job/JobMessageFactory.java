@@ -84,31 +84,55 @@ public class JobMessageFactory {
 
 	/**
 	 * Creates a Kafka message for a Piazza Job to be created. This Topic is
-	 * designed to be consumed by internal Piazza components that will handle
-	 * the processing of such a job. The JobManager will also track this message
-	 * and use it to commit the job transaction record into the Job Tables.
+	 * designed to be consumed by the Job Manager component. The JobManager will
+	 * track this message and use it to commit the job transaction record into
+	 * the Job Tables.
 	 * 
 	 * @param job
-	 *            The Job to be created.
+	 *            The Job to be indexed by the Job Manager
 	 * @return Kafka message
 	 * @throws JsonProcessingException
 	 *             The PiazzaJob cannot be serialized to JSON.
 	 */
-	public static ProducerRecord<String, String> getCreateJobMessage(Job job) throws JsonProcessingException {
+	public static ProducerRecord<String, String> getJobManagerCreateJobMessage(Job job) throws JsonProcessingException {
 		ObjectMapper mapper = new ObjectMapper();
 		return new ProducerRecord<String, String>(CREATE_JOB_TOPIC_NAME, job.getJobId(), mapper.writeValueAsString(job));
 	}
 
 	/**
-	 * Creates a Kafka message for the Piazza Job Status. This Topic is designed 
-	 * to be consumed by the Piazza Gateway that will return the status to the end-user.
+	 * Creates a Kafka message for a Piazza Job to be created and consumed by
+	 * the internal Piazza worker. This topic is different from the above
+	 * method, getJobManagerCreateJobMessage, in that it is meant to be consumed
+	 * not by the Job Manager, but the internal component that will be
+	 * performing the actual work on the job. Thus, the topic for this message
+	 * is dynamic based on the JobType's type field.
 	 * 
-	 * @param topic The topic to place the message on.
-	 * @param key A field representing a name for the JobId.
-	 * @param value A field representing the JobId value.
-	 *            
+	 * @param job
+	 *            The Job to be processed by the internal worker component.
+	 * @returnKafka message
+	 * @throws JsonProcessingException
+	 *             The PiazzaJob cannot be serialized to JSON.
+	 */
+	public static ProducerRecord<String, String> getWorkerJobCreateMessage(Job job) throws JsonProcessingException {
+		ObjectMapper mapper = new ObjectMapper();
+		System.out.println(job.jobType.getType());
+		return new ProducerRecord<String, String>(job.jobType.getType(), job.getJobId(), mapper.writeValueAsString(job));
+	}
+
+	/**
+	 * Creates a Kafka message for the Piazza Job Status. This Topic is designed
+	 * to be consumed by the Piazza Gateway that will return the status to the
+	 * end-user.
+	 * 
+	 * @param topic
+	 *            The topic to place the message on.
+	 * @param key
+	 *            A field representing a name for the JobId.
+	 * @param value
+	 *            A field representing the JobId value.
+	 * 
 	 * @return Kafka message
-	 */	
+	 */
 	public static ProducerRecord<String, String> getJobReturnMessage(String topic, String key, String value) {
 		return new ProducerRecord<String, String>(topic, key, value);
 	}
