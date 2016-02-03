@@ -21,6 +21,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
  */
 @JsonInclude(Include.NON_NULL)
 public class DataResource {
+	public String dataId;
 	public ResourceType resourceType;
 	public SpatialMetadata spatialMetadata;
 	public ResourceMetadata metadata;
@@ -39,5 +40,9 @@ public class DataResource {
 
 	public SpatialMetadata getSpatialMetadata() {
 		return spatialMetadata;
+	}
+
+	public String getDataId() {
+		return dataId;
 	}
 }
