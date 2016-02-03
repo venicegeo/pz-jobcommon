@@ -17,7 +17,6 @@ public class ResourceMetadata {
 	public String id;
 	public String description;
 	public String url;
-	public String filePath;
 	public String format;
 	public String networks;
 	public String qos;
