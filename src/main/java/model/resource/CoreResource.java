@@ -6,17 +6,17 @@ public class CoreResource {
 	
 	private String type;
 	private String address;
-	private int host;
+	private String host;
 	
 	@JsonProperty("db-uri")
 	private String dburi;
 	private String port;
 	
 	
-	public int getHost() {
+	public String getHost() {
 		return host;
 	}
-	public void setHost(int host) {
+	public void setHost(String host) {
 		this.host = host;
 	}
 	public String getPort() {
