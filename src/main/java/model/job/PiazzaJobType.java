@@ -17,6 +17,16 @@ import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
+/**
+ * Interface collecting together all of the available Job Types. This is used by
+ * Jackson in order to properly serialize and deserialize all of the Job
+ * messages that are passed throughout the Piazza system.
+ * 
+ * For a list of all of the Job types available, see the model.job.type package.
+ * 
+ * @author Patrick.Doody
+ * 
+ */
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "type")
 @JsonSubTypes({ @Type(value = AbortJob.class, name = "abort"),
 		@Type(value = DeleteServiceJob.class, name = "delete-service"),
