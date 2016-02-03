@@ -2,17 +2,17 @@ package model.job.type;
 
 import model.job.PiazzaJobType;
 
-public class ReadServiceMetadataJob implements PiazzaJobType {
+public class DescribeServiceMetadataJob implements PiazzaJobType {
 
 		public String jobId = null;
 		public final String type = "read-service";
 		public String serviceID;
 		
-		public ReadServiceMetadataJob() {
+		public DescribeServiceMetadataJob() {
 
 		}
 
-		public ReadServiceMetadataJob(String jobId) {
+		public DescribeServiceMetadataJob(String jobId) {
 			this.jobId = jobId;
 		}
 
