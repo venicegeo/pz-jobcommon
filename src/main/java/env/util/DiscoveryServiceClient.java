@@ -15,6 +15,15 @@ import org.springframework.web.client.RestTemplate;
 import model.resource.CoreResource;
 import model.resource.RegisterService;
 
+/**
+ * A Utility for registering a service with the Discover service, and for 
+ * discovering new resources based on the provided resource name. These discovered
+ * resources are used by the PropertyFactory to update the local properties with 
+ * properties from the registered services in Discover.
+ * 
+ * @author Russell.Orf
+ * 
+ */
 public class DiscoveryServiceClient {
 	
 	private String discoveryServiceUrl = null;
