@@ -12,29 +12,31 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 	 *
 	 **/
 public class RegisterService {
-		private String name;
-		@JsonProperty("data")
-		private Map<String, String> data;
-		
-		
-		public Map<String, String> getData() {
-			return data;
-		}
-		public void setData(Map<String, String> data) {
-			this.data = data;
-		}
-		/**
-		 * @return the name
-		 */
-		public String getName() {
-			return name;
-		}
-		/**
-		 * @param name the name to set
-		 */
-		public void setName(String name) {
-			this.name = name;
-		}
-		
-
+	private String name;
+	@JsonProperty("data")
+	private Map<String, String> data;
+	
+	public RegisterService(String name, Map<String,String> data) {
+		setData(data);
+		setName(name);
+	}
+	
+	public Map<String, String> getData() {
+		return data;
+	}
+	public void setData(Map<String, String> data) {
+		this.data = data;
+	}
+	/**
+	 * @return the name
+	 */
+	public String getName() {
+		return name;
+	}
+	/**
+	 * @param name the name to set
+	 */
+	public void setName(String name) {
+		this.name = name;
+	}
 }
