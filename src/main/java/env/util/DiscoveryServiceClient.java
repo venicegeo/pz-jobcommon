@@ -12,19 +12,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
-import env.CoreServiceProperties;
-import env.util.PropertyFactory;
 import model.resource.CoreResource;
 import model.resource.RegisterService;
 
 public class DiscoveryServiceClient {
-	
-//	public static void main(String args[]) {
-//		CoreServiceProperties csp = PropertyFactory.getCoreServiceProperties();
-//		DiscoveryServiceClient dsc = new DiscoveryServiceClient(csp.getDiscoveryServiceUrl());
-//		System.out.println("Props test: " + csp);
-//		dsc.registerServiceWithDiscovery("localhost", null, "pz-dispatcher", false);	
-//	}
 	
 	private String discoveryServiceUrl = null;
 	
