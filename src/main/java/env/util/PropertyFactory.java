@@ -11,6 +11,16 @@ import org.springframework.util.ReflectionUtils;
 
 import env.CoreServiceProperties;
 
+/**
+ * Accessed statically, this populates an instance of the CoreServiceProperties
+ * object with the available environment variables, first loading them from the local properties
+ * file, then from the services registered with Discover. This ordering is important as it essentially
+ * defaults to the local properties if the Discover service is unavailable.
+ * 
+ * 
+ * @author Russell.Orf
+ * 
+ */
 public class PropertyFactory {
 
 	private static CoreServiceProperties CSP = null;

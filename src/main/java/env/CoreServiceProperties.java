@@ -1,5 +1,21 @@
 package env;
 
+/**
+ * Represents the environment variables available to the running Services.
+ * 
+ * This contains properties for accessing the following services:
+ * 		Alerter
+ * 		Discover
+ * 		Dispatcher
+ * 		JobManager
+ * 		Kafka
+ * 		MongoDB
+ * 		ServiceController
+ * 		UUID
+ * 
+ * @author Russell.Orf
+ * 
+ */
 public class CoreServiceProperties {
 	
 	private String alerterServiceUrl;
