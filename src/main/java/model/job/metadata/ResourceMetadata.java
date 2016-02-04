@@ -9,15 +9,22 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * Common Metadata fields used to describe Data or Services within the Piazza
+ * system. This object should be generic enough to be used to attach common
+ * metadata fields to any object stored in the Piazza system.
+ * 
+ * @author Patrick.Doody
+ * 
+ */
 @JsonInclude(Include.NON_NULL)
 public class ResourceMetadata {
 
 	public String name;
-	@JsonProperty("_id")
+
 	public String id;
 	public String description;
 	public String url;
-	public String filePath;
 	public String format;
 	public String networks;
 	public String qos;
