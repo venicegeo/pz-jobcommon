@@ -38,7 +38,7 @@ public class Job {
 	public String status;
 	public JobProgress progress = new JobProgress();
 	public List<JobProgress> history = new ArrayList<JobProgress>();
-	public Object result = null; // TODO: How to represent this model?
+	public String result; // TODO: How to represent this model?
 
 	public String getJobId() {
 		return jobId;

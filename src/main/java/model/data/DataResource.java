@@ -42,6 +42,10 @@ public class DataResource {
 		return spatialMetadata;
 	}
 
+	public void setDataId(String dataId) {
+		this.dataId = dataId;
+	}
+
 	public String getDataId() {
 		return dataId;
 	}

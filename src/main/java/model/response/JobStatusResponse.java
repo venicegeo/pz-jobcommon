@@ -13,7 +13,7 @@ import model.job.JobProgress;
  */
 public class JobStatusResponse extends PiazzaResponse {
 	private String type = "status";
-	public Object result = null;
+	public Object result;
 	public String status;
 	public JobProgress progress;
 

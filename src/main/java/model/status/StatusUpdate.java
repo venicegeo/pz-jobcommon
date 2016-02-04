@@ -34,6 +34,7 @@ public class StatusUpdate {
 
 	private String status;
 	private JobProgress progress;
+	private String result;
 
 	public StatusUpdate() {
 
@@ -62,5 +63,26 @@ public class StatusUpdate {
 
 	public void setProgress(JobProgress progress) {
 		this.progress = progress;
+	}
+
+	/**
+	 * Sets the Result of the Job. This result will likely be an ID that points
+	 * to a resource in the Resources collection.
+	 * 
+	 * As a reminder, by nature, it would seem silly to submit the Result for
+	 * the Job before the Status of the Job is set to COMPLETE. If you're
+	 * attaching the Result to this StatusUpdate object, then it's suggested you
+	 * also set the status flag to completed.
+	 * 
+	 * @param result
+	 *            The result of the Job, or a reference to the Result of the
+	 *            Job.
+	 */
+	public void setResult(String result) {
+		this.result = result;
+	}
+
+	public String getResult() {
+		return result;
 	}
 }
