@@ -75,29 +75,36 @@ public class JobMessageSyncUtility implements Callable<ConsumerRecord<String, St
 	 */
 	public ConsumerRecord<String, String> call() throws Exception {
 		consumer.subscribe(Arrays.asList(message.key().toString()));
-
-		producer.send(message);
+		ConsumerRecords<String, String> consumerRecords = consumer.poll(10);
+		
+		//blocks until complete
+		producer.send(message).get();
 		producer.close();
 
-		// Track the start time
+
 		DateTime startTime = DateTime.now();
 
-		// Poll for messages on the newly created Topic
-		while (true) {
-			ConsumerRecords<String, String> consumerRecords = consumer.poll(1000);
-			for (ConsumerRecord<String, String> consumerRecord : consumerRecords) {
-				// Only one should ever be sent; close consumer.
-				consumer.close();
-				System.out.println("Returning record: " + consumerRecord.toString());
-				return consumerRecord;
-			}
+		boolean done = false;
+		ConsumerRecord<String, String> consumerRecord=null;
+		while (!done) {
 			// Check for Timeout
-			Period period = new Period(startTime, DateTime.now());
-			if (period.getSeconds() > timeout) {
-				// Timeout
-				System.out.println("ASync Utility has timed out.");
+			if ((new Period(startTime, DateTime.now())).getSeconds() > timeout) {
+				consumer.close();
+				System.out.println("**ASync Utility has timed out.\n\n");
 				throw new Exception("The Consumer has timed out while waiting for a response.");
 			}
+
+			// Poll for messages on the newly created Topic
+			consumerRecords = consumer.poll(500);
+			for (ConsumerRecord<String, String> record : consumerRecords) {
+				// Only one should ever be sent; close consumer.
+				done = true;
+				consumerRecord = record;
+				consumer.close();
+			}
 		}
+
+		System.out.println("Returning record: " + consumerRecord.toString() + "\n\n");
+		return consumerRecord;
 	}
 }
