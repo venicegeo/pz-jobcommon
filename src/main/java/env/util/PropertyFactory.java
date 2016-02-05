@@ -43,18 +43,18 @@ public class PropertyFactory {
 			CSP = new CoreServiceProperties();		
 			loadDefaultProps();
 			
-			DSC = new DiscoveryServiceClient(CSP.getDiscoveryServiceUrl());
-			DSC.registerServiceWithDiscovery(CSP.getRegisterHost(), CSP.getRegisterPort(), CSP.getRegisterResourceName(), false);
-			
-			loadPropsFromDiscovery();
+//			DSC = new DiscoveryServiceClient(CSP.getDiscoveryServiceUrl());
+//			DSC.registerServiceWithDiscovery(CSP.getRegisterHost(), CSP.getRegisterPort(), CSP.getRegisterResourceName(), false);
+//			
+//			loadPropsFromDiscovery();
 		} catch (IOException e) {
 			e.printStackTrace();
-		} catch (NoSuchFieldException e) {
-			e.printStackTrace();
-		} catch (SecurityException e) {
-			e.printStackTrace();
-		} catch (NoSuchMethodException e) {
-			e.printStackTrace();
+//		} catch (NoSuchFieldException e) {
+//			e.printStackTrace();
+//		} catch (SecurityException e) {
+//			e.printStackTrace();
+//		} catch (NoSuchMethodException e) {
+//			e.printStackTrace();
 		}
 	}
 	
