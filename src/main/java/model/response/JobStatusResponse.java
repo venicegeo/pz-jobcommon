@@ -13,8 +13,7 @@ import model.job.JobProgress;
  */
 public class JobStatusResponse extends PiazzaResponse {
 	private String type = "status";
-	public Boolean ready = false;
-	public Object result = null;
+	public Object result;
 	public String status;
 	public JobProgress progress;
 
@@ -24,7 +23,6 @@ public class JobStatusResponse extends PiazzaResponse {
 
 	public JobStatusResponse(Job job) {
 		super(job.getJobId());
-		ready = job.result == null ? false : true;
 		result = job.result;
 		status = job.status;
 		progress = job.progress;

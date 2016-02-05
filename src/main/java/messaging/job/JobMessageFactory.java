@@ -69,6 +69,11 @@ public class JobMessageFactory {
 	 * Creates a Kafka message that wraps up a Status Update for a Job. This is
 	 * intended to be produced by the Worker component that owns this Job.
 	 * 
+	 * This can also be used to post the result to the Job. If you're setting
+	 * the status of the job to complete, you can also set the
+	 * StatusUpdate.setResult() method to attach some resulting object or ID
+	 * that the job has created.
+	 * 
 	 * @param jobId
 	 *            The ID of the Job being updated
 	 * @param statusUpdate
