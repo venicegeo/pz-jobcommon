@@ -1,5 +1,7 @@
 package model.job.type;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import model.job.PiazzaJobType;
 
 /**
@@ -21,12 +23,14 @@ import model.job.PiazzaJobType;
  * 
  */
 public class AccessJob implements PiazzaJobType {
+	@JsonIgnore
 	public static final String ACCESS_TYPE_GEOSERVER = "geoserver";
+	@JsonIgnore
 	public static final String ACCESS_TYPE_FILE = "file";
 
-	public String resourceId;
 	public final String type = "access";
-	public String deploymentType = ACCESS_TYPE_GEOSERVER;
+	public String resourceId;
+	public String deploymentType;
 
 	public AccessJob() {
 	}
