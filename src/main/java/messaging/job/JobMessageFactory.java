@@ -156,4 +156,5 @@ public class JobMessageFactory {
 		PiazzaJobRequest request = new ObjectMapper().readValue(json, PiazzaJobRequest.class);
 		return request;
 	}
+
 }

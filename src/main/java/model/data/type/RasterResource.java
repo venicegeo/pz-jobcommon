@@ -1,7 +1,7 @@
 package model.data.type;
 
-import model.data.FileResource;
 import model.data.DataType;
+import model.data.location.FileLocation;
 
 /**
  * Represents a Raster image with accompanying file stored somewhere accessible
@@ -13,8 +13,9 @@ import model.data.DataType;
  * @author Patrick.Doody
  * 
  */
-public class RasterResource extends FileResource implements DataType {
+public class RasterResource implements DataType {
 	public static final String type = "raster";
+	public FileLocation location;
 
 	public RasterResource() {
 
@@ -22,5 +23,13 @@ public class RasterResource extends FileResource implements DataType {
 
 	public String getType() {
 		return type;
+	}
+
+	public FileLocation getLocation() {
+		return location;
+	}
+
+	public void setLocation(FileLocation location) {
+		this.location = location;
 	}
 }
