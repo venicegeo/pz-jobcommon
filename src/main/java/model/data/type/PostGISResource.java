@@ -1,6 +1,6 @@
 package model.data.type;
 
-import model.data.ResourceType;
+import model.data.DataType;
 
 /**
  * Vector resource held by a PostGIS table. For example: a Shapefile loaded with
@@ -11,8 +11,8 @@ import model.data.ResourceType;
  * @author Patrick.Doody
  * 
  */
-public class PostGISResource implements ResourceType {
-	private String type = "postgis";
+public class PostGISResource implements DataType {
+	public static final String type = "postgis";
 	public String database;
 	public String table;
 

@@ -5,6 +5,7 @@ import model.job.type.DeleteServiceJob;
 import model.job.type.DescribeServiceMetadataJob;
 import model.job.type.ExecuteServiceJob;
 import model.job.type.GetJob;
+import model.job.type.GetResource;
 import model.job.type.IngestJob;
 import model.job.type.ListServicesJob;
 import model.job.type.RegisterServiceJob;
@@ -35,7 +36,8 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 		@Type(value = DescribeServiceMetadataJob.class, name = "read-service"),
 		@Type(value = RegisterServiceJob.class, name = "register-service"),
 		@Type(value = UpdateServiceJob.class, name = "update-service"),
-		@Type(value = ListServicesJob.class, name = "list-service") })
+		@Type(value = ListServicesJob.class, name = "list-service"),
+		@Type(value = GetResource.class, name = "get-resource") })
 @JsonInclude(Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
 public interface PiazzaJobType {

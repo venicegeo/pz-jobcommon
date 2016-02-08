@@ -2,7 +2,7 @@ package model.data.type;
 
 import java.util.List;
 
-import model.data.ResourceType;
+import model.data.DataType;
 
 /**
  * OGC Web Feature Service (WFS) Resource.
@@ -10,8 +10,8 @@ import model.data.ResourceType;
  * @author Patrick.Doody
  * 
  */
-public class WfsResource implements ResourceType {
-	private String type = "wfs";
+public class WfsResource implements DataType {
+	public static final String type = "wfs";
 	public String url;
 
 	public String version;

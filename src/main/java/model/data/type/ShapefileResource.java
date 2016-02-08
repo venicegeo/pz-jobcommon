@@ -1,7 +1,7 @@
 package model.data.type;
 
 import model.data.FileResource;
-import model.data.ResourceType;
+import model.data.DataType;
 
 /**
  * Shapefile resource with accompanying files on disk.
@@ -9,8 +9,8 @@ import model.data.ResourceType;
  * @author Patrick.Doody
  * 
  */
-public class ShapefileResource extends FileResource implements ResourceType {
-	private String type = "shapefile";
+public class ShapefileResource extends FileResource implements DataType {
+	public static final String type = "shapefile";
 
 	public ShapefileResource() {
 

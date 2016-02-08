@@ -6,6 +6,7 @@ import model.data.type.ShapefileResource;
 import model.data.type.TextResource;
 import model.data.type.WfsResource;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
@@ -28,6 +29,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 		@Type(value = ShapefileResource.class, name = "shapefile"),
 		@Type(value = PostGISResource.class, name = "postgis") })
 @JsonInclude(Include.NON_NULL)
-public interface ResourceType {
+@JsonIgnoreProperties(ignoreUnknown = true)
+public interface DataType {
 	public String getType();
 }
