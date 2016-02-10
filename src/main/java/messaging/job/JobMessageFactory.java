@@ -2,8 +2,10 @@ package messaging.job;
 
 import java.io.IOException;
 
+import model.data.DataResource;
 import model.job.Job;
 import model.job.type.AbortJob;
+import model.job.type.IngestJob;
 import model.request.PiazzaJobRequest;
 import model.status.StatusUpdate;
 
@@ -102,6 +104,57 @@ public class JobMessageFactory {
 	public static ProducerRecord<String, String> getJobManagerCreateJobMessage(Job job) throws JsonProcessingException {
 		ObjectMapper mapper = new ObjectMapper();
 		return new ProducerRecord<String, String>(CREATE_JOB_TOPIC_NAME, job.getJobId(), mapper.writeValueAsString(job));
+	}
+
+	/**
+	 * Creates a Job Request method for an Ingest Job to ingest the specified
+	 * Data Resource, and assigns the specified Job ID to this Ingest job. The
+	 * DataResource passed into this first argument MUST have its DataId
+	 * specified.
+	 * 
+	 * This method is only to be used by internal Piazza components who
+	 * *understand how the Job Process works*. This method is an abstraction
+	 * around creating an IngestJob to the system, where a DataResource is meant
+	 * to be ingested.
+	 * 
+	 * Instead of having the developer create a PiazzaJobRequest, followed up by
+	 * an IngestJob, and then finally specifying the DataResource, this method
+	 * aims to abstract out those first two steps and require only the
+	 * DataResource to be ingested. This method will handle the rest of the
+	 * creation and return the Kafka message that can be sent in order to create
+	 * the Ingst Job.
+	 * 
+	 * @param dataResource
+	 *            The Data Resource to be ingested
+	 * @param jobId
+	 *            The Job ID of the Ingest Job that will be created
+	 * @param apiKey
+	 *            The internal API Key
+	 * @return The Kafka message for creating the Ingest Job, that can be Send
+	 *         via a producer.
+	 */
+	public static ProducerRecord<String, String> getIngestJobForDataResource(DataResource dataResource, String jobId,
+			String apiKey) throws Exception {
+		// Data Resource must have an ID at this point
+		if (dataResource.getDataId() == null) {
+			throw new Exception("The DataResource object must have a populated ID.");
+		}
+
+		// Create the IngestJob
+		IngestJob ingestJob = new IngestJob();
+		ingestJob.data = dataResource;
+		ingestJob.host = true; // This method is only for internal components,
+								// so we will always host
+
+		// Create the Job Request and attach the IngestJob
+		PiazzaJobRequest jobRequest = new PiazzaJobRequest();
+		jobRequest.apiKey = apiKey;
+		jobRequest.jobType = ingestJob;
+		ProducerRecord<String, String> ingestJobMessage = JobMessageFactory.getRequestJobMessage(jobRequest, jobId);
+
+		// This message will now be handled by the Dispatcher the same as any
+		// other Job request
+		return ingestJobMessage;
 	}
 
 	/**
