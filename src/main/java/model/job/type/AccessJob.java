@@ -44,26 +44,26 @@ public class AccessJob implements PiazzaJobType {
 	public static final String ACCESS_TYPE_FILE = "file";
 
 	public final String type = "access";
-	public String resourceId;
+	public String dataId;
 	public String deploymentType;
 
 	public AccessJob() {
 	}
 
-	public AccessJob(String resourceId) {
-		this.resourceId = resourceId;
+	public AccessJob(String dataId) {
+		this.dataId = dataId;
 	}
 
 	public String getType() {
 		return type;
 	}
 
-	public String getResourceId() {
-		return resourceId;
+	public String getDataId() {
+		return dataId;
 	}
 
-	public void setResourceId(String resourceId) {
-		this.resourceId = resourceId;
+	public void setDataId(String dataId) {
+		this.dataId = dataId;
 	}
 
 	/**
