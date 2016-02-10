@@ -1,5 +1,7 @@
 package model.data.location;
 
+import java.io.File;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
@@ -22,10 +24,17 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
  * 
  */
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "type")
-@JsonSubTypes({ @Type(value = S3FileStore.class, name = "list-services3"),
-		@Type(value = FolderShare.class, name = "share") })
+@JsonSubTypes({ @Type(value = S3FileStore.class, name = "s3"), @Type(value = FolderShare.class, name = "share") })
 @JsonInclude(Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
 public interface FileLocation {
 	public String getType();
+
+	/**
+	 * Returns the File referenece from the location type. Could represent
+	 * either a File or directory, depending on what the location is.
+	 * 
+	 * @return The file
+	 */
+	public File getFile();
 }

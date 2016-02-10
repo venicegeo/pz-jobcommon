@@ -1,5 +1,7 @@
 package model.data.location;
 
+import java.io.File;
+
 /**
  * Model representing a File accessible via a folder share that is will be
  * accessible to the Piazza Core internal components.
@@ -13,5 +15,9 @@ public class FolderShare implements FileLocation {
 
 	public String getType() {
 		return type;
+	}
+
+	public File getFile() {
+		throw new UnsupportedOperationException();
 	}
 }
