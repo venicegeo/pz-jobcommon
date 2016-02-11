@@ -16,6 +16,7 @@
 package model.job;
 
 import model.job.type.AbortJob;
+import model.job.type.AccessJob;
 import model.job.type.DeleteServiceJob;
 import model.job.type.DescribeServiceMetadataJob;
 import model.job.type.ExecuteServiceJob;
@@ -52,7 +53,8 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 		@Type(value = RegisterServiceJob.class, name = "register-service"),
 		@Type(value = UpdateServiceJob.class, name = "update-service"),
 		@Type(value = ListServicesJob.class, name = "list-service"),
-		@Type(value = GetResource.class, name = "get-resource") })
+		@Type(value = GetResource.class, name = "get-resource"),
+		@Type(value = AccessJob.class, name = "access")})
 @JsonInclude(Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
 public interface PiazzaJobType {
