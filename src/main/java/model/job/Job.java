@@ -18,6 +18,8 @@ package model.job;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.job.result.ResultType;
+
 import org.joda.time.DateTime;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -53,7 +55,7 @@ public class Job {
 	public String status;
 	public JobProgress progress = new JobProgress();
 	public List<JobProgress> history = new ArrayList<JobProgress>();
-	public String result; // TODO: How to represent this model?
+	public ResultType result;
 
 	public String getJobId() {
 		return jobId;
@@ -76,5 +78,9 @@ public class Job {
 
 	public PiazzaJobType getJobType() {
 		return jobType;
+	}
+	
+	public ResultType getResult() {
+		return result;
 	}
 }

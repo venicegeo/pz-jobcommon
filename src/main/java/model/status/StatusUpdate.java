@@ -16,6 +16,7 @@
 package model.status;
 
 import model.job.JobProgress;
+import model.job.result.ResultType;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -49,7 +50,7 @@ public class StatusUpdate {
 
 	private String status;
 	private JobProgress progress;
-	private String result;
+	private ResultType result;
 
 	public StatusUpdate() {
 
@@ -90,14 +91,13 @@ public class StatusUpdate {
 	 * also set the status flag to completed.
 	 * 
 	 * @param result
-	 *            The result of the Job, or a reference to the Result of the
-	 *            Job.
+	 *            The result of the Job.
 	 */
-	public void setResult(String result) {
+	public void setResult(ResultType result) {
 		this.result = result;
 	}
 
-	public String getResult() {
+	public ResultType getResult() {
 		return result;
 	}
 }
