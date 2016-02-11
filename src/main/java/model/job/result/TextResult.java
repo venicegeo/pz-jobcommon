@@ -22,7 +22,7 @@ package model.job.result;
  * 
  */
 public class TextResult implements ResultType {
-	private static final String type = "text";
+	public final String type = "text";
 	public String text;
 
 	public TextResult() {

@@ -25,7 +25,7 @@ import model.data.deployment.Deployment;
  * 
  */
 public class DeploymentResult implements ResultType {
-	private static final String type = "deployment";
+	public final String type = "deployment";
 	public Deployment deployment;
 
 	public DeploymentResult() {

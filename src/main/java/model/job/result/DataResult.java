@@ -15,37 +15,36 @@
  **/
 package model.job.result;
 
-import model.data.DataResource;
-
 /**
  * A Job result for returning a DataResource item held by the internal Piazza
- * stores.
+ * stores. This returns the ID of the Resource - not the resource information,
+ * as this is weighty and is held elsewhere.
  * 
  * @author Patrick.Doody
  * 
  */
 public class DataResult implements ResultType {
-	private static final String type = "data";
-	public DataResource data;
+	public final String type = "data";
+	public String dataId;
 
 	public DataResult() {
 
 	}
 
-	public DataResult(DataResource data) {
-		this.data = data;
+	public DataResult(String dataId) {
+		this.dataId = dataId;
 	}
 
 	public String getType() {
 		return type;
 	}
 
-	public DataResource getData() {
-		return data;
+	public String getDataId() {
+		return dataId;
 	}
 
-	public void setData(DataResource data) {
-		this.data = data;
+	public void setDataId(String dataId) {
+		this.dataId = dataId;
 	}
 
 }
