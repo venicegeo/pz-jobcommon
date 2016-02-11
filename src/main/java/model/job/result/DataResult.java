@@ -28,7 +28,6 @@ public class DataResult implements ResultType {
 	public String dataId;
 
 	public DataResult() {
-
 	}
 
 	public DataResult(String dataId) {
