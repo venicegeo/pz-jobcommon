@@ -13,37 +13,40 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-package model.job.result;
+package model.job.result.type;
+
+import model.data.deployment.Deployment;
+import model.job.result.ResultType;
 
 /**
- * A Job result for returning a DataResource item held by the internal Piazza
- * stores. This returns the ID of the Resource - not the resource information,
- * as this is weighty and is held elsewhere.
+ * A Deployment Result. This is the Result of jobs that request GeoServer
+ * deployments of resources held within Piazza core.
  * 
  * @author Patrick.Doody
  * 
  */
-public class DataResult implements ResultType {
-	public final String type = "data";
-	public String dataId;
+public class DeploymentResult implements ResultType {
+	public final String type = "deployment";
+	public Deployment deployment;
 
-	public DataResult() {
+	public DeploymentResult() {
+
 	}
 
-	public DataResult(String dataId) {
-		this.dataId = dataId;
+	public DeploymentResult(Deployment deployment) {
+		this.deployment = deployment;
 	}
 
 	public String getType() {
 		return type;
 	}
 
-	public String getDataId() {
-		return dataId;
+	public Deployment getDeployment() {
+		return deployment;
 	}
 
-	public void setDataId(String dataId) {
-		this.dataId = dataId;
+	public void setDeployment(Deployment deployment) {
+		this.deployment = deployment;
 	}
 
 }

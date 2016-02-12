@@ -13,39 +13,38 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-package model.job.result;
+package model.job.result.type;
 
-import model.data.deployment.Deployment;
+import model.job.result.ResultType;
+
 
 /**
- * A Deployment Result. This is the Result of jobs that request GeoServer
- * deployments of resources held within Piazza core.
+ * Represents a simple Text result that can be stored with a Job.
  * 
  * @author Patrick.Doody
  * 
  */
-public class DeploymentResult implements ResultType {
-	public final String type = "deployment";
-	public Deployment deployment;
+public class TextResult implements ResultType {
+	public final String type = "text";
+	public String text;
 
-	public DeploymentResult() {
+	public TextResult() {
 
 	}
 
-	public DeploymentResult(Deployment deployment) {
-		this.deployment = deployment;
+	public TextResult(String text) {
+		this.text = text;
 	}
 
 	public String getType() {
 		return type;
 	}
 
-	public Deployment getDeployment() {
-		return deployment;
+	public String getText() {
+		return text;
 	}
 
-	public void setDeployment(Deployment deployment) {
-		this.deployment = deployment;
+	public void setText(String text) {
+		this.text = text;
 	}
-
 }
