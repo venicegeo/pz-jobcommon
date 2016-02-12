@@ -13,9 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-package model.job.result;
+package model.job.result.type;
 
 import model.data.deployment.Deployment;
+import model.job.result.ResultType;
 
 /**
  * A Deployment Result. This is the Result of jobs that request GeoServer
@@ -25,7 +26,7 @@ import model.data.deployment.Deployment;
  * 
  */
 public class DeploymentResult implements ResultType {
-	private static final String type = "deployment";
+	public final String type = "deployment";
 	public Deployment deployment;
 
 	public DeploymentResult() {

@@ -15,6 +15,10 @@
  **/
 package model.job.result;
 
+import model.job.result.type.DataResult;
+import model.job.result.type.DeploymentResult;
+import model.job.result.type.TextResult;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;

@@ -13,39 +13,38 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-package model.job.result;
+package model.job.result.type;
 
-import model.data.DataResource;
+import model.job.result.ResultType;
+
 
 /**
- * A Job result for returning a DataResource item held by the internal Piazza
- * stores.
+ * Represents a simple Text result that can be stored with a Job.
  * 
  * @author Patrick.Doody
  * 
  */
-public class DataResult implements ResultType {
-	private static final String type = "data";
-	public DataResource data;
+public class TextResult implements ResultType {
+	public final String type = "text";
+	public String text;
 
-	public DataResult() {
+	public TextResult() {
 
 	}
 
-	public DataResult(DataResource data) {
-		this.data = data;
+	public TextResult(String text) {
+		this.text = text;
 	}
 
 	public String getType() {
 		return type;
 	}
 
-	public DataResource getData() {
-		return data;
+	public String getText() {
+		return text;
 	}
 
-	public void setData(DataResource data) {
-		this.data = data;
+	public void setText(String text) {
+		this.text = text;
 	}
-
 }
