@@ -15,7 +15,7 @@
  **/
 package model.data.location;
 
-import java.io.File;
+import java.io.InputStream;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -46,10 +46,10 @@ public interface FileLocation {
 	public String getType();
 
 	/**
-	 * Returns the File referenece from the location type. Could represent
-	 * either a File or directory, depending on what the location is.
+	 * Returns the file bytes from the location type. Could represent either a
+	 * File or S3 File, etc.
 	 * 
-	 * @return The file
+	 * @return The file bytes
 	 */
-	public File getFile();
+	public InputStream getFile();
 }

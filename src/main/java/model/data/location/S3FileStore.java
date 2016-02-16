@@ -15,7 +15,13 @@
  **/
 package model.data.location;
 
-import java.io.File;
+import java.io.InputStream;
+
+import com.amazonaws.regions.Region;
+import com.amazonaws.regions.Regions;
+import com.amazonaws.services.s3.AmazonS3;
+import com.amazonaws.services.s3.AmazonS3Client;
+import com.amazonaws.services.s3.model.S3Object;
 
 /**
  * Model for the necessary information that is required to access a file on an
@@ -46,7 +52,12 @@ public class S3FileStore implements FileLocation {
 		return type;
 	}
 
-	public File getFile() {
-		throw new UnsupportedOperationException();
+	public InputStream getFile() {
+		// Get the file from S3
+		AmazonS3 client = new AmazonS3Client();
+		client.setEndpoint(bucketName + domainName);
+		client.setRegion(Region.getRegion(Regions.US_EAST_1));
+		S3Object s3Object = client.getObject(bucketName, fileName);
+		return s3Object.getObjectContent();
 	}
 }

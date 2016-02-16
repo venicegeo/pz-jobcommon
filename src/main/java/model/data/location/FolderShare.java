@@ -15,7 +15,7 @@
  **/
 package model.data.location;
 
-import java.io.File;
+import java.io.InputStream;
 
 /**
  * Model representing a File accessible via a folder share that is will be
@@ -32,7 +32,7 @@ public class FolderShare implements FileLocation {
 		return type;
 	}
 
-	public File getFile() {
+	public InputStream getFile() {
 		throw new UnsupportedOperationException();
 	}
 }
