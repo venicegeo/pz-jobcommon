@@ -16,6 +16,7 @@
 package model.data.type;
 
 import model.data.DataType;
+import model.data.FileRepresentation;
 import model.data.location.FileLocation;
 
 /**
@@ -27,7 +28,7 @@ import model.data.location.FileLocation;
  * @author Patrick.Doody
  * 
  */
-public class ShapefileResource implements DataType {
+public class ShapefileResource implements DataType, FileRepresentation {
 	public static final String type = "shapefile";
 	public String databaseTableName;
 	public FileLocation location;

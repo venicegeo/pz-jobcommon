@@ -26,8 +26,21 @@ import java.io.File;
  */
 public class S3FileStore implements FileLocation {
 	public static final String type = "s3";
-	public String uri;
+	public String bucketName;
+	public String fileName;
+	public String domainName;
 	public String credentials;
+
+	public S3FileStore() {
+
+	}
+
+	public S3FileStore(String bucketName, String fileName, String domainName, String credentials) {
+		this.bucketName = bucketName;
+		this.fileName = fileName;
+		this.domainName = domainName;
+		this.credentials = credentials;
+	}
 
 	public String getType() {
 		return type;
