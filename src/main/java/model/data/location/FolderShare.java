@@ -15,6 +15,8 @@
  **/
 package model.data.location;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.InputStream;
 
 /**
@@ -32,7 +34,16 @@ public class FolderShare implements FileLocation {
 		return type;
 	}
 
+	/**
+	 * Returns the InputStream for the file which resides at a folder share or
+	 * local file system. Null if no file can be found.
+	 */
 	public InputStream getFile() {
-		throw new UnsupportedOperationException();
+		try {
+			return new FileInputStream(filePath);
+		} catch (FileNotFoundException exception) {
+			exception.printStackTrace();
+			return null;
+		}
 	}
 }

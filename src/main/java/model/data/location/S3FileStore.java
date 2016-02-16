@@ -52,6 +52,11 @@ public class S3FileStore implements FileLocation {
 		return type;
 	}
 
+	/**
+	 * Gets the input stream for this S3 file store. This will stream the bytes
+	 * from S3 and return them for utilization. Null, or exception will be
+	 * thrown if an error occurs during acquisition.
+	 */
 	public InputStream getFile() {
 		// Get the file from S3
 		AmazonS3 client = new AmazonS3Client();
