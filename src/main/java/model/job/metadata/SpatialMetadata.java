@@ -15,6 +15,7 @@
  **/
 package model.job.metadata;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
@@ -87,6 +88,7 @@ public class SpatialMetadata {
 	 * 
 	 * @return EPSG String.
 	 */
+	@JsonIgnore
 	public String getEpsgString() {
 		return String.format("EPSG:%s", epsgCode);
 	}
