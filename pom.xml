@@ -8,6 +8,7 @@
 	<packaging>jar</packaging>
 	<properties>
 		<junit.version>4.11</junit.version>
+		<geotools.version>14.2</geotools.version>
 	</properties>
 
 	<build>
@@ -19,6 +20,14 @@
 			</extension>
 		</extensions>
 	</build>
+
+	<repositories>
+		<repository>
+			<id>osgeo</id>
+			<name>Open Source Geospatial Foundation Repository</name>
+			<url>http://download.osgeo.org/webdav/geotools/</url>
+		</repository>
+	</repositories>
 
 	<distributionManagement>
 		<site>
@@ -126,6 +135,16 @@
 			<groupId>com.fasterxml.jackson.module</groupId>
 			<artifactId>jackson-module-parameter-names</artifactId>
 			<version>2.6.3</version>
+		</dependency>
+		<dependency>
+			<groupId>org.geotools</groupId>
+			<artifactId>gt-main</artifactId>
+			<version>${geotools.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.geotools</groupId>
+			<artifactId>gt-opengis</artifactId>
+			<version>${geotools.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.mongojack</groupId>

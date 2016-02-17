@@ -15,8 +15,6 @@
  **/
 package model.data.type;
 
-import java.util.List;
-
 import model.data.DataType;
 
 /**
@@ -28,9 +26,8 @@ import model.data.DataType;
 public class WfsResource implements DataType {
 	public static final String type = "wfs";
 	public String url;
-
 	public String version;
-	public List<String> featureTypes;
+	public String featureType;
 
 	public WfsResource() {
 
@@ -48,7 +45,7 @@ public class WfsResource implements DataType {
 		return version;
 	}
 
-	public List<String> getFeatureTypes() {
-		return featureTypes;
+	public String getFeatureType() {
+		return featureType;
 	}
 }
