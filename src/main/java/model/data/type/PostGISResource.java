@@ -37,4 +37,20 @@ public class PostGISResource implements DataType {
 	public String getType() {
 		return type;
 	}
+
+	public String getDatabase() {
+		return database;
+	}
+
+	public void setDatabase(String database) {
+		this.database = database;
+	}
+
+	public String getTable() {
+		return table;
+	}
+
+	public void setTable(String table) {
+		this.table = table;
+	}
 }

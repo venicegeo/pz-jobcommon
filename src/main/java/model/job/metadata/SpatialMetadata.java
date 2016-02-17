@@ -82,6 +82,15 @@ public class SpatialMetadata {
 		this.epsgCode = epsgCode;
 	}
 
+	/**
+	 * Returns the EPSG String. Included is the "EPSG:" prefix.
+	 * 
+	 * @return EPSG String.
+	 */
+	public String getEpsgString() {
+		return String.format("EPSG:%s", epsgCode);
+	}
+
 	public Double getMinX() {
 		return minX;
 	}
