@@ -1,5 +1,10 @@
 package util;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import org.geotools.data.DataStore;
+import org.geotools.data.DataStoreFinder;
 import org.geotools.feature.simple.SimpleFeatureTypeBuilder;
 import org.opengis.feature.simple.SimpleFeatureType;
 
@@ -15,6 +20,8 @@ import org.opengis.feature.simple.SimpleFeatureType;
  * 
  */
 public class GeoToolsUtil {
+	private static final String POSTGIS_DATASTORE_TYPE = "postgis";
+
 	/**
 	 * GeoTools offers no simple way to rename an existing FeatureType. This
 	 * method provides a nice way to clone a feature type with a new name.
@@ -33,5 +40,37 @@ public class GeoToolsUtil {
 		builder.addAll(featureType.getAttributeDescriptors());
 		builder.setDefaultGeometry(featureType.getGeometryDescriptor().getLocalName());
 		return builder.buildFeatureType();
+	}
+
+	/**
+	 * Creates a PostGIS Data Store.
+	 * 
+	 * @param host
+	 *            The hostname of the Database
+	 * @param port
+	 *            The port
+	 * @param schema
+	 *            The schema name (such as "public")
+	 * @param database
+	 *            The database name
+	 * @param user
+	 *            The user name
+	 * @param password
+	 *            The password
+	 * @return GeoTools DataStore for the PostGIS database.
+	 * @throws Exception
+	 */
+	public static DataStore getPostGisDataStore(String host, String port, String schema, String database, String user,
+			String password) throws Exception {
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("dbtype", POSTGIS_DATASTORE_TYPE);
+		params.put("host", host);
+		params.put("port", port);
+		params.put("schema", schema);
+		params.put("database", database);
+		params.put("user", user);
+		params.put("passwd", password);
+		DataStore postGisStore = DataStoreFinder.getDataStore(params);
+		return postGisStore;
 	}
 }
