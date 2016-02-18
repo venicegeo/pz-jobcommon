@@ -60,7 +60,7 @@ public class S3FileStore implements FileLocation {
 	public InputStream getFile() {
 		// Get the file from S3
 		AmazonS3 client = new AmazonS3Client();
-		client.setEndpoint(bucketName + domainName);
+		client.setEndpoint(String.format("%s.%s", bucketName + domainName));
 		client.setRegion(Region.getRegion(Regions.US_EAST_1));
 		S3Object s3Object = client.getObject(bucketName, fileName);
 		return s3Object.getObjectContent();
