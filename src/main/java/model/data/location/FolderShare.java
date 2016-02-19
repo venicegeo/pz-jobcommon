@@ -19,6 +19,8 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 /**
  * Model representing a File accessible via a folder share that is will be
  * accessible to the Piazza Core internal components.
@@ -38,6 +40,7 @@ public class FolderShare implements FileLocation {
 	 * Returns the InputStream for the file which resides at a folder share or
 	 * local file system. Null if no file can be found.
 	 */
+	@JsonIgnore
 	public InputStream getFile() {
 		try {
 			return new FileInputStream(filePath);

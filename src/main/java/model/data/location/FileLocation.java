@@ -15,8 +15,6 @@
  **/
 package model.data.location;
 
-import java.io.InputStream;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
@@ -35,6 +33,9 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
  * describe the appropriate parameters required to connect to that
  * implementation.
  * 
+ * The factory class FileAccessFactory is what is intended to be used for
+ * pulling the bytes out of files represented by these interfaces.
+ * 
  * @author Patrick.Doody
  * 
  */
@@ -44,12 +45,4 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public interface FileLocation {
 	public String getType();
-
-	/**
-	 * Returns the file bytes from the location type. Could represent either a
-	 * File or S3 File, etc.
-	 * 
-	 * @return The file bytes
-	 */
-	public InputStream getFile();
 }

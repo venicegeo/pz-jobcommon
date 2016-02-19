@@ -17,11 +17,11 @@ package model.data.location;
 
 import java.io.InputStream;
 
-import com.amazonaws.regions.Region;
-import com.amazonaws.regions.Regions;
+import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.S3Object;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  * Model for the necessary information that is required to access a file on an
@@ -35,17 +35,15 @@ public class S3FileStore implements FileLocation {
 	public String bucketName;
 	public String fileName;
 	public String domainName;
-	public String credentials;
 
 	public S3FileStore() {
 
 	}
 
-	public S3FileStore(String bucketName, String fileName, String domainName, String credentials) {
+	public S3FileStore(String bucketName, String fileName, String domainName) {
 		this.bucketName = bucketName;
 		this.fileName = fileName;
 		this.domainName = domainName;
-		this.credentials = credentials;
 	}
 
 	public String getType() {
@@ -56,12 +54,16 @@ public class S3FileStore implements FileLocation {
 	 * Gets the input stream for this S3 file store. This will stream the bytes
 	 * from S3 and return them for utilization. Null, or exception will be
 	 * thrown if an error occurs during acquisition.
+	 * 
+	 * The S3 Credentials MUST be populated using the setCredentials() method
+	 * before executing this call, or a Credentials exception is likely to be
+	 * thrown by S3.
 	 */
-	public InputStream getFile() {
+	@JsonIgnore
+	public InputStream getFile(String accessKey, String privateKey) {
 		// Get the file from S3
-		AmazonS3 client = new AmazonS3Client();
-		client.setEndpoint(String.format("%s.%s", bucketName + domainName));
-		client.setRegion(Region.getRegion(Regions.US_EAST_1));
+		BasicAWSCredentials credentials = new BasicAWSCredentials(accessKey, privateKey);
+		AmazonS3 client = new AmazonS3Client(credentials);
 		S3Object s3Object = client.getObject(bucketName, fileName);
 		return s3Object.getObjectContent();
 	}
