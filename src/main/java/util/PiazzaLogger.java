@@ -23,10 +23,13 @@ import java.util.Map;
 
 import javax.annotation.PostConstruct;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import model.request.LogRequest;
+
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -34,99 +37,121 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
-import model.request.LogRequest;
-
 /**
  * PiazzaLogger is a class that logs using the Piazza Core Logger service.
  * 
- * @author mlynum, rorf
+ * @author mlynum, rorf, patrick.doody
  * @version 1.0
  */
 @Component
 public class PiazzaLogger {
+	@Value("${pz.logger.url:}")
+	private String loggerServiceUrl;
+	@Value("${pz.logger.name:}")
+	private String serviceName;
 
-    public static final String DEBUG = "Debug";
-    public static final String ERROR = "Error";
-    public static final String FATAL = "Fatal";
-    public static final String INFO = "Info";
-    public static final String WARNING = "Warning";
+	public static final String DEBUG = "Debug";
+	public static final String ERROR = "Error";
+	public static final String FATAL = "Fatal";
+	public static final String INFO = "Info";
+	public static final String WARNING = "Warning";
+	private static final String[] SEVERITY_OPTIONS = { DEBUG, ERROR, FATAL, INFO, WARNING };
 
-    private static final String[] SEVERITY_OPTIONS = { DEBUG, ERROR, FATAL, INFO, WARNING };
+	private RestTemplate template;
+	private final static Logger LOG = LoggerFactory.getLogger(PiazzaLogger.class);
 
-    private String loggerServiceUrl;
-    private String serviceName;
-
-    private RestTemplate template;
-
-    private final static Logger LOG = LoggerFactory.getLogger(Logger.class);
-
-    public PiazzaLogger(String loggerServiceUrl, String serviceName) {
-	this.loggerServiceUrl = loggerServiceUrl;
-	this.serviceName = serviceName;
-    }
-
-    @PostConstruct
-    public void init() {
-	LOG.info("PiazzaLogger initialized");
-	template = new RestTemplate();
-    }
-
-    /**
-     * method for logging messages to Pz-Logger
-     * 
-     * @param logMessage
-     *            - the message you want to log
-     * @param severity
-     *            - the severity of the log
-     */
-    public void log(String logMessage, String severity) {
-	if (isLogInputValid(logMessage, severity)) {
-	    try {
-		HttpHeaders headers = new HttpHeaders();
-		headers.setContentType(MediaType.APPLICATION_JSON);
-
-		LogRequest logRequest = new LogRequest(serviceName, InetAddress.getLocalHost().toString(),
-			new DateTime(DateTimeZone.UTC).toString(), logMessage, severity);
-
-		template.postForEntity("http://" + loggerServiceUrl, new HttpEntity<LogRequest>(logRequest, headers),
-			String.class);
-	    } catch (Exception ex) {
-		LOG.error(ex.getMessage());
-	    }
-	} else {
-	    LOG.error("Log input invalid!");
-	}
-    }
-
-    public List<LogRequest> getLogs(Integer count) {
-	try {
-	    Map<String, Integer> map = new HashMap<String, Integer>();
-	    map.put("count", count);
-
-	    ResponseEntity<LogRequest[]> logs = template.getForEntity("http://" + loggerServiceUrl + "?count={count}",
-		    LogRequest[].class, map);
-	    return (List<LogRequest>) Arrays.asList(logs.getBody());
-	} catch (Exception ex) {
-	    LOG.error(ex.getMessage());
-	    return null;
-	}
-    }
-
-    private boolean isLogInputValid(String logMessage, String severity) {
-	if (logMessage == null || logMessage.length() == 0) {
-	    LOG.error("Message is null. Logger cannot send an empty message. This is a required field.");
-	    return false;
-	}
-	if (severity == null || severity.length() == 0) {
-	    LOG.error("Severity is null. Logger cannot send message without a severity. This is a required field.");
-	    return false;
-	}
-	if (!Arrays.asList(SEVERITY_OPTIONS).contains(severity)) {
-	    LOG.error("Severity '" + severity + "' is not one of the available options: "
-		    + Arrays.toString(SEVERITY_OPTIONS));
-	    return false;
+	/**
+	 * Default constructor, required for beat instantiation.
+	 */
+	public PiazzaLogger() {
 	}
 
-	return true;
-    }
+	/**
+	 * Creates a new Logger component. This constructor is not recommended. It's
+	 * more recommended to have your project populate the pz.logger.url and
+	 * pz.logger.name properties, and allow Spring to Autowire this object.
+	 * However, this constructor exists for cases where that is not an option..
+	 * 
+	 * @param loggerServiceUrl
+	 *            The URL of the PiazzaLogger service.
+	 * @param serviceName
+	 *            The name of the pz-component that utilizes this logger. The
+	 *            name of the component will be included in the message content
+	 *            for every log message generated by this instance of the
+	 *            PiazzaLogger.
+	 */
+	public PiazzaLogger(String loggerServiceUrl, String serviceName) {
+		this.serviceName = serviceName;
+		this.loggerServiceUrl = loggerServiceUrl;
+	}
+
+	@PostConstruct
+	public void init() {
+		LOG.info(String.format("PiazzaLogger initialized for service %s, url: %s", serviceName, loggerServiceUrl));
+		template = new RestTemplate();
+	}
+
+	/**
+	 * Sends a Log message to the Pz-Logger service.
+	 * 
+	 * @param logMessage
+	 *            the message you want to log
+	 * @param severity
+	 *            the severity of the log
+	 */
+	public void log(String logMessage, String severity) {
+		if (isLogInputValid(logMessage, severity)) {
+			try {
+				HttpHeaders headers = new HttpHeaders();
+				headers.setContentType(MediaType.APPLICATION_JSON);
+
+				LogRequest logRequest = new LogRequest(serviceName, InetAddress.getLocalHost().toString(),
+						new DateTime(DateTimeZone.UTC).toString(), logMessage, severity);
+
+				template.postForEntity("http://" + loggerServiceUrl, new HttpEntity<LogRequest>(logRequest, headers),
+						String.class);
+			} catch (Exception exception) {
+				LOG.error("PiazzaLogger could not log: " + exception.getMessage());
+			}
+		}
+	}
+
+	/**
+	 * 
+	 * @param count
+	 * @return
+	 */
+	public List<LogRequest> getLogs(Integer count) {
+		try {
+			Map<String, Integer> map = new HashMap<String, Integer>();
+			map.put("count", count);
+			ResponseEntity<LogRequest[]> logs = template.getForEntity("http://" + loggerServiceUrl + "?count={count}",
+					LogRequest[].class, map);
+			return (List<LogRequest>) Arrays.asList(logs.getBody());
+		} catch (Exception exception) {
+			LOG.error(exception.getMessage());
+			return null;
+		}
+	}
+
+	/**
+	 * Provides simple validation for log messages.
+	 */
+	private boolean isLogInputValid(String logMessage, String severity) {
+		if (logMessage == null || logMessage.length() == 0) {
+			LOG.error("Message is null. Logger cannot send an empty message. This is a required field.");
+			return false;
+		}
+		if (severity == null || severity.length() == 0) {
+			LOG.error("Severity is null. Logger cannot send message without a severity. This is a required field.");
+			return false;
+		}
+		if (!Arrays.asList(SEVERITY_OPTIONS).contains(severity)) {
+			LOG.error("Severity '" + severity + "' is not one of the available options: "
+					+ Arrays.toString(SEVERITY_OPTIONS));
+			return false;
+		}
+
+		return true;
+	}
 }
