@@ -17,13 +17,21 @@ package model.job.metadata;
 
 import java.util.List;
 
+import model.resource.NumericKeyValue;
+import model.resource.NumericKeyValueJsonDeserializer;
+import model.resource.TextKeyValue;
+import model.resource.TextKeyValueJsonDeserializer;
+
 import org.joda.time.DateTime;
+import org.springframework.data.elasticsearch.annotations.Field;
+import org.springframework.data.elasticsearch.annotations.FieldType;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 /**
  * Common Metadata fields used to describe Data or Services within the Piazza
@@ -61,5 +69,27 @@ public class ResourceMetadata {
 	public List<String> params;
 	public String responseMimeType;
 	public String reason;
+	
+	/*
+	 * Need the ability to accommodate arbitrary key/value pairs
+	 */
+	@Field(type = FieldType.Nested)
+	@JsonDeserialize(using = NumericKeyValueJsonDeserializer.class)
+	private List<NumericKeyValue> numericKeyValueList;
+	@Field(type = FieldType.Nested)
+	@JsonDeserialize(using = TextKeyValueJsonDeserializer.class)
+	private List<TextKeyValue> textKeyValueList;
 
+	public List<NumericKeyValue> getNumericKeyValueList() {
+		return numericKeyValueList;
+	}
+	public void setNumericKeyValueList(List<NumericKeyValue> numericKeyValueList) {
+		this.numericKeyValueList = numericKeyValueList;
+	}
+	public List<TextKeyValue> getTextKeyValueList() {
+		return textKeyValueList;
+	}
+	public void setTextKeyValueList(List<TextKeyValue> textKeyValueList) {
+		this.textKeyValueList = textKeyValueList;
+	}
 }
