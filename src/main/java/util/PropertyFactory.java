@@ -21,48 +21,49 @@ import java.util.Properties;
 import com.amazonaws.util.json.JSONObject;
 
 /**
- * Accessed statically, this populates a Properties object with the available 
- * environment variables from the Cloud-Foundry populated VCAP_SERVICES environment 
- * property. 
+ * Accessed statically, this populates a Properties object with the available
+ * environment variables from the Cloud-Foundry populated VCAP_SERVICES
+ * environment property.
  * 
  * @author Russell.Orf
  * 
  */
+@Deprecated
 public class PropertyFactory {
 
-    private static Properties ENV_PROPS = null;
+	private static Properties ENV_PROPS = null;
 
-    private PropertyFactory(Properties p) {
-    }
-
-    public static Properties getEnvironmentProperties() {
-	if (ENV_PROPS == null) {
-	    initializeEnvProps();
+	private PropertyFactory(Properties p) {
 	}
 
-	return ENV_PROPS;
-    }
-
-    private static void initializeEnvProps() {
-	String envString = System.getenv("VCAP_SERVICES");
-	if (envString != null) {
-	    try {
-		JSONObject jsonEnv = new JSONObject(envString);
-		Iterator<String> iter = jsonEnv.keys();
-		String key;
-
-		ENV_PROPS = new Properties();
-
-		System.out.println("VCAP_SERVICES properties: ");
-		while (iter.hasNext()) {
-		    key = iter.next();
-		    System.out.println("Key:" + key + " Value:" + jsonEnv.get(key));
-		    ENV_PROPS.put(key, jsonEnv.get(key));
+	public static Properties getEnvironmentProperties() {
+		if (ENV_PROPS == null) {
+			initializeEnvProps();
 		}
-	    } catch (Exception e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	    }
+
+		return ENV_PROPS;
 	}
-    }
+
+	private static void initializeEnvProps() {
+		String envString = System.getenv("VCAP_SERVICES");
+		if (envString != null) {
+			try {
+				JSONObject jsonEnv = new JSONObject(envString);
+				Iterator<String> iter = jsonEnv.keys();
+				String key;
+
+				ENV_PROPS = new Properties();
+
+				System.out.println("VCAP_SERVICES properties: ");
+				while (iter.hasNext()) {
+					key = iter.next();
+					System.out.println("Key:" + key + " Value:" + jsonEnv.get(key));
+					ENV_PROPS.put(key, jsonEnv.get(key));
+				}
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
 }
