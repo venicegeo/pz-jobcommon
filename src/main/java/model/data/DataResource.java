@@ -18,9 +18,6 @@ package model.data;
 import model.job.metadata.ResourceMetadata;
 import model.job.metadata.SpatialMetadata;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.elasticsearch.annotations.Document;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
@@ -40,9 +37,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
  */
 @JsonInclude(Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
-@Document(indexName = "pzmetadata", type = "DataResource")
 public class DataResource {
-	@Id
 	public String dataId;
 	public DataType dataType;
 	public SpatialMetadata spatialMetadata;
