@@ -49,6 +49,8 @@ public class PiazzaLogger {
 	private String loggerServiceUrl;
 	@Value("${pz.logger.name:}")
 	private String serviceName;
+	@Value("${pz.logger.console:}")
+	private Boolean logToConsole;
 
 	public static final String DEBUG = "Debug";
 	public static final String ERROR = "Error";
@@ -101,6 +103,7 @@ public class PiazzaLogger {
 	 */
 	public void log(String logMessage, String severity) {
 		if (isLogInputValid(logMessage, severity)) {
+			// Log the message with the Piazza Logger service
 			try {
 				HttpHeaders headers = new HttpHeaders();
 				headers.setContentType(MediaType.APPLICATION_JSON);
@@ -108,11 +111,20 @@ public class PiazzaLogger {
 				LogRequest logRequest = new LogRequest(serviceName, InetAddress.getLocalHost().toString(),
 						new DateTime(DateTimeZone.UTC).toString(), logMessage, severity);
 
+				// Log the message locally if requested
+				try {
+					if (logToConsole.booleanValue()) {
+						System.out.println(logRequest.toPrettyString());
+					}
+				} catch (Exception exception) { /* Do nothing. */
+				}
+
 				template.postForEntity("http://" + loggerServiceUrl, new HttpEntity<LogRequest>(logRequest, headers),
 						String.class);
 			} catch (Exception exception) {
 				LOG.error("PiazzaLogger could not log: " + exception.getMessage());
 			}
+
 		}
 	}
 
