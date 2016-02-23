@@ -13,29 +13,28 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-package model.job.type;
+package model.job.result.type;
 
-import model.job.PiazzaJobType;
+import model.job.result.ResultType;
 
 /**
- * Repeats a Job that is currently stored within the Job Manager's Job Table.
- * This will re-run the Job with the API Key of the user requesting the repeat.
+ * A Job result for returning a Job held by the internal Piazza stores. This
+ * returns the ID of the Job - not the Job information.
  * 
- * All resources generated (including the Job itself) will have new IDs
- * associated with them. This creates an entirely new, decoupled Job that has
- * only its exact inputs tied to the first Job.
+ * This is used when the result of one Job is to spawn another Job. This Result
+ * Type is used to link the two Jobs together.
  * 
  * @author Patrick.Doody
  * 
  */
-public class RepeatJob implements PiazzaJobType {
-	public String jobId = null;
-	public final String type = "repeat";
+public class JobResult implements ResultType {
+	public String type = "job";
+	public String jobId;
 
-	public RepeatJob() {
+	public JobResult() {
 	}
 
-	public RepeatJob(String jobId) {
+	public JobResult(String jobId) {
 		this.jobId = jobId;
 	}
 
@@ -50,4 +49,5 @@ public class RepeatJob implements PiazzaJobType {
 	public void setJobId(String jobId) {
 		this.jobId = jobId;
 	}
+
 }
