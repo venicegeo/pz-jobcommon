@@ -46,6 +46,10 @@ public class S3FileStore implements FileLocation {
 		this.domainName = domainName;
 	}
 
+	public String getFileName() {
+		return fileName;
+	}
+	
 	public String getType() {
 		return type;
 	}

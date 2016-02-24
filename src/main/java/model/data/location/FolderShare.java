@@ -15,6 +15,7 @@
  **/
 package model.data.location;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -32,6 +33,10 @@ public class FolderShare implements FileLocation {
 	public static final String type = "share";
 	public String filePath;
 
+	public String getFileName() {
+		return new File(filePath).getName();
+	}
+	
 	public String getType() {
 		return type;
 	}
