@@ -37,4 +37,13 @@ public class ErrorResponse extends PiazzaResponse {
 		this.message = message;
 		this.origin = origin;
 	}
+	
+	/**
+	 * Gets the type of this response.
+	 * 
+	 * @return
+	 */
+	public String getType() {
+		return type;
+	}
 }

@@ -42,4 +42,13 @@ public class JobStatusResponse extends PiazzaResponse {
 		status = job.status;
 		progress = job.progress;
 	}
+	
+	/**
+	 * Gets the type of this response.
+	 * 
+	 * @return
+	 */
+	public String getType() {
+		return type;
+	}
 }

@@ -19,8 +19,15 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * Model used in interacting with the pz-uuidgen service. This model
+ * encapsulates the format that is required by the pz-uuidgen service.
+ * 
+ * @author Patrick.Doody
+ * 
+ */
 public class UUID {
-	
+
 	@JsonProperty("data")
 	public List<String> data;
 

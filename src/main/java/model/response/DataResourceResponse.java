@@ -35,4 +35,13 @@ public class DataResourceResponse extends PiazzaResponse {
 	public DataResourceResponse(DataResource dataResource) {
 		this.data = dataResource;
 	}
+	
+	/**
+	 * Gets the type of this response.
+	 * 
+	 * @return
+	 */
+	public String getType() {
+		return type;
+	}
 }
