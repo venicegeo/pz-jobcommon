@@ -14,11 +14,7 @@
  * limitations under the License.
  **/
 package model.job.type;
-/**
- * This job is services as the request to search for services within Piazza
- * @author mlynum
- */
-import model.job.service.SearchCriteria;
+import model.service.SearchCriteria;
 
 
 public class SearchServiceJob {
