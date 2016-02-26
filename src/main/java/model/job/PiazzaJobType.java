@@ -26,6 +26,7 @@ import model.job.type.IngestJob;
 import model.job.type.ListServicesJob;
 import model.job.type.RegisterServiceJob;
 import model.job.type.RepeatJob;
+import model.job.type.SearchServiceJob;
 import model.job.type.UpdateServiceJob;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -54,6 +55,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 		@Type(value = RegisterServiceJob.class, name = "register-service"),
 		@Type(value = UpdateServiceJob.class, name = "update-service"),
 		@Type(value = ListServicesJob.class, name = "list-service"),
+		@Type(value = SearchServiceJob.class, name = "search-service"),
 		@Type(value = GetResource.class, name = "get-resource"), @Type(value = AccessJob.class, name = "access"),
 		@Type(value = RepeatJob.class, name = "repeat") })
 @JsonInclude(Include.NON_NULL)
