@@ -14,10 +14,11 @@
  * limitations under the License.
  **/
 package model.job.type;
+import model.job.PiazzaJobType;
 import model.service.SearchCriteria;
 
 
-public class SearchServiceJob {
+public class SearchServiceJob implements PiazzaJobType  {
 	public String jobId = null;
 	public final String type = "search-service";
 	public SearchCriteria data;
