@@ -32,9 +32,11 @@ public class SpatialMetadata {
 	Integer epsgCode;
 	Double minX;
 	Double minY;
+	Double minZ;
 	Double maxX;
 	Double maxY;
-
+	Double maxZ;
+	
 	public SpatialMetadata() {
 
 	}
@@ -92,7 +94,7 @@ public class SpatialMetadata {
 	public String getEpsgString() {
 		return String.format("EPSG:%s", epsgCode);
 	}
-
+	
 	public Double getMinX() {
 		return minX;
 	}
@@ -107,6 +109,14 @@ public class SpatialMetadata {
 
 	public void setMinY(Double minY) {
 		this.minY = minY;
+	}
+
+	public Double getMinZ() {
+		return minZ;
+	}
+
+	public void setMinZ(Double minZ) {
+		this.minZ = minZ;
 	}
 
 	public Double getMaxX() {
@@ -125,4 +135,11 @@ public class SpatialMetadata {
 		this.maxY = maxY;
 	}
 
+	public Double getMaxZ() {
+		return maxZ;
+	}
+
+	public void setMaxZ(Double maxZ) {
+		this.maxZ = maxZ;
+	}
 }
