@@ -83,10 +83,8 @@ public class FileAccessFactory {
 			return ((FolderShare) fileLocation).getFilePath();
 		} else if (fileLocation instanceof S3FileStore) {
 			S3FileStore s3FileStore = ((S3FileStore) fileLocation);
-			
-			//Following aws s3 url needs to be tested to ensure proper url construction
-			//Sample file to test on: 
-			//https://s3.amazonaws.com/venicegeo-sample-data/pointcloud/samp71-utm.laz
+			//Following s3 url, need to be tested live to ensure proper url construction, folder name may be added from S3Object
+			//Sample file to test on: https://s3.amazonaws.com/venicegeo-sample-data/pointcloud/samp71-utm.laz
 			return String.format("%s/%s/%s", s3FileStore.getDomainName(), s3FileStore.getBucketName(), s3FileStore.getFileName());
 		} else {
 			throw new Exception("Unsupported Object type.");
