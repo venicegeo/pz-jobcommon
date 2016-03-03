@@ -15,6 +15,7 @@
  **/
 package model.data.location;
 
+import java.io.File;
 import java.io.InputStream;
 
 /**
@@ -67,4 +68,29 @@ public class FileAccessFactory {
 			throw new Exception("Unsupported Object type.");
 		}
 	}
+
+
+	/**
+	 * Returns the URI for a file represented by an object implementing
+	 * the FileLocation interface
+	 * 
+	 * @param fileLocation
+	 *            The file location
+	 * @return The File URI
+	 */
+	public String getFileUri(FileLocation fileLocation) throws Exception {
+		if (fileLocation instanceof FolderShare) {
+			return ((FolderShare) fileLocation).getFilePath();
+		} else if (fileLocation instanceof S3FileStore) {
+			S3FileStore s3FileStore = ((S3FileStore) fileLocation);
+			
+			//Following aws s3 url needs to be tested to ensure proper url construction
+			//Sample file to test on: 
+			//https://s3.amazonaws.com/venicegeo-sample-data/pointcloud/samp71-utm.laz
+			return String.format("%s/%s/%s", s3FileStore.getDomainName(), s3FileStore.getBucketName(), s3FileStore.getFileName());
+		} else {
+			throw new Exception("Unsupported Object type.");
+		}
+	}
+	
 }

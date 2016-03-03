@@ -33,6 +33,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class S3FileStore implements FileLocation {
 	public static final String type = "s3";
 	public String bucketName;
+	
 	public String fileName;
 	public String domainName;
 
@@ -44,6 +45,17 @@ public class S3FileStore implements FileLocation {
 		this.bucketName = bucketName;
 		this.fileName = fileName;
 		this.domainName = domainName;
+	}
+
+	public String getBucketName() {
+		return bucketName;
+	}
+
+	public String getDomainName() {
+		return domainName;
+	}
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
 	}
 
 	public String getFileName() {

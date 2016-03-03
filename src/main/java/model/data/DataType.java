@@ -15,6 +15,7 @@
  **/
 package model.data;
 
+import model.data.type.PointCloudResource;
 import model.data.type.PostGISResource;
 import model.data.type.RasterResource;
 import model.data.type.ShapefileResource;
@@ -42,7 +43,8 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 @JsonSubTypes({ @Type(value = WfsResource.class, name = "wfs"), @Type(value = TextResource.class, name = "text"),
 		@Type(value = RasterResource.class, name = "raster"),
 		@Type(value = ShapefileResource.class, name = "shapefile"),
-		@Type(value = PostGISResource.class, name = "postgis") })
+		@Type(value = PostGISResource.class, name = "postgis"),
+		@Type(value = PointCloudResource.class, name = "pointcloud")})
 @JsonInclude(Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
 public interface DataType {

@@ -41,6 +41,10 @@ public class FolderShare implements FileLocation {
 		return type;
 	}
 
+	public String getFilePath() {
+		return filePath;
+	}
+
 	/**
 	 * Returns the InputStream for the file which resides at a folder share or
 	 * local file system. Null if no file can be found.
