@@ -16,13 +16,13 @@
 package model.job.type;
 
 import model.job.PiazzaJobType;
-import model.job.metadata.ResourceMetadata;
+import model.job.metadata.Service;
 
 public class RegisterServiceJob implements PiazzaJobType {
 
 		public String jobId = null;
 		public final String type = "register-service";
-		public ResourceMetadata data;
+		public Service data;
 
 		
 		public RegisterServiceJob() {
