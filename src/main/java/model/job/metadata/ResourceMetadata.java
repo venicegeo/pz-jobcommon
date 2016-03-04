@@ -17,11 +17,6 @@ package model.job.metadata;
 
 import java.util.List;
 
-import model.resource.NumericKeyValue;
-import model.resource.NumericKeyValueJsonDeserializer;
-import model.resource.TextKeyValue;
-import model.resource.TextKeyValueJsonDeserializer;
-
 import org.joda.time.DateTime;
 import org.springframework.data.elasticsearch.annotations.Field;
 import org.springframework.data.elasticsearch.annotations.FieldType;
@@ -30,8 +25,13 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+
+import model.resource.NumericKeyValue;
+import model.resource.NumericKeyValueJsonDeserializer;
+import model.resource.TextKeyValue;
+import model.resource.TextKeyValueJsonDeserializer;
+import model.security.SecurityClassification;
 
 /**
  * Common Metadata fields used to describe Data or Services within the Piazza
@@ -51,11 +51,10 @@ public class ResourceMetadata {
 	public String description;
 	public String url;
 	public String format;
-	public String networks;
 	public String qos;
 	public String availability;
 	public String tags;
-	public String classType;
+	public SecurityClassification classType;
 	@JsonIgnore
 	public DateTime termDate;
 	public Boolean clientCertRequired;
@@ -63,11 +62,6 @@ public class ResourceMetadata {
 	public Boolean preAuthRequired;
 	public String contacts;
 	public String method;
-	public String requestMimeType;
-	public String param;
-	@JsonProperty("params")
-	public List<String> params;
-	public String responseMimeType;
 	public String reason;
 	
 	/*
