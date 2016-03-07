@@ -14,6 +14,13 @@ public class Service {
 	private ResourceMetadata resourceMetadata;
 	private List<ParamDataItem> inputs;
 	private List<ParamDataItem> outputs;
+	private String mimeType;
+	public String getMimeType() {
+		return mimeType;
+	}
+	public void setMimeType(String mimeType) {
+		this.mimeType = mimeType;
+	}
 	public String getName() {
 		return name;
 	}
