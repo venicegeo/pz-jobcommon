@@ -16,36 +16,33 @@
 package model.data.type;
 
 import model.data.DataType;
-import model.data.FileRepresentation;
-import model.data.location.FileLocation;
 
 /**
- * Represents a Raster image with accompanying file stored somewhere accessible
- * to Piazza.
- * 
- * The term Raster is being used as any valid raster file format that can be
- * recognized by GDAL.
+ * Represents simple text that can be stored directly within MongoDB's Resource
+ * collection.
  * 
  * @author Patrick.Doody
  * 
  */
-public class RasterResource implements DataType, FileRepresentation {
-	public static final String type = "raster";
-	public FileLocation location;
+public class TextDataType implements DataType {
+	public static final String type = "text";
+	public String content;
+	public String mimeType;
 
-	public RasterResource() {
+	public TextDataType() {
 
-	};
+	}
 
 	public String getType() {
 		return type;
 	}
 
-	public FileLocation getLocation() {
-		return location;
+	public String getContent() {
+		return content;
 	}
 
-	public void setLocation(FileLocation location) {
-		this.location = location;
+	public String getMimeType() {
+		return mimeType;
 	}
+
 }

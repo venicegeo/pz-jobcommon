@@ -20,16 +20,29 @@ import model.data.FileRepresentation;
 import model.data.location.FileLocation;
 
 /**
- * Represents a Point Cloud format with accompanying file stored somewhere accessible to Piazza.
+ * Represents a Raster image with accompanying file stored somewhere accessible
+ * to Piazza.
  * 
- * @author Sonny.Saniev
+ * The term Raster is being used as any valid raster file format that can be
+ * recognized by GDAL.
+ * 
+ * @author Patrick.Doody
  * 
  */
-public class PointCloudResource implements DataType, FileRepresentation {
-	public static final String type = "pointcloud";
+public class RasterDataType implements DataType, FileRepresentation {
+	public static final String type = "raster";
 	public FileLocation location;
+	public String mimeType;
 
-	public PointCloudResource() {
+	public String getMimeType() {
+		return mimeType;
+	}
+
+	public void setMimeType(String mimeType) {
+		this.mimeType = mimeType;
+	}
+
+	public RasterDataType() {
 
 	};
 

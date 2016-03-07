@@ -18,18 +18,28 @@ package model.data.type;
 import model.data.DataType;
 
 /**
- * OGC Web Feature Service (WFS) Resource.
+ * Vector resource held by the Piazza PostGIS database.
+ * 
+ * TODO: This class is likely missing some necessary parameters.
  * 
  * @author Patrick.Doody
  * 
  */
-public class WfsResource implements DataType {
-	public static final String type = "wfs";
-	public String url;
-	public String version;
-	public String featureType;
+public class PostGISDataType implements DataType {
+	public static final String type = "postgis";
+	public String database;
+	public String table;
+	public String mimeType;
 
-	public WfsResource() {
+	public String getMimeType() {
+		return mimeType;
+	}
+
+	public void setMimeType(String mimeType) {
+		this.mimeType = mimeType;
+	}
+
+	public PostGISDataType() {
 
 	}
 
@@ -37,15 +47,19 @@ public class WfsResource implements DataType {
 		return type;
 	}
 
-	public String getUrl() {
-		return url;
+	public String getDatabase() {
+		return database;
 	}
 
-	public String getVersion() {
-		return version;
+	public void setDatabase(String database) {
+		this.database = database;
 	}
 
-	public String getFeatureType() {
-		return featureType;
+	public String getTable() {
+		return table;
+	}
+
+	public void setTable(String table) {
+		this.table = table;
 	}
 }

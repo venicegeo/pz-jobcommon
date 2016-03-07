@@ -15,12 +15,12 @@
  **/
 package model.data;
 
-import model.data.type.PointCloudResource;
-import model.data.type.PostGISResource;
-import model.data.type.RasterResource;
-import model.data.type.ShapefileResource;
-import model.data.type.TextResource;
-import model.data.type.WfsResource;
+import model.data.type.PointCloudDataType;
+import model.data.type.PostGISDataType;
+import model.data.type.RasterDataType;
+import model.data.type.ShapefileDataType;
+import model.data.type.TextDataType;
+import model.data.type.WfsDataType;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -40,11 +40,11 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
  * 
  */
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "type")
-@JsonSubTypes({ @Type(value = WfsResource.class, name = "wfs"), @Type(value = TextResource.class, name = "text"),
-		@Type(value = RasterResource.class, name = "raster"),
-		@Type(value = ShapefileResource.class, name = "shapefile"),
-		@Type(value = PostGISResource.class, name = "postgis"),
-		@Type(value = PointCloudResource.class, name = "pointcloud")})
+@JsonSubTypes({ @Type(value = WfsDataType.class, name = "wfs"), @Type(value = TextDataType.class, name = "text"),
+		@Type(value = RasterDataType.class, name = "raster"),
+		@Type(value = ShapefileDataType.class, name = "shapefile"),
+		@Type(value = PostGISDataType.class, name = "postgis"),
+		@Type(value = PointCloudDataType.class, name = "pointcloud")})
 @JsonInclude(Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
 public interface DataType {

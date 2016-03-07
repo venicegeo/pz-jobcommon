@@ -16,33 +16,41 @@
 package model.data.type;
 
 import model.data.DataType;
+import model.data.FileRepresentation;
+import model.data.location.FileLocation;
 
 /**
- * Represents simple text that can be stored directly within MongoDB's Resource
- * collection.
+ * Represents a Point Cloud format with accompanying file stored somewhere accessible to Piazza.
  * 
- * @author Patrick.Doody
+ * @author Sonny.Saniev
  * 
  */
-public class TextResource implements DataType {
-	public static final String type = "text";
-	public String content;
+public class PointCloudDataType implements DataType, FileRepresentation {
+	public static final String type = "pointcloud";
+	public FileLocation location;
 	public String mimeType;
-
-	public TextResource() {
-
-	}
-
-	public String getType() {
-		return type;
-	}
-
-	public String getContent() {
-		return content;
-	}
 
 	public String getMimeType() {
 		return mimeType;
 	}
 
+	public void setMimeType(String mimeType) {
+		this.mimeType = mimeType;
+	}
+
+	public PointCloudDataType() {
+
+	};
+
+	public String getType() {
+		return type;
+	}
+
+	public FileLocation getLocation() {
+		return location;
+	}
+
+	public void setLocation(FileLocation location) {
+		this.location = location;
+	}
 }
