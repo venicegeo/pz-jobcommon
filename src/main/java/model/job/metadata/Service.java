@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 @JsonInclude(Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Service {
+	private String id;
 	private String name;
 	private ResourceMetadata resourceMetadata;
 	private List<ParamDataItem> inputs;
