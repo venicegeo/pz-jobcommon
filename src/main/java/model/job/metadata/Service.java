@@ -38,5 +38,12 @@ public class Service {
 	public void setOutputs(List<ParamDataItem> outputs) {
 		this.outputs = outputs;
 	}
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
+	
 
 }
