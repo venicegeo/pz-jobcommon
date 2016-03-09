@@ -29,6 +29,8 @@ public class FileAccessFactory {
 	private String s3AccessKey;
 	private String s3PrivateKey;
 
+	private final String PROTOCOL_PREFIX = "https://";
+	
 	public FileAccessFactory() {
 
 	}
@@ -83,9 +85,7 @@ public class FileAccessFactory {
 			return ((FolderShare) fileLocation).getFilePath();
 		} else if (fileLocation instanceof S3FileStore) {
 			S3FileStore s3FileStore = ((S3FileStore) fileLocation);
-			//Following s3 url, need to be tested live to ensure proper url construction, folder name may be added from S3Object
-			//Sample file to test on: https://s3.amazonaws.com/venicegeo-sample-data/pointcloud/samp71-utm.laz
-			return String.format("%s/%s/%s", s3FileStore.getDomainName(), s3FileStore.getBucketName(), s3FileStore.getFileName());
+			return String.format("%s%s/%s/%s", PROTOCOL_PREFIX, s3FileStore.getDomainName(), s3FileStore.getBucketName(), s3FileStore.getFileName());
 		} else {
 			throw new Exception("Unsupported Object type.");
 		}
