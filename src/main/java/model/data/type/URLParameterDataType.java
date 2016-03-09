@@ -13,35 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-package model.job.type;
+package model.data.type;
+/**
+ * Indicates that text content is to be used in URL key-value pair
+ * @author bkrasner
+ *
+ */
+public class URLParameterDataType extends TextDataType{
+	public static final String type = "URLParameter";
 
-import model.job.PiazzaJobType;
-import model.service.metadata.ExecuteServiceData;
-
-public class ExecuteServiceJob implements PiazzaJobType {
-
-		public String jobId = null;
-		public final String type = "execute-service";
-		public ExecuteServiceData data;
-
-		public ExecuteServiceJob() {
-
-		}
-
-		public ExecuteServiceJob(String jobId) {
-			this.jobId = jobId;
-		}
-
-		public String getType() {
-			return type;
-		}
-
-		public String getJobId() {
-			return jobId;
-		}
-
-		public void setJobId(String jobId) {
-			this.jobId = jobId;
-		}
-
-	}
+}

@@ -16,7 +16,7 @@
 package model.job.type;
 
 import model.job.PiazzaJobType;
-import model.job.metadata.Service;
+import model.service.metadata.Service;
 
 public class RegisterServiceJob implements PiazzaJobType {
 
