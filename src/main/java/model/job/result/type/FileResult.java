@@ -11,7 +11,7 @@ import model.job.result.ResultType;
  */
 public class FileResult implements ResultType {
 	public final String type = "file";
-	public String url;
+	public String dataId;
 
 	/**
 	 * Default Constructor
@@ -25,13 +25,19 @@ public class FileResult implements ResultType {
 	 * @param url
 	 *            The URL, off of the Gateway, that the file can be acquired
 	 *            from.
+	 * @param dataId
+	 *            The Data ID of the resource.
 	 */
-	public FileResult(String url) {
-		this.url = url;
+	public FileResult(String dataId) {
+		this.dataId = dataId;
 	}
 
 	public String getType() {
 		return type;
+	}
+
+	public String getDataId() {
+		return dataId;
 	}
 
 }
