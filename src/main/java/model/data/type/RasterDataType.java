@@ -29,11 +29,20 @@ import model.data.location.FileLocation;
  * @author Patrick.Doody
  * 
  */
-public class RasterResource implements DataType, FileRepresentation {
+public class RasterDataType implements DataType, FileRepresentation {
 	public static final String type = "raster";
 	public FileLocation location;
+	public String mimeType;
 
-	public RasterResource() {
+	public String getMimeType() {
+		return mimeType;
+	}
+
+	public void setMimeType(String mimeType) {
+		this.mimeType = mimeType;
+	}
+
+	public RasterDataType() {
 
 	};
 

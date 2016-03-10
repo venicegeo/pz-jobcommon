@@ -25,11 +25,20 @@ import model.data.location.FileLocation;
  * @author Sonny.Saniev
  * 
  */
-public class PointCloudResource implements DataType, FileRepresentation {
+public class PointCloudDataType implements DataType, FileRepresentation {
 	public static final String type = "pointcloud";
 	public FileLocation location;
+	public String mimeType;
 
-	public PointCloudResource() {
+	public String getMimeType() {
+		return mimeType;
+	}
+
+	public void setMimeType(String mimeType) {
+		this.mimeType = mimeType;
+	}
+
+	public PointCloudDataType() {
 
 	};
 

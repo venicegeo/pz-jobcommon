@@ -15,19 +15,22 @@
  **/
 package model.data;
 
-import model.data.type.PointCloudResource;
-import model.data.type.PostGISResource;
-import model.data.type.RasterResource;
-import model.data.type.ShapefileResource;
-import model.data.type.TextResource;
-import model.data.type.WfsResource;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
+
+import model.data.type.BodyDataType;
+import model.data.type.LiteralDataType;
+import model.data.type.PointCloudDataType;
+import model.data.type.PostGISDataType;
+import model.data.type.RasterDataType;
+import model.data.type.ShapefileDataType;
+import model.data.type.TextDataType;
+import model.data.type.URLParameterDataType;
+import model.data.type.WfsDataType;
 
 /**
  * Interface for Spatial Resources that can be ingested and stored in Piazza.
@@ -40,13 +43,17 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
  * 
  */
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "type")
-@JsonSubTypes({ @Type(value = WfsResource.class, name = "wfs"), @Type(value = TextResource.class, name = "text"),
-		@Type(value = RasterResource.class, name = "raster"),
-		@Type(value = ShapefileResource.class, name = "shapefile"),
-		@Type(value = PostGISResource.class, name = "postgis"),
-		@Type(value = PointCloudResource.class, name = "pointcloud")})
+@JsonSubTypes({ @Type(value = WfsDataType.class, name = "wfs"), @Type(value = TextDataType.class, name = "text"),
+	    @Type(value = BodyDataType.class, name = "body"),
+	    @Type(value = LiteralDataType.class, name = "literal"),
+	    @Type(value = URLParameterDataType.class, name = "urlparameter"),
+		@Type(value = RasterDataType.class, name = "raster"),
+		@Type(value = ShapefileDataType.class, name = "shapefile"),
+		@Type(value = PostGISDataType.class, name = "postgis"),
+		@Type(value = PointCloudDataType.class, name = "pointcloud")})
 @JsonInclude(Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
 public interface DataType {
 	public String getType();
+	public String getMimeType();
 }

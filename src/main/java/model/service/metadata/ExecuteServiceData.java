@@ -13,39 +13,35 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-package model.job.metadata;
+package model.service.metadata;
 
 import java.util.Map;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import model.data.DataType;
+
+/**
+ * Data passed to service controller for execute service jobs
+ * @author bkrasner
+ *
+ */
 public class ExecuteServiceData {
-	@JsonProperty("dataInputs")
-	public Map<String, String> dataInputs;	
-	public String dataInput;
-	public String resourceId;
-	
-	public Map<String, String> getDataInputs() {
+	String serviceId;
+	public String getServiceId() {
+		return serviceId;
+	}
+	public void setServiceId(String serviceId) {
+		this.serviceId = serviceId;
+	}
+	public Map<String, DataType> getDataInputs() {
 		return dataInputs;
 	}
-
-	public void setDataInputs(Map<String, String> dataInputs) {
+	public void setDataInputs(Map<String, DataType> dataInputs) {
 		this.dataInputs = dataInputs;
 	}
-
-	public String getDataInput() {
-		return dataInput;
-	}
-
-	public void setDataInput(String dataInput) {
-		this.dataInput = dataInput;
-	}
-
-	public String getResourceId() {
-		return resourceId;
-	}
-
-	public void setResourceId(String resourceId) {
-		this.resourceId = resourceId;
-	}		
+	@JsonProperty("dataInputs")
+	public Map<String, DataType> dataInputs;	
+	
+	
 }
