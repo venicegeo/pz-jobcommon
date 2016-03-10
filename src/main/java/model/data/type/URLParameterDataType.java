@@ -14,12 +14,26 @@
  * limitations under the License.
  **/
 package model.data.type;
+
+import model.data.DataType;
+
 /**
  * Indicates that text content is to be used in URL key-value pair
  * @author bkrasner
  *
  */
-public class URLParameterDataType extends TextDataType{
+public class URLParameterDataType implements DataType{
 	public static final String type = "URLParameter";
+
+	@Override
+	public String getType() {
+		return type;
+	}
+
+	@Override
+	public String getMimeType() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }

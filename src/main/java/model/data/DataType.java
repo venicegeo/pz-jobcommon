@@ -15,19 +15,22 @@
  **/
 package model.data;
 
-import model.data.type.PointCloudDataType;
-import model.data.type.PostGISDataType;
-import model.data.type.RasterDataType;
-import model.data.type.ShapefileDataType;
-import model.data.type.TextDataType;
-import model.data.type.WfsDataType;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
+
+import model.data.type.BodyDataType;
+import model.data.type.LiteralDataType;
+import model.data.type.PointCloudDataType;
+import model.data.type.PostGISDataType;
+import model.data.type.RasterDataType;
+import model.data.type.ShapefileDataType;
+import model.data.type.TextDataType;
+import model.data.type.URLParameterDataType;
+import model.data.type.WfsDataType;
 
 /**
  * Interface for Spatial Resources that can be ingested and stored in Piazza.
@@ -41,6 +44,9 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
  */
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "type")
 @JsonSubTypes({ @Type(value = WfsDataType.class, name = "wfs"), @Type(value = TextDataType.class, name = "text"),
+	    @Type(value = BodyDataType.class, name = "body"),
+	    @Type(value = LiteralDataType.class, name = "literal"),
+	    @Type(value = URLParameterDataType.class, name = "urlparameter"),
 		@Type(value = RasterDataType.class, name = "raster"),
 		@Type(value = ShapefileDataType.class, name = "shapefile"),
 		@Type(value = PostGISDataType.class, name = "postgis"),
@@ -49,4 +55,5 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public interface DataType {
 	public String getType();
+	public String getMimeType();
 }
