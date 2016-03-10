@@ -18,18 +18,28 @@ package model.data.type;
 import model.data.DataType;
 
 /**
- * Represents simple text that can be stored directly within MongoDB's Resource
- * collection.
+ * Vector resource held by the Piazza PostGIS database.
+ * 
+ * TODO: This class is likely missing some necessary parameters.
  * 
  * @author Patrick.Doody
  * 
  */
-public class TextResource implements DataType {
-	public static final String type = "text";
-	public String content;
+public class PostGISDataType implements DataType {
+	public static final String type = "postgis";
+	public String database;
+	public String table;
 	public String mimeType;
 
-	public TextResource() {
+	public String getMimeType() {
+		return mimeType;
+	}
+
+	public void setMimeType(String mimeType) {
+		this.mimeType = mimeType;
+	}
+
+	public PostGISDataType() {
 
 	}
 
@@ -37,12 +47,19 @@ public class TextResource implements DataType {
 		return type;
 	}
 
-	public String getContent() {
-		return content;
+	public String getDatabase() {
+		return database;
 	}
 
-	public String getMimeType() {
-		return mimeType;
+	public void setDatabase(String database) {
+		this.database = database;
 	}
 
+	public String getTable() {
+		return table;
+	}
+
+	public void setTable(String table) {
+		this.table = table;
+	}
 }

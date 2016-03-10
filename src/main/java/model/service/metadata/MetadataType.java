@@ -13,39 +13,40 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-package model.data.type;
-
-import model.data.DataType;
-
+package model.service.metadata;
 /**
- * OGC Web Feature Service (WFS) Resource.
- * 
- * @author Patrick.Doody
- * 
+ * Used to describe input data to a Service
+ * @author bkrasner
+ *
  */
-public class WfsResource implements DataType {
-	public static final String type = "wfs";
-	public String url;
-	public String version;
-	public String featureType;
-
-	public WfsResource() {
-
+public class MetadataType {
+	String about;
+	String href;
+	String role;
+	String title;
+	public String getAbout() {
+		return about;
+	}
+	public void setAbout(String about) {
+		this.about = about;
+	}
+	public String getHref() {
+		return href;
+	}
+	public void setHref(String href) {
+		this.href = href;
+	}
+	public String getRole() {
+		return role;
+	}
+	public void setRole(String role) {
+		this.role = role;
+	}
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
-	public String getType() {
-		return type;
-	}
-
-	public String getUrl() {
-		return url;
-	}
-
-	public String getVersion() {
-		return version;
-	}
-
-	public String getFeatureType() {
-		return featureType;
-	}
 }

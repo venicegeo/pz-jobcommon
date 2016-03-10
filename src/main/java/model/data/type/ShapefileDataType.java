@@ -28,12 +28,21 @@ import model.data.location.FileLocation;
  * @author Patrick.Doody
  * 
  */
-public class ShapefileResource implements DataType, FileRepresentation {
+public class ShapefileDataType implements DataType, FileRepresentation {
 	public static final String type = "shapefile";
 	public String databaseTableName;
 	public FileLocation location;
+	public String mimeType;
 
-	public ShapefileResource() {
+	public String getMimeType() {
+		return mimeType;
+	}
+
+	public void setMimeType(String mimeType) {
+		this.mimeType = mimeType;
+	}
+
+	public ShapefileDataType() {
 
 	}
 

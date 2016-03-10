@@ -13,35 +13,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-package model.job.type;
+package model.security;
+/**
+ * Specifies security classification
+ * @author Bkrasner
+ *
+ */
+public class SecurityClassification {
+	String classification;
 
-import model.job.PiazzaJobType;
-import model.service.metadata.ExecuteServiceData;
-
-public class ExecuteServiceJob implements PiazzaJobType {
-
-		public String jobId = null;
-		public final String type = "execute-service";
-		public ExecuteServiceData data;
-
-		public ExecuteServiceJob() {
-
-		}
-
-		public ExecuteServiceJob(String jobId) {
-			this.jobId = jobId;
-		}
-
-		public String getType() {
-			return type;
-		}
-
-		public String getJobId() {
-			return jobId;
-		}
-
-		public void setJobId(String jobId) {
-			this.jobId = jobId;
-		}
-
+	public String getClassification() {
+		return classification;
 	}
+
+	public void setClassification(String classification) {
+		this.classification = classification;
+	}
+
+	public SecurityClassification(String classification) {
+		super();
+		this.classification = classification;
+	}
+	
+}

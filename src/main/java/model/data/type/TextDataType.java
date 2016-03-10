@@ -13,35 +13,36 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-package model.job.type;
+package model.data.type;
 
-import model.job.PiazzaJobType;
-import model.service.metadata.ExecuteServiceData;
+import model.data.DataType;
 
-public class ExecuteServiceJob implements PiazzaJobType {
+/**
+ * Represents simple text that can be stored directly within MongoDB's Resource
+ * collection.
+ * 
+ * @author Patrick.Doody
+ * 
+ */
+public class TextDataType implements DataType {
+	public static final String type = "text";
+	public String content;
+	public String mimeType;
 
-		public String jobId = null;
-		public final String type = "execute-service";
-		public ExecuteServiceData data;
-
-		public ExecuteServiceJob() {
-
-		}
-
-		public ExecuteServiceJob(String jobId) {
-			this.jobId = jobId;
-		}
-
-		public String getType() {
-			return type;
-		}
-
-		public String getJobId() {
-			return jobId;
-		}
-
-		public void setJobId(String jobId) {
-			this.jobId = jobId;
-		}
+	public TextDataType() {
 
 	}
+
+	public String getType() {
+		return type;
+	}
+
+	public String getContent() {
+		return content;
+	}
+
+	public String getMimeType() {
+		return mimeType;
+	}
+
+}
