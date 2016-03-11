@@ -19,17 +19,18 @@ import model.data.DataResource;
 import model.job.PiazzaJobType;
 
 /**
- * Represents the JSON Model for ingesting metadata into Piazza for subsequent query,
- * e.g. used in conjunction/within the flow of an InjestJob
- * The contents of this payload includes DataResource serving as complete metadata
- * record to locate Piazza data access key(s) from Search service.
+ * Represents the JSON Model passing Elasticsearch Query (DSL language)
+ * into Piazza for search query,
  * 
  * @author Christopher Smith
  * 
  */
 public class SearchQueryJob implements PiazzaJobType {
 	public final String type = "search-query";
-	public DataResource data;
+	/**
+	 * Hunk-o-memory for serialization of input DSL
+	 */
+	public Object data;
 
 	public SearchQueryJob() {
 
@@ -39,7 +40,7 @@ public class SearchQueryJob implements PiazzaJobType {
 		return type;
 	}
 
-	public DataResource getData() {
+	public Object getData() {
 		return data;
 	}
 
