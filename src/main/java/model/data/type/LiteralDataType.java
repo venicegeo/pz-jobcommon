@@ -46,15 +46,11 @@ public class LiteralDataType implements DataType {
 		this.value = value;
 	}
 
-	@Override
 	public String getType() {
-		// TODO Auto-generated method stub
 		return type;
 	}
 
-	@Override
 	public String getMimeType() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 	

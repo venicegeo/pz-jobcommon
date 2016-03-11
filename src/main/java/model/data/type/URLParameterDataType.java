@@ -25,12 +25,10 @@ import model.data.DataType;
 public class URLParameterDataType implements DataType{
 	public static final String type = "urlparameter";
 
-	@Override
 	public String getType() {
 		return type;
 	}
 
-	@Override
 	public String getMimeType() {
 		// TODO Auto-generated method stub
 		return null;
