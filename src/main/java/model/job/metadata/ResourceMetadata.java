@@ -60,6 +60,7 @@ public class ResourceMetadata {
 	public Boolean clientCertRequired;
 	public Boolean credentialsRequired;
 	public Boolean preAuthRequired;
+	public String networkAvailable;
 	public String contacts;
 	public String method;
 	public String reason;
