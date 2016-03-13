@@ -63,6 +63,7 @@ public class ResourceMetadata {
 	public String contacts;
 	public String method;
 	public String reason;
+	public String version;
 	
 	/*
 	 * Need the ability to accommodate arbitrary key/value pairs
