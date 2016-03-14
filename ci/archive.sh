@@ -8,7 +8,7 @@ popd > /dev/null
 source $root/ci/vars.sh
 
 # Path to output JAR
-src=$base/../target/pz-jobcommon-1.0.0.BUILD-SNAPSHOT.jar
+src=$root/target/pz-jobcommon-1.0.0.BUILD-SNAPSHOT.jar
 
 # Build Spring-boot JAR
 [ -f $src ] || mvn clean package
