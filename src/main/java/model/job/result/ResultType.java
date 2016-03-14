@@ -18,6 +18,7 @@ package model.job.result;
 import model.job.result.type.DataResult;
 import model.job.result.type.DeploymentResult;
 import model.job.result.type.ErrorResult;
+import model.job.result.type.FileResult;
 import model.job.result.type.JobResult;
 import model.job.result.type.TextResult;
 
@@ -43,7 +44,8 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "type")
 @JsonSubTypes({ @Type(value = DataResult.class, name = "data"),
 		@Type(value = DeploymentResult.class, name = "deployment"), @Type(value = TextResult.class, name = "text"),
-		@Type(value = ErrorResult.class, name = "error"), @Type(value = JobResult.class, name = "job") })
+		@Type(value = ErrorResult.class, name = "error"), @Type(value = JobResult.class, name = "job"),
+		@Type(value = FileResult.class, name = "file") })
 @JsonInclude(Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
 public interface ResultType {
