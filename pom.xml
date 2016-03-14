@@ -12,16 +12,6 @@
 		<geotools.version>14.2</geotools.version>
 	</properties>
 
-	<build>
-		<extensions>
-			<extension>
-				<groupId>org.kuali.maven.wagons</groupId>
-				<artifactId>maven-s3-wagon</artifactId>
-				<version>1.2.1</version>
-			</extension>
-		</extensions>
-	</build>
-
 	<repositories>
 		<repository>
 			<id>osgeo</id>
@@ -29,21 +19,6 @@
 			<url>http://download.osgeo.org/webdav/geotools/</url>
 		</repository>
 	</repositories>
-
-	<distributionManagement>
-		<site>
-			<id>s3.site</id>
-			<url>s3://venice-maven-private/site</url>
-		</site>
-		<repository>
-			<id>s3.release</id>
-			<url>s3://venice-maven-private/release</url>
-		</repository>
-		<snapshotRepository>
-			<id>s3.snapshot</id>
-			<url>s3://venice-maven-private/snapshot</url>
-		</snapshotRepository>
-	</distributionManagement>
 
 	<dependencies>
 		<dependency>
