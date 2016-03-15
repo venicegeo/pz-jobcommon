@@ -51,7 +51,7 @@ public class Job {
 	public PiazzaJobType jobType;
 	@JsonIgnore
 	public DateTime submitted;
-	public String submitterApiKey;
+	public String submitterUserName;
 	public String status;
 	public JobProgress progress = new JobProgress();
 	public List<JobProgress> history = new ArrayList<JobProgress>();

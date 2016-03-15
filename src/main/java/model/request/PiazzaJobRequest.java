@@ -29,6 +29,6 @@ import model.job.PiazzaJobType;
  * 
  */
 public class PiazzaJobRequest {
-	public String apiKey;
+	public String userName;
 	public PiazzaJobType jobType;
 }
