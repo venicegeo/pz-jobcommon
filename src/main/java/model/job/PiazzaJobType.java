@@ -26,6 +26,8 @@ import model.job.type.IngestJob;
 import model.job.type.ListServicesJob;
 import model.job.type.RegisterServiceJob;
 import model.job.type.RepeatJob;
+import model.job.type.SearchMetadataIngestJob;
+import model.job.type.SearchQueryJob;
 import model.job.type.SearchServiceJob;
 import model.job.type.UpdateServiceJob;
 
@@ -51,6 +53,8 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 		@Type(value = DeleteServiceJob.class, name = "delete-service"),
 		@Type(value = ExecuteServiceJob.class, name = "execute-service"), @Type(value = GetJob.class, name = "get"),
 		@Type(value = IngestJob.class, name = "ingest"),
+		@Type(value = SearchMetadataIngestJob.class, name = "search-metadata-ingest"),
+		@Type(value = SearchQueryJob.class, name = "search-query"),
 		@Type(value = DescribeServiceMetadataJob.class, name = "read-service"),
 		@Type(value = RegisterServiceJob.class, name = "register-service"),
 		@Type(value = UpdateServiceJob.class, name = "update-service"),
