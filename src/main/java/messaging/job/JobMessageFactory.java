@@ -76,10 +76,10 @@ public class JobMessageFactory {
 	 * @return Kafka Message
 	 * @throws JsonProcessingException
 	 */
-	public static ProducerRecord<String, String> getAbortJobMessage(AbortJob abortJob) throws JsonProcessingException {
+	public static ProducerRecord<String, String> getAbortJobMessage(PiazzaJobRequest piazzaRequest, String jobId) throws JsonProcessingException {
 		ObjectMapper mapper = new ObjectMapper();
-		return new ProducerRecord<String, String>(ABORT_JOB_TOPIC_NAME, abortJob.getJobId(),
-				mapper.writeValueAsString(abortJob));
+		return new ProducerRecord<String, String>(ABORT_JOB_TOPIC_NAME, jobId,
+				mapper.writeValueAsString(piazzaRequest));
 	}
 
 	/**
