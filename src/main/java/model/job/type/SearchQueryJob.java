@@ -15,7 +15,6 @@
  **/
 package model.job.type;
 
-import model.data.DataResource;
 import model.job.PiazzaJobType;
 
 /**
