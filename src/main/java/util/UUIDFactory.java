@@ -91,7 +91,7 @@ public class UUIDFactory {
 		try {
 			Map<String, Integer> map = new HashMap<String, Integer>();
 			map.put("count", count);
-			ResponseEntity<UUID> uuid = template.postForEntity("http://" + uuidServiceUrl + "?count={count}", null,
+			ResponseEntity<UUID> uuid = template.postForEntity("https://" + uuidServiceUrl + "?count={count}", null,
 					UUID.class, map);
 			return uuid.getBody().getData();
 		} catch (Exception exception) {
