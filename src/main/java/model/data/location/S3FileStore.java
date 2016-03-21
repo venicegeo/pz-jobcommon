@@ -33,7 +33,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class S3FileStore implements FileLocation {
 	public static final String type = "s3";
 	public String bucketName;
-	
+
 	public String fileName;
 	public String domainName;
 
@@ -54,6 +54,7 @@ public class S3FileStore implements FileLocation {
 	public String getDomainName() {
 		return domainName;
 	}
+
 	public void setFileName(String fileName) {
 		this.fileName = fileName;
 	}
@@ -61,7 +62,7 @@ public class S3FileStore implements FileLocation {
 	public String getFileName() {
 		return fileName;
 	}
-	
+
 	public String getType() {
 		return type;
 	}
@@ -77,10 +78,28 @@ public class S3FileStore implements FileLocation {
 	 */
 	@JsonIgnore
 	public InputStream getFile(String accessKey, String privateKey) {
-		// Get the file from S3
-		BasicAWSCredentials credentials = new BasicAWSCredentials(accessKey, privateKey);
-		AmazonS3 client = new AmazonS3Client(credentials);
+		// Get the file from S3. Connect to S3 Bucket. Only apply credentials if
+		// they are present.
+		AmazonS3 client;
+		if ((accessKey.isEmpty()) && (privateKey.isEmpty())) {
+			client = new AmazonS3Client();
+		} else {
+			BasicAWSCredentials credentials = new BasicAWSCredentials(accessKey, privateKey);
+			client = new AmazonS3Client(credentials);
+		}
 		S3Object s3Object = client.getObject(bucketName, fileName);
 		return s3Object.getObjectContent();
+	}
+
+	/**
+	 * Gets the input stream for this S3 file store. This will stream the bytes
+	 * from S3 and return them for utilization. Null, or exception will be
+	 * thrown if an error occurs during acquisition.
+	 * 
+	 * Used for cases where credentials are not required.
+	 */
+	@JsonIgnore
+	public InputStream getFile() {
+		return getFile(new String(), new String());
 	}
 }
