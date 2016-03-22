@@ -40,8 +40,20 @@ public class ExecuteServiceData {
 	public void setDataInputs(Map<String, DataType> dataInputs) {
 		this.dataInputs = dataInputs;
 	}
+	
+	public DataType getDataOutput() {
+		return dataOutput;
+	}
+	public void setDataOutput(DataType dataOutput) {
+		this.dataOutput = dataOutput;
+	}
+	
 	@JsonProperty("dataInputs")
 	public Map<String, DataType> dataInputs;	
+	
+	@JsonProperty("dataOutput")
+	public DataType dataOutput;
+
 	
 	
 }
