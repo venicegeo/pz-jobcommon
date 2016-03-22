@@ -4,6 +4,7 @@ public class NumericKeyValue {
 	private String key;
 	private Double value;
 	
+	public NumericKeyValue() {};
 	public NumericKeyValue(String key, Double value)
 	{
 		this.key = key;
