@@ -15,7 +15,6 @@
  **/
 package model.data.location;
 
-import java.io.File;
 import java.io.InputStream;
 
 /**
@@ -30,7 +29,7 @@ public class FileAccessFactory {
 	private String s3PrivateKey;
 
 	private final String PROTOCOL_PREFIX = "https://";
-	
+
 	public FileAccessFactory() {
 
 	}
@@ -71,10 +70,9 @@ public class FileAccessFactory {
 		}
 	}
 
-
 	/**
-	 * Returns the URI for a file represented by an object implementing
-	 * the FileLocation interface
+	 * Returns the URI for a file represented by an object implementing the
+	 * FileLocation interface
 	 * 
 	 * @param fileLocation
 	 *            The file location
@@ -85,10 +83,11 @@ public class FileAccessFactory {
 			return ((FolderShare) fileLocation).getFilePath();
 		} else if (fileLocation instanceof S3FileStore) {
 			S3FileStore s3FileStore = ((S3FileStore) fileLocation);
-			return String.format("%s%s/%s/%s", PROTOCOL_PREFIX, s3FileStore.getDomainName(), s3FileStore.getBucketName(), s3FileStore.getFileName());
+			return String.format("%s%s/%s/%s", PROTOCOL_PREFIX, s3FileStore.getDomainName(),
+					s3FileStore.getBucketName(), s3FileStore.getFileName());
 		} else {
 			throw new Exception("Unsupported Object type.");
 		}
 	}
-	
+
 }
