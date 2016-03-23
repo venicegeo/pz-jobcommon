@@ -21,4 +21,9 @@ package model.data.type;
 
 public class BodyDataType extends TextDataType{
 	public static final String type = "body";
+	@Override
+	public String getType() {
+		return type;
+	}
+
 }
