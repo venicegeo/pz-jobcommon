@@ -13,25 +13,34 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-package model.data.type;
+package model.job.type;
 
-import model.data.DataType;
+import model.data.DataResource;
+import model.job.PiazzaJobType;
 
 /**
- * Indicates that text content is to be used in URL key-value pair
- * @author bkrasner
- *
+ * Represents the JSON Model for ingesting metadata into Piazza for subsequent query,
+ * e.g. used in conjunction/within the flow of an InjestJob
+ * The contents of this payload includes DataResource serving as complete metadata
+ * record to locate Piazza data access key(s) from Search service.
+ * 
+ * @author Christopher Smith
+ * 
  */
-public class URLParameterDataType implements DataType{
-	public static final String type = "urlparameter";
+public class SearchMetadataIngestJob implements PiazzaJobType {
+	public final String type = "search-metadata-ingest";
+	public DataResource data;
+
+	public SearchMetadataIngestJob() {
+
+	}
 
 	public String getType() {
 		return type;
 	}
 
-	public String getMimeType() {
-		// TODO Auto-generated method stub
-		return null;
+	public DataResource getData() {
+		return data;
 	}
 
 }

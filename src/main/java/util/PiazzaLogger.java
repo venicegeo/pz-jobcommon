@@ -119,7 +119,7 @@ public class PiazzaLogger {
 				} catch (Exception exception) { /* Do nothing. */
 				}
 
-				template.postForEntity("http://" + loggerServiceUrl, new HttpEntity<LogRequest>(logRequest, headers),
+				template.postForEntity("https://" + loggerServiceUrl, new HttpEntity<LogRequest>(logRequest, headers),
 						String.class);
 			} catch (Exception exception) {
 				LOG.error("PiazzaLogger could not log: " + exception.getMessage());
@@ -137,7 +137,7 @@ public class PiazzaLogger {
 		try {
 			Map<String, Integer> map = new HashMap<String, Integer>();
 			map.put("count", count);
-			ResponseEntity<LogRequest[]> logs = template.getForEntity("http://" + loggerServiceUrl + "?count={count}",
+			ResponseEntity<LogRequest[]> logs = template.getForEntity("https://" + loggerServiceUrl + "?count={count}",
 					LogRequest[].class, map);
 			return (List<LogRequest>) Arrays.asList(logs.getBody());
 		} catch (Exception exception) {

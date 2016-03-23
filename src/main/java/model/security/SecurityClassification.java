@@ -14,13 +14,19 @@
  * limitations under the License.
  **/
 package model.security;
+
 /**
  * Specifies security classification
+ * 
  * @author Bkrasner
- *
+ * 
  */
 public class SecurityClassification {
 	String classification;
+
+	public SecurityClassification() {
+
+	}
 
 	public String getClassification() {
 		return classification;
@@ -34,5 +40,5 @@ public class SecurityClassification {
 		super();
 		this.classification = classification;
 	}
-	
+
 }

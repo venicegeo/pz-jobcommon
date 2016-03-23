@@ -25,12 +25,10 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+//import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 import model.resource.NumericKeyValue;
-import model.resource.NumericKeyValueJsonDeserializer;
 import model.resource.TextKeyValue;
-import model.resource.TextKeyValueJsonDeserializer;
 import model.security.SecurityClassification;
 
 /**
@@ -60,18 +58,18 @@ public class ResourceMetadata {
 	public Boolean clientCertRequired;
 	public Boolean credentialsRequired;
 	public Boolean preAuthRequired;
+	public String networkAvailable;
 	public String contacts;
 	public String method;
 	public String reason;
+	public String version;
 	
 	/*
 	 * Need the ability to accommodate arbitrary key/value pairs
 	 */
 	@Field(type = FieldType.Nested)
-	@JsonDeserialize(using = NumericKeyValueJsonDeserializer.class)
 	private List<NumericKeyValue> numericKeyValueList;
 	@Field(type = FieldType.Nested)
-	@JsonDeserialize(using = TextKeyValueJsonDeserializer.class)
 	private List<TextKeyValue> textKeyValueList;
 
 	public List<NumericKeyValue> getNumericKeyValueList() {
