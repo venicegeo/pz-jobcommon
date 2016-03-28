@@ -17,6 +17,12 @@ package model.data.location;
 
 import java.io.InputStream;
 
+import com.amazonaws.auth.BasicAWSCredentials;
+import com.amazonaws.services.s3.AmazonS3;
+import com.amazonaws.services.s3.AmazonS3Client;
+import com.amazonaws.services.s3.model.S3Object;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 /**
  * Factory class that helps with the obtaining of Files represented by
  * FileLocation interfaces; such as S3 files or folder shares.
@@ -25,8 +31,8 @@ import java.io.InputStream;
  * 
  */
 public class FileAccessFactory {
-	private String s3AccessKey;
-	private String s3PrivateKey;
+	private String s3AccessKey = "";
+	private String s3PrivateKey = "";
 
 	private final String PROTOCOL_PREFIX = "https://";
 
@@ -64,10 +70,36 @@ public class FileAccessFactory {
 		if (fileLocation instanceof FolderShare) {
 			return ((FolderShare) fileLocation).getFile();
 		} else if (fileLocation instanceof S3FileStore) {
-			return ((S3FileStore) fileLocation).getFile(s3AccessKey, s3PrivateKey);
+			return getS3File(fileLocation, s3AccessKey, s3PrivateKey);
 		} else {
 			throw new Exception("Unsupported Object type.");
 		}
+	}
+
+	/**
+	 * Gets the input stream for an S3 file store. This will stream the bytes
+	 * from S3. Null, or exception will be thrown if an error occurs during
+	 * acquisition.
+	 * 
+	 * The S3 Credentials MUST be populated using the setCredentials() method
+	 * before executing this call, or a Credentials exception is likely to be
+	 * thrown by S3.
+	 */
+	@JsonIgnore
+	public InputStream getS3File(FileLocation fileLocation, String accessKey, String privateKey) {
+		System.out.println("NEW CODEEE YEEAAHHH");
+		S3FileStore fileStore = (S3FileStore) fileLocation;
+		// Get the file from S3. Connect to S3 Bucket. Only apply credentials if
+		// they are present.
+		AmazonS3 client;
+		if ((accessKey.isEmpty()) && (privateKey.isEmpty())) {
+			client = new AmazonS3Client();
+		} else {
+			BasicAWSCredentials credentials = new BasicAWSCredentials(accessKey, privateKey);
+			client = new AmazonS3Client(credentials);
+		}
+		S3Object s3Object = client.getObject(fileStore.getBucketName(), fileStore.getFileName());
+		return s3Object.getObjectContent();
 	}
 
 	/**

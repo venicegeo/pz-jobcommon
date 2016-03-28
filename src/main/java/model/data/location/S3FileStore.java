@@ -15,14 +15,6 @@
  **/
 package model.data.location;
 
-import java.io.InputStream;
-
-import com.amazonaws.auth.BasicAWSCredentials;
-import com.amazonaws.services.s3.AmazonS3;
-import com.amazonaws.services.s3.AmazonS3Client;
-import com.amazonaws.services.s3.model.S3Object;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 /**
  * Model for the necessary information that is required to access a file on an
  * AWS S3 bucket share.
@@ -65,41 +57,5 @@ public class S3FileStore implements FileLocation {
 
 	public String getType() {
 		return type;
-	}
-
-	/**
-	 * Gets the input stream for this S3 file store. This will stream the bytes
-	 * from S3 and return them for utilization. Null, or exception will be
-	 * thrown if an error occurs during acquisition.
-	 * 
-	 * The S3 Credentials MUST be populated using the setCredentials() method
-	 * before executing this call, or a Credentials exception is likely to be
-	 * thrown by S3.
-	 */
-	@JsonIgnore
-	public InputStream getFile(String accessKey, String privateKey) {
-		// Get the file from S3. Connect to S3 Bucket. Only apply credentials if
-		// they are present.
-		AmazonS3 client;
-		if ((accessKey.isEmpty()) && (privateKey.isEmpty())) {
-			client = new AmazonS3Client();
-		} else {
-			BasicAWSCredentials credentials = new BasicAWSCredentials(accessKey, privateKey);
-			client = new AmazonS3Client(credentials);
-		}
-		S3Object s3Object = client.getObject(bucketName, fileName);
-		return s3Object.getObjectContent();
-	}
-
-	/**
-	 * Gets the input stream for this S3 file store. This will stream the bytes
-	 * from S3 and return them for utilization. Null, or exception will be
-	 * thrown if an error occurs during acquisition.
-	 * 
-	 * Used for cases where credentials are not required.
-	 */
-	@JsonIgnore
-	public InputStream getFile() {
-		return getFile(new String(), new String());
 	}
 }
