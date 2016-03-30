@@ -64,12 +64,11 @@ public class Job {
 	}
 
 	public Job(PiazzaJobRequest request, String jobId) {
-		Job job = new Job();
-		job.setJobId(jobId);
-		job.jobType = request.jobType;
-		job.submitterApiKey = request.apiKey;
-		job.status = StatusUpdate.STATUS_SUBMITTED;
-		job.submitted = new DateTime();
+		this.jobId = jobId;
+		this.jobType = request.jobType;
+		this.submitterApiKey = request.apiKey;
+		this.status = StatusUpdate.STATUS_SUBMITTED;
+		this.submitted = new DateTime();
 	}
 
 	public String getJobId() {
