@@ -47,21 +47,19 @@ public class GeoJsonDataType implements DataType, FileRepresentation {
 	}
 
 	/**
-	 * Gets the location of the raw, zipped shapefile that was sent to the
-	 * Gateway upon Ingest.
+	 * Gets the location of the geojson.
 	 * 
-	 * @return Shapefile location
+	 * @return geojson postgis location
 	 */
 	public FileLocation getLocation() {
 		return location;
 	}
 
 	/**
-	 * Sets the location of the raw, zipped shapefile that was sent to the
-	 * Gateway upon Ingest.
+	 * Sets the location of the geojson
 	 * 
 	 * @param location
-	 *            The current shapefile location
+	 *            The location object
 	 */
 	public void setLocation(FileLocation location) {
 		this.location = location;
