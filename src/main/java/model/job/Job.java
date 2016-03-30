@@ -19,6 +19,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.job.result.ResultType;
+import model.request.PiazzaJobRequest;
+import model.status.StatusUpdate;
 
 import org.joda.time.DateTime;
 
@@ -57,6 +59,19 @@ public class Job {
 	public List<JobProgress> history = new ArrayList<JobProgress>();
 	public ResultType result;
 
+	public Job() {
+
+	}
+
+	public Job(PiazzaJobRequest request, String jobId) {
+		Job job = new Job();
+		job.setJobId(jobId);
+		job.jobType = request.jobType;
+		job.submitterApiKey = request.apiKey;
+		job.status = StatusUpdate.STATUS_SUBMITTED;
+		job.submitted = new DateTime();
+	}
+
 	public String getJobId() {
 		return jobId;
 	}
@@ -79,7 +94,7 @@ public class Job {
 	public PiazzaJobType getJobType() {
 		return jobType;
 	}
-	
+
 	public ResultType getResult() {
 		return result;
 	}
