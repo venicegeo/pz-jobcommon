@@ -23,6 +23,7 @@ import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 import model.data.type.BodyDataType;
+import model.data.type.GeoJsonDataType;
 import model.data.type.LiteralDataType;
 import model.data.type.PointCloudDataType;
 import model.data.type.PostGISDataType;
@@ -50,6 +51,7 @@ import model.data.type.WfsDataType;
 		@Type(value = RasterDataType.class, name = "raster"),
 		@Type(value = ShapefileDataType.class, name = "shapefile"),
 		@Type(value = PostGISDataType.class, name = "postgis"),
+		@Type(value = GeoJsonDataType.class, name = "geojson"),
 		@Type(value = PointCloudDataType.class, name = "pointcloud")})
 @JsonInclude(Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
