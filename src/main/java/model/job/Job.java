@@ -66,7 +66,7 @@ public class Job {
 	public Job(PiazzaJobRequest request, String jobId) {
 		this.jobId = jobId;
 		this.jobType = request.jobType;
-		this.submitterApiKey = request.apiKey;
+		this.submitterUserName = request.userName;
 		this.status = StatusUpdate.STATUS_SUBMITTED;
 		this.submitted = new DateTime();
 	}
