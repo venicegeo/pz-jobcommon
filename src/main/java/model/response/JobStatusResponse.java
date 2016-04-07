@@ -30,6 +30,8 @@ public class JobStatusResponse extends PiazzaResponse {
 	private String type = "status";
 	public Object result;
 	public String status;
+	public String jobType;
+	public String submittedBy;
 	public JobProgress progress;
 
 	public JobStatusResponse() {
@@ -41,6 +43,8 @@ public class JobStatusResponse extends PiazzaResponse {
 		result = job.result;
 		status = job.status;
 		progress = job.progress;
+		jobType = job.getJobType().getType();
+		submittedBy = job.submitterUserName; 
 	}
 	
 	/**

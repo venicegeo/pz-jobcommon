@@ -76,10 +76,10 @@ public class JobMessageFactory {
 	 * @return Kafka Message
 	 * @throws JsonProcessingException
 	 */
-	public static ProducerRecord<String, String> getAbortJobMessage(AbortJob abortJob) throws JsonProcessingException {
+	public static ProducerRecord<String, String> getAbortJobMessage(PiazzaJobRequest piazzaRequest, String jobId) throws JsonProcessingException {
 		ObjectMapper mapper = new ObjectMapper();
-		return new ProducerRecord<String, String>(ABORT_JOB_TOPIC_NAME, abortJob.getJobId(),
-				mapper.writeValueAsString(abortJob));
+		return new ProducerRecord<String, String>(ABORT_JOB_TOPIC_NAME, jobId,
+				mapper.writeValueAsString(piazzaRequest));
 	}
 
 	/**
@@ -143,13 +143,13 @@ public class JobMessageFactory {
 	 *            The Data Resource to be ingested
 	 * @param jobId
 	 *            The Job ID of the Ingest Job that will be created
-	 * @param apiKey
-	 *            The internal API Key
+	 * @param userName
+	 *            The authenticated UserName
 	 * @return The Kafka message for creating the Ingest Job, that can be Send
 	 *         via a producer.
 	 */
 	public static ProducerRecord<String, String> getIngestJobForDataResource(DataResource dataResource, String jobId,
-			String apiKey) throws Exception {
+			String userName) throws Exception {
 		// Data Resource must have an ID at this point
 		if (dataResource.getDataId() == null) {
 			throw new Exception("The DataResource object must have a populated ID.");
@@ -163,7 +163,7 @@ public class JobMessageFactory {
 
 		// Create the Job Request and attach the IngestJob
 		PiazzaJobRequest jobRequest = new PiazzaJobRequest();
-		jobRequest.apiKey = apiKey;
+		jobRequest.userName = userName;
 		jobRequest.jobType = ingestJob;
 		ProducerRecord<String, String> ingestJobMessage = JobMessageFactory.getRequestJobMessage(jobRequest, jobId);
 
