@@ -9,6 +9,6 @@ package model.request;
  * 
  */
 public class FileRequest {
-	public String apiKey;
+	public String userName;
 	public String dataId;
 }
