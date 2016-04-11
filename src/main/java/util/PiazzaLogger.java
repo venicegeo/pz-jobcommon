@@ -16,6 +16,7 @@
 package util;
 
 import java.net.InetAddress;
+import java.time.Instant;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -25,8 +26,6 @@ import javax.annotation.PostConstruct;
 
 import model.request.LogRequest;
 
-import org.joda.time.DateTime;
-import org.joda.time.DateTimeZone;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -108,8 +107,8 @@ public class PiazzaLogger {
 				HttpHeaders headers = new HttpHeaders();
 				headers.setContentType(MediaType.APPLICATION_JSON);
 
-				LogRequest logRequest = new LogRequest(serviceName, InetAddress.getLocalHost().toString(),
-						new DateTime(DateTimeZone.UTC).toString(), logMessage, severity);
+				LogRequest logRequest = new LogRequest(serviceName, InetAddress.getLocalHost().toString(), Instant
+						.now().getEpochSecond(), logMessage, severity);
 
 				// Log the message locally if requested
 				try {

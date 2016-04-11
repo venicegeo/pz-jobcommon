@@ -26,17 +26,17 @@ public class LogRequest {
 
 	private String service;
 	private String address;
-	private String time;
+	private Long stamp;
 	private String message;
 	private String severity;
 
 	public LogRequest() {
 	}
 
-	public LogRequest(String service, String address, String time, String message, String severity) {
+	public LogRequest(String service, String address, Long stamp, String message, String severity) {
 		setService(service);
 		setAddress(address);
-		setTime(time);
+		setStamp(stamp);
 		setMessage(message);
 		setSeverity(severity);
 	}
@@ -57,12 +57,12 @@ public class LogRequest {
 		this.address = address;
 	}
 
-	public String getTime() {
-		return time;
+	public Long getStamp() {
+		return stamp;
 	}
 
-	public void setTime(String time) {
-		this.time = time;
+	public void setStamp(Long stamp) {
+		this.stamp = stamp;
 	}
 
 	public String getMessage() {
@@ -85,7 +85,7 @@ public class LogRequest {
 		StringBuffer sb = new StringBuffer();
 		sb.append("Service : " + getService() + "\n");
 		sb.append("Address : " + getAddress() + "\n");
-		sb.append("Time : " + getTime() + "\n");
+		sb.append("Time Stamp : " + getStamp() + "\n");
 		sb.append("Message : " + getMessage() + "\n");
 		sb.append("Severity : " + getSeverity() + "\n");
 
