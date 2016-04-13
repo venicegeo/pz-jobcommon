@@ -20,13 +20,15 @@ import model.data.FileRepresentation;
 import model.data.location.FileLocation;
 
 /**
- * Represents a geojson format with accompanying file stored somewhere accessible to Piazza.
+ * Represents a geojson format with accompanying file stored somewhere
+ * accessible to Piazza.
  * 
  * @author Sonny.Saniev
  * 
  */
 public class GeoJsonDataType implements DataType, FileRepresentation {
 	public static final String type = "geojson";
+	public String databaseTableName;
 	public FileLocation location;
 	public String mimeType;
 
@@ -63,5 +65,13 @@ public class GeoJsonDataType implements DataType, FileRepresentation {
 	 */
 	public void setLocation(FileLocation location) {
 		this.location = location;
+	}
+
+	/**
+	 * 
+	 * @param databaseTableName
+	 */
+	public void setDatabaseTableName(String databaseTableName) {
+		this.databaseTableName = databaseTableName;
 	}
 }
