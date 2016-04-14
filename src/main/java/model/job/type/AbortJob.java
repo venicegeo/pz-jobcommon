@@ -37,6 +37,11 @@ public class AbortJob implements PiazzaJobType {
 		this.jobId = jobId;
 	}
 
+	public AbortJob(String jobId, String reason) {
+		this(jobId);
+		this.reason = reason;
+	}
+
 	public String getType() {
 		return type;
 	}
