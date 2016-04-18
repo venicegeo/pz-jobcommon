@@ -30,12 +30,18 @@ import model.data.DataResource;
 public class DataResourceListResponse extends PiazzaResponse {
 	private String type = "data-list";
 	public List<DataResource> data;
+	public Pagination pagination;
 
 	public DataResourceListResponse() {
 	}
 
 	public DataResourceListResponse(List<DataResource> dataResources) {
 		this.data = dataResources;
+	}
+
+	public DataResourceListResponse(List<DataResource> dataResources, Pagination pagination) {
+		this(dataResources);
+		this.pagination = pagination;
 	}
 
 	/**
@@ -54,5 +60,9 @@ public class DataResourceListResponse extends PiazzaResponse {
 	 */
 	public List<DataResource> getData() {
 		return data;
+	}
+
+	public Pagination getPagination() {
+		return pagination;
 	}
 }
