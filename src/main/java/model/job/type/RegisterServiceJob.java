@@ -19,31 +19,18 @@ import model.job.PiazzaJobType;
 import model.service.metadata.Service;
 
 public class RegisterServiceJob implements PiazzaJobType {
+	public final String type = "register-service";
+	public Service data;
 
-		public String jobId = null;
-		public final String type = "register-service";
-		public Service data;
-
-		
-		public RegisterServiceJob() {
-
-		}
-
-		public RegisterServiceJob(String jobId) {
-			this.jobId = jobId;
-		}
-
-		public String getType() {
-			return type;
-		}
-
-		public String getJobId() {
-			return jobId;
-		}
-
-		public void setJobId(String jobId) {
-			this.jobId = jobId;
-		}
+	public RegisterServiceJob() {
 
 	}
 
+	public RegisterServiceJob(Service data) {
+		this.data = data;
+	}
+
+	public String getType() {
+		return type;
+	}
+}
