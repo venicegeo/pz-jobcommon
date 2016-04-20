@@ -22,7 +22,7 @@ import model.data.DataType;
  * @author bkrasner
  *
  */
-public class URLParameterDataType implements DataType{
+public class URLParameterDataType extends TextDataType{
 	public static final String type = "urlparameter";
 
 	public String getType() {
