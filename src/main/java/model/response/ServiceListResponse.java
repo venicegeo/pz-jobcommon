@@ -28,7 +28,7 @@ import model.service.metadata.Service;
  * 
  */
 public class ServiceListResponse extends PiazzaResponse {
-	private String type = "data-list";
+	private String type = "service-list";
 	public List<Service> data;
 	public Pagination pagination;
 

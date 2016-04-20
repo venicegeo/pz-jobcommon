@@ -37,7 +37,10 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 @JsonSubTypes({ @Type(value = PiazzaResponse.class, name = "job"), @Type(value = ErrorResponse.class, name = "error"),
 		@Type(value = JobStatusResponse.class, name = "status"),
 		@Type(value = DataResourceResponse.class, name = "data"),
-		@Type(value = DataResourceListResponse.class, name = "data-list") })
+		@Type(value = DataResourceListResponse.class, name = "data-list"),
+		@Type(value = DeploymentResponse.class, name = "deployment"),
+		@Type(value = ServiceResponse.class, name = "service"),
+		@Type(value = ServiceListResponse.class, name = "service-list") })
 @JsonInclude(Include.NON_NULL)
 public class PiazzaResponse {
 	private String type = "job";
