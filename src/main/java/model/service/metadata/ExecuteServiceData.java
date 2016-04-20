@@ -15,6 +15,7 @@
  **/
 package model.service.metadata;
 
+import java.util.List;
 import java.util.Map;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -28,6 +29,7 @@ import model.data.DataType;
  */
 public class ExecuteServiceData {
 	String serviceId;
+	
 	public String getServiceId() {
 		return serviceId;
 	}
@@ -41,10 +43,10 @@ public class ExecuteServiceData {
 		this.dataInputs = dataInputs;
 	}
 	
-	public DataType getDataOutput() {
+	public List<DataType> getDataOutput() {
 		return dataOutput;
 	}
-	public void setDataOutput(DataType dataOutput) {
+	public void setDataOutput(List<DataType> dataOutput) {
 		this.dataOutput = dataOutput;
 	}
 	
@@ -52,7 +54,7 @@ public class ExecuteServiceData {
 	public Map<String, DataType> dataInputs;	
 	
 	@JsonProperty("dataOutput")
-	public DataType dataOutput;
+	public List<DataType> dataOutput;
 
 	
 	

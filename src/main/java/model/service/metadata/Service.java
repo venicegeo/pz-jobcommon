@@ -26,42 +26,39 @@ import model.job.metadata.ResourceMetadata;
 @JsonInclude(Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Service {
-	private String id;
-	private String name;
-	private ResourceMetadata resourceMetadata;
-	private List<ParamDataItem> inputs;
-	private List<ParamDataItem> outputs;
 	
-	public String getName() {
-		return name;
+	// If filled in then overwrite entire Service (Delete old service and put in new
+	private String serviceId;
+	private String url;
+	private String contractUrl;
+	private ResourceMetadata resourceMetadata;
+	
+	public String getServiceId() {
+		return serviceId;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setServiceId(String serviceId) {
+		this.serviceId = serviceId;
 	}
+
 	public ResourceMetadata getResourceMetadata() {
 		return resourceMetadata;
 	}
 	public void setResourceMetadata(ResourceMetadata resourceMetadata) {
 		this.resourceMetadata = resourceMetadata;
 	}
-	public List<ParamDataItem> getInputs() {
-		return inputs;
+	public String getUrl() {
+		return url;
 	}
-	public void setInputs(List<ParamDataItem> inputs) {
-		this.inputs = inputs;
+	public void setUrl(String url) {
+		this.url = url;
 	}
-	public List<ParamDataItem> getOutputs() {
-		return outputs;
+	public String getContractUrl() {
+		return contractUrl;
 	}
-	public void setOutputs(List<ParamDataItem> outputs) {
-		this.outputs = outputs;
+	public void setContractUrl(String contractUrl) {
+		this.contractUrl = contractUrl;
 	}
-	public String getId() {
-		return id;
-	}
-	public void setId(String id) {
-		this.id = id;
-	}
+	
 	
 
 }

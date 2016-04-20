@@ -16,6 +16,7 @@
 package model.job.metadata;
 
 import java.util.List;
+import java.util.Map;
 
 import org.joda.time.DateTime;
 import org.springframework.data.elasticsearch.annotations.Field;
@@ -44,10 +45,7 @@ import model.security.SecurityClassification;
 public class ResourceMetadata {
 
 	public String name;
-
-	public String id;
 	public String description;
-	public String url;
 	public String format;
 	public String qos;
 	public String availability;
@@ -63,6 +61,12 @@ public class ResourceMetadata {
 	public String method;
 	public String reason;
 	public String version;
+	
+	// @TODO or some other name generic list of key value pairs user defined..
+	public Map<String, String> metadata;
+	
+	//where id="121221"&resourceMetadata.metadata.thing=" 3234242"& resourceMetadata.name
+	
 	
 	/*
 	 * Need the ability to accommodate arbitrary key/value pairs
