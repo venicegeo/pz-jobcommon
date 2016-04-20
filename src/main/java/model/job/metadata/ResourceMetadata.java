@@ -61,13 +61,9 @@ public class ResourceMetadata {
 	public String method;
 	public String reason;
 	public String version;
+    public Map<String, String> metadata;
 	
-	// @TODO or some other name generic list of key value pairs user defined..
-	public Map<String, String> metadata;
-	
-	//where id="121221"&resourceMetadata.metadata.thing=" 3234242"& resourceMetadata.name
-	
-	
+
 	/*
 	 * Need the ability to accommodate arbitrary key/value pairs
 	 */
