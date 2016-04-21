@@ -194,7 +194,8 @@ public class JobMessageFactory {
 			throws JsonProcessingException {
 		ObjectMapper mapper = new ObjectMapper();
 		System.out.println(job.jobType.getType());
-		return new ProducerRecord<String, String>(job.jobType.getType(), job.getJobId(), mapper.writeValueAsString(job));
+		return new ProducerRecord<String, String>(String.format("%s-%s", job.jobType.getType(), space), job.getJobId(),
+				mapper.writeValueAsString(job));
 	}
 
 	/**
