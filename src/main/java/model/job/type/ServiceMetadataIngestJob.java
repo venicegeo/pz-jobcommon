@@ -16,6 +16,7 @@
 package model.job.type;
 
 import model.job.PiazzaJobType;
+import model.service.metadata.Service;
 
 /**
  * Represents the JSON Model for ingesting service metadata into Piazza for subsequent query,
@@ -28,7 +29,7 @@ import model.job.PiazzaJobType;
 public class ServiceMetadataIngestJob  implements PiazzaJobType {
 
 	public final String type = "servicemetadata-ingest";
-	public String data;
+	public Service data;
 	
 	public ServiceMetadataIngestJob() {
 		
@@ -37,10 +38,10 @@ public class ServiceMetadataIngestJob  implements PiazzaJobType {
 	public String getType() {
 		return type;
 	}
-	public String getData() {
+	public Service getData() {
 		return data;
 	}
-	public void setData(String data) {
+	public void setData(Service data) {
 		this.data = data;
 	}
 	
