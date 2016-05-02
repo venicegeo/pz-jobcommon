@@ -39,6 +39,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 		@Type(value = DataResourceResponse.class, name = "data"),
 		@Type(value = DataResourceListResponse.class, name = "data-list"),
 		@Type(value = DeploymentResponse.class, name = "deployment"),
+		@Type(value = DeploymentListResponse.class, name = "deployment-list"),
 		@Type(value = ServiceResponse.class, name = "service"),
 		@Type(value = ServiceListResponse.class, name = "service-list") })
 @JsonInclude(Include.NON_NULL)
