@@ -32,7 +32,16 @@ public class Service {
 	private String url;
 	private String contractUrl;
 	private ResourceMetadata resourceMetadata;
+	private String contractData;
 	
+	
+	
+	public String getContractData() {
+		return contractData;
+	}
+	public void setContractData(String contractData) {
+		this.contractData = contractData;
+	}
 	public String getServiceId() {
 		return serviceId;
 	}

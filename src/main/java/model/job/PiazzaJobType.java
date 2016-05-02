@@ -15,6 +15,13 @@
  **/
 package model.job;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+
 import model.job.type.AbortJob;
 import model.job.type.AccessJob;
 import model.job.type.DeleteServiceJob;
@@ -29,14 +36,8 @@ import model.job.type.RepeatJob;
 import model.job.type.SearchMetadataIngestJob;
 import model.job.type.SearchQueryJob;
 import model.job.type.SearchServiceJob;
+import model.job.type.ServiceMetadataIngestJob;
 import model.job.type.UpdateServiceJob;
-
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.fasterxml.jackson.annotation.JsonSubTypes;
-import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 /**
  * Interface collecting together all of the available Job Types. This is used by
@@ -54,6 +55,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 		@Type(value = ExecuteServiceJob.class, name = "execute-service"), @Type(value = GetJob.class, name = "get"),
 		@Type(value = IngestJob.class, name = "ingest"),
 		@Type(value = SearchMetadataIngestJob.class, name = "search-metadata-ingest"),
+		@Type(value = ServiceMetadataIngestJob.class, name = "servicemetadata-ingest"),
 		@Type(value = SearchQueryJob.class, name = "search-query"),
 		@Type(value = DescribeServiceMetadataJob.class, name = "read-service"),
 		@Type(value = RegisterServiceJob.class, name = "register-service"),
