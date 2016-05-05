@@ -19,32 +19,33 @@ import model.job.PiazzaJobType;
 import model.service.metadata.Service;
 
 /**
- * Represents the JSON Model for ingesting service metadata into Piazza for subsequent query,
- * e.g. used when registering a service.  This ingest allows subsequent searches for services.
+ * Represents the JSON Model for ingesting service metadata into Piazza for
+ * subsequent query, e.g. used when registering a service. This ingest allows
+ * subsequent searches for services.
  * 
  * 
-
+ * 
  * 
  */
-public class ServiceMetadataIngestJob  implements PiazzaJobType {
+public class ServiceMetadataIngestJob implements PiazzaJobType {
 
 	public final String type = "servicemetadata-ingest";
 	public Service data;
-	
+
 	public ServiceMetadataIngestJob() {
-		
+
 	}
-	@Override
+
 	public String getType() {
 		return type;
 	}
+
 	public Service getData() {
 		return data;
 	}
+
 	public void setData(Service data) {
 		this.data = data;
 	}
-	
-	
 
 }
