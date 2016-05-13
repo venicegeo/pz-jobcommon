@@ -15,8 +15,13 @@
  **/
 package model.job.metadata;
 
+import java.lang.reflect.Method;
 import java.util.List;
 import java.util.Map;
+
+import model.resource.NumericKeyValue;
+import model.resource.TextKeyValue;
+import model.security.SecurityClassification;
 
 import org.joda.time.DateTime;
 import org.springframework.data.elasticsearch.annotations.Field;
@@ -26,11 +31,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
-//import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
-import model.resource.NumericKeyValue;
-import model.resource.TextKeyValue;
-import model.security.SecurityClassification;
+//import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 /**
  * Common Metadata fields used to describe Data or Services within the Piazza
@@ -61,9 +63,7 @@ public class ResourceMetadata {
 	public String method;
 	public String reason;
 	public String version;
-    public Map<String, String> metadata;
-	
-
+	public Map<String, String> metadata;
 	/*
 	 * Need the ability to accommodate arbitrary key/value pairs
 	 */
@@ -75,13 +75,182 @@ public class ResourceMetadata {
 	public List<NumericKeyValue> getNumericKeyValueList() {
 		return numericKeyValueList;
 	}
+
 	public void setNumericKeyValueList(List<NumericKeyValue> numericKeyValueList) {
 		this.numericKeyValueList = numericKeyValueList;
 	}
+
 	public List<TextKeyValue> getTextKeyValueList() {
 		return textKeyValueList;
 	}
+
 	public void setTextKeyValueList(List<TextKeyValue> textKeyValueList) {
 		this.textKeyValueList = textKeyValueList;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public String getFormat() {
+		return format;
+	}
+
+	public void setFormat(String format) {
+		this.format = format;
+	}
+
+	public String getQos() {
+		return qos;
+	}
+
+	public void setQos(String qos) {
+		this.qos = qos;
+	}
+
+	public String getAvailability() {
+		return availability;
+	}
+
+	public void setAvailability(String availability) {
+		this.availability = availability;
+	}
+
+	public String getTags() {
+		return tags;
+	}
+
+	public void setTags(String tags) {
+		this.tags = tags;
+	}
+
+	public SecurityClassification getClassType() {
+		return classType;
+	}
+
+	public void setClassType(SecurityClassification classType) {
+		this.classType = classType;
+	}
+
+	public Boolean getClientCertRequired() {
+		return clientCertRequired;
+	}
+
+	public void setClientCertRequired(Boolean clientCertRequired) {
+		this.clientCertRequired = clientCertRequired;
+	}
+
+	public Boolean getCredentialsRequired() {
+		return credentialsRequired;
+	}
+
+	public void setCredentialsRequired(Boolean credentialsRequired) {
+		this.credentialsRequired = credentialsRequired;
+	}
+
+	public Boolean getPreAuthRequired() {
+		return preAuthRequired;
+	}
+
+	public void setPreAuthRequired(Boolean preAuthRequired) {
+		this.preAuthRequired = preAuthRequired;
+	}
+
+	public String getNetworkAvailable() {
+		return networkAvailable;
+	}
+
+	public void setNetworkAvailable(String networkAvailable) {
+		this.networkAvailable = networkAvailable;
+	}
+
+	public String getContacts() {
+		return contacts;
+	}
+
+	public void setContacts(String contacts) {
+		this.contacts = contacts;
+	}
+
+	public String getMethod() {
+		return method;
+	}
+
+	public void setMethod(String method) {
+		this.method = method;
+	}
+
+	public String getReason() {
+		return reason;
+	}
+
+	public void setReason(String reason) {
+		this.reason = reason;
+	}
+
+	public String getVersion() {
+		return version;
+	}
+
+	public void setVersion(String version) {
+		this.version = version;
+	}
+
+	public Map<String, String> getMetadata() {
+		return metadata;
+	}
+
+	public void setMetadata(Map<String, String> metadata) {
+		this.metadata = metadata;
+	}
+
+	/**
+	 * Merges the properties of another ResourceMetadata into this one.
+	 * 
+	 * <p>
+	 * If the other ResourceMetadata specifies properties, then those properties
+	 * take precedence. If the other ResourceMetadata contains a null value for
+	 * a property that exists in this object, then this object's property is
+	 * unchanged unless the overwriteNull flag is set to true.
+	 * </p>
+	 * 
+	 * @param other
+	 *            The ResourceMetadata properties to merge
+	 * @param overwriteNull
+	 *            True if null values in the other ResourceMetadata should
+	 *            overwrite values in this object. False if not.
+	 */
+	public void merge(ResourceMetadata other, boolean overwriteNull) {
+		Method[] methods = this.getClass().getMethods();
+
+		for (Method fromMethod : methods) {
+			if (fromMethod.getDeclaringClass().equals(this.getClass()) && fromMethod.getName().startsWith("get")) {
+
+				String fromName = fromMethod.getName();
+				String toName = fromName.replace("get", "set");
+
+				try {
+					Method toMethod = this.getClass().getMethod(toName, fromMethod.getReturnType());
+					Object value = fromMethod.invoke(other, (Object[]) null);
+					if ((value != null) || (overwriteNull == true)) {
+						toMethod.invoke(this, value);
+					}
+				} catch (Exception exception) {
+					exception.printStackTrace();
+				}
+			}
+		}
 	}
 }
