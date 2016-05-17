@@ -44,11 +44,13 @@ import org.springframework.web.client.RestTemplate;
  */
 @Component
 public class PiazzaLogger {
-	@Value("${pz.logger.url:}")
-	private String loggerServiceUrl;
-	@Value("${pz.logger.name:}")
+	@Value("#{'${logger.protocol}' + '://' + '${logger.prefix}' + '.' + '${DOMAIN}' + ':' + '${logger.port}'}")
+	private String LOGGER_URL;
+	@Value("${logger.endpoint}")
+	private String LOGGER_ENDPOINT;
+	@Value("${logger.name:}")
 	private String serviceName;
-	@Value("${pz.logger.console:}")
+	@Value("${logger.console:}")
 	private Boolean logToConsole;
 
 	public static final String DEBUG = "Debug";
@@ -83,12 +85,12 @@ public class PiazzaLogger {
 	 */
 	public PiazzaLogger(String loggerServiceUrl, String serviceName) {
 		this.serviceName = serviceName;
-		this.loggerServiceUrl = loggerServiceUrl;
+		this.LOGGER_URL = loggerServiceUrl;
 	}
 
 	@PostConstruct
 	public void init() {
-		LOG.info(String.format("PiazzaLogger initialized for service %s, url: %s", serviceName, loggerServiceUrl));
+		LOG.info(String.format("PiazzaLogger initialized for service %s, url: %s", serviceName, LOGGER_URL));
 		template = new RestTemplate();
 	}
 
@@ -118,8 +120,8 @@ public class PiazzaLogger {
 				} catch (Exception exception) { /* Do nothing. */
 				}
 
-				template.postForEntity("https://" + loggerServiceUrl, new HttpEntity<LogRequest>(logRequest, headers),
-						String.class);
+				String url = String.format("%s/%s", LOGGER_URL, LOGGER_ENDPOINT);
+				template.postForEntity(url, new HttpEntity<LogRequest>(logRequest, headers), String.class);
 			} catch (Exception exception) {
 				LOG.error("PiazzaLogger could not log: " + exception.getMessage());
 			}
@@ -136,8 +138,8 @@ public class PiazzaLogger {
 		try {
 			Map<String, Integer> map = new HashMap<String, Integer>();
 			map.put("count", count);
-			ResponseEntity<LogRequest[]> logs = template.getForEntity("https://" + loggerServiceUrl + "?count={count}",
-					LogRequest[].class, map);
+			String url = String.format("%s/%s", LOGGER_URL, LOGGER_ENDPOINT);
+			ResponseEntity<LogRequest[]> logs = template.getForEntity(url + "?count={count}", LogRequest[].class, map);
 			return (List<LogRequest>) Arrays.asList(logs.getBody());
 		} catch (Exception exception) {
 			LOG.error(exception.getMessage());
