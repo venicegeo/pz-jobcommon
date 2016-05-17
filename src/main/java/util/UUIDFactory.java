@@ -43,8 +43,8 @@ import org.springframework.web.client.RestTemplate;
  */
 @Component
 public class UUIDFactory {
-	@Value("${pz.uuid.url:}")
-	private String uuidServiceUrl;
+	@Value("#{'${uuid.protocol}' + '://' + '${uuid.prefix}' + '.' + '${DOMAIN}' + ':' + '${uuid.port}'}")
+	private String UUIDGEN_URL;
 	private RestTemplate template;
 	private final static Logger LOG = LoggerFactory.getLogger(UUIDFactory.class);
 
@@ -64,12 +64,12 @@ public class UUIDFactory {
 	 *            The URL of the UUIDGen service.
 	 */
 	public UUIDFactory(String uuidServiceUrl) {
-		this.uuidServiceUrl = uuidServiceUrl;
+		this.UUIDGEN_URL = uuidServiceUrl;
 	}
 
 	@PostConstruct
 	public void init() {
-		LOG.info(String.format("UUIDGen initialized for to url %s", uuidServiceUrl));
+		LOG.info(String.format("UUIDGen initialized for to url %s", UUIDGEN_URL));
 		template = new RestTemplate();
 	}
 
@@ -91,8 +91,7 @@ public class UUIDFactory {
 		try {
 			Map<String, Integer> map = new HashMap<String, Integer>();
 			map.put("count", count);
-			ResponseEntity<UUID> uuid = template.postForEntity("https://" + uuidServiceUrl + "?count={count}", null,
-					UUID.class, map);
+			ResponseEntity<UUID> uuid = template.postForEntity(UUIDGEN_URL + "?count={count}", null, UUID.class, map);
 			return uuid.getBody().getData();
 		} catch (Exception exception) {
 			// Aiding with debugging, if the above REST call fails, then UUIDs
