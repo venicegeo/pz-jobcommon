@@ -46,4 +46,6 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 public interface FileLocation {
 	public String getFileName();
 	public String getType();
+	public long getFileSize();
+	public void setFileSize(long fileSize);
 }

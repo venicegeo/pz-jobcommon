@@ -32,6 +32,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class FolderShare implements FileLocation {
 	public static final String type = "share";
 	public String filePath;
+	public long fileSize;
 
 	public String getFileName() {
 		return new File(filePath).getName();
@@ -45,6 +46,14 @@ public class FolderShare implements FileLocation {
 		return filePath;
 	}
 
+	public long getFileSize() {
+		return fileSize;
+	}
+	
+	public void setFileSize(long fileSize) {
+		this.fileSize = fileSize;
+	}
+	
 	/**
 	 * Returns the InputStream for the file which resides at a folder share or
 	 * local file system. Null if no file can be found.

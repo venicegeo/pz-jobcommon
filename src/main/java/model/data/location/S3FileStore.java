@@ -27,32 +27,50 @@ public class S3FileStore implements FileLocation {
 	public String bucketName;
 
 	public String fileName;
+	public long fileSize;
 	public String domainName;
 
 	public S3FileStore() {
 
 	}
 
-	public S3FileStore(String bucketName, String fileName, String domainName) {
+	public S3FileStore(String bucketName, String fileName, long fileSize, String domainName) {
 		this.bucketName = bucketName;
 		this.fileName = fileName;
 		this.domainName = domainName;
+		this.fileSize = fileSize;
 	}
 
 	public String getBucketName() {
 		return bucketName;
 	}
 
-	public String getDomainName() {
-		return domainName;
+	public void setBucketName(String bucketName) {
+		this.bucketName = bucketName;
+	}
+
+	public String getFileName() {
+		return fileName;
 	}
 
 	public void setFileName(String fileName) {
 		this.fileName = fileName;
 	}
 
-	public String getFileName() {
-		return fileName;
+	public long getFileSize() {
+		return fileSize;
+	}
+
+	public void setFileSize(long fileSize) {
+		this.fileSize = fileSize;
+	}
+
+	public String getDomainName() {
+		return domainName;
+	}
+
+	public void setDomainName(String domainName) {
+		this.domainName = domainName;
 	}
 
 	public String getType() {
