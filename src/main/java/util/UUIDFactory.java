@@ -43,7 +43,7 @@ import org.springframework.web.client.RestTemplate;
  */
 @Component
 public class UUIDFactory {
-	@Value("#{'${uuid.protocol}' + '://' + '${uuid.prefix}' + '.' + '${DOMAIN}' + ':' + '${uuid.port}'}")
+	@Value("${uuid.url}")
 	private String UUIDGEN_URL;
 	@Value("${uuid.endpoint}")
 	private String UUIDGEN_ENDPOINT;
