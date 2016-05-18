@@ -28,14 +28,15 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
  */
 @JsonInclude(Include.NON_NULL)
 public class SpatialMetadata {
-	String coordinateReferenceSystem;
-	Integer epsgCode;
-	Double minX;
-	Double minY;
-	Double minZ;
-	Double maxX;
-	Double maxY;
-	Double maxZ;
+	private String coordinateReferenceSystem;
+	private Integer epsgCode;
+	private Double minX;
+	private Double minY;
+	private Double minZ;
+	private Double maxX;
+	private Double maxY;
+	private Double maxZ;
+	private Integer numFeatures;
 	
 	public SpatialMetadata() {
 
@@ -141,5 +142,13 @@ public class SpatialMetadata {
 
 	public void setMaxZ(Double maxZ) {
 		this.maxZ = maxZ;
+	}
+
+	public Integer getNumFeatures() {
+		return numFeatures;
+	}
+
+	public void setNumFeatures(Integer numFeatures) {
+		this.numFeatures = numFeatures;
 	}
 }
