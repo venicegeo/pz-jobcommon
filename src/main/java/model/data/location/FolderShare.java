@@ -32,7 +32,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class FolderShare implements FileLocation {
 	public static final String type = "share";
 	public String filePath;
-	public long fileSize;
+	public Long fileSize;
 
 	public String getFileName() {
 		return new File(filePath).getName();

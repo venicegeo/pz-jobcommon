@@ -27,14 +27,14 @@ public class S3FileStore implements FileLocation {
 	public String bucketName;
 
 	public String fileName;
-	public long fileSize;
+	public Long fileSize;
 	public String domainName;
 
 	public S3FileStore() {
 
 	}
 
-	public S3FileStore(String bucketName, String fileName, long fileSize, String domainName) {
+	public S3FileStore(String bucketName, String fileName, Long fileSize, String domainName) {
 		this.bucketName = bucketName;
 		this.fileName = fileName;
 		this.domainName = domainName;
