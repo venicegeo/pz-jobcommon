@@ -57,11 +57,11 @@ public class S3FileStore implements FileLocation {
 		this.fileName = fileName;
 	}
 
-	public long getFileSize() {
+	public Long getFileSize() {
 		return fileSize;
 	}
 
-	public void setFileSize(long fileSize) {
+	public void setFileSize(Long fileSize) {
 		this.fileSize = fileSize;
 	}
 

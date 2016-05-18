@@ -46,11 +46,11 @@ public class FolderShare implements FileLocation {
 		return filePath;
 	}
 
-	public long getFileSize() {
+	public Long getFileSize() {
 		return fileSize;
 	}
 	
-	public void setFileSize(long fileSize) {
+	public void setFileSize(Long fileSize) {
 		this.fileSize = fileSize;
 	}
 	
