@@ -63,7 +63,10 @@ public class ResourceMetadata {
 	public String method;
 	public String reason;
 	public String version;
+	public String createdBy;
+	public String createdDate;
 	public Map<String, String> metadata;
+
 	/*
 	 * Need the ability to accommodate arbitrary key/value pairs
 	 */
