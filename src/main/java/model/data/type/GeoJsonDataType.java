@@ -30,6 +30,7 @@ public class GeoJsonDataType implements DataType, FileRepresentation {
 	public static final String type = "geojson";
 	public String databaseTableName;
 	public FileLocation location;
+	public String geoJsonContent;
 	public String mimeType;
 
 	public String getMimeType() {
@@ -73,5 +74,22 @@ public class GeoJsonDataType implements DataType, FileRepresentation {
 	 */
 	public void setDatabaseTableName(String databaseTableName) {
 		this.databaseTableName = databaseTableName;
+	}
+
+	/**
+	 * Gets the geojson content string
+	 * 
+	 * @return
+	 */
+	public String getGeoJsonContent() {
+		return geoJsonContent;
+	}
+
+	/**
+	 * 
+	 * @param geoJsonContent
+	 */
+	public void setGeoJsonContent(String geoJsonContent) {
+		this.geoJsonContent = geoJsonContent;
 	}
 }
