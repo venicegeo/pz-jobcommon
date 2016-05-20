@@ -21,6 +21,7 @@ import model.job.metadata.SpatialMetadata;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * Represents a piece of data referened by the Piazza system, internally or
@@ -39,6 +40,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class DataResource {
 	public String dataId;
+	@JsonProperty(required = true)
 	public DataType dataType;
 	public SpatialMetadata spatialMetadata;
 	public ResourceMetadata metadata;
