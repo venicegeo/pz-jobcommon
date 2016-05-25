@@ -21,11 +21,20 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonPropertyDescription;
+import com.fasterxml.jackson.module.jsonSchema.annotation.JsonHyperSchema;
+import com.fasterxml.jackson.module.jsonSchema.annotation.Link;
 
 import model.job.metadata.ResourceMetadata;
 
 @JsonInclude(Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
+
+@JsonHyperSchema(
+	     pathStart = "https://pz-swagger.int.geointservices.io/service/",
+	     links = {
+	         @Link(href = "", rel = "service", method = "POST", targetSchema = Service.class)
+	 })
+
 public class Service {
 	
 	// If filled in then overwrite entire Service (Delete old service and put in new
