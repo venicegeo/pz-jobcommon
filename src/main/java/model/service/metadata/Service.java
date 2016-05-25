@@ -20,6 +20,7 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.annotation.JsonPropertyDescription;
 
 import model.job.metadata.ResourceMetadata;
 
@@ -28,13 +29,21 @@ import model.job.metadata.ResourceMetadata;
 public class Service {
 	
 	// If filled in then overwrite entire Service (Delete old service and put in new
+	@JsonPropertyDescription("Unique identifier for the user service.")
 	private String serviceId;
+	
+	@JsonPropertyDescription("URL for the user service.")
 	private String url;
+	
+	@JsonPropertyDescription("URL to the contract or schema to the user service (e.g JSON schema, Swagger, etc.)")
 	private String contractUrl;
-	private ResourceMetadata resourceMetadata;
+	
+	@JsonPropertyDescription("Data associated with the contract.")
 	private String contractData;
 	
-	
+	@JsonPropertyDescription("Additional metadata about the user service.")
+	private ResourceMetadata resourceMetadata;
+		
 	
 	public String getContractData() {
 		return contractData;
