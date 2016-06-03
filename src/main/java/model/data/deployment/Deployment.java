@@ -19,6 +19,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
+import io.swagger.annotations.ApiModelProperty;
+
 /**
  * JSON Database Model, serialized by Jackson, that represents a Deployment in
  * the Piazza System.
@@ -29,17 +31,30 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 @JsonInclude(Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Deployment {
+
+	@ApiModelProperty(value = "The unique identifier for this Deployment.")
 	public String id;
+
+	@ApiModelProperty(value = "The unique identifier of the Data that this deployment hosts.")
 	public String dataId;
+
+	@ApiModelProperty(value = "The host name for the deployment server.")
 	public String host;
+
+	@ApiModelProperty(value = "The port number for the deployment server. ")
 	public String port;
+
+	@ApiModelProperty(value = "The layer name for the hosted service on the deployment server.")
 	public String layer;
+
+	@ApiModelProperty(value = "Fully qualified URL for accessing the GetCapabilities action for the deployment service.")
 	public String capabilitiesUrl;
 
 	/**
 	 * Creates a new Deployment.
 	 */
 	public Deployment() {
+
 	}
 
 	/**

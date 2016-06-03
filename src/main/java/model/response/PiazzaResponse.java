@@ -16,9 +16,14 @@
 package model.response;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
+
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 /**
@@ -43,11 +48,17 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 		@Type(value = ServiceResponse.class, name = "service"),
 		@Type(value = ServiceListResponse.class, name = "service-list") })
 @JsonInclude(Include.NON_NULL)
+@ApiModel(value = "JobResponse", subTypes = {})
 public class PiazzaResponse {
+
+	@ApiModelProperty(hidden = true)
 	private String type = "job";
+
+	@ApiModelProperty(value = "The ID of the Job that has been created from the request.", required = true)
 	public String jobId;
 
 	public PiazzaResponse() {
+
 	}
 
 	public PiazzaResponse(String jobId) {

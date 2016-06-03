@@ -20,7 +20,8 @@ import model.data.FileRepresentation;
 import model.data.location.FileLocation;
 
 /**
- * Represents a Point Cloud format with accompanying file stored somewhere accessible to Piazza.
+ * Represents a Point Cloud format with accompanying file stored somewhere
+ * accessible to Piazza.
  * 
  * @author Sonny.Saniev
  * 

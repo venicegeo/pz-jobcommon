@@ -15,33 +15,40 @@
  **/
 package model.job.type;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import model.job.PiazzaJobType;
 import model.service.metadata.ExecuteServiceData;
 
+@ApiModel(value = "ExecuteJob")
 public class ExecuteServiceJob implements PiazzaJobType {
 
-		public String jobId = null;
-		public final String type = "execute-service";
-		public ExecuteServiceData data;
+	@ApiModelProperty(hidden = true)
+	public String jobId = null;
 
-		public ExecuteServiceJob() {
+	@ApiModelProperty(value = "Legacy. This will eventually be removed.", required = true)
+	public final String type = "execute-service";
 
-		}
+	@ApiModelProperty(value = "The parameter inputs for Service execution.", required = true)
+	public ExecuteServiceData data;
 
-		public ExecuteServiceJob(String jobId) {
-			this.jobId = jobId;
-		}
-
-		public String getType() {
-			return type;
-		}
-
-		public String getJobId() {
-			return jobId;
-		}
-
-		public void setJobId(String jobId) {
-			this.jobId = jobId;
-		}
+	public ExecuteServiceJob() {
 
 	}
+
+	public ExecuteServiceJob(String jobId) {
+		this.jobId = jobId;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public String getJobId() {
+		return jobId;
+	}
+
+	public void setJobId(String jobId) {
+		this.jobId = jobId;
+	}
+}

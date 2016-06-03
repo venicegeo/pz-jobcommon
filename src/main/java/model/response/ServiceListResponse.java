@@ -17,6 +17,8 @@ package model.response;
 
 import java.util.List;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import model.service.metadata.Service;
 
 /**
@@ -27,12 +29,20 @@ import model.service.metadata.Service;
  * @author Patrick.Doody
  * 
  */
+@ApiModel(value = "ServiceResults")
 public class ServiceListResponse extends PiazzaResponse {
+
+	@ApiModelProperty(hidden = true)
 	private String type = "service-list";
+
+	@ApiModelProperty(value = "The array of Service results.")
 	public List<Service> data;
+
+	@ApiModelProperty(value = "The pagination metadata for this query.")
 	public Pagination pagination;
 
 	public ServiceListResponse() {
+
 	}
 
 	public ServiceListResponse(List<Service> services) {

@@ -53,5 +53,4 @@ public class AbortJob implements PiazzaJobType {
 	public void setJobId(String jobId) {
 		this.jobId = jobId;
 	}
-
 }

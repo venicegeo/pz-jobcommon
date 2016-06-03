@@ -15,6 +15,9 @@
  **/
 package model.response;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 /**
  * Metadata describing pagination information when returning lists of data in
  * responses.
@@ -23,8 +26,14 @@ package model.response;
  *
  */
 public class Pagination {
+
+	@ApiModelProperty(value = " The number of results that matched the query.")
 	public Integer count;
+
+	@ApiModelProperty(value = "The current page returned.")
 	public Integer page;
+
+	@ApiModelProperty(value = "The current number of results returned per page.")
 	public Integer per_page;
 
 	public Pagination() {

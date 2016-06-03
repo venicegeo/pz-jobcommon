@@ -31,23 +31,32 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
  */
 @JsonInclude(Include.NON_NULL)
 public class StatusUpdate {
+
 	@JsonIgnore
 	public static final String STATUS_SUBMITTED = "Submitted";
+
 	@JsonIgnore
 	public static final String STATUS_PENDING = "Pending";
+
 	@JsonIgnore
 	public static final String STATUS_RUNNING = "Running";
+
 	@JsonIgnore
 	public static final String STATUS_SUCCESS = "Success";
+
 	@JsonIgnore
 	public static final String STATUS_CANCELLED = "Cancelled";
+
 	@JsonIgnore
 	public static final String STATUS_ERROR = "Error";
+
 	@JsonIgnore
 	public static final String STATUS_FAIL = "Fail";
 
 	private String status;
+
 	private JobProgress progress;
+
 	private ResultType result;
 
 	public StatusUpdate() {

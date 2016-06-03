@@ -17,11 +17,10 @@ package model.data;
 
 import model.job.metadata.ResourceMetadata;
 import model.job.metadata.SpatialMetadata;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import io.swagger.annotations.ApiModelProperty;
 
 /**
  * Represents a piece of data referened by the Piazza system, internally or
@@ -39,10 +38,17 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonInclude(Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class DataResource {
+
+	@ApiModelProperty(hidden = true)
 	public String dataId;
-	@JsonProperty(required = true)
+
+	@ApiModelProperty(value = "Polymorphically defines the information specific to this Data Resource, based on its format.", required = true)
 	public DataType dataType;
+
+	@ApiModelProperty(value = "")
 	public SpatialMetadata spatialMetadata;
+
+	@ApiModelProperty(value = "")
 	public ResourceMetadata metadata;
 
 	public DataResource() {

@@ -24,10 +24,13 @@ import model.data.deployment.Deployment;
  *
  */
 public class DeploymentResponse extends PiazzaResponse {
+
 	private String type = "deployment";
+
 	public Deployment deployment;
 
 	public DeploymentResponse() {
+
 	}
 
 	public DeploymentResponse(Deployment deployment) {

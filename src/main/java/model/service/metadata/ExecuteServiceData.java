@@ -18,44 +18,47 @@ package model.service.metadata;
 import java.util.List;
 import java.util.Map;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
+import io.swagger.annotations.ApiModelProperty;
 import model.data.DataType;
 
 /**
  * Data passed to service controller for execute service jobs
+ * 
  * @author bkrasner
  *
  */
 public class ExecuteServiceData {
-	String serviceId;
-	
+
+	@ApiModelProperty(value = "The Inputs for the execution.", required = true)
+	public Map<String, DataType> dataInputs;
+
+	@ApiModelProperty(value = "The Output for the execution.", required = true)
+	public List<DataType> dataOutput;
+
+	@ApiModelProperty(value = "The ID of the Service to Execute.", required = true)
+	private String serviceId;
+
 	public String getServiceId() {
 		return serviceId;
 	}
+
 	public void setServiceId(String serviceId) {
 		this.serviceId = serviceId;
 	}
+
 	public Map<String, DataType> getDataInputs() {
 		return dataInputs;
 	}
+
 	public void setDataInputs(Map<String, DataType> dataInputs) {
 		this.dataInputs = dataInputs;
 	}
-	
+
 	public List<DataType> getDataOutput() {
 		return dataOutput;
 	}
+
 	public void setDataOutput(List<DataType> dataOutput) {
 		this.dataOutput = dataOutput;
 	}
-	
-	@JsonProperty("dataInputs")
-	public Map<String, DataType> dataInputs;	
-	
-	@JsonProperty("dataOutput")
-	public List<DataType> dataOutput;
-
-	
-	
 }

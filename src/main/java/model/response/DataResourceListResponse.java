@@ -17,6 +17,7 @@ package model.response;
 
 import java.util.List;
 
+import io.swagger.annotations.ApiModelProperty;
 import model.data.DataResource;
 
 /**
@@ -28,11 +29,18 @@ import model.data.DataResource;
  * 
  */
 public class DataResourceListResponse extends PiazzaResponse {
+
+	@ApiModelProperty(hidden = true)
 	private String type = "data-list";
+
+	@ApiModelProperty(value = "The array of Data Resource results.")
 	public List<DataResource> data;
+
+	@ApiModelProperty(value = "The pagination metadata for this query.")
 	public Pagination pagination;
 
 	public DataResourceListResponse() {
+
 	}
 
 	public DataResourceListResponse(List<DataResource> dataResources) {

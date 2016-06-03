@@ -15,6 +15,10 @@
  **/
 package model.job.type;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import model.data.DataResource;
 import model.job.PiazzaJobType;
 
@@ -27,9 +31,16 @@ import model.job.PiazzaJobType;
  * @author Patrick.Doody
  * 
  */
+@ApiModel("LoadJob")
 public class IngestJob implements PiazzaJobType {
+
+	@ApiModelProperty(required = true, value = "Legacy. This will eventually be removed.")
 	public final String type = "ingest";
+
+	@ApiModelProperty(required = true, value = "The Description of the Data being loaded, including metadata, and the path to the data.")
 	public DataResource data;
+
+	@ApiModelProperty(required = true, value = "Dictates if Piazza should internally host the data or not. If set to true, then the data will be stored in Piazza's data holdings. If false, then Piazza will point to the location of the data, but will not store the data internally.")
 	public Boolean host;
 
 	public IngestJob() {

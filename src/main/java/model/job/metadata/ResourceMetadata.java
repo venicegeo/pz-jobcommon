@@ -27,12 +27,11 @@ import org.joda.time.DateTime;
 import org.springframework.data.elasticsearch.annotations.Field;
 import org.springframework.data.elasticsearch.annotations.FieldType;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
-//import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import io.swagger.annotations.ApiModelProperty;
 
 /**
  * Common Metadata fields used to describe Data or Services within the Piazza
@@ -46,32 +45,71 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ResourceMetadata {
 
+	@ApiModelProperty(value = "Human-readable name of the object.")
 	public String name;
+
+	@ApiModelProperty(value = "Human-readable description of the object.")
 	public String description;
+
+	@ApiModelProperty(hidden = true)
 	public String format;
+
+	@ApiModelProperty(hidden = true)
 	public String qos;
+
+	@ApiModelProperty(hidden = true)
 	public String availability;
+
+	@ApiModelProperty(hidden = true)
 	public String tags;
+
+	@ApiModelProperty(hidden = true)
 	public SecurityClassification classType;
-	@JsonIgnore
+
+	@ApiModelProperty(hidden = true)
 	public DateTime termDate;
+
+	@ApiModelProperty(hidden = true)
 	public Boolean clientCertRequired;
+
+	@ApiModelProperty(hidden = true)
 	public Boolean credentialsRequired;
+
+	@ApiModelProperty(hidden = true)
 	public Boolean preAuthRequired;
+
+	@ApiModelProperty(hidden = true)
 	public String networkAvailable;
+
+	@ApiModelProperty(hidden = true)
 	public String contacts;
+
+	@ApiModelProperty(hidden = true)
 	public String method;
+
+	@ApiModelProperty(hidden = true)
 	public String reason;
+
+	@ApiModelProperty(hidden = true)
 	public String version;
+
+	@ApiModelProperty(hidden = true)
 	public String createdBy;
+
+	@ApiModelProperty(hidden = true)
 	public String createdDate;
+
+	@ApiModelProperty(hidden = true)
 	public Map<String, String> metadata;
 
 	/*
 	 * Need the ability to accommodate arbitrary key/value pairs
 	 */
+	@ApiModelProperty(hidden = true)
 	@Field(type = FieldType.Nested)
 	private List<NumericKeyValue> numericKeyValueList;
+
+	@ApiModelProperty(hidden = true)
 	@Field(type = FieldType.Nested)
 	private List<TextKeyValue> textKeyValueList;
 

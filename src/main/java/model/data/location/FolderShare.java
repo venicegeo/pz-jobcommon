@@ -37,7 +37,7 @@ public class FolderShare implements FileLocation {
 	public String getFileName() {
 		return new File(filePath).getName();
 	}
-	
+
 	public String getType() {
 		return type;
 	}
@@ -49,11 +49,11 @@ public class FolderShare implements FileLocation {
 	public Long getFileSize() {
 		return fileSize;
 	}
-	
+
 	public void setFileSize(Long fileSize) {
 		this.fileSize = fileSize;
 	}
-	
+
 	/**
 	 * Returns the InputStream for the file which resides at a folder share or
 	 * local file system. Null if no file can be found.

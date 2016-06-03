@@ -207,8 +207,8 @@ public class JobMessageFactory {
 	 * @return PiazzaRequest object for the JSON Payload.
 	 * @throws Exception
 	 */
-	public static PiazzaJobRequest parseRequestJson(String json) throws IOException, JsonParseException,
-			JsonMappingException {
+	public static PiazzaJobRequest parseRequestJson(String json)
+			throws IOException, JsonParseException, JsonMappingException {
 		PiazzaJobRequest request = new ObjectMapper().readValue(json, PiazzaJobRequest.class);
 		return request;
 	}

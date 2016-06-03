@@ -45,7 +45,10 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public interface FileLocation {
 	public String getFileName();
+
 	public String getType();
+
 	public Long getFileSize();
+
 	public void setFileSize(Long fileSize);
 }
