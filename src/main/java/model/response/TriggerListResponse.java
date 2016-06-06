@@ -19,38 +19,30 @@ import java.util.List;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import model.data.DataResource;
+import model.workflow.Trigger;
 
-/**
- * Represents the response that the Gateway returns to the user when the user
- * has requested to see the information on a list of Resources currently held by
- * the Piazza system; represented internally using the DataResource object.
- * 
- * @author Patrick.Doody
- * 
- */
-@ApiModel("DataResourceResults")
-public class DataResourceListResponse extends PiazzaResponse {
+@ApiModel(value="TriggerResults")
+public class TriggerListResponse extends PiazzaResponse {
 
 	@ApiModelProperty(hidden = true)
-	private String type = "data-list";
+	private String type = "trigger-list";
 
-	@ApiModelProperty(value = "The array of Data Resource results.")
-	public List<DataResource> data;
+	@ApiModelProperty(value = "The array of Trigger results.")
+	public List<Trigger> triggers;
 
 	@ApiModelProperty(value = "The pagination metadata for this query.")
 	public Pagination pagination;
 
-	public DataResourceListResponse() {
+	public TriggerListResponse() {
 
 	}
 
-	public DataResourceListResponse(List<DataResource> dataResources) {
-		this.data = dataResources;
+	public TriggerListResponse(List<Trigger> triggers) {
+		this.triggers = triggers;
 	}
 
-	public DataResourceListResponse(List<DataResource> dataResources, Pagination pagination) {
-		this(dataResources);
+	public TriggerListResponse(List<Trigger> triggers, Pagination pagination) {
+		this(triggers);
 		this.pagination = pagination;
 	}
 
@@ -64,12 +56,12 @@ public class DataResourceListResponse extends PiazzaResponse {
 	}
 
 	/**
-	 * Returns the list of Data Resources held by this response object
+	 * Returns the list of Triggers held by this response object
 	 * 
 	 * @return The list
 	 */
-	public List<DataResource> getData() {
-		return data;
+	public List<Trigger> getTriggers() {
+		return triggers;
 	}
 
 	public Pagination getPagination() {

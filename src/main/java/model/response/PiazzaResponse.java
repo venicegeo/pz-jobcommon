@@ -47,7 +47,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 		@Type(value = ServiceResponse.class, name = "service"),
 		@Type(value = ServiceListResponse.class, name = "service-list") })
 @JsonInclude(Include.NON_NULL)
-@ApiModel(value = "JobResponse", subTypes = {})
+@ApiModel
 public class PiazzaResponse {
 
 	@ApiModelProperty(hidden = true)
