@@ -27,6 +27,7 @@ import org.joda.time.DateTime;
 import org.springframework.data.elasticsearch.annotations.Field;
 import org.springframework.data.elasticsearch.annotations.FieldType;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
@@ -67,6 +68,7 @@ public class ResourceMetadata {
 	public SecurityClassification classType;
 
 	@ApiModelProperty(hidden = true)
+	@JsonIgnore
 	public DateTime termDate;
 
 	@ApiModelProperty(hidden = true)
