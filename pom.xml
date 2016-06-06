@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.venice.piazza</groupId>
 	<artifactId>pz-jobcommon</artifactId>
-	<version>LATEST</version>
+	<version>1.0.0.BUILD-SNAPSHOT</version>
 
 	<packaging>jar</packaging>
 
@@ -117,12 +117,12 @@
 			<artifactId>jackson-module-parameter-names</artifactId>
 			<version>2.6.3</version>
 		</dependency>
-		
+
 		<dependency>
-    		<groupId>com.fasterxml.jackson.module</groupId>
-    		<artifactId>jackson-module-jsonSchema</artifactId>
-    		<version>2.7.4</version>
-		</dependency> 
+			<groupId>com.fasterxml.jackson.module</groupId>
+			<artifactId>jackson-module-jsonSchema</artifactId>
+			<version>2.7.4</version>
+		</dependency>
 		<dependency>
 			<groupId>org.geotools</groupId>
 			<artifactId>gt-main</artifactId>
