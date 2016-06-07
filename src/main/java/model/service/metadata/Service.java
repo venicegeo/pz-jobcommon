@@ -27,27 +27,27 @@ import model.job.metadata.ResourceMetadata;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Service {
 
-	@ApiModelProperty(value = "The unique identifier of the Service.")
+	@ApiModelProperty(required = true, value = "The unique identifier of the user servie.")
 	private String serviceId;
 
-	@ApiModelProperty(value = "The URL to the service to be executed.")
+	@ApiModelProperty(required = true, value = "The URL to the user service to be executed.")
 	private String url;
 
-	@ApiModelProperty(value = "URL to the schema or contract to interface with the service, such as a Swagger file, or documentation.")
+	@ApiModelProperty(required = true, value = "URL to the schema or contract to interface with the service, such as a Swagger file, or documentation.")
 	private String contractUrl;
-
-	@ApiModelProperty(hidden = true)
-	private String contractData;
+	
+	@ApiModelProperty(required = true, value = "The HTTP method used to invoke this user service.")
+	public String method;
 
 	@ApiModelProperty(value = "")
 	private ResourceMetadata resourceMetadata;
 
-	public String getContractData() {
-		return contractData;
+	public String getMethod() {
+		return method;
 	}
 
-	public void setContractData(String contractData) {
-		this.contractData = contractData;
+	public void setMethod(String method) {
+		this.method = method;
 	}
 
 	public String getServiceId() {
