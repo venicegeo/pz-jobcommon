@@ -87,9 +87,6 @@ public class ResourceMetadata {
 	public String contacts;
 
 	@ApiModelProperty(hidden = true)
-	public String method;
-
-	@ApiModelProperty(hidden = true)
 	public String reason;
 
 	@ApiModelProperty(hidden = true)
@@ -225,14 +222,6 @@ public class ResourceMetadata {
 
 	public void setContacts(String contacts) {
 		this.contacts = contacts;
-	}
-
-	public String getMethod() {
-		return method;
-	}
-
-	public void setMethod(String method) {
-		this.method = method;
 	}
 
 	public String getReason() {
