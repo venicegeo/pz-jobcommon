@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.venice.piazza</groupId>
 	<artifactId>pz-jobcommon</artifactId>
-	<version>1.0.0.BUILD-SNAPSHOT</version>
+	<version>LATEST</version>
 
 	<packaging>jar</packaging>
 
