@@ -50,7 +50,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 @ApiModel
 public class PiazzaResponse {
 
-	@ApiModelProperty(hidden = true)
+	@ApiModelProperty(value = "Legacy. This will eventually be removed.")
 	private String type = "job";
 
 	@ApiModelProperty(value = "The ID of the Job that has been created from the request.", required = true)

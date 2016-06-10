@@ -21,10 +21,10 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import model.workflow.Alert;
 
-@ApiModel(value="AlertResults")
+@ApiModel(value = "AlertResults")
 public class AlertListResponse extends PiazzaResponse {
 
-	@ApiModelProperty(hidden = true)
+	@ApiModelProperty(value = "Legacy. This will eventually be removed.")
 	private String type = "alert-list";
 
 	@ApiModelProperty(value = "The array of Alert results.")

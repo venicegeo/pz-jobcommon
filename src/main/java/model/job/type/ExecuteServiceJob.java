@@ -23,7 +23,7 @@ import model.service.metadata.ExecuteServiceData;
 @ApiModel(value = "ExecuteJob")
 public class ExecuteServiceJob implements PiazzaJobType {
 
-	@ApiModelProperty(hidden = true)
+	@ApiModelProperty(value = "The JobID created for executing the service.")
 	public String jobId = null;
 
 	@ApiModelProperty(value = "Legacy. This will eventually be removed.", required = true)

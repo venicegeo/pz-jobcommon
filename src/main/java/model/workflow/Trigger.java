@@ -46,18 +46,18 @@ import io.swagger.annotations.ApiModelProperty;
 
 public class Trigger {
 
-	@ApiModelProperty(value = "The unique identifier for this Event.", required=true)
+	@ApiModelProperty(value = "The unique identifier for this Event.", required = true)
 	public String id;
-	
+
 	@ApiModelProperty(value = "The human-readable description of what this Trigger intends to accomplish.")
 	public String title;
-	
+
 	@ApiModelProperty(value = "Defines the trigger conditions, the query replacements, and the Job to execute upon this object becoming Triggered.")
 	public Condition condition;
-	
+
 	@ApiModelProperty(value = "The Template of the Job to be executed when the conditions are met.")
 	public Job job;
-	
+
 	@ApiModelProperty(value = "")
 	public String percolationId;
 }

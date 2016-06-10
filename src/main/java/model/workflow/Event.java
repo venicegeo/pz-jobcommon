@@ -42,16 +42,16 @@ import io.swagger.annotations.ApiModelProperty;
  */
 
 public class Event {
-	
-	@ApiModelProperty(value = "The unique identifier for this Event.", required=true)
+
+	@ApiModelProperty(value = "The unique identifier for this Event.", required = true)
 	public String id;
-	
+
 	@ApiModelProperty(value = "The unique identifier of the Event Type whose schema this Event conforms to.")
 	public String eventTypeId;
-	
+
 	@ApiModelProperty(value = "The date and time that the Event has generated.")
 	public Date date;
-	
+
 	@ApiModelProperty(value = "The populated values for the Key-value pairs defined by the Event Type's 'mapping' dictionary. Each value in this dictionary must be populated here under this 'data' property.")
 	public Map<String, Object> data;
 }

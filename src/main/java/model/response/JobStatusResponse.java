@@ -31,6 +31,7 @@ import model.job.JobProgress;
 @ApiModel("JobStatus")
 public class JobStatusResponse extends PiazzaResponse {
 
+	@ApiModelProperty(value = "Legacy. This will eventually be removed.")
 	private String type = "status";
 
 	@ApiModelProperty(value = "A reference to the Result of the Job. This could be a Resource ID, or a Service ID, in certain cases. Or perhaps an error if the Job encountered an error during processing.")

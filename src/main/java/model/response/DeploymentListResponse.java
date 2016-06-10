@@ -32,7 +32,7 @@ import model.data.deployment.Deployment;
 @ApiModel("DeploymentResults")
 public class DeploymentListResponse extends PiazzaResponse {
 
-	@ApiModelProperty(hidden = true)
+	@ApiModelProperty(value = "Legacy. This will eventually be removed.")
 	private String type = "deployment-list";
 
 	@ApiModelProperty(value = "The array of Deployment results.")

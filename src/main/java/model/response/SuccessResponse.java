@@ -37,9 +37,10 @@ public class SuccessResponse extends PiazzaResponse {
 		this.message = message;
 		this.origin = origin;
 	}
-	
+
 	/**
 	 * Gets the success message response contains.
+	 * 
 	 * @return
 	 */
 	public String getMessage() {
@@ -48,6 +49,7 @@ public class SuccessResponse extends PiazzaResponse {
 
 	/**
 	 * Gets the origin where object came from.
+	 * 
 	 * @return
 	 */
 	public String getOrigin() {

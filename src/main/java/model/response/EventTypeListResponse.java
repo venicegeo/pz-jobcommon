@@ -21,10 +21,10 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import model.workflow.EventType;
 
-@ApiModel(value="EventTypeResults")
+@ApiModel(value = "EventTypeResults")
 public class EventTypeListResponse extends PiazzaResponse {
 
-	@ApiModelProperty(hidden = true)
+	@ApiModelProperty(value = "Legacy. This will eventually be removed.")
 	private String type = "eventtype-list";
 
 	@ApiModelProperty(value = "The array of EventType results.")

@@ -31,10 +31,10 @@ import io.swagger.annotations.ApiModelProperty;
 // }
 
 public class Condition {
-	
+
 	@ApiModelProperty(value = "The array of Event Type IDs.")
 	public String[] eventTypeIds;
-	
+
 	@ApiModelProperty(value = "The Elastic Search query string.")
 	public Map<String, Object> query;
 }

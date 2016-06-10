@@ -43,7 +43,7 @@ public class SpatialMetadata {
 	@ApiModelProperty(value = "Minimum Y bounds.")
 	private Double minY;
 
-	@ApiModelProperty(hidden = true)
+	@ApiModelProperty(value = "Minimum Z bounds.")
 	private Double minZ;
 
 	@ApiModelProperty(value = "Maximum X bounds.")
@@ -52,10 +52,10 @@ public class SpatialMetadata {
 	@ApiModelProperty(value = "Maximum Y bounds.")
 	private Double maxY;
 
-	@ApiModelProperty(hidden = true)
+	@ApiModelProperty(value = "Maximum Z bounds.")
 	private Double maxZ;
 
-	@ApiModelProperty(hidden = true)
+	@ApiModelProperty(value = "The number of features contained in the resource.")
 	private Integer numFeatures;
 
 	public SpatialMetadata() {

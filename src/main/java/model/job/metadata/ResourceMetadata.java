@@ -52,63 +52,63 @@ public class ResourceMetadata {
 	@ApiModelProperty(value = "Human-readable description of the object.")
 	public String description;
 
-	@ApiModelProperty(hidden = true)
+	@ApiModelProperty(value = "In case of ComplexData, Format defines the allowed input representation")
 	public String format;
 
-	@ApiModelProperty(hidden = true)
+	@ApiModelProperty(value = "Quality level of the service (Production, Development)")
 	public String qos;
 
-	@ApiModelProperty(hidden = true)
+	@ApiModelProperty(value = "String to describe the status (UP, UNAVAILABLE (something is going on), DOWN (It has been turned off)")
 	public String availability;
 
-	@ApiModelProperty(hidden = true)
+	@ApiModelProperty(value = "Keywords describing the service")
 	public String tags;
 
-	@ApiModelProperty(hidden = true)
+	@ApiModelProperty(value = "Classification of the service")
 	public SecurityClassification classType;
 
-	@ApiModelProperty(hidden = true)
+	@ApiModelProperty(value = "The date the service will be terminated. ")
 	@JsonIgnore
 	public DateTime termDate;
 
-	@ApiModelProperty(hidden = true)
+	@ApiModelProperty(value = "Is a client certificate required?   Could be a user certificate or computer certificate…")
 	public Boolean clientCertRequired;
 
-	@ApiModelProperty(hidden = true)
+	@ApiModelProperty(value = "Are credentials required to access this service?")
 	public Boolean credentialsRequired;
 
-	@ApiModelProperty(hidden = true)
+	@ApiModelProperty(value = "Is preauthorization required before using the service?  (e.g. do users need to sign a user agreement, etc.)")
 	public Boolean preAuthRequired;
 
-	@ApiModelProperty(hidden = true)
+	@ApiModelProperty(value = "")
 	public String networkAvailable;
 
-	@ApiModelProperty(hidden = true)
+	@ApiModelProperty(value = "Name, e-mail and phone number of point of contact (String concatenated together)")
 	public String contacts;
 
-	@ApiModelProperty(hidden = true)
+	@ApiModelProperty(value = "")
 	public String reason;
 
-	@ApiModelProperty(hidden = true)
+	@ApiModelProperty(value = "")
 	public String version;
 
-	@ApiModelProperty(hidden = true)
+	@ApiModelProperty(value = "")
 	public String createdBy;
 
-	@ApiModelProperty(hidden = true)
+	@ApiModelProperty(value = "")
 	public String createdDate;
 
-	@ApiModelProperty(hidden = true)
+	@ApiModelProperty(value = "")
 	public Map<String, String> metadata;
 
 	/*
 	 * Need the ability to accommodate arbitrary key/value pairs
 	 */
-	@ApiModelProperty(hidden = true)
+	@ApiModelProperty(value = "")
 	@Field(type = FieldType.Nested)
 	private List<NumericKeyValue> numericKeyValueList;
 
-	@ApiModelProperty(hidden = true)
+	@ApiModelProperty(value = "")
 	@Field(type = FieldType.Nested)
 	private List<TextKeyValue> textKeyValueList;
 

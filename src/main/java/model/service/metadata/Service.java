@@ -35,7 +35,7 @@ public class Service {
 
 	@ApiModelProperty(required = true, value = "URL to the schema or contract to interface with the service, such as a Swagger file, or documentation.")
 	private String contractUrl;
-	
+
 	@ApiModelProperty(required = true, value = "The HTTP method used to invoke this user service.")
 	public String method;
 

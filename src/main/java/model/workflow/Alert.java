@@ -33,7 +33,7 @@ import io.swagger.annotations.ApiModelProperty;
  */
 
 public class Alert {
-	@ApiModelProperty(value = "The unique identifier for this Alert.", required=true)
+	@ApiModelProperty(value = "The unique identifier for this Alert.", required = true)
 	public String id;
 
 	@ApiModelProperty(value = "The unique identifier for the Trigger that was hit.")

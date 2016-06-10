@@ -21,10 +21,10 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import model.workflow.Trigger;
 
-@ApiModel(value="TriggerResults")
+@ApiModel(value = "TriggerResults")
 public class TriggerListResponse extends PiazzaResponse {
 
-	@ApiModelProperty(hidden = true)
+	@ApiModelProperty(value = "Legacy. This will eventually be removed.")
 	private String type = "trigger-list";
 
 	@ApiModelProperty(value = "The array of Trigger results.")
