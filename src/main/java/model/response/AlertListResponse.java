@@ -19,38 +19,30 @@ import java.util.List;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import model.data.DataResource;
+import model.workflow.Alert;
 
-/**
- * Represents the response that the Gateway returns to the user when the user
- * has requested to see the information on a list of Resources currently held by
- * the Piazza system; represented internally using the DataResource object.
- * 
- * @author Patrick.Doody
- * 
- */
-@ApiModel("DataResourceResults")
-public class DataResourceListResponse extends PiazzaResponse {
+@ApiModel(value = "AlertResults")
+public class AlertListResponse extends PiazzaResponse {
 
 	@ApiModelProperty(value = "Legacy. This will eventually be removed.")
-	private String type = "data-list";
+	private String type = "alert-list";
 
-	@ApiModelProperty(value = "The array of Data Resource results.")
-	public List<DataResource> data;
+	@ApiModelProperty(value = "The array of Alert results.")
+	public List<Alert> alerts;
 
 	@ApiModelProperty(value = "The pagination metadata for this query.")
 	public Pagination pagination;
 
-	public DataResourceListResponse() {
+	public AlertListResponse() {
 
 	}
 
-	public DataResourceListResponse(List<DataResource> dataResources) {
-		this.data = dataResources;
+	public AlertListResponse(List<Alert> alerts) {
+		this.alerts = alerts;
 	}
 
-	public DataResourceListResponse(List<DataResource> dataResources, Pagination pagination) {
-		this(dataResources);
+	public AlertListResponse(List<Alert> alerts, Pagination pagination) {
+		this(alerts);
 		this.pagination = pagination;
 	}
 
@@ -64,12 +56,12 @@ public class DataResourceListResponse extends PiazzaResponse {
 	}
 
 	/**
-	 * Returns the list of Data Resources held by this response object
+	 * Returns the list of Alerts held by this response object
 	 * 
 	 * @return The list
 	 */
-	public List<DataResource> getData() {
-		return data;
+	public List<Alert> getAlerts() {
+		return alerts;
 	}
 
 	public Pagination getPagination() {

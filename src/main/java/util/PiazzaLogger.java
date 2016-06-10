@@ -109,8 +109,8 @@ public class PiazzaLogger {
 				HttpHeaders headers = new HttpHeaders();
 				headers.setContentType(MediaType.APPLICATION_JSON);
 
-				LogRequest logRequest = new LogRequest(serviceName, InetAddress.getLocalHost().toString(), Instant
-						.now().getEpochSecond(), logMessage, severity);
+				LogRequest logRequest = new LogRequest(serviceName, InetAddress.getLocalHost().toString(),
+						Instant.now().getEpochSecond(), logMessage, severity);
 
 				// Log the message locally if requested
 				try {

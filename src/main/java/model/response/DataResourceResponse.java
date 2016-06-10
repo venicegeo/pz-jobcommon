@@ -26,16 +26,19 @@ import model.data.DataResource;
  * 
  */
 public class DataResourceResponse extends PiazzaResponse {
+
 	private String type = "data";
+
 	public DataResource data;
 
 	public DataResourceResponse() {
+
 	}
 
 	public DataResourceResponse(DataResource dataResource) {
 		this.data = dataResource;
 	}
-	
+
 	/**
 	 * Gets the type of this response.
 	 * 

@@ -17,7 +17,6 @@ package model.job.result.type;
 
 import model.job.result.ResultType;
 
-
 /**
  * Represents a simple Text result that can be stored with a Job.
  * 

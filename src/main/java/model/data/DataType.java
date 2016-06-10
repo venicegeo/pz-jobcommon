@@ -37,25 +37,25 @@ import model.data.type.WfsDataType;
  * Interface for Spatial Resources that can be ingested and stored in Piazza.
  * For different types of spatial resources that can be represented, such as
  * Shapefiles, WFS, etc; there must be an accompanying class that implements
- * this interface and references type information for deserialization in the @JsonTypeInfo
- * annotation.
+ * this interface and references type information for deserialization in
+ * the @JsonTypeInfo annotation.
  * 
  * @author Patrick.Doody
  * 
  */
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "type")
 @JsonSubTypes({ @Type(value = WfsDataType.class, name = "wfs"), @Type(value = TextDataType.class, name = "text"),
-	    @Type(value = BodyDataType.class, name = "body"),
-	    @Type(value = LiteralDataType.class, name = "literal"),
-	    @Type(value = URLParameterDataType.class, name = "urlparameter"),
+		@Type(value = BodyDataType.class, name = "body"), @Type(value = LiteralDataType.class, name = "literal"),
+		@Type(value = URLParameterDataType.class, name = "urlparameter"),
 		@Type(value = RasterDataType.class, name = "raster"),
 		@Type(value = ShapefileDataType.class, name = "shapefile"),
-		@Type(value = PostGISDataType.class, name = "postgis"),
-		@Type(value = GeoJsonDataType.class, name = "geojson"),
-		@Type(value = PointCloudDataType.class, name = "pointcloud")})
+		@Type(value = PostGISDataType.class, name = "postgis"), @Type(value = GeoJsonDataType.class, name = "geojson"),
+		@Type(value = PointCloudDataType.class, name = "pointcloud") })
 @JsonInclude(Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
 public interface DataType {
+
 	public String getType();
+
 	public String getMimeType();
 }

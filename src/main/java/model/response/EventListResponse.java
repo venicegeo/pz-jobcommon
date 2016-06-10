@@ -19,38 +19,30 @@ import java.util.List;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import model.data.DataResource;
+import model.workflow.Event;
 
-/**
- * Represents the response that the Gateway returns to the user when the user
- * has requested to see the information on a list of Resources currently held by
- * the Piazza system; represented internally using the DataResource object.
- * 
- * @author Patrick.Doody
- * 
- */
-@ApiModel("DataResourceResults")
-public class DataResourceListResponse extends PiazzaResponse {
+@ApiModel(value = "EventResults")
+public class EventListResponse extends PiazzaResponse {
 
 	@ApiModelProperty(value = "Legacy. This will eventually be removed.")
-	private String type = "data-list";
+	private String type = "event-list";
 
-	@ApiModelProperty(value = "The array of Data Resource results.")
-	public List<DataResource> data;
+	@ApiModelProperty(value = "The array of Event results.")
+	public List<Event> events;
 
 	@ApiModelProperty(value = "The pagination metadata for this query.")
 	public Pagination pagination;
 
-	public DataResourceListResponse() {
+	public EventListResponse() {
 
 	}
 
-	public DataResourceListResponse(List<DataResource> dataResources) {
-		this.data = dataResources;
+	public EventListResponse(List<Event> events) {
+		this.events = events;
 	}
 
-	public DataResourceListResponse(List<DataResource> dataResources, Pagination pagination) {
-		this(dataResources);
+	public EventListResponse(List<Event> events, Pagination pagination) {
+		this(events);
 		this.pagination = pagination;
 	}
 
@@ -64,12 +56,12 @@ public class DataResourceListResponse extends PiazzaResponse {
 	}
 
 	/**
-	 * Returns the list of Data Resources held by this response object
+	 * Returns the list of Events held by this response object
 	 * 
 	 * @return The list
 	 */
-	public List<DataResource> getData() {
-		return data;
+	public List<Event> getEvents() {
+		return events;
 	}
 
 	public Pagination getPagination() {

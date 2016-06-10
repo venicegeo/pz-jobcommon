@@ -15,6 +15,7 @@
  **/
 package model.data.type;
 
+import io.swagger.annotations.ApiModelProperty;
 import model.data.DataType;
 
 /**
@@ -29,6 +30,8 @@ public class PostGISDataType implements DataType {
 	public static final String type = "postgis";
 	public String database;
 	public String table;
+
+	@ApiModelProperty(value = "The media type of the stored data")
 	public String mimeType;
 
 	public String getMimeType() {

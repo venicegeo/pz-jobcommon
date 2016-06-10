@@ -24,11 +24,15 @@ import model.service.metadata.Service;
  *
  */
 public class ServiceResponse extends PiazzaResponse {
+
 	private String type = "service";
+
 	public Service service;
+
 	public String serviceId;
 
 	public ServiceResponse() {
+
 	}
 
 	public ServiceResponse(Service service) {

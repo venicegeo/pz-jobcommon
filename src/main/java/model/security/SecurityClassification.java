@@ -22,7 +22,8 @@ package model.security;
  * 
  */
 public class SecurityClassification {
-	String classification;
+
+	private String classification;
 
 	public SecurityClassification() {
 
@@ -40,5 +41,4 @@ public class SecurityClassification {
 		super();
 		this.classification = classification;
 	}
-
 }

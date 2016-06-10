@@ -14,39 +14,52 @@
  * limitations under the License.
  **/
 package model.service.metadata;
+
 /**
  * Used to describe input data to a Service
+ * 
  * @author bkrasner
  *
  */
 public class MetadataType {
-	String about;
-	String href;
-	String role;
-	String title;
+
+	private String about;
+
+	private String href;
+
+	private String role;
+
+	private String title;
+
 	public String getAbout() {
 		return about;
 	}
+
 	public void setAbout(String about) {
 		this.about = about;
 	}
+
 	public String getHref() {
 		return href;
 	}
+
 	public void setHref(String href) {
 		this.href = href;
 	}
+
 	public String getRole() {
 		return role;
 	}
+
 	public void setRole(String role) {
 		this.role = role;
 	}
+
 	public String getTitle() {
 		return title;
 	}
+
 	public void setTitle(String title) {
 		this.title = title;
 	}
-
 }

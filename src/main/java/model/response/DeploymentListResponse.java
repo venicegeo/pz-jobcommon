@@ -17,6 +17,8 @@ package model.response;
 
 import java.util.List;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import model.data.deployment.Deployment;
 
 /**
@@ -27,12 +29,20 @@ import model.data.deployment.Deployment;
  * @author Patrick.Doody
  * 
  */
+@ApiModel("DeploymentResults")
 public class DeploymentListResponse extends PiazzaResponse {
+
+	@ApiModelProperty(value = "Legacy. This will eventually be removed.")
 	private String type = "deployment-list";
+
+	@ApiModelProperty(value = "The array of Deployment results.")
 	public List<Deployment> data;
+
+	@ApiModelProperty(value = "The pagination metadata for this query.")
 	public Pagination pagination;
 
 	public DeploymentListResponse() {
+
 	}
 
 	public DeploymentListResponse(List<Deployment> deployments) {

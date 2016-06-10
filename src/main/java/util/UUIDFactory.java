@@ -99,10 +99,9 @@ public class UUIDFactory {
 		} catch (Exception exception) {
 			// Aiding with debugging, if the above REST call fails, then UUIDs
 			// will be generated locally. This is not a permanent solution.
-			System.out
-					.println(String
-							.format("UUIDGen service encountered an error: %s, and local UUIDs were generated. Please fix your UUIDGen REST Endpoint.",
-									exception.getMessage()));
+			System.out.println(String.format(
+					"UUIDGen service encountered an error: %s, and local UUIDs were generated. Please fix your UUIDGen REST Endpoint.",
+					exception.getMessage()));
 			List<String> uuidList = new ArrayList<String>();
 			for (int i = 0; i < count; i++) {
 				uuidList.add(java.util.UUID.randomUUID().toString());

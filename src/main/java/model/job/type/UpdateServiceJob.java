@@ -20,30 +20,28 @@ import model.service.metadata.Service;
 
 public class UpdateServiceJob implements PiazzaJobType {
 
-		public String jobId = null;
-		public final String type = "update-service";
-		public String serviceID;
-		public Service data;
-		
-		public UpdateServiceJob() {
+	public String jobId = null;
+	public final String type = "update-service";
+	public String serviceID;
+	public Service data;
 
-		}
-
-		public UpdateServiceJob(String jobId) {
-			this.jobId = jobId;
-		}
-
-		public String getType() {
-			return type;
-		}
-
-		public String getJobId() {
-			return jobId;
-		}
-
-		public void setJobId(String jobId) {
-			this.jobId = jobId;
-		}
+	public UpdateServiceJob() {
 
 	}
 
+	public UpdateServiceJob(String jobId) {
+		this.jobId = jobId;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public String getJobId() {
+		return jobId;
+	}
+
+	public void setJobId(String jobId) {
+		this.jobId = jobId;
+	}
+}

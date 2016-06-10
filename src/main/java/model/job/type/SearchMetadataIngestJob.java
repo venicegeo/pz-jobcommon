@@ -19,10 +19,10 @@ import model.data.DataResource;
 import model.job.PiazzaJobType;
 
 /**
- * Represents the JSON Model for ingesting metadata into Piazza for subsequent query,
- * e.g. used in conjunction/within the flow of an InjestJob
- * The contents of this payload includes DataResource serving as complete metadata
- * record to locate Piazza data access key(s) from Search service.
+ * Represents the JSON Model for ingesting metadata into Piazza for subsequent
+ * query, e.g. used in conjunction/within the flow of an InjestJob The contents
+ * of this payload includes DataResource serving as complete metadata record to
+ * locate Piazza data access key(s) from Search service.
  * 
  * @author Christopher Smith
  * 
@@ -42,5 +42,4 @@ public class SearchMetadataIngestJob implements PiazzaJobType {
 	public DataResource getData() {
 		return data;
 	}
-
 }

@@ -15,36 +15,45 @@
  **/
 package model.service.metadata;
 
-import java.util.List;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
+import io.swagger.annotations.ApiModelProperty;
 
 import model.job.metadata.ResourceMetadata;
 
 @JsonInclude(Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Service {
-	
-	// If filled in then overwrite entire Service (Delete old service and put in new
+
+	@ApiModelProperty(required = true, value = "The unique identifier of the user servie.")
 	private String serviceId;
+
+	@ApiModelProperty(required = true, value = "The URL to the user service to be executed.")
 	private String url;
+
+	@ApiModelProperty(required = true, value = "URL to the schema or contract to interface with the service, such as a Swagger file, or documentation.")
 	private String contractUrl;
+
+	@ApiModelProperty(required = true, value = "The HTTP method used to invoke this user service.")
+	public String method;
+
+	@ApiModelProperty(value = "")
 	private ResourceMetadata resourceMetadata;
-	private String contractData;
-	
-	
-	
-	public String getContractData() {
-		return contractData;
+
+	public String getMethod() {
+		return method;
 	}
-	public void setContractData(String contractData) {
-		this.contractData = contractData;
+
+	public void setMethod(String method) {
+		this.method = method;
 	}
+
 	public String getServiceId() {
 		return serviceId;
 	}
+
 	public void setServiceId(String serviceId) {
 		this.serviceId = serviceId;
 	}
@@ -52,22 +61,24 @@ public class Service {
 	public ResourceMetadata getResourceMetadata() {
 		return resourceMetadata;
 	}
+
 	public void setResourceMetadata(ResourceMetadata resourceMetadata) {
 		this.resourceMetadata = resourceMetadata;
 	}
+
 	public String getUrl() {
 		return url;
 	}
+
 	public void setUrl(String url) {
 		this.url = url;
 	}
+
 	public String getContractUrl() {
 		return contractUrl;
 	}
+
 	public void setContractUrl(String contractUrl) {
 		this.contractUrl = contractUrl;
 	}
-	
-	
-
 }

@@ -14,48 +14,64 @@
  * limitations under the License.
  **/
 package model.service.metadata;
+
 /**
- * Actual specification for how an input data item shall be presented to a Service
- * example - For feature, what version of gml should be used
+ * Actual specification for how an input data item shall be presented to a
+ * Service example - For feature, what version of gml should be used
+ * 
  * @author bkrasner
  *
  */
 public class Format {
-	String mimeType;
-	String encoding;
-	String schema;
-	Integer maximumMegabytes;
+
+	private String mimeType;
+
+	private String encoding;
+
+	private String schema;
+
+	private Integer maximumMegabytes;
+
 	// Represents the type returned from getType in model.data.type
-	String dataType;
+	private String dataType;
+
 	public String getMimeType() {
 		return mimeType;
 	}
+
 	public void setMimeType(String mimeType) {
 		this.mimeType = mimeType;
 	}
+
 	public String getEncoding() {
 		return encoding;
 	}
+
 	public void setEncoding(String encoding) {
 		this.encoding = encoding;
 	}
+
 	public String getSchema() {
 		return schema;
 	}
+
 	public void setSchema(String schema) {
 		this.schema = schema;
 	}
+
 	public Integer getMaximumMegabytes() {
 		return maximumMegabytes;
 	}
+
 	public void setMaximumMegabytes(Integer maximumMegabytes) {
 		this.maximumMegabytes = maximumMegabytes;
 	}
+
 	public String getDataType() {
 		return dataType;
 	}
+
 	public void setDataType(String dataType) {
 		this.dataType = dataType;
 	}
-
 }

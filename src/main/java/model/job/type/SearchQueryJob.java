@@ -18,8 +18,8 @@ package model.job.type;
 import model.job.PiazzaJobType;
 
 /**
- * Represents the JSON Model passing Elasticsearch Query (DSL language)
- * into Piazza for search query,
+ * Represents the JSON Model passing Elasticsearch Query (DSL language) into
+ * Piazza for search query,
  * 
  * @author Christopher Smith
  * 
@@ -42,5 +42,4 @@ public class SearchQueryJob implements PiazzaJobType {
 	public Object getData() {
 		return data;
 	}
-
 }

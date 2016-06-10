@@ -15,6 +15,7 @@
  **/
 package model.data.type;
 
+import io.swagger.annotations.ApiModelProperty;
 import model.data.DataType;
 import model.data.FileRepresentation;
 import model.data.location.FileLocation;
@@ -29,10 +30,22 @@ import model.data.location.FileLocation;
  * 
  */
 public class ShapefileDataType implements DataType, FileRepresentation {
+
+	@ApiModelProperty(value = "The type of the Data. Valid options are raster, shapefile, wfs, text, postgis, geojson, and pointcloud.")
 	public static final String type = "shapefile";
+
+	@ApiModelProperty(value = "The PostGIS table name that contains the Shapefile data.")
 	public String databaseTableName;
+
+	@ApiModelProperty(value = "The location of the data. Used to describe S3 stores, or folder shares, for where the data is located.")
 	public FileLocation location;
+
+	@ApiModelProperty(value = "The media type of the stored data")
 	public String mimeType;
+
+	public ShapefileDataType() {
+
+	}
 
 	public String getMimeType() {
 		return mimeType;
@@ -40,10 +53,6 @@ public class ShapefileDataType implements DataType, FileRepresentation {
 
 	public void setMimeType(String mimeType) {
 		this.mimeType = mimeType;
-	}
-
-	public ShapefileDataType() {
-
 	}
 
 	public String getType() {

@@ -24,8 +24,11 @@ package model.response;
  * 
  */
 public class ErrorResponse extends PiazzaResponse {
+
 	private String type = "error";
+
 	public String message;
+
 	public String origin;
 
 	public ErrorResponse() {
@@ -37,7 +40,7 @@ public class ErrorResponse extends PiazzaResponse {
 		this.message = message;
 		this.origin = origin;
 	}
-	
+
 	/**
 	 * Gets the type of this response.
 	 * 

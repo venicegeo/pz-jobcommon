@@ -18,6 +18,8 @@ package model.job;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
+import io.swagger.annotations.ApiModelProperty;
+
 /**
  * Represents the progress of a Job. Job Workers can fire update to the progress
  * of a Job throughout Job Processing to keep users and other components current
@@ -28,8 +30,14 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
  */
 @JsonInclude(Include.NON_NULL)
 public class JobProgress {
+
+	@ApiModelProperty(value = "The percentage complete for the Job, in whole numbers, out of 100 percent")
 	public Integer percentComplete;
+
+	@ApiModelProperty(value = "The last value for the Time Remaining as reported by the processor of this Job.")
 	public String timeRemaining;
+
+	@ApiModelProperty(value = "The amount of time spent by the processor of this Job, according to that processor.")
 	public String timeSpent;
 
 	public JobProgress() {

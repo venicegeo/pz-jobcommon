@@ -13,29 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-package model.alerter;
+package model.workflow;
 
-public class Alert {
-	private String id;
-	private String condition_id;
-	private String event_id;
-	public String getId() {
-		return id;
-	}
-	public void setId(String id) {
-		this.id = id;
-	}
-	public String getCondition_id() {
-		return condition_id;
-	}
-	public void setCondition_id(String condition_id) {
-		this.condition_id = condition_id;
-	}
-	public String getEvent_id() {
-		return event_id;
-	}
-	public void setEvent_id(String event_id) {
-		this.event_id = event_id;
-	}
-	
+/**
+ * Created by sbortman on 6/2/16.
+ */
+//
+// type model.workflow.Job struct {
+// Task string
+// }
+
+public class Job {
+	public String task;
 }

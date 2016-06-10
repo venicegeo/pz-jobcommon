@@ -47,5 +47,4 @@ public class ServiceMetadataIngestJob implements PiazzaJobType {
 	public void setData(Service data) {
 		this.data = data;
 	}
-
 }

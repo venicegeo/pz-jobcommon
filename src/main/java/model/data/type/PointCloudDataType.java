@@ -15,12 +15,14 @@
  **/
 package model.data.type;
 
+import io.swagger.annotations.ApiModelProperty;
 import model.data.DataType;
 import model.data.FileRepresentation;
 import model.data.location.FileLocation;
 
 /**
- * Represents a Point Cloud format with accompanying file stored somewhere accessible to Piazza.
+ * Represents a Point Cloud format with accompanying file stored somewhere
+ * accessible to Piazza.
  * 
  * @author Sonny.Saniev
  * 
@@ -28,6 +30,8 @@ import model.data.location.FileLocation;
 public class PointCloudDataType implements DataType, FileRepresentation {
 	public static final String type = "pointcloud";
 	public FileLocation location;
+
+	@ApiModelProperty(value = "The media type of the stored data")
 	public String mimeType;
 
 	public String getMimeType() {

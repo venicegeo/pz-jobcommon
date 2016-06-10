@@ -15,6 +15,7 @@
  **/
 package model.data.type;
 
+import io.swagger.annotations.ApiModelProperty;
 import model.data.DataType;
 
 /**
@@ -28,6 +29,8 @@ public class WfsDataType implements DataType {
 	public String url;
 	public String version;
 	public String featureType;
+
+	@ApiModelProperty(value = "The media type of the stored data")
 	public String mimeType;
 
 	public String getMimeType() {

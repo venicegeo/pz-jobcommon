@@ -91,16 +91,15 @@ public class JobMessageSyncUtility implements Callable<ConsumerRecord<String, St
 	public ConsumerRecord<String, String> call() throws Exception {
 		consumer.subscribe(Arrays.asList(message.key().toString()));
 		ConsumerRecords<String, String> consumerRecords = consumer.poll(10);
-		
-		//blocks until complete
+
+		// blocks until complete
 		producer.send(message).get();
 		producer.close();
-
 
 		DateTime startTime = DateTime.now();
 
 		boolean done = false;
-		ConsumerRecord<String, String> consumerRecord=null;
+		ConsumerRecord<String, String> consumerRecord = null;
 		while (!done) {
 			// Check for Timeout
 			if ((new Period(startTime, DateTime.now())).getSeconds() > timeout) {

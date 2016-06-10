@@ -19,10 +19,11 @@ import model.data.DataType;
 
 /**
  * Indicates that text content is to be used in URL key-value pair
+ * 
  * @author bkrasner
  *
  */
-public class URLParameterDataType extends TextDataType{
+public class URLParameterDataType extends TextDataType {
 	public static final String type = "urlparameter";
 
 	public String getType() {
@@ -33,5 +34,4 @@ public class URLParameterDataType extends TextDataType{
 		// TODO Auto-generated method stub
 		return null;
 	}
-
 }

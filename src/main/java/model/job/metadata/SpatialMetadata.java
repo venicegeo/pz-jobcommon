@@ -19,6 +19,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
+import io.swagger.annotations.ApiModelProperty;
+
 /**
  * Spatial metadata fields associated with a Resource. Used to generically
  * specify the bounding box and the spatial reference of a dataset.
@@ -28,16 +30,34 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
  */
 @JsonInclude(Include.NON_NULL)
 public class SpatialMetadata {
+
+	@ApiModelProperty(value = "The CRS (Coordinate Reference System) of the data.")
 	private String coordinateReferenceSystem;
+
+	@ApiModelProperty(value = "The EPSG code of the CRS.")
 	private Integer epsgCode;
+
+	@ApiModelProperty(value = "Minimum X bounds.")
 	private Double minX;
+
+	@ApiModelProperty(value = "Minimum Y bounds.")
 	private Double minY;
+
+	@ApiModelProperty(value = "Minimum Z bounds.")
 	private Double minZ;
+
+	@ApiModelProperty(value = "Maximum X bounds.")
 	private Double maxX;
+
+	@ApiModelProperty(value = "Maximum Y bounds.")
 	private Double maxY;
+
+	@ApiModelProperty(value = "Maximum Z bounds.")
 	private Double maxZ;
+
+	@ApiModelProperty(value = "The number of features contained in the resource.")
 	private Integer numFeatures;
-	
+
 	public SpatialMetadata() {
 
 	}
@@ -95,7 +115,7 @@ public class SpatialMetadata {
 	public String getEpsgString() {
 		return String.format("EPSG:%s", epsgCode);
 	}
-	
+
 	public Double getMinX() {
 		return minX;
 	}

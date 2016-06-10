@@ -14,16 +14,15 @@
  * limitations under the License.
  **/
 package model.job.type;
+
 import model.job.PiazzaJobType;
 import model.service.SearchCriteria;
 
-
-public class SearchServiceJob implements PiazzaJobType  {
+public class SearchServiceJob implements PiazzaJobType {
 	public String jobId = null;
 	public final String type = "search-service";
 	public SearchCriteria data;
 
-	
 	public SearchServiceJob() {
 
 	}
@@ -43,5 +42,4 @@ public class SearchServiceJob implements PiazzaJobType  {
 	public void setJobId(String jobId) {
 		this.jobId = jobId;
 	}
-
 }

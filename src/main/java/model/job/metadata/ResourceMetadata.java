@@ -32,7 +32,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
-//import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import io.swagger.annotations.ApiModelProperty;
 
 /**
  * Common Metadata fields used to describe Data or Services within the Piazza
@@ -46,32 +46,69 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ResourceMetadata {
 
+	@ApiModelProperty(value = "Human-readable name of the object.")
 	public String name;
+
+	@ApiModelProperty(value = "Human-readable description of the object.")
 	public String description;
+
+	@ApiModelProperty(value = "In case of ComplexData, Format defines the allowed input representation")
 	public String format;
+
+	@ApiModelProperty(value = "Quality level of the service (Production, Development)")
 	public String qos;
+
+	@ApiModelProperty(value = "String to describe the status (UP, UNAVAILABLE (something is going on), DOWN (It has been turned off)")
 	public String availability;
+
+	@ApiModelProperty(value = "Keywords describing the service")
 	public String tags;
+
+	@ApiModelProperty(value = "Classification of the service")
 	public SecurityClassification classType;
+
+	@ApiModelProperty(value = "The date the service will be terminated. ")
 	@JsonIgnore
 	public DateTime termDate;
+
+	@ApiModelProperty(value = "Is a client certificate required?   Could be a user certificate or computer certificate…")
 	public Boolean clientCertRequired;
+
+	@ApiModelProperty(value = "Are credentials required to access this service?")
 	public Boolean credentialsRequired;
+
+	@ApiModelProperty(value = "Is preauthorization required before using the service?  (e.g. do users need to sign a user agreement, etc.)")
 	public Boolean preAuthRequired;
+
+	@ApiModelProperty(value = "")
 	public String networkAvailable;
+
+	@ApiModelProperty(value = "Name, e-mail and phone number of point of contact (String concatenated together)")
 	public String contacts;
-	public String method;
+
+	@ApiModelProperty(value = "")
 	public String reason;
+
+	@ApiModelProperty(value = "")
 	public String version;
+
+	@ApiModelProperty(value = "")
 	public String createdBy;
+
+	@ApiModelProperty(value = "")
 	public String createdDate;
+
+	@ApiModelProperty(value = "")
 	public Map<String, String> metadata;
 
 	/*
 	 * Need the ability to accommodate arbitrary key/value pairs
 	 */
+	@ApiModelProperty(value = "")
 	@Field(type = FieldType.Nested)
 	private List<NumericKeyValue> numericKeyValueList;
+
+	@ApiModelProperty(value = "")
 	@Field(type = FieldType.Nested)
 	private List<TextKeyValue> textKeyValueList;
 
@@ -185,14 +222,6 @@ public class ResourceMetadata {
 
 	public void setContacts(String contacts) {
 		this.contacts = contacts;
-	}
-
-	public String getMethod() {
-		return method;
-	}
-
-	public void setMethod(String method) {
-		this.method = method;
 	}
 
 	public String getReason() {
