@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-package model.job.metadata.test;
+package model.test;
 
 import static org.junit.Assert.assertTrue;
 import model.job.metadata.ResourceMetadata;
