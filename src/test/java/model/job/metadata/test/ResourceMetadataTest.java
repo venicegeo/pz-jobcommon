@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-package model.metadata;
+package model.job.metadata.test;
 
 import static org.junit.Assert.assertTrue;
 import model.job.metadata.ResourceMetadata;
@@ -27,7 +27,7 @@ import org.junit.Test;
  * @author Patrick.Doody
  *
  */
-public class MetadataTest {
+public class ResourceMetadataTest {
 
 	/**
 	 * Tests the merging capabilities.
