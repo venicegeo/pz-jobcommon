@@ -16,18 +16,24 @@
 package model.data;
 
 import static org.junit.Assert.assertTrue;
+
+import java.io.IOException;
+
 import model.job.metadata.ResourceMetadata;
+import model.job.metadata.SpatialMetadata;
 
 import org.junit.Test;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 /**
- * Tests the ResourceMetadata model. Primarily tests the merging capabilities to
- * ensure correctness of merging.
+ * Tests the Metadata models. Primarily tests the merging capabilities to ensure
+ * correctness of merging.
  * 
  * @author Patrick.Doody
  *
  */
-public class ResourceMetadataTest {
+public class MetadataTest {
 
 	/**
 	 * Tests the merging capabilities.
@@ -68,5 +74,36 @@ public class ResourceMetadataTest {
 		assertTrue(original.getName().equals("North America"));
 		assertTrue(original.getDescription().equals("This is a map of North America."));
 		assertTrue(original.getFormat() == null);
+	}
+
+	/**
+	 * Test Spatial Metadata
+	 */
+	@Test
+	public void testSpatial() throws IOException {
+		// Mock
+		SpatialMetadata input = new SpatialMetadata();
+		input.setCoordinateReferenceSystem("WGS84");
+		input.setEpsgCode(4326);
+		input.setMaxX((double) 0);
+		input.setMaxY((double) 1);
+		input.setMaxZ((double) 2);
+		input.setMinY((double) 1);
+		input.setMinX((double) 2);
+		input.setMinZ((double) 3);
+		input.setNumFeatures(500);
+		ObjectMapper mapper = new ObjectMapper();
+		String serialized = mapper.writeValueAsString(input);
+		SpatialMetadata output = mapper.readValue(serialized, SpatialMetadata.class);
+		// Verify
+		assertTrue(input.getCoordinateReferenceSystem().equals(output.getCoordinateReferenceSystem()));
+		assertTrue(input.getEpsgCode().equals(output.getEpsgCode()));
+		assertTrue(input.getEpsgString().equals(output.getEpsgString()));
+		assertTrue(input.getMinX().equals(output.getMinX()));
+		assertTrue(input.getMinY().equals(output.getMinY()));
+		assertTrue(input.getMinZ().equals(output.getMinZ()));
+		assertTrue(input.getMaxX().equals(output.getMaxX()));
+		assertTrue(input.getMaxY().equals(output.getMaxY()));
+		assertTrue(input.getMaxZ().equals(output.getMaxZ()));
 	}
 }
