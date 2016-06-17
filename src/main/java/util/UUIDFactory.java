@@ -47,7 +47,7 @@ public class UUIDFactory {
 	private String UUIDGEN_URL;
 	@Value("${uuid.endpoint}")
 	private String UUIDGEN_ENDPOINT;
-	private RestTemplate template;
+	private RestTemplate restTemplate = new RestTemplate();
 	private final static Logger LOG = LoggerFactory.getLogger(UUIDFactory.class);
 
 	/**
@@ -72,7 +72,6 @@ public class UUIDFactory {
 	@PostConstruct
 	public void init() {
 		LOG.info(String.format("UUIDGen initialized for to url %s", UUIDGEN_URL));
-		template = new RestTemplate();
 	}
 
 	/**
@@ -94,14 +93,15 @@ public class UUIDFactory {
 			Map<String, Integer> map = new HashMap<String, Integer>();
 			map.put("count", count);
 			String url = String.format("%s/%s?%s", UUIDGEN_URL, UUIDGEN_ENDPOINT, "count={count}");
-			ResponseEntity<UUID> uuid = template.postForEntity(url, null, UUID.class, map);
+			ResponseEntity<UUID> uuid = restTemplate.postForEntity(url, null, UUID.class, map);
 			return uuid.getBody().getData();
 		} catch (Exception exception) {
 			// Aiding with debugging, if the above REST call fails, then UUIDs
 			// will be generated locally. This is not a permanent solution.
-			System.out.println(String.format(
-					"UUIDGen service encountered an error: %s, and local UUIDs were generated. Please fix your UUIDGen REST Endpoint.",
-					exception.getMessage()));
+			System.out
+					.println(String
+							.format("UUIDGen service encountered an error: %s, and local UUIDs were generated. Please fix your UUIDGen REST Endpoint.",
+									exception.getMessage()));
 			List<String> uuidList = new ArrayList<String>();
 			for (int i = 0; i < count; i++) {
 				uuidList.add(java.util.UUID.randomUUID().toString());
