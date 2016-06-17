@@ -90,6 +90,10 @@ public class FileAccessTest {
 	public void testS3Error() throws Exception {
 		// Test getting an S3 file, throwing an exception.
 		S3FileStore s3Location = new S3FileStore("test", "test.txt", (long) 0, "amazon");
+		s3Location.setBucketName("test");
+		s3Location.setDomainName("amazon");
+		s3Location.setFileSize((long) 0);
+		s3Location.setFileName("test.txt");
 		factory.getFile(s3Location);
 	}
 
