@@ -17,6 +17,9 @@ package model.workflow;
 
 import java.util.Map;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
 import io.swagger.annotations.ApiModelProperty;
 
 /**
@@ -36,7 +39,7 @@ import io.swagger.annotations.ApiModelProperty;
  * of offense, 1..5 "Problem": "string" # nature of the issue, e.g. US bbox, US
  * phone number, etc } }
  */
-
+@JsonInclude(Include.NON_NULL)
 public class EventType {
 
 	@ApiModelProperty(value = "The unique identifier of this Event Type.", required = true)

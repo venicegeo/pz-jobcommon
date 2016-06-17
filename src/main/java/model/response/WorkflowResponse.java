@@ -13,28 +13,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-package model.workflow;
+package model.response;
 
-import java.util.Map;
-
+import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * Created by sbortman on 6/2/16.
+ * Represents a Standard Response from the Piazza Workflow project. Responses contain, at
+ * bare minimum, the ID of the item they correspond with.
+ * 
+ * @author Russell.Orf
+ * 
  */
-// expresses the idea of "this ES query returns an event"
-// Query is specific to the event type
-//
-// type model.workflow.Condition struct {
-// EventTypeIDs []Ident `json:"eventtype_ids" binding:"required"`
-// Query map[string]interface{} `json:"query" binding:"required"`
-// }
+@ApiModel
+public class WorkflowResponse {
 
-public class Condition {
-
-	@ApiModelProperty(value = "The array of Event Type IDs.")
-	public String[] eventtype_ids;
-
-	@ApiModelProperty(value = "The Elastic Search query string.")
-	public Map<String, Object> query;
+	@ApiModelProperty(value = "The ID of the item that has been created from the request.", required = true)
+	public String id;
 }

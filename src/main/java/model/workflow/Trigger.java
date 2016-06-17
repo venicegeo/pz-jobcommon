@@ -15,7 +15,11 @@
  **/
 package model.workflow;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
 import io.swagger.annotations.ApiModelProperty;
+import model.request.PiazzaJobRequest;
 
 /**
  * Created by sbortman on 6/2/16.
@@ -43,7 +47,7 @@ import io.swagger.annotations.ApiModelProperty;
  * "{\"userName\": \"$userName\", \"jobType\": {\"type\": \"get\", \"jobId\": \"$jobId\"}}"
  * } } }
  */
-
+@JsonInclude(Include.NON_NULL)
 public class Trigger {
 
 	@ApiModelProperty(value = "The unique identifier for this Event.", required = true)
@@ -56,7 +60,7 @@ public class Trigger {
 	public Condition condition;
 
 	@ApiModelProperty(value = "The Template of the Job to be executed when the conditions are met.")
-	public Job job;
+	public PiazzaJobRequest job;
 
 	@ApiModelProperty(value = "")
 	public String percolationId;

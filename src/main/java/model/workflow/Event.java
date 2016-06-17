@@ -15,8 +15,14 @@
  **/
 package model.workflow;
 
-import java.util.Date;
 import java.util.Map;
+
+import org.joda.time.DateTime;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 import io.swagger.annotations.ApiModelProperty;
 
@@ -40,18 +46,30 @@ import io.swagger.annotations.ApiModelProperty;
  * into Pz "Severity": 4, "Problem": "us-bbox", "userName": "my-api-key-38n987",
  * "jobId": "43688858-b6d4-4ef9-a98b-163e1980bba8" } }
  */
-
+@JsonInclude(Include.NON_NULL)
 public class Event {
 
 	@ApiModelProperty(value = "The unique identifier for this Event.", required = true)
 	public String id;
 
-	@ApiModelProperty(value = "The unique identifier of the Event Type whose schema this Event conforms to.")
-	public String eventTypeId;
+	@ApiModelProperty(value = "The unique identifier of the Event Type whose schema this Event conforms to.", required = true)
+	public String eventtype_id;
 
-	@ApiModelProperty(value = "The date and time that the Event has generated.")
-	public Date date;
+	@ApiModelProperty(value = "The date and time that the Event has generated.", required = true)
+	@JsonIgnore	
+	public DateTime date;
 
 	@ApiModelProperty(value = "The populated values for the Key-value pairs defined by the Event Type's 'mapping' dictionary. Each value in this dictionary must be populated here under this 'data' property.")
 	public Map<String, Object> data;
+	
+	@JsonProperty("date")
+	public String getDateString() {
+		// Defaults to ISO8601
+		return date.toString();
+	}
+	
+	@JsonProperty("date")
+	public void setDateString(String date) {
+		this.date = new DateTime(date);
+	}	
 }
