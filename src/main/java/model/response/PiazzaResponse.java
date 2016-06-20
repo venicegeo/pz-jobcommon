@@ -45,6 +45,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 		@Type(value = DeploymentResponse.class, name = "deployment"),
 		@Type(value = DeploymentListResponse.class, name = "deployment-list"),
 		@Type(value = ServiceResponse.class, name = "service"),
+		@Type(value = ServiceIdResponse.class, name = "service-id"),
 		@Type(value = ServiceListResponse.class, name = "service-list") })
 @JsonInclude(Include.NON_NULL)
 @ApiModel

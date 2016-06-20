@@ -15,26 +15,24 @@
  **/
 package model.response;
 
-import model.service.metadata.Service;
-
 /**
- * A Response containing information regarding a Piazza Service.
+ * A Response containing an ID regarding a Piazza Service.
  * 
  * @author Patrick.Doody
  *
  */
-public class ServiceResponse extends PiazzaResponse {
+public class ServiceIdResponse extends PiazzaResponse {
 
-	private String type = "service";
+	private String type = "service-id";
 
-	public Service service;
+	public String serviceId;
 
-	public ServiceResponse() {
+	public ServiceIdResponse() {
 
 	}
 
-	public ServiceResponse(Service service) {
-		this.service = service;
+	public ServiceIdResponse(String serviceId) {
+		this.serviceId = serviceId;
 	}
 
 	/**
