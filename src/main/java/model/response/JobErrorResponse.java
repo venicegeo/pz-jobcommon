@@ -41,6 +41,10 @@ public class JobErrorResponse extends JobResponse {
 		this.message = message;
 		this.origin = origin;
 	}
+	
+	public JobErrorResponse() {
+
+	}
 
 	/**
 	 * Gets the type of this response.

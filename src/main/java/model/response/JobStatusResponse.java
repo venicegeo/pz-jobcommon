@@ -58,6 +58,10 @@ public class JobStatusResponse extends JobResponse {
 		jobType = job.getJobType().getType();
 		submittedBy = job.submitterUserName;
 	}
+	
+	public JobStatusResponse() {
+
+	}
 
 	/**
 	 * Gets the type of this response.

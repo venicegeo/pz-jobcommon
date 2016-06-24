@@ -41,6 +41,10 @@ public class SuccessResponse extends PiazzaResponse {
 		this.origin = origin;
 	}
 
+	public SuccessResponse() {
+		
+	}
+	
 	/**
 	 * Gets the success message response contains.
 	 * 

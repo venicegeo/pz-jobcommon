@@ -12,4 +12,8 @@ public class JobResponse extends PiazzaResponse {
 	public JobResponse(String jobId) {
 		this.jobId = jobId;
 	}
+	
+	public JobResponse() {
+
+	}
 }
