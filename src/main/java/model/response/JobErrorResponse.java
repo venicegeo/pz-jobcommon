@@ -16,7 +16,7 @@
 package model.response;
 
 import io.swagger.annotations.ApiModelProperty;
-
+import model.response.JobResponse;
 /**
  * Some internal error occurred in Piazza and should be reported to the user.
  * This response object aims to include sufficient information about the error
@@ -25,10 +25,10 @@ import io.swagger.annotations.ApiModelProperty;
  * @author Patrick.Doody
  * 
  */
-public class ErrorResponse extends PiazzaResponse {
+public class JobErrorResponse extends JobResponse {
 
 	@ApiModelProperty(value = "The type of message.")
-	private String type = "error";
+	private String type = "job-error";
 
 	@ApiModelProperty(value = "A description of the error describing the failure.")
 	public String message;
@@ -36,7 +36,8 @@ public class ErrorResponse extends PiazzaResponse {
 	@ApiModelProperty(value = "The Piazza component where the error originated.")
 	public String origin;
 
-	public ErrorResponse(String message, String origin) {
+	public JobErrorResponse(String jobId, String message, String origin) {
+		super(jobId);
 		this.message = message;
 		this.origin = origin;
 	}

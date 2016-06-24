@@ -32,7 +32,7 @@ import io.swagger.annotations.ApiModelProperty;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Deployment {
 
-	@ApiModelProperty(value = "The unique identifier for this Deployment.")
+	@ApiModelProperty(value = "The unique identifier for this Deployment.", required = true)
 	public String id;
 
 	@ApiModelProperty(value = "The unique identifier of the Data that this deployment hosts.")

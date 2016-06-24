@@ -40,7 +40,7 @@ import io.swagger.annotations.ApiModelProperty;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class DataResource {
 
-	@ApiModelProperty(value = "The ID of the data to download.")
+	@ApiModelProperty(value = "The ID of the data to download.", required = true)
 	public String dataId;
 
 	@ApiModelProperty(value = "Polymorphically defines the information specific to this Data Resource, based on its format.", required = true, dataType = "model.swagger.SwaggerDataType")

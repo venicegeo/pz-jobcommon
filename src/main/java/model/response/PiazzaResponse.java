@@ -41,6 +41,8 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 @JsonSubTypes({ @Type(value = PiazzaResponse.class, name = "job"), @Type(value = ErrorResponse.class, name = "error"),
 		@Type(value = JobStatusResponse.class, name = "status"),
 		@Type(value = DataResourceResponse.class, name = "data"),
+		@Type(value = JobResponse.class, name = "job"),
+		@Type(value = JobErrorResponse.class, name = "job-error"),		
 		@Type(value = DataResourceListResponse.class, name = "data-list"),
 		@Type(value = DeploymentResponse.class, name = "deployment"),
 		@Type(value = DeploymentListResponse.class, name = "deployment-list"),
@@ -51,18 +53,11 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 @ApiModel
 public class PiazzaResponse {
 
-	@ApiModelProperty(value = "Legacy. This will eventually be removed.")
-	private String type = "job";
-
-	@ApiModelProperty(value = "The ID of the Job that has been created from the request.", required = true)
-	public String jobId;
+//	@ApiModelProperty(hidden = true, value = "Legacy. This will eventually be removed.")
+	private String type;
 
 	public PiazzaResponse() {
 
-	}
-
-	public PiazzaResponse(String jobId) {
-		this.jobId = jobId;
 	}
 
 	/**

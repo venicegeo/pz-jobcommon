@@ -19,6 +19,7 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import model.job.Job;
 import model.job.JobProgress;
+import model.response.JobResponse;
 
 /**
  * Represents the Status and Results of a Piazza Job. This includes the
@@ -29,7 +30,7 @@ import model.job.JobProgress;
  * 
  */
 @ApiModel("JobStatus")
-public class JobStatusResponse extends PiazzaResponse {
+public class JobStatusResponse extends JobResponse {
 
 	@ApiModelProperty(value = "Legacy. This will eventually be removed.")
 	private String type = "status";
@@ -48,10 +49,6 @@ public class JobStatusResponse extends PiazzaResponse {
 
 	@ApiModelProperty(value = "")
 	public JobProgress progress;
-
-	public JobStatusResponse() {
-		super();
-	}
 
 	public JobStatusResponse(Job job) {
 		super(job.getJobId());

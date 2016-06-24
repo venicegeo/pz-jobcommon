@@ -24,11 +24,8 @@ import model.workflow.EventType;
 @ApiModel(value = "EventTypeResults")
 public class EventTypeListResponse extends PiazzaResponse {
 
-	@ApiModelProperty(value = "Legacy. This will eventually be removed.")
-	private String type = "eventtype-list";
-
-	@ApiModelProperty(value = "The array of EventType results.")
-	public List<EventType> eventTypes;
+	@ApiModelProperty(value = "The array of EventType results.", required = true)
+	public List<EventType> data;
 
 	@ApiModelProperty(value = "The pagination metadata for this query.")
 	public Pagination pagination;
@@ -37,22 +34,13 @@ public class EventTypeListResponse extends PiazzaResponse {
 
 	}
 
-	public EventTypeListResponse(List<EventType> eventTypes) {
-		this.eventTypes = eventTypes;
+	public EventTypeListResponse(List<EventType> data) {
+		this.data = data;
 	}
 
-	public EventTypeListResponse(List<EventType> eventTypes, Pagination pagination) {
-		this(eventTypes);
+	public EventTypeListResponse(List<EventType> data, Pagination pagination) {
+		this(data);
 		this.pagination = pagination;
-	}
-
-	/**
-	 * Gets the type of this response.
-	 * 
-	 * @return
-	 */
-	public String getType() {
-		return type;
 	}
 
 	/**
@@ -60,8 +48,8 @@ public class EventTypeListResponse extends PiazzaResponse {
 	 * 
 	 * @return The list
 	 */
-	public List<EventType> getEventTypes() {
-		return eventTypes;
+	public List<EventType> getData() {
+		return data;
 	}
 
 	public Pagination getPagination() {

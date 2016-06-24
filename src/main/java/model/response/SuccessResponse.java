@@ -15,6 +15,8 @@
  **/
 package model.response;
 
+import io.swagger.annotations.ApiModelProperty;
+
 /**
  * Some successful event occurred in Piazza and should be reported to the user.
  * This response object aims to include sufficient information about the success
@@ -24,16 +26,17 @@ package model.response;
  * 
  */
 public class SuccessResponse extends PiazzaResponse {
+
+	@ApiModelProperty(value = "The type of message.")
 	private String type = "success";
+	
+	@ApiModelProperty(value = "A description of the successful operation performed.")
 	public String message;
+	
+	@ApiModelProperty(value = "The Piazza component where the message originated.")
 	public String origin;
 
-	public SuccessResponse() {
-		super();
-	}
-
-	public SuccessResponse(String jobId, String message, String origin) {
-		super(jobId);
+	public SuccessResponse(String message, String origin) {
 		this.message = message;
 		this.origin = origin;
 	}

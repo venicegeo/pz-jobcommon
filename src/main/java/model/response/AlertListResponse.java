@@ -24,11 +24,8 @@ import model.workflow.Alert;
 @ApiModel(value = "AlertResults")
 public class AlertListResponse extends PiazzaResponse {
 
-	@ApiModelProperty(value = "Legacy. This will eventually be removed.")
-	private String type = "alert-list";
-
 	@ApiModelProperty(value = "The array of Alert results.")
-	public List<Alert> alerts;
+	public List<Alert> data;
 
 	@ApiModelProperty(value = "The pagination metadata for this query.")
 	public Pagination pagination;
@@ -37,22 +34,13 @@ public class AlertListResponse extends PiazzaResponse {
 
 	}
 
-	public AlertListResponse(List<Alert> alerts) {
-		this.alerts = alerts;
+	public AlertListResponse(List<Alert> data) {
+		this.data = data;
 	}
 
-	public AlertListResponse(List<Alert> alerts, Pagination pagination) {
-		this(alerts);
+	public AlertListResponse(List<Alert> data, Pagination pagination) {
+		this(data);
 		this.pagination = pagination;
-	}
-
-	/**
-	 * Gets the type of this response.
-	 * 
-	 * @return
-	 */
-	public String getType() {
-		return type;
 	}
 
 	/**
@@ -60,8 +48,8 @@ public class AlertListResponse extends PiazzaResponse {
 	 * 
 	 * @return The list
 	 */
-	public List<Alert> getAlerts() {
-		return alerts;
+	public List<Alert> getData() {
+		return data;
 	}
 
 	public Pagination getPagination() {

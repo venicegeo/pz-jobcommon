@@ -50,7 +50,7 @@ import model.request.PiazzaJobRequest;
 @JsonInclude(Include.NON_NULL)
 public class Trigger {
 
-	@ApiModelProperty(value = "The unique identifier for this Event.", required = true)
+	@ApiModelProperty(value = "The unique identifier for this Trigger.", required = true)
 	public String id;
 
 	@ApiModelProperty(value = "The human-readable description of what this Trigger intends to accomplish.")
@@ -63,5 +63,5 @@ public class Trigger {
 	public PiazzaJobRequest job;
 
 	@ApiModelProperty(value = "")
-	public String percolationId;
+	public String percolation_id;
 }
