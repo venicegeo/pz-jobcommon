@@ -15,6 +15,8 @@
  **/
 package model.data.location;
 
+import io.swagger.annotations.ApiModelProperty;
+
 /**
  * Model for the necessary information that is required to access a file on an
  * AWS S3 bucket share.
@@ -23,11 +25,22 @@ package model.data.location;
  * 
  */
 public class S3FileStore implements FileLocation {
-	public static final String type = "s3";
+	
+	public static final String TYPE = "s3";	
+	
+	@ApiModelProperty(value = "The type of file location.", required = true, allowableValues = "s3")	
+	public final String type = "s3";
+	
+	@ApiModelProperty(value = "")
 	public String bucketName;
 
+	@ApiModelProperty(value = "")
 	public String fileName;
+	
+	@ApiModelProperty(value = "")
 	public Long fileSize;
+	
+	@ApiModelProperty(value = "")
 	public String domainName;
 
 	public S3FileStore() {

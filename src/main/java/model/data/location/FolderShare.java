@@ -22,6 +22,8 @@ import java.io.InputStream;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import io.swagger.annotations.ApiModelProperty;
+
 /**
  * Model representing a File accessible via a folder share that is will be
  * accessible to the Piazza Core internal components.
@@ -30,12 +32,24 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
  * 
  */
 public class FolderShare implements FileLocation {
-	public static final String type = "share";
+	
+	public static final String TYPE = "share";
+	
+	@ApiModelProperty(value = "The type of file location.", required = true, allowableValues = "share")		
+	public final String type = "share";
+	
+	@ApiModelProperty(value = "")
 	public String filePath;
+	
+	@ApiModelProperty(value = "")
 	public Long fileSize;
+	
+	@ApiModelProperty(value = "")	
+	public String fileName;
 
 	public String getFileName() {
-		return new File(filePath).getName();
+		fileName = new File(filePath).getName();
+		return fileName;
 	}
 
 	public String getType() {

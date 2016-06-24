@@ -26,7 +26,13 @@ import model.data.DataType;
  * 
  */
 public class TextDataType implements DataType {
-	public static final String type = "text";
+
+	public static final String TYPE = "text";
+
+	@ApiModelProperty(value = "The type of data.", required = true, allowableValues = "text")
+	public final String type = "text";
+
+	@ApiModelProperty(value = "")
 	public String content;
 
 	@ApiModelProperty(value = "The media type of the stored data")
@@ -47,5 +53,4 @@ public class TextDataType implements DataType {
 	public String getMimeType() {
 		return mimeType;
 	}
-
 }

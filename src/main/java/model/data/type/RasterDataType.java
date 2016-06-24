@@ -31,13 +31,21 @@ import model.data.location.FileLocation;
  * 
  */
 public class RasterDataType implements DataType, FileRepresentation {
-	public static final String type = "raster";
 
-	@ApiModelProperty(value = "The location of the data. Used to describe S3 stores, or folder shares, for where the data is located.")
+	public static final String TYPE = "raster";
+
+	@ApiModelProperty(value = "The type of data.", required = true, allowableValues = "raster")
+	public final String type = "raster";
+
+	@ApiModelProperty(value = "The location of the data. Used to describe S3 stores, or folder shares, for where the data is located.", dataType = "model.swagger.SwaggerFileLocation")
 	public FileLocation location;
 
 	@ApiModelProperty(value = "The media type of the stored data")
 	public String mimeType;
+
+	public RasterDataType() {
+
+	}
 
 	public String getMimeType() {
 		return mimeType;
@@ -46,10 +54,6 @@ public class RasterDataType implements DataType, FileRepresentation {
 	public void setMimeType(String mimeType) {
 		this.mimeType = mimeType;
 	}
-
-	public RasterDataType() {
-
-	};
 
 	public String getType() {
 		return type;

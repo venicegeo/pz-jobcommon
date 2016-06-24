@@ -13,29 +13,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-package model.data.type;
+package model.swagger;
 
+import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import model.data.location.FolderShare;
+import model.data.location.S3FileStore;
 
 /**
- * Indicates that text content is to be used in URL key-value pair
+ * This class is needed as a workaround to nonfunctional swagger annotations on
+ * interface classes. It is intentionally abstract so as not to be instantiated.
  * 
- * @author bkrasner
+ * @author Russell Orf
  *
  */
-public class URLParameterDataType extends TextDataType {
+@ApiModel(value = "FileLocationInterface")
+public abstract class SwaggerFileLocation {
 
-	public static final String TYPE = "urlparameter";
+	@ApiModelProperty("S3FileStore Implementation")
+	public S3FileStore impl01;
 
-	@ApiModelProperty(value = "The type of data.", required = true, allowableValues = "urlparameter")
-	public final String type = "urlparameter";
-
-	public String getType() {
-		return type;
-	}
-
-	public String getMimeType() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	@ApiModelProperty("FolderShare Implementation")
+	public FolderShare impl02;
 }

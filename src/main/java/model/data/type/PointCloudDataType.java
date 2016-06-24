@@ -28,11 +28,21 @@ import model.data.location.FileLocation;
  * 
  */
 public class PointCloudDataType implements DataType, FileRepresentation {
-	public static final String type = "pointcloud";
+
+	public static final String TYPE = "pointcloud";
+
+	@ApiModelProperty(value = "The type of data.", required = true, allowableValues = "pointcloud")
+	public final String type = "pointcloud";
+
+	@ApiModelProperty(value = "The location of the data. Used to describe S3 stores, or folder shares, for where the data is located.", dataType = "model.swagger.SwaggerFileLocation")
 	public FileLocation location;
 
 	@ApiModelProperty(value = "The media type of the stored data")
 	public String mimeType;
+
+	public PointCloudDataType() {
+
+	}
 
 	public String getMimeType() {
 		return mimeType;
@@ -41,10 +51,6 @@ public class PointCloudDataType implements DataType, FileRepresentation {
 	public void setMimeType(String mimeType) {
 		this.mimeType = mimeType;
 	}
-
-	public PointCloudDataType() {
-
-	};
 
 	public String getType() {
 		return type;

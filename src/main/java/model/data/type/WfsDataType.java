@@ -25,13 +25,27 @@ import model.data.DataType;
  * 
  */
 public class WfsDataType implements DataType {
-	public static final String type = "wfs";
+
+	public static final String TYPE = "wfs";
+
+	@ApiModelProperty(value = "The type of data.", required = true, allowableValues = "wfs")
+	public final String type = "wfs";
+
+	@ApiModelProperty(value = "")
 	public String url;
+
+	@ApiModelProperty(value = "")
 	public String version;
+
+	@ApiModelProperty(value = "")
 	public String featureType;
 
 	@ApiModelProperty(value = "The media type of the stored data")
 	public String mimeType;
+
+	public WfsDataType() {
+
+	}
 
 	public String getMimeType() {
 		return mimeType;
@@ -39,10 +53,6 @@ public class WfsDataType implements DataType {
 
 	public void setMimeType(String mimeType) {
 		this.mimeType = mimeType;
-	}
-
-	public WfsDataType() {
-
 	}
 
 	public String getType() {

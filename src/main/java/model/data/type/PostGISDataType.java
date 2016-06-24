@@ -27,12 +27,24 @@ import model.data.DataType;
  * 
  */
 public class PostGISDataType implements DataType {
-	public static final String type = "postgis";
+
+	public static final String TYPE = "postgis";
+
+	@ApiModelProperty(value = "The type of data.", required = true, allowableValues = "postgis")
+	public final String type = "postgis";
+
+	@ApiModelProperty(value = "")
 	public String database;
+
+	@ApiModelProperty(value = "")
 	public String table;
 
 	@ApiModelProperty(value = "The media type of the stored data")
 	public String mimeType;
+
+	public PostGISDataType() {
+
+	}
 
 	public String getMimeType() {
 		return mimeType;
@@ -40,10 +52,6 @@ public class PostGISDataType implements DataType {
 
 	public void setMimeType(String mimeType) {
 		this.mimeType = mimeType;
-	}
-
-	public PostGISDataType() {
-
 	}
 
 	public String getType() {
