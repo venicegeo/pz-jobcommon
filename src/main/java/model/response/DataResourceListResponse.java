@@ -32,7 +32,7 @@ import model.data.DataResource;
 @ApiModel("DataResourceResults")
 public class DataResourceListResponse extends PiazzaResponse {
 
-	@ApiModelProperty(value = "Legacy. This will eventually be removed.")
+	@ApiModelProperty(value = "The type of response.", required = true, allowableValues = "data-list")
 	private String type = "data-list";
 
 	@ApiModelProperty(value = "The array of Data Resource results.")

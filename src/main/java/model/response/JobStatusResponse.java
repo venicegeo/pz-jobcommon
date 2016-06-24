@@ -15,7 +15,6 @@
  **/
 package model.response;
 
-import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import model.job.Job;
 import model.job.JobProgress;
@@ -29,10 +28,9 @@ import model.response.JobResponse;
  * @author Patrick.Doody
  * 
  */
-@ApiModel("JobStatus")
 public class JobStatusResponse extends JobResponse {
 
-	@ApiModelProperty(value = "Legacy. This will eventually be removed.")
+	@ApiModelProperty(value = "The type of response.", required = true, allowableValues = "status")
 	private String type = "status";
 
 	@ApiModelProperty(value = "A reference to the Result of the Job. This could be a Resource ID, or a Service ID, in certain cases. Or perhaps an error if the Job encountered an error during processing.")
@@ -58,7 +56,7 @@ public class JobStatusResponse extends JobResponse {
 		jobType = job.getJobType().getType();
 		submittedBy = job.submitterUserName;
 	}
-	
+
 	public JobStatusResponse() {
 
 	}

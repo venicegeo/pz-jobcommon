@@ -15,6 +15,7 @@
  **/
 package model.request;
 
+import io.swagger.annotations.ApiModelProperty;
 import model.job.PiazzaJobType;
 
 /**
@@ -29,6 +30,10 @@ import model.job.PiazzaJobType;
  * 
  */
 public class PiazzaJobRequest {
+	
+	@ApiModelProperty(value = "The user that submitted the job.")
 	public String userName;
+	
+	@ApiModelProperty(value = "The type of job submitted", dataType = "model.swagger.SwaggerJobType")
 	public PiazzaJobType jobType;
 }

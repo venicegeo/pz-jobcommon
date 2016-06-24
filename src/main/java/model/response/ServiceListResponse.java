@@ -32,7 +32,7 @@ import model.service.metadata.Service;
 @ApiModel(value = "ServiceResults")
 public class ServiceListResponse extends PiazzaResponse {
 
-	@ApiModelProperty(value = "Legacy. This will eventually be removed.")
+	@ApiModelProperty(value = "The type of response.", required = true, allowableValues = "service-list")
 	private String type = "service-list";
 
 	@ApiModelProperty(value = "The array of Service results.")

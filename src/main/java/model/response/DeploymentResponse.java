@@ -15,6 +15,7 @@
  **/
 package model.response;
 
+import io.swagger.annotations.ApiModelProperty;
 import model.data.deployment.Deployment;
 
 /**
@@ -25,6 +26,7 @@ import model.data.deployment.Deployment;
  */
 public class DeploymentResponse extends PiazzaResponse {
 
+	@ApiModelProperty(value = "The type of response.", required = true, allowableValues = "deployment")
 	private String type = "deployment";
 
 	public Deployment deployment;

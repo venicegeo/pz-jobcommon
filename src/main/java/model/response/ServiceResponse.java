@@ -15,6 +15,7 @@
  **/
 package model.response;
 
+import io.swagger.annotations.ApiModelProperty;
 import model.service.metadata.Service;
 
 /**
@@ -25,6 +26,7 @@ import model.service.metadata.Service;
  */
 public class ServiceResponse extends PiazzaResponse {
 
+	@ApiModelProperty(value = "The type of response.", required = true, allowableValues = "service")
 	private String type = "service";
 
 	public Service service;

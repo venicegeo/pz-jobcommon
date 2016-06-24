@@ -26,7 +26,7 @@ public class ExecuteServiceJob implements PiazzaJobType {
 	@ApiModelProperty(value = "The JobID created for executing the service.")
 	public String jobId = null;
 
-	@ApiModelProperty(value = "Legacy. This will eventually be removed.", required = true)
+	@ApiModelProperty(value = "The type of job.", required = true, allowableValues = "execute-service")	
 	public final String type = "execute-service";
 
 	@ApiModelProperty(value = "The parameter inputs for Service execution.", required = true)

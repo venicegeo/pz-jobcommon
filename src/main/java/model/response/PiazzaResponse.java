@@ -38,11 +38,10 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
  * 
  */
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "type")
-@JsonSubTypes({ @Type(value = PiazzaResponse.class, name = "job"), @Type(value = ErrorResponse.class, name = "error"),
+@JsonSubTypes({ @Type(value = PiazzaResponse.class, name = "base"), @Type(value = ErrorResponse.class, name = "error"),
 		@Type(value = JobStatusResponse.class, name = "status"),
-		@Type(value = DataResourceResponse.class, name = "data"),
-		@Type(value = JobResponse.class, name = "job"),
-		@Type(value = JobErrorResponse.class, name = "job-error"),		
+		@Type(value = DataResourceResponse.class, name = "data"), @Type(value = JobResponse.class, name = "job"),
+		@Type(value = JobErrorResponse.class, name = "job-error"),
 		@Type(value = DataResourceListResponse.class, name = "data-list"),
 		@Type(value = DeploymentResponse.class, name = "deployment"),
 		@Type(value = DeploymentListResponse.class, name = "deployment-list"),
@@ -53,19 +52,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 @ApiModel
 public class PiazzaResponse {
 
-//	@ApiModelProperty(hidden = true, value = "Legacy. This will eventually be removed.")
-	private String type;
-
 	public PiazzaResponse() {
 
-	}
-
-	/**
-	 * Gets the type of this response.
-	 * 
-	 * @return
-	 */
-	public String getType() {
-		return type;
 	}
 }

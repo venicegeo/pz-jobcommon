@@ -15,6 +15,7 @@
  **/
 package model.response;
 
+import io.swagger.annotations.ApiModelProperty;
 import model.data.DataResource;
 
 /**
@@ -27,6 +28,7 @@ import model.data.DataResource;
  */
 public class DataResourceResponse extends PiazzaResponse {
 
+	@ApiModelProperty(value = "The type of response.", required = true, allowableValues = "data")
 	private String type = "data";
 
 	public DataResource data;

@@ -27,7 +27,7 @@ import model.job.metadata.ResourceMetadata;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Service {
 
-	@ApiModelProperty(required = true, value = "The unique identifier of the user servie.")
+	@ApiModelProperty(required = true, value = "The unique identifier of the user service.")
 	private String serviceId;
 
 	@ApiModelProperty(required = true, value = "The URL to the user service to be executed.")

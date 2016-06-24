@@ -27,12 +27,12 @@ import io.swagger.annotations.ApiModelProperty;
  */
 public class SuccessResponse extends PiazzaResponse {
 
-	@ApiModelProperty(value = "The type of message.")
+	@ApiModelProperty(value = "The type of response.", required = true, allowableValues = "success")
 	private String type = "success";
-	
+
 	@ApiModelProperty(value = "A description of the successful operation performed.")
 	public String message;
-	
+
 	@ApiModelProperty(value = "The Piazza component where the message originated.")
 	public String origin;
 
@@ -42,9 +42,9 @@ public class SuccessResponse extends PiazzaResponse {
 	}
 
 	public SuccessResponse() {
-		
+
 	}
-	
+
 	/**
 	 * Gets the success message response contains.
 	 * 

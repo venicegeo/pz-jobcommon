@@ -19,8 +19,8 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * Represents a Standard Response from the Piazza Workflow project. Responses contain, at
- * bare minimum, the ID of the item they correspond with.
+ * Represents a Standard Response from the Piazza Workflow project. Responses
+ * contain, at bare minimum, the ID of the item they correspond with.
  * 
  * @author Russell.Orf
  * 
