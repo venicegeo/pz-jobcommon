@@ -29,6 +29,7 @@ public class ServiceResponse extends PiazzaResponse {
 	@ApiModelProperty(value = "The type of response.", required = true, allowableValues = "service")
 	private String type = "service";
 
+	@ApiModelProperty(value = "Object containing information regarding a Piazza Service.")
 	public Service service;
 
 	public ServiceResponse() {

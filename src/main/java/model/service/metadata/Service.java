@@ -39,7 +39,7 @@ public class Service {
 	@ApiModelProperty(required = true, value = "The HTTP method used to invoke this user service.")
 	public String method;
 
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(value = "Object of common metadata fields used to describe Data or Services within the Piazza system.")
 	private ResourceMetadata resourceMetadata;
 
 	public String getMethod() {

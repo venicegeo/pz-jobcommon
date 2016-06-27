@@ -15,6 +15,8 @@
  **/
 package model.security;
 
+import io.swagger.annotations.ApiModelProperty;
+
 /**
  * Specifies security classification
  * 
@@ -23,6 +25,7 @@ package model.security;
  */
 public class SecurityClassification {
 
+	@ApiModelProperty(value = "The security classification text of the respective data.")
 	private String classification;
 
 	public SecurityClassification() {

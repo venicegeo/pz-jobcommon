@@ -15,10 +15,14 @@
  **/
 package model.resource;
 
-public class NumericKeyValue {
+import io.swagger.annotations.ApiModelProperty;
 
+public class NumericKeyValue {
+	
+	@ApiModelProperty(value = "")
 	private String key;
 
+	@ApiModelProperty(value = "")
 	private Double value;
 
 	public NumericKeyValue() {

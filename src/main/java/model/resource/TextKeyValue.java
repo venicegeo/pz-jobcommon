@@ -16,10 +16,14 @@
  **/
 package model.resource;
 
+import io.swagger.annotations.ApiModelProperty;
+
 public class TextKeyValue {
 
+	@ApiModelProperty(value = "")
 	private String key;
 
+	@ApiModelProperty(value = "")
 	private String value;
 
 	public TextKeyValue() {

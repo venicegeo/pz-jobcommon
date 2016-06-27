@@ -29,6 +29,7 @@ public class DeploymentResponse extends PiazzaResponse {
 	@ApiModelProperty(value = "The type of response.", required = true, allowableValues = "deployment")
 	private String type = "deployment";
 
+	@ApiModelProperty(value = "Object containing metadata regarding a Piazza Deployment.")
 	public Deployment deployment;
 
 	public DeploymentResponse() {

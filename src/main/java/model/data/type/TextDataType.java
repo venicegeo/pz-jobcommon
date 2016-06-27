@@ -32,7 +32,7 @@ public class TextDataType implements DataType {
 	@ApiModelProperty(value = "The type of data.", required = true, allowableValues = "text")
 	public final String type = "text";
 
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(value = "The text content of the data.")
 	public String content;
 
 	@ApiModelProperty(value = "The media type of the stored data")

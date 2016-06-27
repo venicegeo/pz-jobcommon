@@ -33,10 +33,10 @@ public class PostGISDataType implements DataType {
 	@ApiModelProperty(value = "The type of data.", required = true, allowableValues = "postgis")
 	public final String type = "postgis";
 
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(value = "The name of the database hosting the data.")
 	public String database;
 
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(value = "The name of the database table holding the data.")
 	public String table;
 
 	@ApiModelProperty(value = "The media type of the stored data")

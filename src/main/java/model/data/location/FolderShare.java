@@ -38,13 +38,13 @@ public class FolderShare implements FileLocation {
 	@ApiModelProperty(value = "The type of file location.", required = true, allowableValues = "share")		
 	public final String type = "share";
 	
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(value = "The path to the file on the shared folder.")
 	public String filePath;
 	
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(value = "The size of the file stored, in bytes.")
 	public Long fileSize;
 	
-	@ApiModelProperty(value = "")	
+	@ApiModelProperty(value = "The name of the file stored.")	
 	public String fileName;
 
 	public String getFileName() {

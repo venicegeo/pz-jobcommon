@@ -28,6 +28,7 @@ public class ServiceIdResponse extends PiazzaResponse {
 	@ApiModelProperty(value = "The type of response.", required = true, allowableValues = "service-id")
 	private String type = "service-id";
 
+	@ApiModelProperty(value = "The unique ID for a Piazza Service.")
 	public String serviceId;
 
 	public ServiceIdResponse() {

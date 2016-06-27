@@ -80,25 +80,25 @@ public class ResourceMetadata {
 	@ApiModelProperty(value = "Is preauthorization required before using the service?  (e.g. do users need to sign a user agreement, etc.)")
 	public Boolean preAuthRequired;
 
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(value = "A list of networks where this data is available.")
 	public String networkAvailable;
 
 	@ApiModelProperty(value = "Name, e-mail and phone number of point of contact (String concatenated together)")
 	public String contacts;
 
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(value = "Text explaining why this data is necessary.")
 	public String reason;
 
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(value = "The current version of the data.")
 	public String version;
 
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(value = "Username of the individual submitting the data.")
 	public String createdBy;
 
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(value = "The date and time of data submission to Piazza.")
 	public String createdDate;
 
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(value = "A generic Map of String:String (key:value) pairs with additional metadata.")
 	public Map<String, String> metadata;
 
 	/*

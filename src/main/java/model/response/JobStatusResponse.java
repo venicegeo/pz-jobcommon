@@ -45,7 +45,7 @@ public class JobStatusResponse extends JobResponse {
 	@ApiModelProperty(value = "The name of the user who submitted the Job.", required = true)
 	public String submittedBy;
 
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(value = "Object containing metadata describing the current status of the Job.")
 	public JobProgress progress;
 
 	public JobStatusResponse(Job job) {

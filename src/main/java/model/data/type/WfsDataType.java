@@ -31,13 +31,13 @@ public class WfsDataType implements DataType {
 	@ApiModelProperty(value = "The type of data.", required = true, allowableValues = "wfs")
 	public final String type = "wfs";
 
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(value = "HTTP web address to the WFS endpoint.")
 	public String url;
 
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(value = "The current version of the data.")
 	public String version;
 
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(value = "The type of geospatial feature represented in the data.")
 	public String featureType;
 
 	@ApiModelProperty(value = "The media type of the stored data")
