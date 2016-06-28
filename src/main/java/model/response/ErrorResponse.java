@@ -27,9 +27,6 @@ import io.swagger.annotations.ApiModelProperty;
  */
 public class ErrorResponse extends PiazzaResponse {
 
-	@ApiModelProperty(value = "The type of response.", required = true, allowableValues = "error")
-	private String type = "error";
-
 	@ApiModelProperty(value = "A description of the error describing the failure.")
 	public String message;
 
@@ -43,14 +40,5 @@ public class ErrorResponse extends PiazzaResponse {
 
 	public ErrorResponse() {
 
-	}
-
-	/**
-	 * Gets the type of this response.
-	 * 
-	 * @return
-	 */
-	public String getType() {
-		return type;
 	}
 }

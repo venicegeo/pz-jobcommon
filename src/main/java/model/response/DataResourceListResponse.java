@@ -32,9 +32,6 @@ import model.data.DataResource;
 @ApiModel("DataResourceResults")
 public class DataResourceListResponse extends PiazzaResponse {
 
-	@ApiModelProperty(value = "The type of response.", required = true, allowableValues = "data-list")
-	private String type = "data-list";
-
 	@ApiModelProperty(value = "The array of Data Resource results.")
 	public List<DataResource> data;
 
@@ -52,15 +49,6 @@ public class DataResourceListResponse extends PiazzaResponse {
 	public DataResourceListResponse(List<DataResource> dataResources, Pagination pagination) {
 		this(dataResources);
 		this.pagination = pagination;
-	}
-
-	/**
-	 * Gets the type of this response.
-	 * 
-	 * @return
-	 */
-	public String getType() {
-		return type;
 	}
 
 	/**

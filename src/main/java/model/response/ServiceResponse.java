@@ -26,9 +26,6 @@ import model.service.metadata.Service;
  */
 public class ServiceResponse extends PiazzaResponse {
 
-	@ApiModelProperty(value = "The type of response.", required = true, allowableValues = "service")
-	private String type = "service";
-
 	@ApiModelProperty(value = "Object containing information regarding a Piazza Service.")
 	public Service service;
 
@@ -38,14 +35,5 @@ public class ServiceResponse extends PiazzaResponse {
 
 	public ServiceResponse(Service service) {
 		this.service = service;
-	}
-
-	/**
-	 * Gets the type of this response.
-	 * 
-	 * @return
-	 */
-	public String getType() {
-		return type;
 	}
 }

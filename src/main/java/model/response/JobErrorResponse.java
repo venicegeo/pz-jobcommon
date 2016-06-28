@@ -28,9 +28,6 @@ import model.response.JobResponse;
  */
 public class JobErrorResponse extends JobResponse {
 
-	@ApiModelProperty(value = "The type of response.", required = true, allowableValues = "job-error")
-	private String type = "job-error";
-
 	@ApiModelProperty(value = "A description of the error describing the failure.")
 	public String message;
 
@@ -45,14 +42,5 @@ public class JobErrorResponse extends JobResponse {
 
 	public JobErrorResponse() {
 
-	}
-
-	/**
-	 * Gets the type of this response.
-	 * 
-	 * @return
-	 */
-	public String getType() {
-		return type;
 	}
 }

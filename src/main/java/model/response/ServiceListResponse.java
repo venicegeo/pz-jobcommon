@@ -32,9 +32,6 @@ import model.service.metadata.Service;
 @ApiModel(value = "ServiceResults")
 public class ServiceListResponse extends PiazzaResponse {
 
-	@ApiModelProperty(value = "The type of response.", required = true, allowableValues = "service-list")
-	private String type = "service-list";
-
 	@ApiModelProperty(value = "The array of Service results.")
 	public List<Service> data;
 
@@ -52,15 +49,6 @@ public class ServiceListResponse extends PiazzaResponse {
 	public ServiceListResponse(List<Service> services, Pagination pagination) {
 		this(services);
 		this.pagination = pagination;
-	}
-
-	/**
-	 * Gets the type of this response.
-	 * 
-	 * @return
-	 */
-	public String getType() {
-		return type;
 	}
 
 	/**

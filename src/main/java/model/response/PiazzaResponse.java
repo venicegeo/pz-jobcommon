@@ -20,9 +20,6 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
-
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 /**
@@ -38,18 +35,16 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
  * 
  */
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "type")
-@JsonSubTypes({ @Type(value = PiazzaResponse.class, name = "base"), @Type(value = ErrorResponse.class, name = "error"),
-		@Type(value = JobStatusResponse.class, name = "status"),
-		@Type(value = DataResourceResponse.class, name = "data"), @Type(value = JobResponse.class, name = "job"),
-		@Type(value = JobErrorResponse.class, name = "job-error"),
-		@Type(value = DataResourceListResponse.class, name = "data-list"),
+@JsonSubTypes({ @Type(value = DataResourceListResponse.class, name = "data-list"),
+		@Type(value = DataResourceResponse.class, name = "data"),
 		@Type(value = DeploymentResponse.class, name = "deployment"),
 		@Type(value = DeploymentListResponse.class, name = "deployment-list"),
-		@Type(value = ServiceResponse.class, name = "service"),
+		@Type(value = ErrorResponse.class, name = "error"), @Type(value = JobErrorResponse.class, name = "job-error"),
+		@Type(value = JobResponse.class, name = "job"), @Type(value = JobStatusResponse.class, name = "status"),
 		@Type(value = ServiceIdResponse.class, name = "service-id"),
-		@Type(value = ServiceListResponse.class, name = "service-list") })
+		@Type(value = ServiceListResponse.class, name = "service-list"),
+		@Type(value = ServiceResponse.class, name = "service") })
 @JsonInclude(Include.NON_NULL)
-@ApiModel
 public class PiazzaResponse {
 
 	public PiazzaResponse() {

@@ -26,9 +26,6 @@ import model.data.deployment.Deployment;
  */
 public class DeploymentResponse extends PiazzaResponse {
 
-	@ApiModelProperty(value = "The type of response.", required = true, allowableValues = "deployment")
-	private String type = "deployment";
-
 	@ApiModelProperty(value = "Object containing metadata regarding a Piazza Deployment.")
 	public Deployment deployment;
 
@@ -38,14 +35,5 @@ public class DeploymentResponse extends PiazzaResponse {
 
 	public DeploymentResponse(Deployment deployment) {
 		this.deployment = deployment;
-	}
-
-	/**
-	 * Gets the type of this response.
-	 * 
-	 * @return
-	 */
-	public String getType() {
-		return type;
 	}
 }

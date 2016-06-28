@@ -93,7 +93,6 @@ public class ResponseTest {
 		String serialized = mapper.writeValueAsString(dataInput);
 		DataResourceResponse dataOutput = mapper.readValue(serialized, DataResourceResponse.class);
 		// Test Data Resource Response
-		assertTrue(dataOutput.getType().equals(dataInput.getType()));
 		assertTrue(dataOutput.data.getDataId().equals(dataInput.data.getDataId()));
 
 		// Test List response
@@ -123,7 +122,6 @@ public class ResponseTest {
 		// Test Deployment Response
 		String serialized = mapper.writeValueAsString(deploymentInput);
 		DeploymentResponse deploymentOutput = mapper.readValue(serialized, DeploymentResponse.class);
-		assertTrue(deploymentOutput.getType().equals(deploymentInput.getType()));
 		assertTrue(deploymentOutput.deployment.getCapabilitiesUrl().equals(deployment.getCapabilitiesUrl()));
 		assertTrue(deploymentOutput.deployment.getHost().equals(deployment.getHost()));
 		assertTrue(deploymentOutput.deployment.getId().equals(deployment.getId()));
@@ -188,7 +186,6 @@ public class ResponseTest {
 		// Test Single service response
 		String serialized = mapper.writeValueAsString(serviceInput);
 		ServiceResponse serviceOutput = mapper.readValue(serialized, ServiceResponse.class);
-		assertTrue(serviceOutput.getType().equals(serviceInput.getType()));
 		assertTrue(serviceOutput.service.getServiceId().equals("123456"));
 
 		// Test service list response

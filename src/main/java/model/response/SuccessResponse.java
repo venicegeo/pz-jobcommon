@@ -27,9 +27,6 @@ import io.swagger.annotations.ApiModelProperty;
  */
 public class SuccessResponse extends PiazzaResponse {
 
-	@ApiModelProperty(value = "The type of response.", required = true, allowableValues = "success")
-	private String type = "success";
-
 	@ApiModelProperty(value = "A description of the successful operation performed.")
 	public String message;
 
@@ -61,14 +58,5 @@ public class SuccessResponse extends PiazzaResponse {
 	 */
 	public String getOrigin() {
 		return origin;
-	}
-
-	/**
-	 * Gets the type of this response.
-	 * 
-	 * @return
-	 */
-	public String getType() {
-		return type;
 	}
 }

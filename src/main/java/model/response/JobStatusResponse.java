@@ -30,9 +30,6 @@ import model.response.JobResponse;
  */
 public class JobStatusResponse extends JobResponse {
 
-	@ApiModelProperty(value = "The type of response.", required = true, allowableValues = "status")
-	private String type = "status";
-
 	@ApiModelProperty(value = "A reference to the Result of the Job. This could be a Resource ID, or a Service ID, in certain cases. Or perhaps an error if the Job encountered an error during processing.")
 	public Object result;
 
@@ -59,14 +56,5 @@ public class JobStatusResponse extends JobResponse {
 
 	public JobStatusResponse() {
 
-	}
-
-	/**
-	 * Gets the type of this response.
-	 * 
-	 * @return
-	 */
-	public String getType() {
-		return type;
 	}
 }

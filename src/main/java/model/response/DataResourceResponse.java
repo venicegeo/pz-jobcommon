@@ -28,9 +28,7 @@ import model.data.DataResource;
  */
 public class DataResourceResponse extends PiazzaResponse {
 
-	@ApiModelProperty(value = "The type of response.", required = true, allowableValues = "data")
-	private String type = "data";
-
+	@ApiModelProperty(value = "Object containing metadata describing the data.")
 	public DataResource data;
 
 	public DataResourceResponse() {
@@ -39,14 +37,5 @@ public class DataResourceResponse extends PiazzaResponse {
 
 	public DataResourceResponse(DataResource dataResource) {
 		this.data = dataResource;
-	}
-
-	/**
-	 * Gets the type of this response.
-	 * 
-	 * @return
-	 */
-	public String getType() {
-		return type;
 	}
 }
