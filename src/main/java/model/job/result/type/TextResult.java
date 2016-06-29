@@ -24,7 +24,6 @@ import model.job.result.ResultType;
  * 
  */
 public class TextResult implements ResultType {
-	public final String type = "text";
 	public String text;
 
 	public TextResult() {
@@ -33,10 +32,6 @@ public class TextResult implements ResultType {
 
 	public TextResult(String text) {
 		this.text = text;
-	}
-
-	public String getType() {
-		return type;
 	}
 
 	public String getText() {

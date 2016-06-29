@@ -28,7 +28,6 @@ import model.job.result.ResultType;
  * 
  */
 public class JobResult implements ResultType {
-	public String type = "job";
 	public String jobId;
 
 	public JobResult() {
@@ -36,10 +35,6 @@ public class JobResult implements ResultType {
 
 	public JobResult(String jobId) {
 		this.jobId = jobId;
-	}
-
-	public String getType() {
-		return type;
 	}
 
 	public String getJobId() {

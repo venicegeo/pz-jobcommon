@@ -26,7 +26,7 @@ import model.job.result.ResultType;
  * 
  */
 public class DeploymentResult implements ResultType {
-	public final String type = "deployment";
+
 	public Deployment deployment;
 
 	public DeploymentResult() {
@@ -35,10 +35,6 @@ public class DeploymentResult implements ResultType {
 
 	public DeploymentResult(Deployment deployment) {
 		this.deployment = deployment;
-	}
-
-	public String getType() {
-		return type;
 	}
 
 	public Deployment getDeployment() {

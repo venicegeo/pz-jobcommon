@@ -25,7 +25,6 @@ import model.job.result.ResultType;
  * 
  */
 public class FileResult implements ResultType {
-	public final String type = "file";
 	public String dataId;
 
 	/**
@@ -45,10 +44,6 @@ public class FileResult implements ResultType {
 	 */
 	public FileResult(String dataId) {
 		this.dataId = dataId;
-	}
-
-	public String getType() {
-		return type;
 	}
 
 	public String getDataId() {

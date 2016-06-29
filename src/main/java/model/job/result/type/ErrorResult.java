@@ -25,7 +25,6 @@ import model.job.result.ResultType;
  * 
  */
 public class ErrorResult implements ResultType {
-	public final String type = "error";
 	public String message;
 	public String details;
 
@@ -36,10 +35,6 @@ public class ErrorResult implements ResultType {
 	public ErrorResult(String message, String details) {
 		this.message = message;
 		this.details = details;
-	}
-
-	public String getType() {
-		return type;
 	}
 
 	public String getMessage() {

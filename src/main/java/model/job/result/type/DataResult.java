@@ -26,7 +26,7 @@ import model.job.result.ResultType;
  * 
  */
 public class DataResult implements ResultType {
-	public String type = "data";
+
 	public String dataId;
 
 	public DataResult() {
@@ -34,10 +34,6 @@ public class DataResult implements ResultType {
 
 	public DataResult(String dataId) {
 		this.dataId = dataId;
-	}
-
-	public String getType() {
-		return type;
 	}
 
 	public String getDataId() {
