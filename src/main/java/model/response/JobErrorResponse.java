@@ -16,47 +16,31 @@
 package model.response;
 
 import io.swagger.annotations.ApiModelProperty;
+import model.response.JobResponse;
 
 /**
- * Some successful event occurred in Piazza and should be reported to the user.
- * This response object aims to include sufficient information about the success
- * back to the user or the caller.
+ * Some internal error occurred in Piazza and should be reported to the user.
+ * This response object aims to include sufficient information about the error
+ * back to the user.
  * 
- * @author Sonny.Saniev
+ * @author Patrick.Doody
  * 
  */
-public class SuccessResponse extends PiazzaResponse {
+public class JobErrorResponse extends JobResponse {
 
-	@ApiModelProperty(value = "A description of the successful operation performed.")
+	@ApiModelProperty(value = "A description of the error describing the failure.")
 	public String message;
 
-	@ApiModelProperty(value = "The Piazza component where the message originated.")
+	@ApiModelProperty(value = "The Piazza component where the error originated.")
 	public String origin;
 
-	public SuccessResponse(String message, String origin) {
+	public JobErrorResponse(String jobId, String message, String origin) {
+		super(jobId);
 		this.message = message;
 		this.origin = origin;
 	}
 
-	public SuccessResponse() {
+	public JobErrorResponse() {
 
-	}
-
-	/**
-	 * Gets the success message response contains.
-	 * 
-	 * @return
-	 */
-	public String getMessage() {
-		return message;
-	}
-
-	/**
-	 * Gets the origin where object came from.
-	 * 
-	 * @return
-	 */
-	public String getOrigin() {
-		return origin;
 	}
 }

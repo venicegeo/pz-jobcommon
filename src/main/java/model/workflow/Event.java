@@ -56,20 +56,20 @@ public class Event {
 	public String eventtype_id;
 
 	@ApiModelProperty(value = "The date and time that the Event has generated.", required = true)
-	@JsonIgnore	
+	@JsonIgnore
 	public DateTime date;
 
 	@ApiModelProperty(value = "The populated values for the Key-value pairs defined by the Event Type's 'mapping' dictionary. Each value in this dictionary must be populated here under this 'data' property.")
 	public Map<String, Object> data;
-	
+
 	@JsonProperty("date")
 	public String getDateString() {
 		// Defaults to ISO8601
 		return date.toString();
 	}
-	
+
 	@JsonProperty("date")
 	public void setDateString(String date) {
 		this.date = new DateTime(date);
-	}	
+	}
 }

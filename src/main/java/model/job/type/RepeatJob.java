@@ -15,6 +15,7 @@
  **/
 package model.job.type;
 
+import io.swagger.annotations.ApiModelProperty;
 import model.job.PiazzaJobType;
 
 /**
@@ -29,7 +30,11 @@ import model.job.PiazzaJobType;
  * 
  */
 public class RepeatJob implements PiazzaJobType {
+	
+	@ApiModelProperty(value = "The ID of the subject job.")	
 	public String jobId = null;
+
+	@ApiModelProperty(value = "The type of job.", required = true, allowableValues = "repeat")	
 	public final String type = "repeat";
 
 	public RepeatJob() {

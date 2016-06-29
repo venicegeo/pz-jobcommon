@@ -13,32 +13,30 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-package model.response;
+package model.swagger;
 
+import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import model.job.type.AbortJob;
+import model.job.type.ExecuteServiceJob;
+import model.job.type.RepeatJob;
 
 /**
- * Some internal error occurred in Piazza and should be reported to the user.
- * This response object aims to include sufficient information about the error
- * back to the user.
+ * This class is needed as a workaround to nonfunctional swagger annotations on
+ * interface classes. It is intentionally abstract so as not to be instantiated.
  * 
- * @author Patrick.Doody
- * 
+ * @author Russell Orf
+ *
  */
-public class ErrorResponse extends PiazzaResponse {
+@ApiModel(value = "JobTypeInterface")
+public abstract class SwaggerJobType {
 
-	@ApiModelProperty(value = "A description of the error describing the failure.")
-	public String message;
+	@ApiModelProperty("AbortJob Implementation")
+	public AbortJob impl01;
 
-	@ApiModelProperty(value = "The Piazza component where the error originated.")
-	public String origin;
+	@ApiModelProperty("ExecuteServiceJob Implementation")
+	public ExecuteServiceJob impl02;
 
-	public ErrorResponse(String message, String origin) {
-		this.message = message;
-		this.origin = origin;
-	}
-
-	public ErrorResponse() {
-
-	}
+	@ApiModelProperty("RepeatJob Implementation")
+	public RepeatJob impl03;
 }

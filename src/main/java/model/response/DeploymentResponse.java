@@ -15,6 +15,7 @@
  **/
 package model.response;
 
+import io.swagger.annotations.ApiModelProperty;
 import model.data.deployment.Deployment;
 
 /**
@@ -25,8 +26,7 @@ import model.data.deployment.Deployment;
  */
 public class DeploymentResponse extends PiazzaResponse {
 
-	private String type = "deployment";
-
+	@ApiModelProperty(value = "Object containing metadata regarding a Piazza Deployment.")
 	public Deployment deployment;
 
 	public DeploymentResponse() {
@@ -35,14 +35,5 @@ public class DeploymentResponse extends PiazzaResponse {
 
 	public DeploymentResponse(Deployment deployment) {
 		this.deployment = deployment;
-	}
-
-	/**
-	 * Gets the type of this response.
-	 * 
-	 * @return
-	 */
-	public String getType() {
-		return type;
 	}
 }

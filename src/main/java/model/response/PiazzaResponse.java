@@ -20,9 +20,6 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
-
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 /**
@@ -38,41 +35,23 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
  * 
  */
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "type")
-@JsonSubTypes({ @Type(value = PiazzaResponse.class, name = "job"), 
-		@Type(value = ErrorResponse.class, name = "error"),
-		@Type(value = SuccessResponse.class, name = "success"),
-		@Type(value = JobStatusResponse.class, name = "status"),
-		@Type(value = DataResourceResponse.class, name = "data"),
+@JsonSubTypes({ 
 		@Type(value = DataResourceListResponse.class, name = "data-list"),
+		@Type(value = DataResourceResponse.class, name = "data"),
 		@Type(value = DeploymentResponse.class, name = "deployment"),
 		@Type(value = DeploymentListResponse.class, name = "deployment-list"),
-		@Type(value = ServiceResponse.class, name = "service"),
+		@Type(value = ErrorResponse.class, name = "error"), 
+		@Type(value = JobErrorResponse.class, name = "job-error"),
+		@Type(value = JobResponse.class, name = "job"), 
+		@Type(value = JobStatusResponse.class, name = "status"),
 		@Type(value = ServiceIdResponse.class, name = "service-id"),
-		@Type(value = ServiceListResponse.class, name = "service-list") })
+		@Type(value = ServiceListResponse.class, name = "service-list"),
+		@Type(value = ServiceResponse.class, name = "service"),
+		@Type(value = SuccessResponse.class, name = "success")})
 @JsonInclude(Include.NON_NULL)
-@ApiModel
 public class PiazzaResponse {
-
-	@ApiModelProperty(value = "Legacy. This will eventually be removed.")
-	private String type = "job";
-
-	@ApiModelProperty(value = "The ID of the Job that has been created from the request.", required = true)
-	public String jobId;
 
 	public PiazzaResponse() {
 
-	}
-
-	public PiazzaResponse(String jobId) {
-		this.jobId = jobId;
-	}
-
-	/**
-	 * Gets the type of this response.
-	 * 
-	 * @return
-	 */
-	public String getType() {
-		return type;
 	}
 }

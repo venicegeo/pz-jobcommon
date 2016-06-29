@@ -17,6 +17,7 @@ package model.job.type;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import io.swagger.annotations.ApiModelProperty;
 import model.job.PiazzaJobType;
 
 /**
@@ -43,8 +44,13 @@ public class AccessJob implements PiazzaJobType {
 	@JsonIgnore
 	public static final String ACCESS_TYPE_FILE = "file";
 
+	@ApiModelProperty(value = "The type of job.", required = true, allowableValues = "access")		
 	public final String type = "access";
+	
+	@ApiModelProperty(value = "The ID of the subject data.")
 	public String dataId;
+	
+	@ApiModelProperty(value = "The type of deployment, either hosted on a Piazza GeoServer instance, or raw file download.")	
 	public String deploymentType;
 
 	public AccessJob() {

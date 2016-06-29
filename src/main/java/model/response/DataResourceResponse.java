@@ -15,6 +15,7 @@
  **/
 package model.response;
 
+import io.swagger.annotations.ApiModelProperty;
 import model.data.DataResource;
 
 /**
@@ -27,8 +28,7 @@ import model.data.DataResource;
  */
 public class DataResourceResponse extends PiazzaResponse {
 
-	private String type = "data";
-
+	@ApiModelProperty(value = "Object containing metadata describing the data.")
 	public DataResource data;
 
 	public DataResourceResponse() {
@@ -37,14 +37,5 @@ public class DataResourceResponse extends PiazzaResponse {
 
 	public DataResourceResponse(DataResource dataResource) {
 		this.data = dataResource;
-	}
-
-	/**
-	 * Gets the type of this response.
-	 * 
-	 * @return
-	 */
-	public String getType() {
-		return type;
 	}
 }

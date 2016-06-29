@@ -28,12 +28,19 @@ import model.data.location.FileLocation;
  * 
  */
 public class GeoJsonDataType implements DataType, FileRepresentation {
-	public static final String type = "geojson";
+
+	public static final String TYPE = "geojson";
+
+	@ApiModelProperty(value = "The type of data.", required = true, allowableValues = "geojson")
+	public final String type = "geojson";
+
+	@ApiModelProperty(value = "The name of the database table holding the data.")
 	public String databaseTableName;
 
-	@ApiModelProperty(value = "The location of the data. Used to describe S3 stores, or folder shares, for where the data is located.")
+	@ApiModelProperty(value = "The location of the data. Used to describe S3 stores, or folder shares, for where the data is located.", dataType = "model.swagger.SwaggerFileLocation")
 	public FileLocation location;
 
+	@ApiModelProperty(value = "The geojson content of the data.")
 	public String geoJsonContent;
 
 	@ApiModelProperty(value = "The media type of the stored data")

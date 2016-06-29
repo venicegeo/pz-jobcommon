@@ -15,7 +15,7 @@
  **/
 package model.data.type;
 
-import model.data.DataType;
+import io.swagger.annotations.ApiModelProperty;
 
 /**
  * Indicates that text content is to be used in URL key-value pair
@@ -24,7 +24,11 @@ import model.data.DataType;
  *
  */
 public class URLParameterDataType extends TextDataType {
-	public static final String type = "urlparameter";
+
+	public static final String TYPE = "urlparameter";
+
+	@ApiModelProperty(value = "The type of data.", required = true, allowableValues = "urlparameter")
+	public final String type = "urlparameter";
 
 	public String getType() {
 		return type;

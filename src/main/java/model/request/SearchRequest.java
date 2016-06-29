@@ -19,6 +19,6 @@ import io.swagger.annotations.ApiModelProperty;
 
 public class SearchRequest {
 
-	@ApiModelProperty(value = "ElasticSearch DSL Query Object.", required = true)
+	@ApiModelProperty(value = "Elastic Search DSL Query 2.2, for details see https://www.elastic.co/guide/en/elasticsearch/reference/2.2/query-dsl.html", required = true)
 	public Object query;
 }

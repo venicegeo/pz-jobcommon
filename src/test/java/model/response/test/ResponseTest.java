@@ -32,10 +32,9 @@ import model.response.DataResourceListResponse;
 import model.response.DataResourceResponse;
 import model.response.DeploymentListResponse;
 import model.response.DeploymentResponse;
-import model.response.ErrorResponse;
+import model.response.JobErrorResponse;
 import model.response.JobStatusResponse;
 import model.response.Pagination;
-import model.response.PiazzaResponse;
 import model.response.ServiceListResponse;
 import model.response.ServiceResponse;
 import model.response.SuccessResponse;
@@ -65,20 +64,20 @@ public class ResponseTest {
 	public void testAlert() throws IOException {
 		List<Alert> alerts = new ArrayList<Alert>();
 		Alert alert = new Alert();
-		alert.eventId = "123456";
+		alert.event_id = "123456";
 		alert.id = "654321";
-		alert.triggerId = "123456T";
+		alert.trigger_id = "123456T";
 		alerts.add(alert);
 		AlertListResponse input = new AlertListResponse(alerts, pagination);
 
 		String serialized = mapper.writeValueAsString(input);
 		AlertListResponse output = mapper.readValue(serialized, AlertListResponse.class);
 
-		assertTrue(output.getAlerts().size() == 1);
+		assertTrue(output.getData().size() == 1);
 		assertTrue(output.getPagination().getCount().equals(1));
-		assertTrue(output.getAlerts().get(0).eventId.equals("123456"));
-		assertTrue(output.getAlerts().get(0).id.equals("654321"));
-		assertTrue(output.getAlerts().get(0).triggerId.equals("123456T"));
+		assertTrue(output.getData().get(0).event_id.equals("123456"));
+		assertTrue(output.getData().get(0).id.equals("654321"));
+		assertTrue(output.getData().get(0).trigger_id.equals("123456T"));
 	}
 
 	/**
@@ -94,7 +93,6 @@ public class ResponseTest {
 		String serialized = mapper.writeValueAsString(dataInput);
 		DataResourceResponse dataOutput = mapper.readValue(serialized, DataResourceResponse.class);
 		// Test Data Resource Response
-		assertTrue(dataOutput.getType().equals(dataInput.getType()));
 		assertTrue(dataOutput.data.getDataId().equals(dataInput.data.getDataId()));
 
 		// Test List response
@@ -124,7 +122,6 @@ public class ResponseTest {
 		// Test Deployment Response
 		String serialized = mapper.writeValueAsString(deploymentInput);
 		DeploymentResponse deploymentOutput = mapper.readValue(serialized, DeploymentResponse.class);
-		assertTrue(deploymentOutput.getType().equals(deploymentInput.getType()));
 		assertTrue(deploymentOutput.deployment.getCapabilitiesUrl().equals(deployment.getCapabilitiesUrl()));
 		assertTrue(deploymentOutput.deployment.getHost().equals(deployment.getHost()));
 		assertTrue(deploymentOutput.deployment.getId().equals(deployment.getId()));
@@ -144,9 +141,9 @@ public class ResponseTest {
 	 */
 	@Test
 	public void testError() throws IOException {
-		ErrorResponse input = new ErrorResponse("123456", "Bug", "Test");
+		JobErrorResponse input = new JobErrorResponse("123456", "Bug", "Test");
 		String serialized = mapper.writeValueAsString(input);
-		ErrorResponse output = mapper.readValue(serialized, ErrorResponse.class);
+		JobErrorResponse output = mapper.readValue(serialized, JobErrorResponse.class);
 		assertTrue(output.message.equals("Bug"));
 		assertTrue(output.jobId.equals("123456"));
 		assertTrue(output.origin.equals("Test"));
@@ -173,18 +170,6 @@ public class ResponseTest {
 	}
 
 	/**
-	 * Test Piazza Response
-	 */
-	@Test
-	public void testBaseResponse() throws IOException {
-		PiazzaResponse input = new PiazzaResponse("123456");
-		String serialized = mapper.writeValueAsString(input);
-		PiazzaResponse output = mapper.readValue(serialized, PiazzaResponse.class);
-		assertTrue(output.getType().equals(input.getType()));
-		assertTrue(output.jobId.equals("123456"));
-	}
-
-	/**
 	 * Test service responses
 	 */
 	@Test
@@ -201,7 +186,6 @@ public class ResponseTest {
 		// Test Single service response
 		String serialized = mapper.writeValueAsString(serviceInput);
 		ServiceResponse serviceOutput = mapper.readValue(serialized, ServiceResponse.class);
-		assertTrue(serviceOutput.getType().equals(serviceInput.getType()));
 		assertTrue(serviceOutput.service.getServiceId().equals("123456"));
 
 		// Test service list response
@@ -219,11 +203,10 @@ public class ResponseTest {
 	 */
 	@Test
 	public void testSuccess() throws IOException {
-		SuccessResponse input = new SuccessResponse("123456", "Success", "Testing");
+		SuccessResponse input = new SuccessResponse("Success", "Testing");
 		String serialized = mapper.writeValueAsString(input);
 		SuccessResponse output = mapper.readValue(serialized, SuccessResponse.class);
 		assertTrue(output.getMessage().equals("Success"));
 		assertTrue(output.getOrigin().equals("Testing"));
-		assertTrue(output.jobId.equals("123456"));
 	}
 }

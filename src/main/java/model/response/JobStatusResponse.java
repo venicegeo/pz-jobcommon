@@ -15,10 +15,10 @@
  **/
 package model.response;
 
-import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import model.job.Job;
 import model.job.JobProgress;
+import model.response.JobResponse;
 
 /**
  * Represents the Status and Results of a Piazza Job. This includes the
@@ -28,11 +28,7 @@ import model.job.JobProgress;
  * @author Patrick.Doody
  * 
  */
-@ApiModel("JobStatus")
-public class JobStatusResponse extends PiazzaResponse {
-
-	@ApiModelProperty(value = "Legacy. This will eventually be removed.")
-	private String type = "status";
+public class JobStatusResponse extends JobResponse {
 
 	@ApiModelProperty(value = "A reference to the Result of the Job. This could be a Resource ID, or a Service ID, in certain cases. Or perhaps an error if the Job encountered an error during processing.")
 	public Object result;
@@ -46,12 +42,8 @@ public class JobStatusResponse extends PiazzaResponse {
 	@ApiModelProperty(value = "The name of the user who submitted the Job.", required = true)
 	public String submittedBy;
 
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(value = "Object containing metadata describing the current status of the Job.")
 	public JobProgress progress;
-
-	public JobStatusResponse() {
-		super();
-	}
 
 	public JobStatusResponse(Job job) {
 		super(job.getJobId());
@@ -62,12 +54,7 @@ public class JobStatusResponse extends PiazzaResponse {
 		submittedBy = job.submitterUserName;
 	}
 
-	/**
-	 * Gets the type of this response.
-	 * 
-	 * @return
-	 */
-	public String getType() {
-		return type;
+	public JobStatusResponse() {
+
 	}
 }

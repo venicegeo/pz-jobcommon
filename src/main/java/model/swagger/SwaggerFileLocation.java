@@ -13,32 +13,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-package model.response;
+package model.swagger;
 
+import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import model.data.location.FolderShare;
+import model.data.location.S3FileStore;
 
 /**
- * Some internal error occurred in Piazza and should be reported to the user.
- * This response object aims to include sufficient information about the error
- * back to the user.
+ * This class is needed as a workaround to nonfunctional swagger annotations on
+ * interface classes. It is intentionally abstract so as not to be instantiated.
  * 
- * @author Patrick.Doody
- * 
+ * @author Russell Orf
+ *
  */
-public class ErrorResponse extends PiazzaResponse {
+@ApiModel(value = "FileLocationInterface")
+public abstract class SwaggerFileLocation {
 
-	@ApiModelProperty(value = "A description of the error describing the failure.")
-	public String message;
+	@ApiModelProperty("S3FileStore Implementation")
+	public S3FileStore impl01;
 
-	@ApiModelProperty(value = "The Piazza component where the error originated.")
-	public String origin;
-
-	public ErrorResponse(String message, String origin) {
-		this.message = message;
-		this.origin = origin;
-	}
-
-	public ErrorResponse() {
-
-	}
+	@ApiModelProperty("FolderShare Implementation")
+	public FolderShare impl02;
 }

@@ -24,11 +24,8 @@ import model.workflow.Trigger;
 @ApiModel(value = "TriggerResults")
 public class TriggerListResponse extends PiazzaResponse {
 
-	@ApiModelProperty(value = "Legacy. This will eventually be removed.")
-	private String type = "trigger-list";
-
-	@ApiModelProperty(value = "The array of Trigger results.")
-	public List<Trigger> triggers;
+	@ApiModelProperty(value = "The array of Trigger results.", required = true)
+	public List<Trigger> data;
 
 	@ApiModelProperty(value = "The pagination metadata for this query.")
 	public Pagination pagination;
@@ -37,22 +34,13 @@ public class TriggerListResponse extends PiazzaResponse {
 
 	}
 
-	public TriggerListResponse(List<Trigger> triggers) {
-		this.triggers = triggers;
+	public TriggerListResponse(List<Trigger> data) {
+		this.data = data;
 	}
 
-	public TriggerListResponse(List<Trigger> triggers, Pagination pagination) {
-		this(triggers);
+	public TriggerListResponse(List<Trigger> data, Pagination pagination) {
+		this(data);
 		this.pagination = pagination;
-	}
-
-	/**
-	 * Gets the type of this response.
-	 * 
-	 * @return
-	 */
-	public String getType() {
-		return type;
 	}
 
 	/**
@@ -60,8 +48,8 @@ public class TriggerListResponse extends PiazzaResponse {
 	 * 
 	 * @return The list
 	 */
-	public List<Trigger> getTriggers() {
-		return triggers;
+	public List<Trigger> getData() {
+		return data;
 	}
 
 	public Pagination getPagination() {

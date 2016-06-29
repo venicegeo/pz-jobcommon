@@ -37,8 +37,11 @@ public class Alert {
 	public String id;
 
 	@ApiModelProperty(value = "The unique identifier for the Trigger that was hit.")
-	public String triggerId;
+	public String trigger_id;
 
 	@ApiModelProperty(value = "The unique identifier for the Event that triggered the Trigger.")
-	public String eventId;
+	public String event_id;
+
+	@ApiModelProperty(value = "The unique identifier for the Job.")
+	public String job_id;
 }

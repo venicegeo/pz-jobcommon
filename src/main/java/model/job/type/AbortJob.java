@@ -15,6 +15,7 @@
  **/
 package model.job.type;
 
+import io.swagger.annotations.ApiModelProperty;
 import model.job.PiazzaJobType;
 
 /**
@@ -25,8 +26,14 @@ import model.job.PiazzaJobType;
  * 
  */
 public class AbortJob implements PiazzaJobType {
+	
+	@ApiModelProperty(value = "The ID of the subject job.")
 	public String jobId = null;
+	
+	@ApiModelProperty(value = "The type of job.", required = true, allowableValues = "abort")	
 	public final String type = "abort";
+
+	@ApiModelProperty(value = "The reason given for aborting the job.")
 	public String reason;
 
 	public AbortJob() {

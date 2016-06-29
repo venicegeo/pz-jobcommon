@@ -27,7 +27,7 @@ import model.job.metadata.ResourceMetadata;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Service {
 
-	@ApiModelProperty(required = true, value = "The unique identifier of the user servie.")
+	@ApiModelProperty(required = true, value = "The unique identifier of the user service.")
 	private String serviceId;
 
 	@ApiModelProperty(required = true, value = "The URL to the user service to be executed.")
@@ -39,7 +39,7 @@ public class Service {
 	@ApiModelProperty(required = true, value = "The HTTP method used to invoke this user service.")
 	public String method;
 
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(value = "Object of common metadata fields used to describe Data or Services within the Piazza system.")
 	private ResourceMetadata resourceMetadata;
 
 	public String getMethod() {

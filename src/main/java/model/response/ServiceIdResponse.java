@@ -15,6 +15,8 @@
  **/
 package model.response;
 
+import io.swagger.annotations.ApiModelProperty;
+
 /**
  * A Response containing an ID regarding a Piazza Service.
  * 
@@ -23,8 +25,7 @@ package model.response;
  */
 public class ServiceIdResponse extends PiazzaResponse {
 
-	private String type = "service-id";
-
+	@ApiModelProperty(value = "The unique ID for a Piazza Service.")
 	public String serviceId;
 
 	public ServiceIdResponse() {
@@ -33,14 +34,5 @@ public class ServiceIdResponse extends PiazzaResponse {
 
 	public ServiceIdResponse(String serviceId) {
 		this.serviceId = serviceId;
-	}
-
-	/**
-	 * Gets the type of this response.
-	 * 
-	 * @return
-	 */
-	public String getType() {
-		return type;
 	}
 }

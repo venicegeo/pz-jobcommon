@@ -31,13 +31,15 @@ import model.data.location.FileLocation;
  */
 public class ShapefileDataType implements DataType, FileRepresentation {
 
-	@ApiModelProperty(value = "The type of the Data. Valid options are raster, shapefile, wfs, text, postgis, geojson, and pointcloud.")
-	public static final String type = "shapefile";
+	public static final String TYPE = "shapefile";
+
+	@ApiModelProperty(value = "The type of data.", required = true, allowableValues = "shapefile")
+	public final String type = "shapefile";
 
 	@ApiModelProperty(value = "The PostGIS table name that contains the Shapefile data.")
 	public String databaseTableName;
 
-	@ApiModelProperty(value = "The location of the data. Used to describe S3 stores, or folder shares, for where the data is located.")
+	@ApiModelProperty(value = "The location of the data. Used to describe S3 stores, or folder shares, for where the data is located.", dataType = "model.swagger.SwaggerFileLocation")
 	public FileLocation location;
 
 	@ApiModelProperty(value = "The media type of the stored data")

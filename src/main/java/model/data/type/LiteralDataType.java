@@ -18,16 +18,29 @@
  */
 package model.data.type;
 
+import io.swagger.annotations.ApiModelProperty;
 import model.data.DataType;
 
 public class LiteralDataType implements DataType {
+
 	public enum LITERAL {
 		DOUBLE, FLOAT, SHORT, LONG, BYTE, CHAR, BOOLEAN, STRING
 	};
 
-	public static final String type = "literal";
+	public static final String TYPE = "literal";
+
+	@ApiModelProperty(value = "The type of data.", required = true, allowableValues = "literal")
+	public final String type = "literal";
+
+	@ApiModelProperty(value = "")
 	private LITERAL literalType = LITERAL.STRING;
 
+	@ApiModelProperty(value = "The content of the data.")
+	private String value = "";
+
+	@ApiModelProperty(value = "The media type of the stored data")
+	public String mimeType;	
+	
 	public LITERAL getLiteralType() {
 		return literalType;
 	}
@@ -35,8 +48,6 @@ public class LiteralDataType implements DataType {
 	public void setLiteralType(LITERAL literalType) {
 		this.literalType = literalType;
 	}
-
-	private String value = "";
 
 	public String getValue() {
 		return value;
@@ -53,5 +64,4 @@ public class LiteralDataType implements DataType {
 	public String getMimeType() {
 		return null;
 	}
-
 }

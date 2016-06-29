@@ -32,9 +32,6 @@ import model.data.deployment.Deployment;
 @ApiModel("DeploymentResults")
 public class DeploymentListResponse extends PiazzaResponse {
 
-	@ApiModelProperty(value = "Legacy. This will eventually be removed.")
-	private String type = "deployment-list";
-
 	@ApiModelProperty(value = "The array of Deployment results.")
 	public List<Deployment> data;
 
@@ -52,15 +49,6 @@ public class DeploymentListResponse extends PiazzaResponse {
 	public DeploymentListResponse(List<Deployment> deployments, Pagination pagination) {
 		this(deployments);
 		this.pagination = pagination;
-	}
-
-	/**
-	 * Gets the type of this response.
-	 * 
-	 * @return
-	 */
-	public String getType() {
-		return type;
 	}
 
 	/**
