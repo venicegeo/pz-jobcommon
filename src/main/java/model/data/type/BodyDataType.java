@@ -19,17 +19,6 @@
  */
 package model.data.type;
 
-import io.swagger.annotations.ApiModelProperty;
-
 public class BodyDataType extends TextDataType {
-	
-	public static final String TYPE = "body";
-	
-	@ApiModelProperty(value = "The type of data.", required = true, allowableValues = "body")
-	public final String type = "body";
 
-	@Override
-	public String getType() {
-		return type;
-	}
 }

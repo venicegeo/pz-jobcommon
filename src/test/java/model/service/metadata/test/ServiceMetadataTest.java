@@ -94,7 +94,7 @@ public class ServiceMetadataTest {
 		String serialized = mapper.writeValueAsString(input);
 		ParamDataItem output = mapper.readValue(serialized, ParamDataItem.class);
 
-		assertTrue(output.getDataType().getType().equals(input.getDataType().getType()));
+		assertTrue(output.getDataType().getClass().getSimpleName().equals(input.getDataType().getClass().getSimpleName()));
 		assertTrue(output.getMinOccurs().equals(input.getMinOccurs()));
 		assertTrue(output.getMaxOccurs().equals(input.getMaxOccurs()));
 		assertTrue(output.getName().equals(input.getName()));

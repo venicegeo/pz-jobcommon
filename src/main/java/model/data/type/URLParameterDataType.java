@@ -25,15 +25,6 @@ import io.swagger.annotations.ApiModelProperty;
  */
 public class URLParameterDataType extends TextDataType {
 
-	public static final String TYPE = "urlparameter";
-
-	@ApiModelProperty(value = "The type of data.", required = true, allowableValues = "urlparameter")
-	public final String type = "urlparameter";
-
-	public String getType() {
-		return type;
-	}
-
 	public String getMimeType() {
 		// TODO Auto-generated method stub
 		return null;

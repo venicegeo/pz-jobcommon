@@ -107,9 +107,8 @@ public class JobTypeTest {
 		assertTrue(input.getJobId().equals(output.getJobId()));
 		assertTrue(input.getType().equals(output.getType()));
 		assertTrue(input.data.getServiceId().equals(output.data.getServiceId()));
-		assertTrue(input.data.getDataInputs().get("param1").getType()
-				.equals(output.data.getDataInputs().get("param1").getType()));
-		assertTrue(input.data.getDataOutput().get(0).getType().equals(output.data.getDataOutput().get(0).getType()));
+		assertTrue(input.data.getDataInputs().get("param1").getClass().getSimpleName().equals(output.data.getDataInputs().get("param1").getClass().getSimpleName()));
+		assertTrue(input.data.getDataOutput().get(0).getClass().getSimpleName().equals(output.data.getDataOutput().get(0).getClass().getSimpleName()));
 	}
 
 	/**
@@ -133,7 +132,7 @@ public class JobTypeTest {
 		// Verify
 		assertTrue(output.getHost().equals(input.getHost()));
 		assertTrue(output.getType().equals(input.getType()));
-		assertTrue(output.getData().getDataType().getType().equals(input.getData().getDataType().getType()));
+		assertTrue(output.getData().getDataType().getClass().getSimpleName().equals(input.getData().getDataType().getClass().getSimpleName()));
 		assertTrue(output.getData().getMetadata().getName().equals(input.getData().getMetadata().getName()));
 	}
 
