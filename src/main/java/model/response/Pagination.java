@@ -33,16 +33,24 @@ public class Pagination {
 	public Integer page;
 
 	@ApiModelProperty(value = "The current number of results returned per page.", required = true)
-	public Integer per_page;
+	public Integer perPage;
+
+	@ApiModelProperty(value = "The field that the data is being sorted by.", required = true)
+	public String sortBy;
+
+	@ApiModelProperty(value = "The order of the results. Either 'asc' or 'desc' for ascending or descending.", required = true)
+	public String order;
 
 	public Pagination() {
 
 	}
 
-	public Pagination(Integer count, Integer page, Integer per_page) {
+	public Pagination(Integer count, Integer page, Integer perPage, String sortBy, String order) {
 		this.count = count;
 		this.page = page;
-		this.per_page = per_page;
+		this.perPage = perPage;
+		this.sortBy = sortBy;
+		this.order = order;
 	}
 
 	public Integer getCount() {
@@ -53,7 +61,15 @@ public class Pagination {
 		return page;
 	}
 
-	public Integer getPer_page() {
-		return per_page;
+	public Integer getPerPage() {
+		return perPage;
+	}
+
+	public String getSortBy() {
+		return sortBy;
+	}
+
+	public String getOrder() {
+		return order;
 	}
 }

@@ -55,7 +55,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  */
 public class ResponseTest {
 	private ObjectMapper mapper = new ObjectMapper();
-	private Pagination pagination = new Pagination(1, 0, 10);
+	private Pagination pagination = new Pagination(1, 0, 10, "Test", "asc");
 
 	/**
 	 * Test Alert List
