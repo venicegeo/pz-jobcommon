@@ -33,7 +33,7 @@ import io.swagger.annotations.ApiModelProperty;
 public class Condition {
 
 	@ApiModelProperty(value = "The array of Event Type IDs.")
-	public String[] eventtype_ids;
+	public String[] eventTypeIds;
 
 	@ApiModelProperty(value = "Elastic Search DSL Query 2.2, for details see https://www.elastic.co/guide/en/elasticsearch/reference/2.2/query-dsl.html")
 	public Map<String, Object> query;

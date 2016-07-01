@@ -51,7 +51,7 @@ import model.request.PiazzaJobRequest;
 public class Trigger {
 
 	@ApiModelProperty(value = "The unique identifier for this Trigger.", required = true)
-	public String id;
+	public String triggerId;
 
 	@ApiModelProperty(value = "The human-readable description of what this Trigger intends to accomplish.")
 	public String title;
@@ -63,5 +63,5 @@ public class Trigger {
 	public PiazzaJobRequest job;
 
 	@ApiModelProperty(value = "")
-	public String percolation_id;
+	public String percolationId;
 }
