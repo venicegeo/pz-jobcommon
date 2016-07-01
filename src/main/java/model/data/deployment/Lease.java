@@ -39,7 +39,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 @JsonInclude(Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Lease {
-	public String id;
+	public String leaseId;
 	public String deploymentId;
 	public String expirationDate;
 
@@ -60,18 +60,18 @@ public class Lease {
 	 * @param expirationDate
 	 *            The expiration date of this Lease.
 	 */
-	public Lease(String id, String deploymentId, String expirationDate) {
-		this.id = id;
+	public Lease(String leaseId, String deploymentId, String expirationDate) {
+		this.leaseId = leaseId;
 		this.deploymentId = deploymentId;
 		this.expirationDate = expirationDate;
 	}
 
-	public String getId() {
-		return id;
+	public String getLeaseId() {
+		return leaseId;
 	}
 
-	public void setId(String id) {
-		this.id = id;
+	public void setLeaseId(String leaseId) {
+		this.leaseId = leaseId;
 	}
 
 	public String getDeploymentId() {

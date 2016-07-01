@@ -74,7 +74,7 @@ public class JobResultTest {
 		assertTrue(input.getDeployment().getHost().equals(output.getDeployment().getHost()));
 		assertTrue(input.getDeployment().getLayer().equals(output.getDeployment().getLayer()));
 		assertTrue(input.getDeployment().getPort().equals(output.getDeployment().getPort()));
-		assertTrue(input.getDeployment().getId().equals(output.getDeployment().getId()));
+		assertTrue(input.getDeployment().getDeploymentId().equals(output.getDeployment().getDeploymentId()));
 	}
 
 	/**

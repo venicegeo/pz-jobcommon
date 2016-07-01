@@ -34,14 +34,14 @@ import io.swagger.annotations.ApiModelProperty;
 
 public class Alert {
 	@ApiModelProperty(value = "The unique identifier for this Alert.", required = true)
-	public String id;
+	public String alertId;
 
 	@ApiModelProperty(value = "The unique identifier for the Trigger that was hit.")
-	public String trigger_id;
+	public String triggerId;
 
 	@ApiModelProperty(value = "The unique identifier for the Event that triggered the Trigger.")
-	public String event_id;
+	public String eventId;
 
 	@ApiModelProperty(value = "The unique identifier for the Job.")
-	public String job_id;
+	public String jobId;
 }

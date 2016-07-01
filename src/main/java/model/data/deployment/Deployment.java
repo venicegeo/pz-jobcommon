@@ -33,7 +33,7 @@ import io.swagger.annotations.ApiModelProperty;
 public class Deployment {
 
 	@ApiModelProperty(value = "The unique identifier for this Deployment.", required = true)
-	public String id;
+	public String deploymentId;
 
 	@ApiModelProperty(value = "The unique identifier of the Data that this deployment hosts.")
 	public String dataId;
@@ -73,8 +73,8 @@ public class Deployment {
 	 * @param capabilitiesUrl
 	 *            The URL that will return the Capabilities document
 	 */
-	public Deployment(String id, String dataId, String host, String port, String layer, String capabilitiesUrl) {
-		this.id = id;
+	public Deployment(String deploymentId, String dataId, String host, String port, String layer, String capabilitiesUrl) {
+		this.deploymentId = deploymentId;
 		this.dataId = dataId;
 		this.host = host;
 		this.port = port;
@@ -82,12 +82,12 @@ public class Deployment {
 		this.capabilitiesUrl = capabilitiesUrl;
 	}
 
-	public String getId() {
-		return id;
+	public String getDeploymentId() {
+		return deploymentId;
 	}
 
-	public void setId(String id) {
-		this.id = id;
+	public void setDeploymentId(String deploymentId) {
+		this.deploymentId = deploymentId;
 	}
 
 	public String getDataId() {
