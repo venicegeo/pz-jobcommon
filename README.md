@@ -1,6 +1,6 @@
 # Common Job Java API/Models
 
-Common Java models and factories shared between the Gateway/Dispatcher/JobManager components. 
+Common Java models and factories shared between the Java components. 
 
 ## Nexus Maven Repository
 
