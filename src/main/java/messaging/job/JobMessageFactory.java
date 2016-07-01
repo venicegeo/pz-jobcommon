@@ -45,7 +45,7 @@ public class JobMessageFactory {
 
 	/**
 	 * Creates a Kafka message for a Piazza Job to be created. This Topic is
-	 * listened to solely by the Dispatcher and acts as a simple pass-through
+	 * listened to solely by the Job Manager and acts as a simple pass-through
 	 * from the outer world to the internal Piazza components.
 	 * 
 	 * @param piazzaRequest
@@ -171,7 +171,7 @@ public class JobMessageFactory {
 		ProducerRecord<String, String> ingestJobMessage = JobMessageFactory.getRequestJobMessage(jobRequest, jobId,
 				space);
 
-		// This message will now be handled by the Dispatcher the same as any
+		// This message will now be handled as any
 		// other Job request
 		return ingestJobMessage;
 	}
