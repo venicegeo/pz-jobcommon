@@ -30,8 +30,11 @@ import model.job.PiazzaJobType;
  * 
  */
 public class RepeatJob implements PiazzaJobType {
-	
-	@ApiModelProperty(value = "The ID of the subject job.")	
+
+	@ApiModelProperty(required = true, value = "The type of job.", allowableValues = "repeat")
+	public String type;
+
+	@ApiModelProperty(value = "The ID of the subject job.")
 	public String jobId = null;
 
 	public RepeatJob() {

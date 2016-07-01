@@ -31,6 +31,9 @@ import model.data.location.FileLocation;
  */
 public class ShapefileDataType implements DataType, FileRepresentation {
 
+	@ApiModelProperty(required = true, value = "The type of data.", allowableValues = "shapefile")
+	public String type;
+
 	@ApiModelProperty(value = "The PostGIS table name that contains the Shapefile data.")
 	public String databaseTableName;
 

@@ -33,6 +33,9 @@ import io.swagger.annotations.ApiModelProperty;
  */
 public class FolderShare implements FileLocation {
 
+	@ApiModelProperty(required = true, value = "The type of file location.", allowableValues = "share")
+	public String type;
+
 	@ApiModelProperty(value = "The path to the file on the shared folder.")
 	public String filePath;
 

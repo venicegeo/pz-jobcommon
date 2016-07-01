@@ -27,6 +27,9 @@ public class LiteralDataType implements DataType {
 		DOUBLE, FLOAT, SHORT, LONG, BYTE, CHAR, BOOLEAN, STRING
 	};
 
+	@ApiModelProperty(required = true, value = "The type of data.", allowableValues = "literal")
+	public String type;
+
 	@ApiModelProperty(value = "")
 	private LITERAL literalType = LITERAL.STRING;
 

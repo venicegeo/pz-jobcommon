@@ -39,15 +39,19 @@ import model.job.PiazzaJobType;
  * 
  */
 public class AccessJob implements PiazzaJobType {
+
+	@ApiModelProperty(required = true, value = "The type of job.", allowableValues = "access")
+	public String type;
+
 	@JsonIgnore
 	public static final String ACCESS_TYPE_GEOSERVER = "geoserver";
 	@JsonIgnore
 	public static final String ACCESS_TYPE_FILE = "file";
-	
+
 	@ApiModelProperty(value = "The ID of the subject data.")
 	public String dataId;
-	
-	@ApiModelProperty(value = "The type of deployment, either hosted on a Piazza GeoServer instance, or raw file download.")	
+
+	@ApiModelProperty(value = "The type of deployment, either hosted on a Piazza GeoServer instance, or raw file download.")
 	public String deploymentType;
 
 	public AccessJob() {

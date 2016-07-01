@@ -26,6 +26,9 @@ import io.swagger.annotations.ApiModelProperty;
  */
 public class S3FileStore implements FileLocation {
 
+	@ApiModelProperty(required = true, value = "The type of file location.", allowableValues = "s3")
+	public String type;
+
 	@ApiModelProperty(value = "The name of the Amazon S3 bucket hosting the data.")
 	public String bucketName;
 

@@ -28,6 +28,9 @@ import model.data.DataType;
  */
 public class PostGISDataType implements DataType {
 
+	@ApiModelProperty(required = true, value = "The type of data.", allowableValues = "postgis")
+	public String type;
+
 	@ApiModelProperty(value = "The name of the database hosting the data.")
 	public String database;
 

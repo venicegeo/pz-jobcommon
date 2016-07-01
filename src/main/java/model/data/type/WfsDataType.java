@@ -26,6 +26,9 @@ import model.data.DataType;
  */
 public class WfsDataType implements DataType {
 
+	@ApiModelProperty(required = true, value = "The type of data.", allowableValues = "wfs")
+	public String type;
+
 	@ApiModelProperty(value = "HTTP web address to the WFS endpoint.")
 	public String url;
 

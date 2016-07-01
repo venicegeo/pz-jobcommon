@@ -27,6 +27,9 @@ import model.data.DataType;
  */
 public class TextDataType implements DataType {
 
+	@ApiModelProperty(required = true, value = "The type of data.", allowableValues = "text")
+	public String type;
+
 	@ApiModelProperty(value = "The text content of the data.")
 	public String content;
 

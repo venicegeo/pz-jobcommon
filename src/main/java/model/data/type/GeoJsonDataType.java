@@ -29,6 +29,9 @@ import model.data.location.FileLocation;
  */
 public class GeoJsonDataType implements DataType, FileRepresentation {
 
+	@ApiModelProperty(required = true, value = "The type of data.", allowableValues = "geojson")
+	public String type;
+
 	@ApiModelProperty(value = "The name of the database table holding the data.")
 	public String databaseTableName;
 

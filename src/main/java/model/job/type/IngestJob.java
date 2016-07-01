@@ -32,6 +32,9 @@ import model.job.PiazzaJobType;
 @ApiModel("LoadJob")
 public class IngestJob implements PiazzaJobType {
 
+	@ApiModelProperty(required = true, value = "The type of job.", allowableValues = "ingest")
+	public String type;
+
 	@ApiModelProperty(required = true, value = "The Description of the Data being loaded, including metadata, and the path to the data.")
 	public DataResource data;
 
