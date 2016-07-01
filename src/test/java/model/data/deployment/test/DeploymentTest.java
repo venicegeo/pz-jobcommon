@@ -48,7 +48,7 @@ public class DeploymentTest {
 		String serialized = mapper.writeValueAsString(mockDeployment);
 		Deployment deployment = mapper.readValue(serialized, Deployment.class);
 		// Verify
-		assertTrue(deployment.getId().equals(mockDeployment.getId()));
+		assertTrue(deployment.getDeploymentId().equals(mockDeployment.getDeploymentId()));
 		assertTrue(deployment.getDataId().equals(mockDeployment.getDataId()));
 		assertTrue(deployment.getPort().equals(mockDeployment.getPort()));
 		assertTrue(deployment.getHost().equals(mockDeployment.getHost()));
@@ -71,6 +71,6 @@ public class DeploymentTest {
 		// Verify
 		assertTrue(lease.getDeploymentId().equals(mockLease.getDeploymentId()));
 		assertTrue(lease.getExpirationDate().equals(mockLease.getExpirationDate()));
-		assertTrue(lease.getId().equals(mockLease.getId()));
+		assertTrue(lease.getLeaseId().equals(mockLease.getLeaseId()));
 	}
 }
