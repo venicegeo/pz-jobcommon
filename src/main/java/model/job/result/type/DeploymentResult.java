@@ -15,6 +15,7 @@
  **/
 package model.job.result.type;
 
+import io.swagger.annotations.ApiModelProperty;
 import model.data.deployment.Deployment;
 import model.job.result.ResultType;
 
@@ -27,6 +28,7 @@ import model.job.result.ResultType;
  */
 public class DeploymentResult implements ResultType {
 
+	@ApiModelProperty(value = "Object containing metadata regarding a Piazza Deployment.", required = true)
 	public Deployment deployment;
 
 	public DeploymentResult() {

@@ -15,6 +15,7 @@
  **/
 package model.job.result.type;
 
+import io.swagger.annotations.ApiModelProperty;
 import model.job.result.ResultType;
 
 /**
@@ -24,6 +25,8 @@ import model.job.result.ResultType;
  * 
  */
 public class TextResult implements ResultType {
+	
+	@ApiModelProperty(value = "The text content of the data.", required = true)
 	public String text;
 
 	public TextResult() {

@@ -18,6 +18,7 @@ package model.response;
 import io.swagger.annotations.ApiModelProperty;
 import model.job.Job;
 import model.job.JobProgress;
+import model.job.result.ResultType;
 import model.response.JobResponse;
 
 /**
@@ -30,8 +31,8 @@ import model.response.JobResponse;
  */
 public class JobStatusResponse extends JobResponse {
 
-	@ApiModelProperty(value = "A reference to the Result of the Job. This could be a Resource ID, or a Service ID, in certain cases. Or perhaps an error if the Job encountered an error during processing.")
-	public Object result;
+	@ApiModelProperty(value = "A reference to the Result of the Job. This could be a Resource ID, or a Service ID, in certain cases. Or perhaps an error if the Job encountered an error during processing.", dataType = "model.swagger.SwaggerResultType")
+	public ResultType result;
 
 	@ApiModelProperty(value = "The status of the Job. Submitted, Running, Success, Error, or Failure.", required = true)
 	public String status;

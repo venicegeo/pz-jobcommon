@@ -15,6 +15,7 @@
  **/
 package model.job.result.type;
 
+import io.swagger.annotations.ApiModelProperty;
 import model.job.result.ResultType;
 
 /**
@@ -27,6 +28,7 @@ import model.job.result.ResultType;
  */
 public class DataResult implements ResultType {
 
+	@ApiModelProperty(value = "The unique ID of the data resource.", required = true)
 	public String dataId;
 
 	public DataResult() {

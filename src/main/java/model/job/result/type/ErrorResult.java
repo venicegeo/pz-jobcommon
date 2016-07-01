@@ -15,6 +15,7 @@
  **/
 package model.job.result.type;
 
+import io.swagger.annotations.ApiModelProperty;
 import model.job.result.ResultType;
 
 /**
@@ -25,7 +26,11 @@ import model.job.result.ResultType;
  * 
  */
 public class ErrorResult implements ResultType {
+	
+	@ApiModelProperty(value = "A description of the error describing the failure.", required = true)
 	public String message;
+	
+	@ApiModelProperty(value = "Specific details regarding the error.")
 	public String details;
 
 	public ErrorResult() {
