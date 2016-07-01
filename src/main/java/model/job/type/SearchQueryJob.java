@@ -25,7 +25,6 @@ import model.job.PiazzaJobType;
  * 
  */
 public class SearchQueryJob implements PiazzaJobType {
-	public final String type = "search-query";
 	/**
 	 * Hunk-o-memory for serialization of input DSL
 	 */
@@ -33,10 +32,6 @@ public class SearchQueryJob implements PiazzaJobType {
 
 	public SearchQueryJob() {
 
-	}
-
-	public String getType() {
-		return type;
 	}
 
 	public Object getData() {

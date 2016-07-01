@@ -15,6 +15,7 @@
  **/
 package model.job.result.type;
 
+import io.swagger.annotations.ApiModelProperty;
 import model.job.result.ResultType;
 
 /**
@@ -25,7 +26,8 @@ import model.job.result.ResultType;
  * 
  */
 public class FileResult implements ResultType {
-	public final String type = "file";
+	
+	@ApiModelProperty(value = "The unique ID of the data resource.", required = true)	
 	public String dataId;
 
 	/**
@@ -45,10 +47,6 @@ public class FileResult implements ResultType {
 	 */
 	public FileResult(String dataId) {
 		this.dataId = dataId;
-	}
-
-	public String getType() {
-		return type;
 	}
 
 	public String getDataId() {

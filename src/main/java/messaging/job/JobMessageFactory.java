@@ -193,8 +193,8 @@ public class JobMessageFactory {
 	public static ProducerRecord<String, String> getWorkerJobCreateMessage(Job job, String space)
 			throws JsonProcessingException {
 		ObjectMapper mapper = new ObjectMapper();
-		System.out.println(job.jobType.getType());
-		return new ProducerRecord<String, String>(String.format("%s-%s", job.jobType.getType(), space), job.getJobId(),
+		System.out.println(job.jobType.getClass().getSimpleName());
+		return new ProducerRecord<String, String>(String.format("%s-%s", job.jobType.getClass().getSimpleName(), space), job.getJobId(),
 				mapper.writeValueAsString(job));
 	}
 

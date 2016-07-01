@@ -27,11 +27,6 @@ public class LiteralDataType implements DataType {
 		DOUBLE, FLOAT, SHORT, LONG, BYTE, CHAR, BOOLEAN, STRING
 	};
 
-	public static final String TYPE = "literal";
-
-	@ApiModelProperty(value = "The type of data.", required = true, allowableValues = "literal")
-	public final String type = "literal";
-
 	@ApiModelProperty(value = "")
 	private LITERAL literalType = LITERAL.STRING;
 
@@ -39,8 +34,8 @@ public class LiteralDataType implements DataType {
 	private String value = "";
 
 	@ApiModelProperty(value = "The media type of the stored data")
-	public String mimeType;	
-	
+	public String mimeType;
+
 	public LITERAL getLiteralType() {
 		return literalType;
 	}
@@ -55,10 +50,6 @@ public class LiteralDataType implements DataType {
 
 	public void setValue(String value) {
 		this.value = value;
-	}
-
-	public String getType() {
-		return type;
 	}
 
 	public String getMimeType() {

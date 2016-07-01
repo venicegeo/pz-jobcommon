@@ -43,9 +43,6 @@ public class AccessJob implements PiazzaJobType {
 	public static final String ACCESS_TYPE_GEOSERVER = "geoserver";
 	@JsonIgnore
 	public static final String ACCESS_TYPE_FILE = "file";
-
-	@ApiModelProperty(value = "The type of job.", required = true, allowableValues = "access")		
-	public final String type = "access";
 	
 	@ApiModelProperty(value = "The ID of the subject data.")
 	public String dataId;
@@ -58,10 +55,6 @@ public class AccessJob implements PiazzaJobType {
 
 	public AccessJob(String dataId) {
 		this.dataId = dataId;
-	}
-
-	public String getType() {
-		return type;
 	}
 
 	public String getDataId() {

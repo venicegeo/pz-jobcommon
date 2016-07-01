@@ -50,7 +50,7 @@ public class JobResultTest {
 		String serialized = mapper.writeValueAsString(input);
 		DataResult output = mapper.readValue(serialized, DataResult.class);
 		assertTrue(input.getDataId().equals(output.getDataId()));
-		assertTrue(input.getType().equals(output.getType()));
+		assertTrue(input.getClass().getSimpleName().equals(output.getClass().getSimpleName()));
 	}
 
 	/**
@@ -68,7 +68,7 @@ public class JobResultTest {
 		DeploymentResult output = mapper.readValue(serialized, DeploymentResult.class);
 
 		// Verify
-		assertTrue(input.getType().equals(output.getType()));
+		assertTrue(input.getClass().getSimpleName().equals(output.getClass().getSimpleName()));
 		assertTrue(input.getDeployment().getCapabilitiesUrl().equals(output.getDeployment().getCapabilitiesUrl()));
 		assertTrue(input.getDeployment().getDataId().equals(output.getDeployment().getDataId()));
 		assertTrue(input.getDeployment().getHost().equals(output.getDeployment().getHost()));
@@ -87,7 +87,7 @@ public class JobResultTest {
 		input.setMessage("An Error");
 		String serialized = mapper.writeValueAsString(input);
 		ErrorResult output = mapper.readValue(serialized, ErrorResult.class);
-		assertTrue(input.getType().equals(output.getType()));
+		assertTrue(input.getClass().getSimpleName().equals(output.getClass().getSimpleName()));
 		assertTrue(input.getDetails().equals(output.getDetails()));
 		assertTrue(input.getMessage().equals(output.getMessage()));
 	}
@@ -101,7 +101,7 @@ public class JobResultTest {
 		input.dataId = "123456";
 		String serialized = mapper.writeValueAsString(input);
 		FileResult output = mapper.readValue(serialized, FileResult.class);
-		assertTrue(input.getType().equals(output.getType()));
+		assertTrue(input.getClass().getSimpleName().equals(output.getClass().getSimpleName()));
 		assertTrue(input.getDataId().equals(output.getDataId()));
 	}
 
@@ -114,7 +114,7 @@ public class JobResultTest {
 		input.setJobId("654321");
 		String serialized = mapper.writeValueAsString(input);
 		JobResult output = mapper.readValue(serialized, JobResult.class);
-		assertTrue(input.getType().equals(output.getType()));
+		assertTrue(input.getClass().getSimpleName().equals(output.getClass().getSimpleName()));
 		assertTrue(output.getJobId().equals("654321"));
 	}
 
@@ -126,7 +126,7 @@ public class JobResultTest {
 		TextResult input = new TextResult("Success");
 		String serialized = mapper.writeValueAsString(input);
 		TextResult output = mapper.readValue(serialized, TextResult.class);
-		assertTrue(input.getType().equals(output.getType()));
+		assertTrue(input.getClass().getSimpleName().equals(output.getClass().getSimpleName()));
 		assertTrue(output.getText().equals("Success"));
 		input.setText("Error");
 		serialized = mapper.writeValueAsString(input);

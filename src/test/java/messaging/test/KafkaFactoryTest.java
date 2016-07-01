@@ -94,7 +94,7 @@ public class KafkaFactoryTest {
 
 		// Test Worker Job Creation
 		record = JobMessageFactory.getWorkerJobCreateMessage(mockJob, "TEST");
-		assertTrue(record.topic().equals(mockJob.jobType.getType() + "-TEST"));
+		assertTrue(record.topic().equals(mockJob.jobType.getClass().getSimpleName() + "-TEST"));
 		assertTrue(record.key().equals("123456"));
 
 		// Test deserialized helper method

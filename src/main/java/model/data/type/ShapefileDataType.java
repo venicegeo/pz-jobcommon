@@ -31,11 +31,6 @@ import model.data.location.FileLocation;
  */
 public class ShapefileDataType implements DataType, FileRepresentation {
 
-	public static final String TYPE = "shapefile";
-
-	@ApiModelProperty(value = "The type of data.", required = true, allowableValues = "shapefile")
-	public final String type = "shapefile";
-
 	@ApiModelProperty(value = "The PostGIS table name that contains the Shapefile data.")
 	public String databaseTableName;
 
@@ -55,10 +50,6 @@ public class ShapefileDataType implements DataType, FileRepresentation {
 
 	public void setMimeType(String mimeType) {
 		this.mimeType = mimeType;
-	}
-
-	public String getType() {
-		return type;
 	}
 
 	/**

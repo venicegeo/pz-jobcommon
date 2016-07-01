@@ -54,7 +54,7 @@ public class DataTypeTest {
 		String serialized = mapper.writeValueAsString(input);
 		BodyDataType output = mapper.readValue(serialized, BodyDataType.class);
 		assertTrue(input.getContent().equals(output.getContent()));
-		assertTrue(input.getType().equals(output.getType()));
+		assertTrue(input.getClass().getSimpleName().equals(output.getClass().getSimpleName()));
 	}
 
 	/**
@@ -71,7 +71,7 @@ public class DataTypeTest {
 		assertTrue(input.getGeoJsonContent().equals(output.getGeoJsonContent()));
 		assertTrue(output.getLocation() == null);
 		assertTrue(input.getMimeType().equals(output.getMimeType()));
-		assertTrue(input.getType().equals(output.getType()));
+		assertTrue(input.getClass().getSimpleName().equals(output.getClass().getSimpleName()));
 	}
 
 	/**
@@ -97,7 +97,7 @@ public class DataTypeTest {
 		((FolderShare) input.location).filePath = "test/test.laz";
 		String serialized = mapper.writeValueAsString(input);
 		PointCloudDataType output = mapper.readValue(serialized, PointCloudDataType.class);
-		assertTrue(input.getType().equals(output.getType()));
+		assertTrue(input.getClass().getSimpleName().equals(output.getClass().getSimpleName()));
 		assertTrue(output.getLocation() != null);
 		assertTrue(((FolderShare) input.getLocation()).getFilePath().equals(
 				((FolderShare) output.getLocation()).getFilePath()));
@@ -131,7 +131,7 @@ public class DataTypeTest {
 		input.location = location;
 		String serialized = mapper.writeValueAsString(input);
 		RasterDataType output = mapper.readValue(serialized, RasterDataType.class);
-		assertTrue(input.getType().equals(output.getType()));
+		assertTrue(input.getClass().getSimpleName().equals(output.getClass().getSimpleName()));
 		assertTrue(((FolderShare) input.getLocation()).getFilePath().equals(
 				((FolderShare) output.getLocation()).getFilePath()));
 	}
@@ -146,7 +146,7 @@ public class DataTypeTest {
 		input.setMimeType("binary");
 		String serialized = mapper.writeValueAsString(input);
 		ShapefileDataType output = mapper.readValue(serialized, ShapefileDataType.class);
-		assertTrue(input.getType().equals(output.getType()));
+		assertTrue(input.getClass().getSimpleName().equals(output.getClass().getSimpleName()));
 		assertTrue(input.getDatabaseTableName().equals(output.getDatabaseTableName()));
 		assertTrue(input.getMimeType().equals(output.getMimeType()));
 	}
@@ -161,7 +161,7 @@ public class DataTypeTest {
 		input.mimeType = "text/html";
 		String serialized = mapper.writeValueAsString(input);
 		TextDataType output = mapper.readValue(serialized, TextDataType.class);
-		assertTrue(input.getType().equals(output.getType()));
+		assertTrue(input.getClass().getSimpleName().equals(output.getClass().getSimpleName()));
 		assertTrue(input.getContent().equals(output.getContent()));
 		assertTrue(input.getMimeType().equals(output.getMimeType()));
 	}
@@ -175,7 +175,7 @@ public class DataTypeTest {
 		input.content = "parameter";
 		String serialized = mapper.writeValueAsString(input);
 		URLParameterDataType output = mapper.readValue(serialized, URLParameterDataType.class);
-		assertTrue(input.getType().equals(output.getType()));
+		assertTrue(input.getClass().getSimpleName().equals(output.getClass().getSimpleName()));
 		assertTrue(input.getContent().equals(output.getContent()));
 	}
 

@@ -27,11 +27,6 @@ import model.data.DataType;
  */
 public class TextDataType implements DataType {
 
-	public static final String TYPE = "text";
-
-	@ApiModelProperty(value = "The type of data.", required = true, allowableValues = "text")
-	public final String type = "text";
-
 	@ApiModelProperty(value = "The text content of the data.")
 	public String content;
 
@@ -40,10 +35,6 @@ public class TextDataType implements DataType {
 
 	public TextDataType() {
 
-	}
-
-	public String getType() {
-		return type;
 	}
 
 	public String getContent() {

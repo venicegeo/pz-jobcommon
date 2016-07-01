@@ -44,18 +44,20 @@ import model.data.type.WfsDataType;
  * 
  */
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "type")
-@JsonSubTypes({ @Type(value = WfsDataType.class, name = "wfs"), @Type(value = TextDataType.class, name = "text"),
-		@Type(value = BodyDataType.class, name = "body"), @Type(value = LiteralDataType.class, name = "literal"),
-		@Type(value = URLParameterDataType.class, name = "urlparameter"),
+@JsonSubTypes({ 
+		@Type(value = BodyDataType.class, name = "body"), 
+		@Type(value = GeoJsonDataType.class, name = "geojson"),		
+		@Type(value = LiteralDataType.class, name = "literal"),
+		@Type(value = PointCloudDataType.class, name = "pointcloud"),
+		@Type(value = PostGISDataType.class, name = "postgis"), 
 		@Type(value = RasterDataType.class, name = "raster"),
 		@Type(value = ShapefileDataType.class, name = "shapefile"),
-		@Type(value = PostGISDataType.class, name = "postgis"), @Type(value = GeoJsonDataType.class, name = "geojson"),
-		@Type(value = PointCloudDataType.class, name = "pointcloud") })
+		@Type(value = TextDataType.class, name = "text"),		
+		@Type(value = URLParameterDataType.class, name = "urlparameter"),
+		@Type(value = WfsDataType.class, name = "wfs")})
 @JsonInclude(Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
 public interface DataType {
-
-	public String getType();
 
 	public String getMimeType();
 }

@@ -15,6 +15,7 @@
  **/
 package model.job.result.type;
 
+import io.swagger.annotations.ApiModelProperty;
 import model.job.result.ResultType;
 
 /**
@@ -28,7 +29,8 @@ import model.job.result.ResultType;
  * 
  */
 public class JobResult implements ResultType {
-	public String type = "job";
+	
+	@ApiModelProperty(value = "The ID of the Job referenced in the request.", required = true)
 	public String jobId;
 
 	public JobResult() {
@@ -36,10 +38,6 @@ public class JobResult implements ResultType {
 
 	public JobResult(String jobId) {
 		this.jobId = jobId;
-	}
-
-	public String getType() {
-		return type;
 	}
 
 	public String getJobId() {

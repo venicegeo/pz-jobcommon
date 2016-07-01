@@ -32,9 +32,6 @@ import model.job.PiazzaJobType;
 @ApiModel("LoadJob")
 public class IngestJob implements PiazzaJobType {
 
-	@ApiModelProperty(required = true, value = "Legacy. This will eventually be removed.")
-	public final String type = "ingest";
-
 	@ApiModelProperty(required = true, value = "The Description of the Data being loaded, including metadata, and the path to the data.")
 	public DataResource data;
 
@@ -43,10 +40,6 @@ public class IngestJob implements PiazzaJobType {
 
 	public IngestJob() {
 
-	}
-
-	public String getType() {
-		return type;
 	}
 
 	public DataResource getData() {
