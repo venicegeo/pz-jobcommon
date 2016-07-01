@@ -26,9 +26,6 @@ public class ExecuteServiceJob implements PiazzaJobType {
 	@ApiModelProperty(value = "The JobID created for executing the service.")
 	public String jobId = null;
 
-	@ApiModelProperty(value = "The type of job.", required = true, allowableValues = "execute-service")	
-	public final String type = "execute-service";
-
 	@ApiModelProperty(value = "The parameter inputs for Service execution.", required = true)
 	public ExecuteServiceData data;
 
@@ -38,10 +35,6 @@ public class ExecuteServiceJob implements PiazzaJobType {
 
 	public ExecuteServiceJob(String jobId) {
 		this.jobId = jobId;
-	}
-
-	public String getType() {
-		return type;
 	}
 
 	public String getJobId() {

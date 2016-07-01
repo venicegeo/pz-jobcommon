@@ -50,7 +50,7 @@ public class JobStatusResponse extends JobResponse {
 		result = job.result;
 		status = job.status;
 		progress = job.progress;
-		jobType = job.getJobType().getType();
+		jobType = job.getJobType().getClass().getSimpleName();
 		submittedBy = job.submitterUserName;
 	}
 

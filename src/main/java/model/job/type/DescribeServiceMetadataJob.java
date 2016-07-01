@@ -20,7 +20,6 @@ import model.job.PiazzaJobType;
 public class DescribeServiceMetadataJob implements PiazzaJobType {
 
 	public String jobId = null;
-	public final String type = "read-service";
 	public String serviceID;
 
 	public DescribeServiceMetadataJob() {
@@ -37,10 +36,5 @@ public class DescribeServiceMetadataJob implements PiazzaJobType {
 
 	public void setJobId(String jobId) {
 		this.jobId = jobId;
-	}
-
-	public String getType() {
-
-		return type;
 	}
 }

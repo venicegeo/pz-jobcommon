@@ -20,7 +20,6 @@ import model.service.SearchCriteria;
 
 public class SearchServiceJob implements PiazzaJobType {
 	public String jobId = null;
-	public final String type = "search-service";
 	public SearchCriteria data;
 
 	public SearchServiceJob() {
@@ -29,10 +28,6 @@ public class SearchServiceJob implements PiazzaJobType {
 
 	public SearchServiceJob(String jobId) {
 		this.jobId = jobId;
-	}
-
-	public String getType() {
-		return type;
 	}
 
 	public String getJobId() {

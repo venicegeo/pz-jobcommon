@@ -28,15 +28,10 @@ import model.job.PiazzaJobType;
  * 
  */
 public class SearchMetadataIngestJob implements PiazzaJobType {
-	public final String type = "search-metadata-ingest";
 	public DataResource data;
 
 	public SearchMetadataIngestJob() {
 
-	}
-
-	public String getType() {
-		return type;
 	}
 
 	public DataResource getData() {

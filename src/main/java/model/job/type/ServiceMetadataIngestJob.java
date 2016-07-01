@@ -29,15 +29,10 @@ import model.service.metadata.Service;
  */
 public class ServiceMetadataIngestJob implements PiazzaJobType {
 
-	public final String type = "servicemetadata-ingest";
 	public Service data;
 
 	public ServiceMetadataIngestJob() {
 
-	}
-
-	public String getType() {
-		return type;
 	}
 
 	public Service getData() {

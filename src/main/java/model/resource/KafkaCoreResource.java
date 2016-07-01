@@ -35,5 +35,4 @@ public class KafkaCoreResource {
 	public void setHost(String host) {
 		this.host = host;
 	}
-
 }

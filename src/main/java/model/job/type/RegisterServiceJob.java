@@ -19,7 +19,6 @@ import model.job.PiazzaJobType;
 import model.service.metadata.Service;
 
 public class RegisterServiceJob implements PiazzaJobType {
-	public final String type = "register-service";
 	public Service data;
 
 	public RegisterServiceJob() {
@@ -28,9 +27,5 @@ public class RegisterServiceJob implements PiazzaJobType {
 
 	public RegisterServiceJob(Service data) {
 		this.data = data;
-	}
-
-	public String getType() {
-		return type;
 	}
 }
