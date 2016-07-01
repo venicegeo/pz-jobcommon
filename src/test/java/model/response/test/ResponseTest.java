@@ -64,9 +64,9 @@ public class ResponseTest {
 	public void testAlert() throws IOException {
 		List<Alert> alerts = new ArrayList<Alert>();
 		Alert alert = new Alert();
-		alert.event_id = "123456";
-		alert.id = "654321";
-		alert.trigger_id = "123456T";
+		alert.eventId = "123456";
+		alert.alertId = "654321";
+		alert.triggerId = "123456T";
 		alerts.add(alert);
 		AlertListResponse input = new AlertListResponse(alerts, pagination);
 
@@ -75,9 +75,9 @@ public class ResponseTest {
 
 		assertTrue(output.getData().size() == 1);
 		assertTrue(output.getPagination().getCount().equals(1));
-		assertTrue(output.getData().get(0).event_id.equals("123456"));
-		assertTrue(output.getData().get(0).id.equals("654321"));
-		assertTrue(output.getData().get(0).trigger_id.equals("123456T"));
+		assertTrue(output.getData().get(0).eventId.equals("123456"));
+		assertTrue(output.getData().get(0).alertId.equals("654321"));
+		assertTrue(output.getData().get(0).triggerId.equals("123456T"));
 	}
 
 	/**
@@ -115,7 +115,7 @@ public class ResponseTest {
 		deployment.setDataId("123456");
 		deployment.setHost("localhost");
 		deployment.setPort("8080");
-		deployment.setId("123456");
+		deployment.setDeploymentId("123456");
 		deployment.setLayer("Test");
 		DeploymentResponse deploymentInput = new DeploymentResponse(deployment);
 
@@ -124,7 +124,7 @@ public class ResponseTest {
 		DeploymentResponse deploymentOutput = mapper.readValue(serialized, DeploymentResponse.class);
 		assertTrue(deploymentOutput.deployment.getCapabilitiesUrl().equals(deployment.getCapabilitiesUrl()));
 		assertTrue(deploymentOutput.deployment.getHost().equals(deployment.getHost()));
-		assertTrue(deploymentOutput.deployment.getId().equals(deployment.getId()));
+		assertTrue(deploymentOutput.deployment.getDeploymentId().equals(deployment.getDeploymentId()));
 
 		// Test List Response
 		List<Deployment> list = new ArrayList<Deployment>();

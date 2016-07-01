@@ -43,7 +43,7 @@ import io.swagger.annotations.ApiModelProperty;
 public class EventType {
 
 	@ApiModelProperty(value = "The unique identifier of this Event Type.", required = true)
-	public String id;
+	public String eventTypeId;
 
 	@ApiModelProperty(value = "The human-readable name for this Event Type.")
 	public String name;

@@ -50,10 +50,10 @@ import io.swagger.annotations.ApiModelProperty;
 public class Event {
 
 	@ApiModelProperty(value = "The unique identifier for this Event.", required = true)
-	public String id;
+	public String eventId;
 
 	@ApiModelProperty(value = "The unique identifier of the Event Type whose schema this Event conforms to.", required = true)
-	public String eventtype_id;
+	public String eventTypeId;
 
 	@ApiModelProperty(value = "The date and time that the Event has generated.", required = true)
 	@JsonIgnore
