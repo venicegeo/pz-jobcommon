@@ -15,16 +15,12 @@
  **/
 package model.service.metadata;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 import io.swagger.annotations.ApiModelProperty;
 
 import model.job.metadata.ResourceMetadata;
 
-@JsonInclude(Include.NON_NULL)
-@JsonIgnoreProperties(ignoreUnknown = true)
+
 public class Service {
 
 	@ApiModelProperty(required = true, value = "The unique identifier of the user service.")
@@ -33,7 +29,7 @@ public class Service {
 	@ApiModelProperty(required = true, value = "The URL to the user service to be executed.")
 	private String url;
 
-	@ApiModelProperty(required = true, value = "URL to the schema or contract to interface with the service, such as a Swagger file, or documentation.")
+	@ApiModelProperty(required = false, value = "URL to the schema or contract to interface with the service, such as a Swagger file, or documentation.")
 	private String contractUrl;
 
 	@ApiModelProperty(required = true, value = "The HTTP method used to invoke this user service.")
