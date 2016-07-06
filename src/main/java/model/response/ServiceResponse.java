@@ -27,13 +27,13 @@ import model.service.metadata.Service;
 public class ServiceResponse extends PiazzaResponse {
 
 	@ApiModelProperty(value = "Object containing information regarding a Piazza Service.")
-	public Service service;
+	public Service data;
 
 	public ServiceResponse() {
 
 	}
 
 	public ServiceResponse(Service service) {
-		this.service = service;
+		this.data = service;
 	}
 }
