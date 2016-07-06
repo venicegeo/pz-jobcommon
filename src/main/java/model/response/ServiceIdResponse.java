@@ -38,7 +38,7 @@ public class ServiceIdResponse extends PiazzaResponse {
 	/**
 	 * Used to wrap the Service ID in an annotatable class.
 	 */
-	private class ServiceIdData {
+	public class ServiceIdData {
 		@ApiModelProperty(value = "The ID of the Service referenced in the request.")
 		private String serviceId;
 
