@@ -70,7 +70,7 @@ public class DeploymentTest {
 		Lease lease = mapper.readValue(serialized, Lease.class);
 		// Verify
 		assertTrue(lease.getDeploymentId().equals(mockLease.getDeploymentId()));
-		assertTrue(lease.getExpirationDate().equals(mockLease.getExpirationDate()));
+		assertTrue(lease.getExpiresOn().equals(mockLease.getExpiresOn()));
 		assertTrue(lease.getLeaseId().equals(mockLease.getLeaseId()));
 	}
 }
