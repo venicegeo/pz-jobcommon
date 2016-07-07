@@ -19,7 +19,6 @@ import io.swagger.annotations.ApiModelProperty;
 import model.job.Job;
 import model.job.JobProgress;
 import model.job.result.ResultType;
-import model.response.JobResponse;
 
 /**
  * Represents the Status and Results of a Piazza Job. This includes the
@@ -29,33 +28,49 @@ import model.response.JobResponse;
  * @author Patrick.Doody
  * 
  */
-public class JobStatusResponse extends JobResponse {
+public class JobStatusResponse extends PiazzaResponse {
 
-	@ApiModelProperty(value = "A reference to the Result of the Job. This could be a Resource ID, or a Service ID, in certain cases. Or perhaps an error if the Job encountered an error during processing.", dataType = "model.swagger.SwaggerResultType")
-	public ResultType result;
-
-	@ApiModelProperty(value = "The status of the Job. Submitted, Running, Success, Error, or Failure.", required = true)
-	public String status;
-
-	@ApiModelProperty(value = "Polymorphically describes the information defining what actions this Job should take.", required = true)
-	public String jobType;
-
-	@ApiModelProperty(value = "The name of the user who submitted the Job.", required = true)
-	public String submittedBy;
-
-	@ApiModelProperty(value = "Object containing metadata describing the current status of the Job.")
-	public JobProgress progress;
-
-	public JobStatusResponse(Job job) {
-		super(job.getJobId());
-		result = job.result;
-		status = job.status;
-		progress = job.progress;
-		jobType = job.getJobType().getClass().getSimpleName();
-		submittedBy = job.submitterUserName;
-	}
+	@ApiModelProperty(value = "Contains the Job Status Information.")
+	public JobStatusData data = new JobStatusData();
 
 	public JobStatusResponse() {
-
 	}
+
+	public JobStatusResponse(Job job) {
+		data.populateFromJob(job);
+	}
+
+	/**
+	 * Inner class to wrap the information related to a Job's status.
+	 *
+	 */
+	public class JobStatusData {
+		@ApiModelProperty(value = "A reference to the Result of the Job. This could be a Resource ID, or a Service ID, in certain cases. Or perhaps an error if the Job encountered an error during processing.", dataType = "model.swagger.SwaggerResultType")
+		public ResultType result;
+
+		@ApiModelProperty(value = "The status of the Job. Submitted, Running, Success, Error, or Failure.", required = true)
+		public String status;
+
+		@ApiModelProperty(value = "Polymorphically describes the information defining what actions this Job should take.", required = true)
+		public String jobType;
+
+		@ApiModelProperty(value = "The name of the user who submitted the Job.", required = true)
+		public String submittedBy;
+
+		@ApiModelProperty(value = "Object containing metadata describing the current status of the Job.")
+		public JobProgress progress;
+
+		@ApiModelProperty(value = "The ID of the Job.")
+		public String jobId;
+
+		public void populateFromJob(Job job) {
+			jobId = job.getJobId();
+			result = job.result;
+			status = job.status;
+			progress = job.progress;
+			jobType = job.getJobType().getClass().getSimpleName();
+			submittedBy = job.submitterUserName;
+		}
+	}
+
 }

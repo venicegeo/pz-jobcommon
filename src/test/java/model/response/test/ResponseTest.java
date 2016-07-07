@@ -122,9 +122,9 @@ public class ResponseTest {
 		// Test Deployment Response
 		String serialized = mapper.writeValueAsString(deploymentInput);
 		DeploymentResponse deploymentOutput = mapper.readValue(serialized, DeploymentResponse.class);
-		assertTrue(deploymentOutput.deployment.getCapabilitiesUrl().equals(deployment.getCapabilitiesUrl()));
-		assertTrue(deploymentOutput.deployment.getHost().equals(deployment.getHost()));
-		assertTrue(deploymentOutput.deployment.getDeploymentId().equals(deployment.getDeploymentId()));
+		assertTrue(deploymentOutput.data.getCapabilitiesUrl().equals(deployment.getCapabilitiesUrl()));
+		assertTrue(deploymentOutput.data.getHost().equals(deployment.getHost()));
+		assertTrue(deploymentOutput.data.getDeploymentId().equals(deployment.getDeploymentId()));
 
 		// Test List Response
 		List<Deployment> list = new ArrayList<Deployment>();
@@ -165,8 +165,8 @@ public class ResponseTest {
 		String serialized = mapper.writeValueAsString(input);
 		JobStatusResponse output = mapper.readValue(serialized, JobStatusResponse.class);
 
-		assertTrue(output.result == null);
-		assertTrue(output.status.equals(StatusUpdate.STATUS_SUCCESS));
+		assertTrue(output.data.result == null);
+		assertTrue(output.data.status.equals(StatusUpdate.STATUS_SUCCESS));
 	}
 
 	/**
@@ -186,7 +186,7 @@ public class ResponseTest {
 		// Test Single service response
 		String serialized = mapper.writeValueAsString(serviceInput);
 		ServiceResponse serviceOutput = mapper.readValue(serialized, ServiceResponse.class);
-		assertTrue(serviceOutput.service.getServiceId().equals("123456"));
+		assertTrue(serviceOutput.data.getServiceId().equals("123456"));
 
 		// Test service list response
 		List<Service> list = new ArrayList<Service>();
@@ -206,7 +206,7 @@ public class ResponseTest {
 		SuccessResponse input = new SuccessResponse("Success", "Testing");
 		String serialized = mapper.writeValueAsString(input);
 		SuccessResponse output = mapper.readValue(serialized, SuccessResponse.class);
-		assertTrue(output.getMessage().equals("Success"));
-		assertTrue(output.getOrigin().equals("Testing"));
+		assertTrue(output.data.getMessage().equals("Success"));
+		assertTrue(output.data.getOrigin().equals("Testing"));
 	}
 }
