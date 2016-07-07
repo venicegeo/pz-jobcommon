@@ -69,7 +69,7 @@ public class JobStatusResponse extends PiazzaResponse {
 			status = job.status;
 			progress = job.progress;
 			jobType = job.getJobType().getClass().getSimpleName();
-			submittedBy = job.submitterUserName;
+			submittedBy = job.createdBy;
 		}
 	}
 
