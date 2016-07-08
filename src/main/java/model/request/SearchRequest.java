@@ -15,10 +15,13 @@
  **/
 package model.request;
 
+import javax.validation.constraints.NotNull;
+
 import io.swagger.annotations.ApiModelProperty;
 
 public class SearchRequest {
 
 	@ApiModelProperty(value = "Elastic Search DSL Query 2.2, for details see https://www.elastic.co/guide/en/elasticsearch/reference/2.2/query-dsl.html", required = true)
+	@NotNull
 	public Object query;
 }

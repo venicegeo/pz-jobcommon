@@ -19,20 +19,24 @@ package model.service.metadata;
 import io.swagger.annotations.ApiModelProperty;
 
 import model.job.metadata.ResourceMetadata;
+import javax.validation.constraints.NotNull;
 
 
 public class Service {
 
-	@ApiModelProperty(required = true, value = "The unique identifier of the user service.")
+	@ApiModelProperty(required = false, value = "The unique identifier of the user service.")
 	private String serviceId;
 
 	@ApiModelProperty(required = true, value = "The URL to the user service to be executed.")
+	@NotNull
 	private String url;
 
 	@ApiModelProperty(required = false, value = "URL to the schema or contract to interface with the service, such as a Swagger file, or documentation.")
+	@NotNull
 	private String contractUrl;
 
 	@ApiModelProperty(required = true, value = "The HTTP method used to invoke this user service.")
+	@NotNull
 	public String method;
 
 	@ApiModelProperty(value = "Object of common metadata fields used to describe Data or Services within the Piazza system.")

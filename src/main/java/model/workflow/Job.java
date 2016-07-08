@@ -24,5 +24,6 @@ package model.workflow;
 // }
 
 public class Job {
+	
 	public String task;
 }

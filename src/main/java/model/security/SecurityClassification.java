@@ -25,7 +25,8 @@ import io.swagger.annotations.ApiModelProperty;
  */
 public class SecurityClassification {
 
-	@ApiModelProperty(value = "The security classification text of the respective data.")
+	// TODO Need to find appropriate customer Java class which exists to handle
+	@ApiModelProperty(value = "The security classification marking for the data")
 	private String classification;
 
 	public SecurityClassification() {

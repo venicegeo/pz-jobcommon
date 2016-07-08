@@ -15,6 +15,8 @@
  **/
 package model.workflow;
 
+import javax.validation.constraints.NotNull;
+
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
@@ -50,18 +52,23 @@ import model.request.PiazzaJobRequest;
 @JsonInclude(Include.NON_NULL)
 public class Trigger {
 
-	@ApiModelProperty(value = "The unique identifier for this Trigger.", required = true)
+	@ApiModelProperty(value = "The unique identifier for this Trigger", required = true)
+	@NotNull
 	public String triggerId;
 
-	@ApiModelProperty(value = "The human-readable description of what this Trigger intends to accomplish.")
+	@ApiModelProperty(value = "A description of what this Trigger intends to accomplish", required = true)
+	@NotNull
 	public String title;
 
-	@ApiModelProperty(value = "Defines the trigger conditions, the query replacements, and the Job to execute upon this object becoming Triggered.")
+	@ApiModelProperty(value = "Defines the Event Type to match and the query to run on events of that Event", required=true)
+	@NotNull
 	public Condition condition;
 
-	@ApiModelProperty(value = "The Template of the Job to be executed when the conditions are met.")
+	@ApiModelProperty(value = "The Template of the Job to be executed when the conditions are met", required=true)
+	@NotNull
 	public PiazzaJobRequest job;
 
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(value = "System generated Id", required=true)
+	@NotNull
 	public String percolationId;
 }

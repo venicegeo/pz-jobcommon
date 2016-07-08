@@ -17,6 +17,8 @@ package model.workflow;
 
 import java.util.Map;
 
+import javax.validation.constraints.NotNull;
+
 import org.joda.time.DateTime;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -49,17 +51,21 @@ import io.swagger.annotations.ApiModelProperty;
 @JsonInclude(Include.NON_NULL)
 public class Event {
 
-	@ApiModelProperty(value = "The unique identifier for this Event.", required = true)
+	@ApiModelProperty(value = "The unique Id for this Event", required = true)
+	@NotNull
 	public String eventId;
 
-	@ApiModelProperty(value = "The unique identifier of the Event Type whose schema this Event conforms to.", required = true)
+	@ApiModelProperty(value = "The unique Id of the Event Type whose schema this Event conforms to", required = true)
+	@NotNull
 	public String eventTypeId;
 
-	@ApiModelProperty(value = "The date and time that the Event has generated.", required = true)
+	@ApiModelProperty(value = "The date and time that the Event was generated", required = true)
 	@JsonIgnore
+	@NotNull
 	public DateTime date;
 
-	@ApiModelProperty(value = "The populated values for the Key-value pairs defined by the Event Type's 'mapping' dictionary. Each value in this dictionary must be populated here under this 'data' property.")
+	@ApiModelProperty(value = "The populated values for the Key-value pairs defined by the Event Type's 'mapping' dictionary. Each value in this dictionary must be populated here under this 'data' property.", required = true)
+	@NotNull
 	public Map<String, Object> data;
 
 	@JsonProperty("date")
