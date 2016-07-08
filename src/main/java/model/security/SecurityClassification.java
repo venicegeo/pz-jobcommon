@@ -15,6 +15,8 @@
  **/
 package model.security;
 
+import javax.validation.constraints.NotNull;
+
 import io.swagger.annotations.ApiModelProperty;
 
 /**
@@ -27,6 +29,7 @@ public class SecurityClassification {
 
 	// TODO Need to find appropriate customer Java class which exists to handle
 	@ApiModelProperty(value = "The security classification marking for the data")
+	@NotNull
 	private String classification;
 
 	public SecurityClassification() {
