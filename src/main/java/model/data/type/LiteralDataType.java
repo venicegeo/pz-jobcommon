@@ -18,6 +18,8 @@
  */
 package model.data.type;
 
+import javax.validation.constraints.NotNull;
+
 import io.swagger.annotations.ApiModelProperty;
 import model.data.DataType;
 
@@ -27,13 +29,14 @@ public class LiteralDataType implements DataType {
 		DOUBLE, FLOAT, SHORT, LONG, BYTE, CHAR, BOOLEAN, STRING
 	};
 
-	@ApiModelProperty(required = true, value = "The type of data.", allowableValues = "literal")
+	@ApiModelProperty(required = true, value = "The type of data", allowableValues = "literal")
+	@NotNull
 	public String type;
 
 	@ApiModelProperty(value = "")
 	private LITERAL literalType = LITERAL.STRING;
 
-	@ApiModelProperty(value = "The content of the data.")
+	@ApiModelProperty(value = "The content of the data")
 	private String value = "";
 
 	@ApiModelProperty(value = "The media type of the stored data")

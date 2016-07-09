@@ -19,6 +19,9 @@ import java.lang.reflect.Method;
 import java.util.List;
 import java.util.Map;
 
+import javax.validation.constraints.NotNull;
+
+import model.data.type.LiteralDataType.LITERAL;
 import model.resource.NumericKeyValue;
 import model.resource.TextKeyValue;
 import model.security.SecurityClassification;
@@ -35,70 +38,81 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * Common Metadata fields used to describe Data or Services within the Piazza
+ * Common Meta-data fields used to describe Data or Resources (e.g. Services, etc.)  within the Piazza
  * system. This object should be generic enough to be used to attach common
  * metadata fields to any object stored in the Piazza system.
  * 
- * @author Patrick.Doody
+ * @author mlynum & Patrick.Doody
  * 
  */
 @JsonInclude(Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ResourceMetadata {
 
-	@ApiModelProperty(value = "Human-readable name of the object.")
+
+	
+	@ApiModelProperty(value = "Human-readable name of the resource")
 	public String name;
 
-	@ApiModelProperty(value = "Human-readable description of the object.")
+	@ApiModelProperty(value = "Human-readable description of the resource")
 	public String description;
 
 	@ApiModelProperty(value = "In case of ComplexData, Format defines the allowed input representation")
 	public String format;
 
-	@ApiModelProperty(value = "Quality level of the service (Production, Development)")
+	@ApiModelProperty(value = "Quality level of the resource (Production, Development)")
 	public String qos;
+	
+	// Values indicating the status of the resource
+	public enum STATUS_TYPE {
+		ONLINE, OFFLINE, DEGRADED, FAILED
+	};
+	
+	@ApiModelProperty(value = "Status of the resource")
+	private STATUS_TYPE statusType;
+	
 
-	@ApiModelProperty(value = "String to describe the status (UP, UNAVAILABLE (something is going on), DOWN (It has been turned off)")
+	@ApiModelProperty(allowableValues = "status_type", value = "Describes the status of the resource(ONLINE, FAILED (The resoure has failed), DEGRADED (The resource is not performing well), OFFLINE (the resource has been turned off)")
 	public String availability;
 
-	@ApiModelProperty(value = "Keywords describing the service")
+	@ApiModelProperty(value = "Keywords describing the resource")
 	public String tags;
 
-	@ApiModelProperty(value = "Classification of the service")
+	@ApiModelProperty(value = "Classification of the resource", required = true)
 	public SecurityClassification classType;
 
-	@ApiModelProperty(value = "The date the service will be terminated. ")
+	@ApiModelProperty(value = "The date the service will be terminated ")
 	@JsonIgnore
 	public DateTime termDate;
 
-	@ApiModelProperty(value = "Is a client certificate required?   Could be a user certificate or computer certificate…")
+	@ApiModelProperty(value = "Indication on whether a client certificate required to access thie resource.   Could be a user certificate or computer certificate")
 	public Boolean clientCertRequired;
 
-	@ApiModelProperty(value = "Are credentials required to access this service?")
+	@ApiModelProperty(value = "Indication on whether credentials are required to access this resource")
 	public Boolean credentialsRequired;
 
-	@ApiModelProperty(value = "Is preauthorization required before using the service?  (e.g. do users need to sign a user agreement, etc.)")
+	@ApiModelProperty(value = "Indication on whether preauthorization is required before using the resource?  (e.g. do users need to sign a user agreement, etc.)")
 	public Boolean preAuthRequired;
 
-	@ApiModelProperty(value = "A list of networks where this data is available.")
+	@ApiModelProperty(value = "A list of networks names where this resource is available")
 	public String networkAvailable;
 
 	@ApiModelProperty(value = "Name, e-mail and phone number of point of contact (String concatenated together)")
 	public String contacts;
 
-	@ApiModelProperty(value = "Text explaining why this data is necessary.")
+	@ApiModelProperty(value = "Human readable reason on the status of the resource")
 	public String reason;
 
-	@ApiModelProperty(value = "The current version of the data.")
+	@ApiModelProperty(value = "The current version of the resource")
 	public String version;
 
-	@ApiModelProperty(value = "Username of the individual submitting the data.")
+	@ApiModelProperty(value = "Username of the individual submitting the resource")
 	public String createdBy;
 
-	@ApiModelProperty(value = "The date and time of data submission to Piazza.")
+	@ApiModelProperty(value = "The date and time of the resource submission to Piazza")
 	public String createdDate;
 
-	@ApiModelProperty(value = "A generic Map of String:String (key:value) pairs with additional metadata.")
+	@ApiModelProperty(value = "A generic Map of String:String (key:value) pairs with additional metadata")
 	public Map<String, String> metadata;
 
 	/*
@@ -234,6 +248,14 @@ public class ResourceMetadata {
 
 	public String getVersion() {
 		return version;
+	}
+	
+	public STATUS_TYPE getStatusType() {
+		return statusType;
+	}
+
+	public void setStatusType(STATUS_TYPE statusType) {
+		this.statusType = statusType;
 	}
 
 	public void setVersion(String version) {

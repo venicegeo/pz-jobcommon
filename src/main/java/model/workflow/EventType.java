@@ -17,6 +17,8 @@ package model.workflow;
 
 import java.util.Map;
 
+import javax.validation.constraints.NotNull;
+
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
@@ -42,12 +44,15 @@ import io.swagger.annotations.ApiModelProperty;
 @JsonInclude(Include.NON_NULL)
 public class EventType {
 
-	@ApiModelProperty(value = "The unique identifier of this Event Type.", required = true)
+	@ApiModelProperty(value = "The unique Id of this Event Type.", required = true)
+	@NotNull
 	public String eventTypeId;
 
-	@ApiModelProperty(value = "The human-readable name for this Event Type.")
+	@ApiModelProperty(value = "A human-readable name for this Event Type.")
+	@NotNull
 	public String name;
 
 	@ApiModelProperty(value = "The map of key-value pairs that define the properties of this Event Type. The key is the name of the property, and the value is the type of that property. Valid types are 'string' and 'integer'.")
+	@NotNull
 	public Map<String, String> mapping;
 }

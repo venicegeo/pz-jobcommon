@@ -17,6 +17,9 @@ package model.data;
 
 import model.job.metadata.ResourceMetadata;
 import model.job.metadata.SpatialMetadata;
+
+import javax.validation.constraints.NotNull;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
@@ -36,21 +39,21 @@ import io.swagger.annotations.ApiModelProperty;
  * @author Patrick.Doody
  * 
  */
-@JsonInclude(Include.NON_NULL)
-@JsonIgnoreProperties(ignoreUnknown = true)
 public class DataResource {
 
-	@ApiModelProperty(value = "The ID of the data to download.", required = true)
+	@ApiModelProperty(value = "The Id of the data to download", required = true)
+	@NotNull
 	public String dataId;
 
-	@ApiModelProperty(value = "Polymorphically defines the information specific to this Data Resource, based on its format.", required = true, dataType = "model.swagger.SwaggerDataType")
+	@ApiModelProperty(value = "Polymorphically defines the information specific to this Data Resource, based on its format", required = true, dataType = "model.swagger.SwaggerDataType")
+	@NotNull
 	@JsonProperty(required = true)
 	public DataType dataType;
 
-	@ApiModelProperty(value = "Object of spatial metadata fields associated with a Resource. Used to generically specify the bounding box and the spatial reference of a dataset.")
+	@ApiModelProperty(value = "Object of spatial metadata fields associated with a Resource. Used to generically specify the bounding box and the spatial reference of a dataset")
 	public SpatialMetadata spatialMetadata;
 
-	@ApiModelProperty(value = "Object of common metadata fields used to describe Data or Services within the Piazza system.")
+	@ApiModelProperty(value = "Object of common metadata fields used to describe Data or Services within the Piazza system")
 	public ResourceMetadata metadata;
 
 	public DataResource() {

@@ -15,6 +15,8 @@
  **/
 package model.data.type;
 
+import javax.validation.constraints.NotNull;
+
 import io.swagger.annotations.ApiModelProperty;
 import model.data.DataType;
 
@@ -27,13 +29,16 @@ import model.data.DataType;
  */
 public class TextDataType implements DataType {
 
-	@ApiModelProperty(required = true, value = "The type of data.", allowableValues = "text")
+	@ApiModelProperty(required = true, value = "The type of data", allowableValues = "text")
+	@NotNull
 	public String type;
 
-	@ApiModelProperty(value = "The text content of the data.")
+	@ApiModelProperty(value = "The text content of the data", required = true)
+	@NotNull
 	public String content;
 
-	@ApiModelProperty(value = "The media type of the stored data")
+	@NotNull
+	@ApiModelProperty(value = "The media type of the stored data.  Refer to http://www.iana.org for standard values", required = true)
 	public String mimeType;
 
 	public TextDataType() {

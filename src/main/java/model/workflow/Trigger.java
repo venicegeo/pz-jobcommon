@@ -52,23 +52,22 @@ import model.request.PiazzaJobRequest;
 @JsonInclude(Include.NON_NULL)
 public class Trigger {
 
-	@ApiModelProperty(value = "The unique identifier for this Trigger", required = true)
+	@ApiModelProperty(value = "The unique Id for this Trigger.", required = true)
 	@NotNull
 	public String triggerId;
 
-	@ApiModelProperty(value = "A description of what this Trigger intends to accomplish", required = true)
+	@ApiModelProperty(value = "The description of what this Trigger intends to accomplish.", required = true)
 	@NotNull
 	public String title;
 
-	@ApiModelProperty(value = "Defines the Event Type to match and the query to run on events of that Event", required=true)
+	@ApiModelProperty(value = "The Event Type to match and the query to run on events.", required=true)
 	@NotNull
 	public Condition condition;
 
-	@ApiModelProperty(value = "The Template of the Job to be executed when the conditions are met", required=true)
+	@ApiModelProperty(value = "The template of the Job to be executed when the conditions are met.", required=true)
 	@NotNull
 	public PiazzaJobRequest job;
 
-	@ApiModelProperty(value = "System generated Id", required=true)
-	@NotNull
+	@ApiModelProperty(value = "A system generated Id.")
 	public String percolationId;
 }
