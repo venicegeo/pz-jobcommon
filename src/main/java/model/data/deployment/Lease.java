@@ -41,7 +41,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 public class Lease {
 	public String leaseId;
 	public String deploymentId;
-	public String expirationDate;
+	public String expiresOn;
 
 	/**
 	 * Creates a new Deployment Lease.
@@ -57,13 +57,13 @@ public class Lease {
 	 *            The ID of this Lease
 	 * @param deploymentId
 	 *            The ID of the Deployment that this Lease allows access to
-	 * @param expirationDate
+	 * @param expiresOn
 	 *            The expiration date of this Lease.
 	 */
-	public Lease(String leaseId, String deploymentId, String expirationDate) {
+	public Lease(String leaseId, String deploymentId, String expiresOn) {
 		this.leaseId = leaseId;
 		this.deploymentId = deploymentId;
-		this.expirationDate = expirationDate;
+		this.expiresOn = expiresOn;
 	}
 
 	public String getLeaseId() {
@@ -82,11 +82,11 @@ public class Lease {
 		this.deploymentId = deploymentId;
 	}
 
-	public String getExpirationDate() {
-		return expirationDate;
+	public String getExpiresOn() {
+		return expiresOn;
 	}
 
-	public void setExpirationDate(String expirationDate) {
-		this.expirationDate = expirationDate;
+	public void setExpiresOn(String expirationDate) {
+		this.expiresOn = expirationDate;
 	}
 }

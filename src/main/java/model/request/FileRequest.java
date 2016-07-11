@@ -24,6 +24,6 @@ package model.request;
  * 
  */
 public class FileRequest {
-	public String userName;
+	public String createdBy;
 	public String dataId;
 }

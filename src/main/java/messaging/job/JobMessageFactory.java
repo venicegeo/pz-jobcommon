@@ -166,7 +166,7 @@ public class JobMessageFactory {
 
 		// Create the Job Request and attach the IngestJob
 		PiazzaJobRequest jobRequest = new PiazzaJobRequest();
-		jobRequest.userName = userName;
+		jobRequest.createdBy = userName;
 		jobRequest.jobType = ingestJob;
 		ProducerRecord<String, String> ingestJobMessage = JobMessageFactory.getRequestJobMessage(jobRequest, jobId,
 				space);

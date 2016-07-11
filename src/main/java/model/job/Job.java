@@ -52,8 +52,8 @@ public class Job {
 	public String jobId;
 	public PiazzaJobType jobType;
 	@JsonIgnore
-	public DateTime submitted;
-	public String submitterUserName;
+	public DateTime createdOn;
+	public String createdBy;
 	public String status;
 	public JobProgress progress = new JobProgress();
 	public List<JobProgress> history = new ArrayList<JobProgress>();
@@ -66,9 +66,9 @@ public class Job {
 	public Job(PiazzaJobRequest request, String jobId) {
 		this.jobId = jobId;
 		this.jobType = request.jobType;
-		this.submitterUserName = request.userName;
+		this.createdBy = request.createdBy;
 		this.status = StatusUpdate.STATUS_SUBMITTED;
-		this.submitted = new DateTime();
+		this.createdOn = new DateTime();
 	}
 
 	public String getJobId() {
@@ -79,15 +79,15 @@ public class Job {
 		this.jobId = jobId;
 	}
 
-	@JsonProperty("submitted")
-	public String getSubmittedString() {
+	@JsonProperty("createdOn")
+	public String getCreatedOnString() {
 		// Defaults to ISO8601
-		return submitted.toString();
+		return createdOn.toString();
 	}
 
-	@JsonProperty("submitted")
-	public void setSubmittedString(String submitted) {
-		this.submitted = new DateTime(submitted);
+	@JsonProperty("createdOn")
+	public void setCreatedOnString(String createdOn) {
+		this.createdOn = new DateTime(createdOn);
 	}
 
 	public PiazzaJobType getJobType() {
@@ -96,5 +96,37 @@ public class Job {
 
 	public ResultType getResult() {
 		return result;
+	}
+
+	public String getCreatedBy() {
+		return createdBy;
+	}
+
+	public void setCreatedBy(String createdBy) {
+		this.createdBy = createdBy;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public JobProgress getProgress() {
+		return progress;
+	}
+
+	public void setProgress(JobProgress progress) {
+		this.progress = progress;
+	}
+
+	public void setJobType(PiazzaJobType jobType) {
+		this.jobType = jobType;
+	}
+
+	public void setResult(ResultType result) {
+		this.result = result;
 	}
 }

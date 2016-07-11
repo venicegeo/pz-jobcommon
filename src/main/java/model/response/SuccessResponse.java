@@ -26,37 +26,54 @@ import io.swagger.annotations.ApiModelProperty;
  * 
  */
 public class SuccessResponse extends PiazzaResponse {
-
-	@ApiModelProperty(value = "A description of the successful operation performed.")
-	public String message;
-
-	@ApiModelProperty(value = "The Piazza component where the message originated.")
-	public String origin;
+	@ApiModelProperty(value = "Object describing the nature of the action that took place.")
+	public SuccessData data = new SuccessData();
 
 	public SuccessResponse(String message, String origin) {
-		this.message = message;
-		this.origin = origin;
+		data.setMessage(message);
+		data.setOrigin(origin);
 	}
 
 	public SuccessResponse() {
-
 	}
 
 	/**
-	 * Gets the success message response contains.
+	 * Describes the data object in the Success Response.
 	 * 
-	 * @return
+	 * @author Patrick.Doody
+	 *
 	 */
-	public String getMessage() {
-		return message;
-	}
+	public class SuccessData {
+		@ApiModelProperty(value = "A description of the successful operation performed.")
+		public String message;
 
-	/**
-	 * Gets the origin where object came from.
-	 * 
-	 * @return
-	 */
-	public String getOrigin() {
-		return origin;
+		@ApiModelProperty(value = "The Piazza component where the message originated.")
+		public String origin;
+
+		/**
+		 * Gets the success message response contains.
+		 * 
+		 * @return
+		 */
+		public String getMessage() {
+			return message;
+		}
+
+		/**
+		 * Gets the origin where object came from.
+		 * 
+		 * @return
+		 */
+		public String getOrigin() {
+			return origin;
+		}
+
+		public void setOrigin(String origin) {
+			this.origin = origin;
+		}
+
+		public void setMessage(String message) {
+			this.message = message;
+		}
 	}
 }
