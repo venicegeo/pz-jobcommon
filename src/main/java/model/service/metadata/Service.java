@@ -16,11 +16,13 @@
 package model.service.metadata;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import io.swagger.annotations.ApiModelProperty;
 
 import model.job.metadata.ResourceMetadata;
 
-
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Service {
 
 	@ApiModelProperty(required = true, value = "The unique identifier of the user service.")
