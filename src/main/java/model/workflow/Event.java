@@ -72,4 +72,7 @@ public class Event {
 	public void setCreatedOnString(String createdOn) {
 		this.createdOn = new DateTime(createdOn);
 	}
+
+	@ApiModelProperty(value = "The name of the user that created this object.")
+	public String createdBy;
 }
