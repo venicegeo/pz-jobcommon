@@ -64,4 +64,7 @@ public class Trigger {
 
 	@ApiModelProperty(value = "")
 	public String percolationId;
+
+	@ApiModelProperty(value = "The name of the user that created this object.")
+	public String createdBy;
 }
