@@ -24,6 +24,12 @@ import io.swagger.annotations.ApiModelProperty;
 
 import model.job.metadata.ResourceMetadata;
 
+/**
+ * 
+ * @author mlynum
+ *
+ */
+
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(Include.NON_NULL)
 public class Service {
