@@ -79,6 +79,7 @@ public class ResourceMetadata {
 	public String tags;
 
 	@ApiModelProperty(value = "Classification of the resource", required = true)
+	@NotNull
 	public SecurityClassification classType;
 
 	@ApiModelProperty(value = "The date the service will be terminated ")
