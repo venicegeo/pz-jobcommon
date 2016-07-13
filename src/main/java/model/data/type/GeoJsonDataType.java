@@ -15,6 +15,8 @@
  **/
 package model.data.type;
 
+import javax.validation.constraints.NotNull;
+
 import io.swagger.annotations.ApiModelProperty;
 import model.data.DataType;
 import model.data.FileRepresentation;
@@ -29,19 +31,21 @@ import model.data.location.FileLocation;
  */
 public class GeoJsonDataType implements DataType, FileRepresentation {
 
-	@ApiModelProperty(required = true, value = "The type of data.", allowableValues = "geojson")
+	@ApiModelProperty(required = true, value = "The type of data", allowableValues = "geojson")
+	@NotNull
 	public String type;
 
-	@ApiModelProperty(value = "The name of the database table holding the data.")
+	@ApiModelProperty(value = "The name of the database table holding the data")
 	public String databaseTableName;
 
-	@ApiModelProperty(value = "The location of the data. Used to describe S3 stores, or folder shares, for where the data is located.", dataType = "model.swagger.SwaggerFileLocation")
+	@ApiModelProperty(value = "The location of the data. Used to describe S3 stores, or folder shares, for where the data is located", dataType = "model.swagger.SwaggerFileLocation")
 	public FileLocation location;
 
-	@ApiModelProperty(value = "The geojson content of the data.")
+	@ApiModelProperty(value = "The geojson content of the data")
 	public String geoJsonContent;
 
-	@ApiModelProperty(value = "The media type of the stored data")
+	@ApiModelProperty(value = "The media type of the stored data.  Refer to http://www.iana.org for standard values")
+	@NotNull
 	public String mimeType;
 
 	public String getMimeType() {

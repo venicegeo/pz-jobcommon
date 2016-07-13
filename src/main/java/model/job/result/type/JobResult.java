@@ -30,7 +30,7 @@ import model.job.result.ResultType;
  */
 public class JobResult implements ResultType {
 	
-	@ApiModelProperty(value = "The ID of the Job referenced in the request.", required = true)
+	@ApiModelProperty(value = "The Id of the Job referenced in the request.", required = true)
 	public String jobId;
 
 	public JobResult() {

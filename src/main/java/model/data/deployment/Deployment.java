@@ -15,6 +15,8 @@
  **/
 package model.data.deployment;
 
+import javax.validation.constraints.NotNull;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
@@ -32,22 +34,23 @@ import io.swagger.annotations.ApiModelProperty;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Deployment {
 
-	@ApiModelProperty(value = "The unique identifier for this Deployment.", required = true)
+	@ApiModelProperty(value = "The unique Id for this Deployment", required = true)
+	@NotNull
 	public String deploymentId;
 
-	@ApiModelProperty(value = "The unique identifier of the Data that this deployment hosts.")
+	@ApiModelProperty(value = "The unique Id of the Data that this deployment hosts")
 	public String dataId;
 
-	@ApiModelProperty(value = "The host name for the deployment server.")
+	@ApiModelProperty(value = "The host name for the deployment server")
 	public String host;
 
-	@ApiModelProperty(value = "The port number for the deployment server. ")
+	@ApiModelProperty(value = "The port number for the deployment server")
 	public String port;
 
-	@ApiModelProperty(value = "The layer name for the hosted service on the deployment server.")
+	@ApiModelProperty(value = "The layer name for the hosted service on the deployment server")
 	public String layer;
 
-	@ApiModelProperty(value = "Fully qualified URL for accessing the GetCapabilities action for the deployment service.")
+	@ApiModelProperty(value = "Fully qualified URL for accessing the GetCapabilities action for the deployment service")
 	public String capabilitiesUrl;
 
 	/**
