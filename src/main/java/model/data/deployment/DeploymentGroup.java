@@ -49,6 +49,9 @@ public class DeploymentGroup {
 	@ApiModelProperty(value = "The user who created this Deployment Group.", required = true)
 	public String createdBy;
 
+	@ApiModelProperty(value = "Determines if the GeoServer instance has a corresponding Layer Group for this Deployment Group", required = true)
+	public Boolean hasGeoServerLayer;
+
 	/**
 	 * Creates a new Deployment Group.
 	 */
@@ -67,5 +70,13 @@ public class DeploymentGroup {
 	public DeploymentGroup(String id, String createdBy) {
 		this.deploymentGroupId = id;
 		this.createdBy = createdBy;
+	}
+
+	public Boolean getHasGeoServerLayer() {
+		return hasGeoServerLayer;
+	}
+
+	public void setHasGeoServerLayer(Boolean hasGeoServerLayer) {
+		this.hasGeoServerLayer = hasGeoServerLayer;
 	}
 }
