@@ -31,31 +31,31 @@ import io.swagger.annotations.ApiModelProperty;
 @JsonInclude(Include.NON_NULL)
 public class SpatialMetadata {
 
-	@ApiModelProperty(value = "The CRS (Coordinate Reference System) of the data.")
+	@ApiModelProperty(value = "The CRS (Coordinate Reference System) of the data")
 	private String coordinateReferenceSystem;
 
-	@ApiModelProperty(value = "The EPSG code of the CRS.")
+	@ApiModelProperty(value = "The EPSG code of the CRS")
 	private Integer epsgCode;
 
-	@ApiModelProperty(value = "Minimum X bounds.")
+	@ApiModelProperty(value = "The minimum X ordinate of the bounding box")
 	private Double minX;
 
-	@ApiModelProperty(value = "Minimum Y bounds.")
+	@ApiModelProperty(value = "The minimum Y ordinate of the bounding box")
 	private Double minY;
 
-	@ApiModelProperty(value = "Minimum Z bounds.")
+	@ApiModelProperty(value = "The minimum Z ordinate of the bounding box")
 	private Double minZ;
 
-	@ApiModelProperty(value = "Maximum X bounds.")
+	@ApiModelProperty(value = "The maximum X ordinate of the bounding box")
 	private Double maxX;
 
-	@ApiModelProperty(value = "Maximum Y bounds.")
+	@ApiModelProperty(value = "The maximum Y ordinate of the bounding box")
 	private Double maxY;
 
-	@ApiModelProperty(value = "Maximum Z bounds.")
+	@ApiModelProperty(value = "The maximum Z ordinate of the bounding box")
 	private Double maxZ;
 
-	@ApiModelProperty(value = "The number of features contained in the resource.")
+	@ApiModelProperty(value = "The number of features contained in the resource")
 	private Integer numFeatures;
 
 	public SpatialMetadata() {

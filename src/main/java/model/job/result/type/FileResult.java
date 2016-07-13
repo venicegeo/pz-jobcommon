@@ -27,7 +27,7 @@ import model.job.result.ResultType;
  */
 public class FileResult implements ResultType {
 	
-	@ApiModelProperty(value = "The unique ID of the data resource.", required = true)	
+	@ApiModelProperty(value = "The unique Id of the data resource.", required = true)	
 	public String dataId;
 
 	/**

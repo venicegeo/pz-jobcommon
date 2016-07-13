@@ -16,39 +16,66 @@
 package model.service.metadata;
 
 
+
+
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
-import io.swagger.annotations.ApiModelProperty;
 
+import io.swagger.annotations.ApiModelProperty;
 import model.job.metadata.ResourceMetadata;
+import javax.validation.constraints.NotNull;
 
 /**
- * 
+ * Class which represents a service registered and managed by Piazza
  * @author mlynum
- *
  */
-
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(Include.NON_NULL)
 public class Service {
-
-	@ApiModelProperty(required = true, value = "The unique identifier of the user service.")
+	
+	public enum METHOD_TYPE {
+		GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
+	};
+	
+	@ApiModelProperty(value = "HTTP method types ")
+	private METHOD_TYPE methodType;
+	
+	@ApiModelProperty(required = false, value = "The unique Id of the user service.")
 	private String serviceId;
 
-	@ApiModelProperty(required = true, value = "The URL to the user service to be executed.")
+	@ApiModelProperty(required = true, value = "The URL to the user service to be executed")
+	@NotNull
 	private String url;
 
-	@ApiModelProperty(required = false, value = "URL to the schema or contract to interface with the service, such as a Swagger file, or documentation.")
+	@ApiModelProperty(required = false, value = "URL to the schema or contract to interface with the service, such as a Swagger file, or documentation")
+	@NotNull
 	private String contractUrl;
 
-	@ApiModelProperty(required = true, value = "The HTTP method used to invoke this user service.")
-	public String method;
+	@ApiModelProperty(required = true, value = "The HTTP method used to invoke this user service", allowableValues = "method_type")
+	@NotNull
+	private String method;
+	
+	@ApiModelProperty(value = "The timeout Piazza waits for a response (defaults to 120 seconds) ")
+    private Long timeout;
+	
+	@ApiModelProperty(value = "The frequency in which Piazza sends heartbeat requests to check on the health of the service  (defaults to 120 seconds) ")
+    private Long heartbeat;
 
-	@ApiModelProperty(value = "Object of common metadata fields used to describe Data or Services within the Piazza system.")
+
+	@ApiModelProperty(value = "Object of common metadata fields used to describe Data or Services within the Piazza system")
 	private ResourceMetadata resourceMetadata;
 
+	public Long getHeartbeat() {
+		return heartbeat;
+	}
+
+	public void setHeartbeat(Long heartbeat) {
+		this.heartbeat = heartbeat;
+	}
+	
 	public String getMethod() {
 		return method;
 	}
@@ -64,7 +91,14 @@ public class Service {
 	public void setServiceId(String serviceId) {
 		this.serviceId = serviceId;
 	}
+	
+	public Long getTimeout() {
+		return timeout;
+	}
 
+	public void setTimeout(Long timeout) {
+		this.timeout = timeout;
+	}
 	public ResourceMetadata getResourceMetadata() {
 		return resourceMetadata;
 	}

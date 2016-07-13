@@ -26,19 +26,19 @@ import io.swagger.annotations.ApiModelProperty;
  */
 public class Pagination {
 
-	@ApiModelProperty(value = " The number of results that matched the query.", required = true)
+	@ApiModelProperty(value = " The number of results that matched the query", required = true)
 	public Integer count;
 
-	@ApiModelProperty(value = "The current page returned.", required = true)
+	@ApiModelProperty(value = "The current page returned", required = true)
 	public Integer page;
 
-	@ApiModelProperty(value = "The current number of results returned per page.", required = true)
+	@ApiModelProperty(value = "The current number of results returned per page", required = true)
 	public Integer perPage;
 
-	@ApiModelProperty(value = "The field that the data is being sorted by.", required = true)
+	@ApiModelProperty(value = "The field that the data is being sorted by", required = true)
 	public String sortBy;
 
-	@ApiModelProperty(value = "The order of the results. Either 'asc' or 'desc' for ascending or descending.", required = true)
+	@ApiModelProperty(value = "The order of the results. Either 'asc' or 'desc' for ascending or descending", required = true)
 	public String order;
 
 	public Pagination() {

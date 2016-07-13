@@ -19,10 +19,13 @@
  */
 package model.data.type;
 
+import javax.validation.constraints.NotNull;
+
 import io.swagger.annotations.ApiModelProperty;
 
 public class BodyDataType extends TextDataType {
 
-	@ApiModelProperty(required = true, value = "The type of data.", allowableValues = "body")
+	@ApiModelProperty(required = true, value = "The type of data", allowableValues = "body")
+	@NotNull
 	public String type;
 }

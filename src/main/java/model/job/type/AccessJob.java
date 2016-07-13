@@ -48,10 +48,10 @@ public class AccessJob implements PiazzaJobType {
 	@JsonIgnore
 	public static final String ACCESS_TYPE_FILE = "file";
 
-	@ApiModelProperty(value = "The ID of the subject data.")
+	@ApiModelProperty(value = "The Id of the subject data")
 	public String dataId;
 
-	@ApiModelProperty(value = "The type of deployment, either hosted on a Piazza GeoServer instance, or raw file download.")
+	@ApiModelProperty(value = "The type of deployment, either hosted on a Piazza GeoServer instance, or raw file download")
 	public String deploymentType;
 
 	public AccessJob() {

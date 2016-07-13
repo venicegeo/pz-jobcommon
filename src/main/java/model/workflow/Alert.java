@@ -15,6 +15,8 @@
  **/
 package model.workflow;
 
+import javax.validation.constraints.NotNull;
+
 import io.swagger.annotations.ApiModelProperty;
 
 /**
@@ -33,15 +35,19 @@ import io.swagger.annotations.ApiModelProperty;
  */
 
 public class Alert {
-	@ApiModelProperty(value = "The unique identifier for this Alert.", required = true)
+	@ApiModelProperty(value = "The unique Id for this Alert", required = true)
+	@NotNull
 	public String alertId;
 
-	@ApiModelProperty(value = "The unique identifier for the Trigger that was hit.")
+	@ApiModelProperty(value = "The unique Id for the Trigger that was fired", required = true)
+	@NotNull
 	public String triggerId;
 
-	@ApiModelProperty(value = "The unique identifier for the Event that triggered the Trigger.")
+	@ApiModelProperty(value = "The unique Id for the Event that fired the Trigger", required = true)
+	@NotNull
 	public String eventId;
 
-	@ApiModelProperty(value = "The unique identifier for the Job.")
+	@ApiModelProperty(value = "The unique Id for the Job that was submitted", required = true)
+	@NotNull
 	public String jobId;
 }

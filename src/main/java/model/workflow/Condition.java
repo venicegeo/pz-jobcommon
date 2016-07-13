@@ -17,6 +17,8 @@ package model.workflow;
 
 import java.util.Map;
 
+import javax.validation.constraints.NotNull;
+
 import io.swagger.annotations.ApiModelProperty;
 
 /**
@@ -32,9 +34,11 @@ import io.swagger.annotations.ApiModelProperty;
 
 public class Condition {
 
-	@ApiModelProperty(value = "The array of Event Type IDs.")
+	@ApiModelProperty(value = "The array of Event Type Ids")
+	@NotNull
 	public String[] eventTypeIds;
 
 	@ApiModelProperty(value = "Elastic Search DSL Query 2.2, for details see https://www.elastic.co/guide/en/elasticsearch/reference/2.2/query-dsl.html")
+	@NotNull
 	public Map<String, Object> query;
 }

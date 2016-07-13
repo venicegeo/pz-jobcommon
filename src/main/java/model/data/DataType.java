@@ -55,8 +55,6 @@ import model.data.type.WfsDataType;
 		@Type(value = TextDataType.class, name = "text"),		
 		@Type(value = URLParameterDataType.class, name = "urlparameter"),
 		@Type(value = WfsDataType.class, name = "wfs")})
-@JsonInclude(Include.NON_NULL)
-@JsonIgnoreProperties(ignoreUnknown = true)
 public interface DataType {
 
 	public String getMimeType();
