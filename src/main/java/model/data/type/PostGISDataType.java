@@ -15,6 +15,8 @@
  **/
 package model.data.type;
 
+import javax.validation.constraints.NotNull;
+
 import io.swagger.annotations.ApiModelProperty;
 import model.data.DataType;
 
@@ -29,15 +31,19 @@ import model.data.DataType;
 public class PostGISDataType implements DataType {
 
 	@ApiModelProperty(required = true, value = "The type of data.", allowableValues = "postgis")
+	@NotNull
 	public String type;
 
-	@ApiModelProperty(value = "The name of the database hosting the data.")
+	@ApiModelProperty(required = true, value = "The name of the database hosting the data.")
+	@NotNull
 	public String database;
 
-	@ApiModelProperty(value = "The name of the database table holding the data.")
+	@ApiModelProperty(required = true, value = "The name of the database table holding the data.")
+	@NotNull
 	public String table;
 
-	@ApiModelProperty(value = "The media type of the stored data")
+	@ApiModelProperty(required = true, value = "The media type of the stored data")
+	@NotNull
 	public String mimeType;
 
 	public PostGISDataType() {

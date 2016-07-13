@@ -18,6 +18,8 @@ package model.service.metadata;
 import java.util.List;
 import java.util.Map;
 
+import javax.validation.constraints.NotNull;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import io.swagger.annotations.ApiModelProperty;
@@ -32,14 +34,17 @@ import model.data.DataType;
 public class ExecuteServiceData {
 
 	@ApiModelProperty(value = "The Inputs for the execution.", required = true)
+	@NotNull
 	@JsonProperty("dataInputs")
 	public Map<String, DataType> dataInputs;
 
 	@ApiModelProperty(value = "The Output for the execution.", required = true)
+	@NotNull
 	@JsonProperty("dataOutput")
 	public List<DataType> dataOutput;
 
 	@ApiModelProperty(value = "The ID of the Service to Execute.", required = true)
+	@NotNull
 	private String serviceId;
 
 	public String getServiceId() {

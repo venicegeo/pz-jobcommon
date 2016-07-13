@@ -61,13 +61,12 @@ public class Event {
 
 	@ApiModelProperty(value = "The date and time that the Event was generated.", required = true)
 	@JsonIgnore
-
     @NotNull
 	public DateTime createdOn;
 
 
 	@ApiModelProperty(value = "The populated values for the Key-value pairs defined by the Event Type's 'mapping' dictionary. Each value in this dictionary must be populated here under this 'data' property.", required = true)
-	
+	@NotNull
 	public Map<String, Object> data;
 
 	@JsonProperty("createdOn")

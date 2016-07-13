@@ -15,6 +15,8 @@
  **/
 package model.job.type;
 
+import javax.validation.constraints.NotNull;
+
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import model.data.DataResource;
@@ -33,12 +35,15 @@ import model.job.PiazzaJobType;
 public class IngestJob implements PiazzaJobType {
 
 	@ApiModelProperty(required = true, value = "The type of job.", allowableValues = "ingest")
+	@NotNull
 	public String type;
 
 	@ApiModelProperty(required = true, value = "The Description of the Data being loaded, including metadata, and the path to the data.")
+	@NotNull
 	public DataResource data;
 
 	@ApiModelProperty(required = true, value = "Dictates if Piazza should internally host the data or not. If set to true, then the data will be stored in Piazza's data holdings. If false, then Piazza will point to the location of the data, but will not store the data internally.")
+	@NotNull
 	public Boolean host;
 
 	public IngestJob() {

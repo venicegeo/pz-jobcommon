@@ -15,6 +15,8 @@
  **/
 package model.job.type;
 
+import javax.validation.constraints.NotNull;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import io.swagger.annotations.ApiModelProperty;
@@ -41,6 +43,7 @@ import model.job.PiazzaJobType;
 public class AccessJob implements PiazzaJobType {
 
 	@ApiModelProperty(required = true, value = "The type of job.", allowableValues = "access")
+	@NotNull
 	public String type;
 
 	@JsonIgnore
