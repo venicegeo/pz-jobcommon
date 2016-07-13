@@ -55,4 +55,7 @@ public class EventType {
 	@ApiModelProperty(value = "The map of key-value pairs that define the properties of this Event Type. The key is the name of the property, and the value is the type of that property. Valid types are 'string' and 'integer'.")
 	@NotNull
 	public Map<String, String> mapping;
+
+	@ApiModelProperty(value = "The name of the user that created this object.")
+	public String createdBy;
 }

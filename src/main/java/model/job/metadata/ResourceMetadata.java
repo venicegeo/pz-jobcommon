@@ -83,7 +83,7 @@ public class ResourceMetadata {
 
 	@ApiModelProperty(value = "The date the service will be terminated ")
 	@JsonIgnore
-	public DateTime termDate;
+	public DateTime expiresOn;
 
 	@ApiModelProperty(value = "Indication on whether a client certificate required to access thie resource.   Could be a user certificate or computer certificate")
 	public Boolean clientCertRequired;
@@ -109,8 +109,10 @@ public class ResourceMetadata {
 	@ApiModelProperty(value = "Username of the individual submitting the resource")
 	public String createdBy;
 
-	@ApiModelProperty(value = "The date and time of the resource submission to Piazza")
-	public String createdDate;
+
+	@ApiModelProperty(value = "The date and time of data submission to Piazza.")
+	public String createdOn;
+
 
 	@ApiModelProperty(value = "A generic Map of String:String (key:value) pairs with additional metadata")
 	public Map<String, String> metadata;
@@ -260,6 +262,30 @@ public class ResourceMetadata {
 
 	public void setVersion(String version) {
 		this.version = version;
+	}
+
+	public DateTime getExpiresOn() {
+		return expiresOn;
+	}
+
+	public void setExpiresOn(DateTime expiresOn) {
+		this.expiresOn = expiresOn;
+	}
+
+	public String getCreatedBy() {
+		return createdBy;
+	}
+
+	public void setCreatedBy(String createdBy) {
+		this.createdBy = createdBy;
+	}
+
+	public String getCreatedOn() {
+		return createdOn;
+	}
+
+	public void setCreatedOn(String createdOn) {
+		this.createdOn = createdOn;
 	}
 
 	public Map<String, String> getMetadata() {

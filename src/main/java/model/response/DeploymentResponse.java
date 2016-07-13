@@ -27,13 +27,13 @@ import model.data.deployment.Deployment;
 public class DeploymentResponse extends PiazzaResponse {
 
 	@ApiModelProperty(value = "Object containing metadata regarding a Piazza Deployment.")
-	public Deployment deployment;
+	public Deployment data;
 
 	public DeploymentResponse() {
 
 	}
 
 	public DeploymentResponse(Deployment deployment) {
-		this.deployment = deployment;
+		this.data = deployment;
 	}
 }

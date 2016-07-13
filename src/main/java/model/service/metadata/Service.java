@@ -15,15 +15,25 @@
  **/
 package model.service.metadata;
 
-/**
- * Class which represents a service registered and managed by Piazza
- * @author mlynum
- */
+
+
+
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
+
 import io.swagger.annotations.ApiModelProperty;
 import model.job.metadata.ResourceMetadata;
 import javax.validation.constraints.NotNull;
 
-
+/**
+ * Class which represents a service registered and managed by Piazza
+ * @author mlynum
+ */
+@JsonIgnoreProperties(ignoreUnknown = true)
+@JsonInclude(Include.NON_NULL)
 public class Service {
 	
 	public enum METHOD_TYPE {

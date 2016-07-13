@@ -50,7 +50,7 @@ public class KafkaFactoryTest {
 	public void testJobMessages() throws Exception {
 		// Test Job Requesting
 		PiazzaJobRequest request = new PiazzaJobRequest();
-		request.userName = "Test User";
+		request.createdBy = "Test User";
 		request.jobType = new AbortJob("123456");
 		ProducerRecord<String, String> record = JobMessageFactory.getRequestJobMessage(request, "123456", "TEST");
 		assertTrue(record.topic().equals(JobMessageFactory.REQUEST_JOB_TOPIC_NAME + "-TEST"));
@@ -101,7 +101,7 @@ public class KafkaFactoryTest {
 		PiazzaJobRequest createdRequest = JobMessageFactory.parseRequestJson(new ObjectMapper()
 				.writeValueAsString(request));
 		assertTrue(createdRequest instanceof PiazzaJobRequest);
-		assertTrue(createdRequest.userName.equals("Test User"));
+		assertTrue(createdRequest.createdBy.equals("Test User"));
 		assertTrue(createdRequest.jobType instanceof AbortJob);
 	}
 
