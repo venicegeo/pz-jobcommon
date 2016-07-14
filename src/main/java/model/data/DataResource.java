@@ -18,7 +18,9 @@ package model.data;
 import model.job.metadata.ResourceMetadata;
 import model.job.metadata.SpatialMetadata;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -45,11 +47,13 @@ public class DataResource {
 
 	@ApiModelProperty(value = "The Id of the data to download", required = true)
 	@NotNull
+	@Size(min=1)
 	public String dataId;
 
 	@ApiModelProperty(value = "Polymorphically defines the information specific to this Data Resource, based on its format", required = true, dataType = "model.swagger.SwaggerDataType")
 	@NotNull
 	@JsonProperty(required = true)
+	@Valid
 	public DataType dataType;
 
 	@ApiModelProperty(value = "Object of spatial metadata fields associated with a Resource. Used to generically specify the bounding box and the spatial reference of a dataset")

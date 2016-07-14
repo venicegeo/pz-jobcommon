@@ -19,6 +19,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -45,6 +46,7 @@ public class ExecuteServiceData {
 
 	@ApiModelProperty(value = "The ID of the Service to Execute.", required = true)
 	@NotNull
+	@Size(min=1)
 	private String serviceId;
 
 	public String getServiceId() {

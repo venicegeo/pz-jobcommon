@@ -16,6 +16,7 @@
 package model.data.type;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import io.swagger.annotations.ApiModelProperty;
 import model.data.DataType;
@@ -44,6 +45,7 @@ public class RasterDataType implements DataType, FileRepresentation {
 
 	@ApiModelProperty(required = true, value = "The media type of the stored data")
 	@NotNull
+	@Size(min=1)
 	public String mimeType;
 
 	public RasterDataType() {

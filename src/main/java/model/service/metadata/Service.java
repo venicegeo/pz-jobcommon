@@ -21,7 +21,10 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 import io.swagger.annotations.ApiModelProperty;
 import model.job.metadata.ResourceMetadata;
+
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 /**
  * Class which represents a service registered and managed by Piazza
@@ -29,6 +32,7 @@ import javax.validation.constraints.NotNull;
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(Include.NON_NULL)
+
 public class Service {
 	
 	public enum METHOD_TYPE {
@@ -43,14 +47,17 @@ public class Service {
 
 	@ApiModelProperty(required = true, value = "The URL to the user service to be executed")
 	@NotNull
+	@Size(min=1)
 	private String url;
 
 	@ApiModelProperty(required = false, value = "URL to the schema or contract to interface with the service, such as a Swagger file, or documentation")
 	@NotNull
+	@Size(min=1)
 	private String contractUrl;
 
 	@ApiModelProperty(required = true, value = "The HTTP method used to invoke this user service", allowableValues = "method_type")
 	@NotNull
+	@Size(min=1)
 	private String method;
 	
 	@ApiModelProperty(value = "The timeout Piazza waits for a response (defaults to 120 seconds) ")
@@ -61,6 +68,8 @@ public class Service {
 
 
 	@ApiModelProperty(value = "Object of common metadata fields used to describe Data or Services within the Piazza system")
+	@NotNull
+	@Valid
 	private ResourceMetadata resourceMetadata;
 
 	public Long getHeartbeat() {
