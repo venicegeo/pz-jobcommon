@@ -37,7 +37,8 @@ public class RepeatJob implements PiazzaJobType {
 	@NotNull
 	public String type;
 
-	@ApiModelProperty(value = "The Id of the subject job")
+	@ApiModelProperty(required = true, value = "The Id of the subject job")
+	@NotNull
 	public String jobId = null;
 
 	public RepeatJob() {
