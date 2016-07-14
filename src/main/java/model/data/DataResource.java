@@ -39,6 +39,8 @@ import io.swagger.annotations.ApiModelProperty;
  * @author Patrick.Doody
  * 
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
+@JsonInclude(Include.NON_NULL)
 public class DataResource {
 
 	@ApiModelProperty(value = "The Id of the data to download", required = true)
