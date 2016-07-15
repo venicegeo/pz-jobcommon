@@ -43,9 +43,7 @@ public class RasterDataType implements DataType, FileRepresentation {
 	@NotNull
 	public FileLocation location;
 
-	@ApiModelProperty(required = true, value = "The media type of the stored data")
-	@NotNull
-	@Size(min=1)
+	@ApiModelProperty(value = "The media type of the stored data")
 	public String mimeType;
 
 	public RasterDataType() {

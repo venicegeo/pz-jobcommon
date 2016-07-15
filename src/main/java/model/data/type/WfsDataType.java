@@ -16,6 +16,7 @@
 package model.data.type;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import io.swagger.annotations.ApiModelProperty;
 import model.data.DataType;
@@ -29,23 +30,24 @@ import model.data.DataType;
 public class WfsDataType implements DataType {
 
 	@ApiModelProperty(required = true, value = "The type of data.", allowableValues = "wfs")
-	@NotNull
 	public String type;
 
 	@ApiModelProperty(required = true, value = "HTTP web address to the WFS endpoint.")
 	@NotNull
+	@Size(min=1)
 	public String url;
 
 	@ApiModelProperty(required = true, value = "The current version of the data.")
 	@NotNull
+	@Size(min=1)
 	public String version;
 
 	@ApiModelProperty(required = true, value = "The type of geospatial feature represented in the data.")
 	@NotNull
+	@Size(min=1)
 	public String featureType;
 
-	@ApiModelProperty(required = true, value = "The media type of the stored data")
-	@NotNull
+	@ApiModelProperty(value = "The media type of the stored data")
 	public String mimeType;
 
 	public WfsDataType() {
