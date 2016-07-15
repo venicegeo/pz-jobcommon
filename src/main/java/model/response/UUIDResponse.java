@@ -6,33 +6,41 @@
  * You may obtain a copy of the License at
  * 
  *   http://www.apache.org/licenses/LICENSE-2.0
- * 
+ * re
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-package model.data.type;
-
-import javax.validation.constraints.NotNull;
+package model.response;
 
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * Indicates that text content is to be used in URL key-value pair
+ * Represents the UUID returned for authentication purposes with pz-security.
  * 
- * @author bkrasner
- *
+ * @author Russell.Orf
+ * 
  */
-public class URLParameterDataType extends TextDataType {
+public class UUIDResponse extends PiazzaResponse {
 
-	@ApiModelProperty(required = true, value = "The type of data.", allowableValues = "urlparameter")
-	@NotNull
-	public String type;
+	@ApiModelProperty(value = "Contains the UUID for the requested user.")
+	public String uuid;
+	
+	public UUIDResponse() {
+		
+	}
+	
+	public UUIDResponse(String uuid) {
+		setUuid(uuid);
+	}
+	
+	public String getUuid() {
+		return uuid;
+	}
 
-	public String getMimeType() {
-		// TODO Auto-generated method stub
-		return null;
+	public void setUuid(String uuid) {
+		this.uuid = uuid;
 	}
 }

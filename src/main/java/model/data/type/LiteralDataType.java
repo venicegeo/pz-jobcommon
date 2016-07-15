@@ -34,12 +34,15 @@ public class LiteralDataType implements DataType {
 	public String type;
 
 	@ApiModelProperty(value = "")
+	@NotNull
 	private LITERAL literalType = LITERAL.STRING;
 
-	@ApiModelProperty(value = "The content of the data")
+	@ApiModelProperty(required = true, value = "The content of the data")
+	@NotNull
 	private String value = "";
 
-	@ApiModelProperty(value = "The media type of the stored data")
+	@ApiModelProperty(required = true, value = "The media type of the stored data")
+	@NotNull
 	public String mimeType;
 
 	public LITERAL getLiteralType() {

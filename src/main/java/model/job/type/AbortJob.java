@@ -15,6 +15,8 @@
  **/
 package model.job.type;
 
+import javax.validation.constraints.NotNull;
+
 import io.swagger.annotations.ApiModelProperty;
 import model.job.PiazzaJobType;
 
@@ -28,9 +30,11 @@ import model.job.PiazzaJobType;
 public class AbortJob implements PiazzaJobType {
 
 	@ApiModelProperty(required = true, value = "The type of job", allowableValues = "abort")
+	@NotNull
 	public String type;
 
-	@ApiModelProperty(value = "The Id of the subject job")
+	@ApiModelProperty(required = true, value = "The Id of the subject job")
+	@NotNull
 	public String jobId = null;
 
 	@ApiModelProperty(value = "The reason given for aborting the job")

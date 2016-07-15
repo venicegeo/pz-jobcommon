@@ -13,26 +13,36 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-package model.data.type;
+package model.response;
 
-import javax.validation.constraints.NotNull;
+public class AuthenticationResponse extends PiazzaResponse {
+	
+	public String username;
+	
+	public Boolean authenticated;
 
-import io.swagger.annotations.ApiModelProperty;
+	public AuthenticationResponse() {
 
-/**
- * Indicates that text content is to be used in URL key-value pair
- * 
- * @author bkrasner
- *
- */
-public class URLParameterDataType extends TextDataType {
+	}
 
-	@ApiModelProperty(required = true, value = "The type of data.", allowableValues = "urlparameter")
-	@NotNull
-	public String type;
+	public AuthenticationResponse(String username, Boolean authenticated) {
+		this.username = username;
+		this.authenticated = authenticated;
+	}
 
-	public String getMimeType() {
-		// TODO Auto-generated method stub
-		return null;
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public Boolean getAuthenticated() {
+		return authenticated;
+	}
+
+	public void setAuthenticated(Boolean authenticated) {
+		this.authenticated = authenticated;
 	}
 }
