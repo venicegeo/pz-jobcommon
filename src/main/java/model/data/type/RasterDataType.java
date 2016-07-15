@@ -36,8 +36,8 @@ import model.data.location.FileLocation;
 public class RasterDataType implements DataType, FileRepresentation {
 
 	@ApiModelProperty(required = true, value = "The type of data.", allowableValues = "raster")
-	@NotNull
 	public String type;
+
 
 	@ApiModelProperty(required = true, value = "The location of the data. Used to describe S3 stores, or folder shares, for where the data is located.", dataType = "model.swagger.SwaggerFileLocation")
 	@NotNull
@@ -66,5 +66,13 @@ public class RasterDataType implements DataType, FileRepresentation {
 
 	public void setLocation(FileLocation location) {
 		this.location = location;
+	}
+	
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
 	}
 }
