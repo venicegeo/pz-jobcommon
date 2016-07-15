@@ -18,6 +18,7 @@ package model.workflow;
 import java.util.Map;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import org.joda.time.DateTime;
 
@@ -51,17 +52,17 @@ import io.swagger.annotations.ApiModelProperty;
 @JsonInclude(Include.NON_NULL)
 public class Event {
 
-	@ApiModelProperty(value = "The unique Id for this Event.", required = true)
-	@NotNull
+	@ApiModelProperty(value = "The unique Id for this Event.")
 	public String eventId;
 
 	@ApiModelProperty(value = "The unique Id of the Event Type whose schema this Event conforms to.", required = true)
 	@NotNull
+	@Size(min=1)
 	public String eventTypeId;
 
 	@ApiModelProperty(value = "The date and time that the Event was generated.", required = true)
 	@JsonIgnore
-    @NotNull
+	@NotNull
 	public DateTime createdOn;
 
 
@@ -80,6 +81,6 @@ public class Event {
 		this.createdOn = new DateTime(createdOn);
 	}
 
-	@ApiModelProperty(value = "The name of the user that created this object.")
+	@ApiModelProperty(value = "Username of the individual submitting the Event.")
 	public String createdBy;
 }

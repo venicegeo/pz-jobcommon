@@ -16,6 +16,7 @@
 package model.job.type;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import io.swagger.annotations.ApiModelProperty;
 import model.job.PiazzaJobType;
@@ -38,6 +39,7 @@ public class RepeatJob implements PiazzaJobType {
 
 	@ApiModelProperty(required = true, value = "The Id of the subject job")
 	@NotNull
+	@Size(min=1)
 	public String jobId = null;
 
 	public RepeatJob() {

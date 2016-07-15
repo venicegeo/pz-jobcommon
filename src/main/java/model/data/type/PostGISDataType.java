@@ -31,7 +31,6 @@ import model.data.DataType;
 public class PostGISDataType implements DataType {
 
 	@ApiModelProperty(required = true, value = "The type of data.", allowableValues = "postgis")
-	@NotNull
 	public String type;
 
 	@ApiModelProperty(required = true, value = "The name of the database hosting the data.")
@@ -42,8 +41,7 @@ public class PostGISDataType implements DataType {
 	@NotNull
 	public String table;
 
-	@ApiModelProperty(required = true, value = "The media type of the stored data")
-	@NotNull
+	@ApiModelProperty(value = "The media type of the stored data")
 	public String mimeType;
 
 	public PostGISDataType() {

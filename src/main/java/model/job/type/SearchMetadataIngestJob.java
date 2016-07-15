@@ -15,6 +15,8 @@
  **/
 package model.job.type;
 
+import javax.validation.constraints.NotNull;
+
 import model.data.DataResource;
 import model.job.PiazzaJobType;
 
@@ -28,13 +30,20 @@ import model.job.PiazzaJobType;
  * 
  */
 public class SearchMetadataIngestJob implements PiazzaJobType {
+	
+	@NotNull
 	public DataResource data;
+
 
 	public SearchMetadataIngestJob() {
 
 	}
-
+	public void setData(DataResource data) {
+		this.data = data;
+	}
+	
 	public DataResource getData() {
 		return data;
 	}
+	
 }

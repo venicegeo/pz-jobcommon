@@ -15,7 +15,6 @@
  **/
 package model.data.type;
 
-import javax.validation.constraints.NotNull;
 
 import io.swagger.annotations.ApiModelProperty;
 import model.data.DataType;
@@ -32,7 +31,6 @@ import model.data.location.FileLocation;
 public class GeoJsonDataType implements DataType, FileRepresentation {
 
 	@ApiModelProperty(required = true, value = "The type of data", allowableValues = "geojson")
-	@NotNull
 	public String type;
 
 	@ApiModelProperty(value = "The name of the database table holding the data")
@@ -45,7 +43,6 @@ public class GeoJsonDataType implements DataType, FileRepresentation {
 	public String geoJsonContent;
 
 	@ApiModelProperty(value = "The media type of the stored data.  Refer to http://www.iana.org for standard values")
-	@NotNull
 	public String mimeType;
 
 	public String getMimeType() {

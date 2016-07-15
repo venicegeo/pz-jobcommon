@@ -16,6 +16,7 @@
 package model.job.type;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -50,10 +51,12 @@ public class AccessJob implements PiazzaJobType {
 	@JsonIgnore
 	public static final String ACCESS_TYPE_FILE = "file";
 
-	@ApiModelProperty(value = "The Id of the subject data")
+	@ApiModelProperty(required = true, value = "The Id of the subject data")
+	@Size(min=1)
 	public String dataId;
 
-	@ApiModelProperty(value = "The type of deployment, either hosted on a Piazza GeoServer instance, or raw file download")
+	@ApiModelProperty(required = true, value = "The type of deployment, either hosted on a Piazza GeoServer instance, or raw file download")
+	@Size(min=1)
 	public String deploymentType;
 
 	public AccessJob() {
