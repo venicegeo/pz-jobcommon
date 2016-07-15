@@ -15,6 +15,7 @@
  **/
 package model.job.type;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 import io.swagger.annotations.ApiModel;
@@ -26,7 +27,6 @@ import model.service.metadata.ExecuteServiceData;
 public class ExecuteServiceJob implements PiazzaJobType {
 
 	@ApiModelProperty(required = true, value = "The type of job.", allowableValues = "execute-service")
-	@NotNull
 	public String type;
 
 	@ApiModelProperty(value = "The JobID created for executing the service.")
@@ -34,7 +34,16 @@ public class ExecuteServiceJob implements PiazzaJobType {
 
 	@ApiModelProperty(value = "The parameter inputs for Service execution.", required = true)
 	@NotNull
+	@Valid
 	public ExecuteServiceData data;
+
+	public ExecuteServiceData getData() {
+		return data;
+	}
+
+	public void setData(ExecuteServiceData data) {
+		this.data = data;
+	}
 
 	public ExecuteServiceJob() {
 

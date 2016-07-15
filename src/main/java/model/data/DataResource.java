@@ -15,16 +15,18 @@
  **/
 package model.data;
 
+import io.swagger.annotations.ApiModelProperty;
+
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+
 import model.job.metadata.ResourceMetadata;
 import model.job.metadata.SpatialMetadata;
-
-import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import io.swagger.annotations.ApiModelProperty;
 
 /**
  * Represents a piece of data referened by the Piazza system, internally or
@@ -44,12 +46,12 @@ import io.swagger.annotations.ApiModelProperty;
 public class DataResource {
 
 	@ApiModelProperty(value = "The Id of the data to download", required = true)
-	@NotNull
 	public String dataId;
 
 	@ApiModelProperty(value = "Polymorphically defines the information specific to this Data Resource, based on its format", required = true, dataType = "model.swagger.SwaggerDataType")
 	@NotNull
 	@JsonProperty(required = true)
+	@Valid
 	public DataType dataType;
 
 	@ApiModelProperty(value = "Object of spatial metadata fields associated with a Resource. Used to generically specify the bounding box and the spatial reference of a dataset")

@@ -45,7 +45,6 @@ import io.swagger.annotations.ApiModelProperty;
  * @author mlynum & Patrick.Doody
  * 
  */
-@JsonInclude(Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ResourceMetadata {
 
