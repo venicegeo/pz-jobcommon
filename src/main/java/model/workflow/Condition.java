@@ -36,7 +36,7 @@ public class Condition {
 
 	@ApiModelProperty(value = "The array of Event Type Ids")
 	@NotNull
-	public String[] eventTypeIds;
+	public String[] eventtypeIds;
 
 	@ApiModelProperty(value = "Elastic Search DSL Query 2.2, for details see https://www.elastic.co/guide/en/elasticsearch/reference/2.2/query-dsl.html")
 	@NotNull

@@ -58,11 +58,10 @@ public class Event {
 	@ApiModelProperty(value = "The unique Id of the Event Type whose schema this Event conforms to.", required = true)
 	@NotNull
 	@Size(min=1)
-	public String eventTypeId;
+	public String eventtypeId;
 
 	@ApiModelProperty(value = "The date and time that the Event was generated.", required = true)
 	@JsonIgnore
-	@NotNull
 	public DateTime createdOn;
 
 
@@ -73,12 +72,17 @@ public class Event {
 	@JsonProperty("createdOn")
 	public String getCreatedOnString() {
 		// Defaults to ISO8601
-		return createdOn.toString();
+		if( createdOn != null ) {
+			return createdOn.toString();
+		}
+		return null;
 	}
 
 	@JsonProperty("createdOn")
 	public void setCreatedOnString(String createdOn) {
-		this.createdOn = new DateTime(createdOn);
+		if( createdOn != null) {
+			this.createdOn = new DateTime(createdOn);
+		}
 	}
 
 	@ApiModelProperty(value = "Username of the individual submitting the Event.")

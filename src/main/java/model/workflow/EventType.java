@@ -20,7 +20,11 @@ import java.util.Map;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.joda.time.DateTime;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 import io.swagger.annotations.ApiModelProperty;
@@ -46,7 +50,7 @@ import io.swagger.annotations.ApiModelProperty;
 public class EventType {
 
 	@ApiModelProperty(value = "The unique Id of this Event Type.")
-	public String eventTypeId;
+	public String eventtypeId;
 
 	@ApiModelProperty(value = "A human-readable name for this Event Type.")
 	@NotNull
@@ -59,4 +63,24 @@ public class EventType {
 
 	@ApiModelProperty(value = "Username of the individual submitting the EventType.")
 	public String createdBy;
+	
+	@ApiModelProperty(value = "The date and time that the EventType was generated.", required = true)
+	@JsonIgnore
+	public DateTime createdOn;
+
+	@JsonProperty("createdOn")
+	public String getCreatedOnString() {
+		// Defaults to ISO8601
+		if( createdOn != null ) {
+			return createdOn.toString();
+		}
+		return null;
+	}
+
+	@JsonProperty("createdOn")
+	public void setCreatedOnString(String createdOn) {
+		if( createdOn != null) {
+			this.createdOn = new DateTime(createdOn);
+		}
+	}	
 }
