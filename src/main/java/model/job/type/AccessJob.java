@@ -59,6 +59,9 @@ public class AccessJob implements PiazzaJobType {
 	@Size(min=1)
 	public String deploymentType;
 
+	@ApiModelProperty(value = "Optional. If provided, the deployment will also be added to the specified deployment group.", required = false)
+	public String deploymentGroupId;
+
 	public AccessJob() {
 	}
 
@@ -85,5 +88,13 @@ public class AccessJob implements PiazzaJobType {
 
 	public String getDeploymentType() {
 		return deploymentType;
+	}
+
+	public String getDeploymentGroupId() {
+		return deploymentGroupId;
+	}
+
+	public void setDeploymentGroupId(String deploymentGroupId) {
+		this.deploymentGroupId = deploymentGroupId;
 	}
 }

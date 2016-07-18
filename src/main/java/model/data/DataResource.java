@@ -15,18 +15,18 @@
  **/
 package model.data;
 
-import model.job.metadata.ResourceMetadata;
-import model.job.metadata.SpatialMetadata;
+import io.swagger.annotations.ApiModelProperty;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+
+import model.job.metadata.ResourceMetadata;
+import model.job.metadata.SpatialMetadata;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import io.swagger.annotations.ApiModelProperty;
 
 /**
  * Represents a piece of data referened by the Piazza system, internally or
@@ -41,8 +41,8 @@ import io.swagger.annotations.ApiModelProperty;
  * @author Patrick.Doody
  * 
  */
-@JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(Include.NON_NULL)
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class DataResource {
 
 	@ApiModelProperty(value = "The Id of the data to download", required = true)
