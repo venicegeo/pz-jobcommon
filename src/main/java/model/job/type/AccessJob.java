@@ -58,7 +58,6 @@ public class AccessJob implements PiazzaJobType {
 	public String deploymentGroupId;
 
 	@ApiModelProperty(value = "Optional. The number of days that this Deployment will be needed for. Once the Deployment expires, it is subject to automatic resource cleanup on the Piazza GIS Server.", required = false)
-	@Size(min = 1, max = 1825)
 	public Integer durationDays;
 
 	public AccessJob() {
