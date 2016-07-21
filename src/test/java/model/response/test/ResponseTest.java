@@ -117,14 +117,14 @@ public class ResponseTest {
 		deployment.setPort("8080");
 		deployment.setDeploymentId("123456");
 		deployment.setLayer("Test");
-		DeploymentResponse deploymentInput = new DeploymentResponse(deployment);
+		DeploymentResponse deploymentInput = new DeploymentResponse(deployment, "Now");
 
 		// Test Deployment Response
 		String serialized = mapper.writeValueAsString(deploymentInput);
 		DeploymentResponse deploymentOutput = mapper.readValue(serialized, DeploymentResponse.class);
-		assertTrue(deploymentOutput.data.getCapabilitiesUrl().equals(deployment.getCapabilitiesUrl()));
-		assertTrue(deploymentOutput.data.getHost().equals(deployment.getHost()));
-		assertTrue(deploymentOutput.data.getDeploymentId().equals(deployment.getDeploymentId()));
+		assertTrue(deploymentOutput.data.getDeployment().getCapabilitiesUrl().equals(deployment.getCapabilitiesUrl()));
+		assertTrue(deploymentOutput.data.getDeployment().getHost().equals(deployment.getHost()));
+		assertTrue(deploymentOutput.data.getDeployment().getDeploymentId().equals(deployment.getDeploymentId()));
 
 		// Test List Response
 		List<Deployment> list = new ArrayList<Deployment>();
