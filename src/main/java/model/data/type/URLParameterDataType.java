@@ -31,7 +31,6 @@ public class URLParameterDataType extends TextDataType {
 	public String type;
 
 	public String getMimeType() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 }
