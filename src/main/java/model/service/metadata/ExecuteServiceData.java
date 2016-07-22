@@ -34,12 +34,12 @@ import model.data.DataType;
  */
 public class ExecuteServiceData {
 
-	@ApiModelProperty(value = "The Inputs for the execution.", required = true)
+	@ApiModelProperty(value = "The Inputs for the execution", required = true)
 	@NotNull
 	@JsonProperty("dataInputs")
 	public Map<String, DataType> dataInputs;
 
-	@ApiModelProperty(value = "The Output for the execution.", required = true)
+	@ApiModelProperty(value = "The Output for the execution", required = true)
 	@NotNull
 	@JsonProperty("dataOutput")
 	public List<DataType> dataOutput;

@@ -27,7 +27,7 @@ public class TriggerListResponse extends PiazzaResponse {
 	@ApiModelProperty(value = "The array of Trigger results.", required = true)
 	public List<Trigger> data;
 
-	@ApiModelProperty(value = "The pagination metadata for this query.")
+	@ApiModelProperty(value = "The pagination metadata for this query.", required = true)
 	public Pagination pagination;
 
 	public TriggerListResponse() {

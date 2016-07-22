@@ -49,22 +49,22 @@ import io.swagger.annotations.ApiModelProperty;
 @JsonInclude(Include.NON_NULL)
 public class EventType {
 
-	@ApiModelProperty(value = "The unique Id of this Event Type.")
-	public String eventtypeId;
+	@ApiModelProperty(value = "The unique Id of this Event Type. Not used in POST requests", required = true)
+	public String eventTypeId;
 
-	@ApiModelProperty(value = "A human-readable name for this Event Type.")
+	@ApiModelProperty(value = "A human-readable name for this Event Type", required = true)
 	@NotNull
 	@Size(min=1)
 	public String name;
 
-	@ApiModelProperty(value = "The map of key-value pairs that define the properties of this Event Type. The key is the name of the property, and the value is the type of that property. Valid types are 'string' and 'integer'.")
+	@ApiModelProperty(value = "The map of key-value pairs that define the properties of this Event Type. The key is the name of the property, and the value is the type of that property. Valid types are 'string', 'boolean', 'integer', 'double' 'date', 'float', 'short', 'long' and 'byte''")
 	@NotNull
 	public Map<String, String> mapping;
 
-	@ApiModelProperty(value = "Username of the individual submitting the EventType.")
+	@ApiModelProperty(value = "Supplied by system", required = true)
 	public String createdBy;
 	
-	@ApiModelProperty(value = "The date and time that the EventType was generated.", required = true)
+	@ApiModelProperty(value = "Supplied by system", required = true)
 	@JsonIgnore
 	public DateTime createdOn;
 

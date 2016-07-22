@@ -18,6 +18,10 @@ package model.workflow;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.joda.time.DateTime;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import io.swagger.annotations.ApiModelProperty;
 
 /**
@@ -36,7 +40,7 @@ import io.swagger.annotations.ApiModelProperty;
  */
 
 public class Alert {
-	@ApiModelProperty(value = "The unique Id for this Alert")
+	@ApiModelProperty(value = "The unique Id for this Alert", required = true)
 	public String alertId;
 
 	@ApiModelProperty(value = "The unique Id for the Trigger that was fired", required = true)
@@ -49,6 +53,13 @@ public class Alert {
 	@Size(min=1)
 	public String eventId;
 
-	@ApiModelProperty(value = "The unique Id for the Job that was submitted")
+	@ApiModelProperty(value = "The unique Id for the Job that was submitted", required = true)
 	public String jobId;
+	
+	@JsonIgnore
+	@ApiModelProperty(value = "Supplied by system", required = true)
+	public DateTime createdOn;
+	
+	@ApiModelProperty(value = "Supplied by system", required = true)
+	public String createdBy;
 }
