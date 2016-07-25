@@ -27,7 +27,7 @@ import io.swagger.annotations.ApiModelProperty;
  */
 public class ErrorResponse extends PiazzaResponse {
 
-	@ApiModelProperty(value = "A description of the error describing the failure.")
+	@ApiModelProperty(value = "A description of the error describing the failure", required = true)
 	public String message;
 
 	@ApiModelProperty(value = "The Piazza component where the error originated.")

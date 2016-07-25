@@ -23,8 +23,6 @@ import model.data.DataType;
 /**
  * Vector resource held by the Piazza PostGIS database.
  * 
- * TODO: This class is likely missing some necessary parameters.
- * 
  * @author Patrick.Doody
  * 
  */

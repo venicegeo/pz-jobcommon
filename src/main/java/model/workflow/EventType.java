@@ -20,7 +20,11 @@ import java.util.Map;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.joda.time.DateTime;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 import io.swagger.annotations.ApiModelProperty;
@@ -45,18 +49,38 @@ import io.swagger.annotations.ApiModelProperty;
 @JsonInclude(Include.NON_NULL)
 public class EventType {
 
-	@ApiModelProperty(value = "The unique Id of this Event Type.")
+	@ApiModelProperty(value = "The unique Id of this Event Type. Not used in POST requests", required = true)
 	public String eventTypeId;
 
-	@ApiModelProperty(value = "A human-readable name for this Event Type.")
+	@ApiModelProperty(value = "A human-readable name for this Event Type", required = true)
 	@NotNull
 	@Size(min=1)
 	public String name;
 
-	@ApiModelProperty(value = "The map of key-value pairs that define the properties of this Event Type. The key is the name of the property, and the value is the type of that property. Valid types are 'string' and 'integer'.")
+	@ApiModelProperty(value = "The map of key-value pairs that define the properties of this Event Type. The key is the name of the property, and the value is the type of that property. Valid types are 'string', 'boolean', 'integer', 'double' 'date', 'float', 'short', 'long' and 'byte''")
 	@NotNull
 	public Map<String, String> mapping;
 
-	@ApiModelProperty(value = "Username of the individual submitting the EventType.")
+	@ApiModelProperty(value = "Supplied by system", required = true)
 	public String createdBy;
+	
+	@ApiModelProperty(value = "Supplied by system", required = true)
+	@JsonIgnore
+	public DateTime createdOn;
+
+	@JsonProperty("createdOn")
+	public String getCreatedOnString() {
+		// Defaults to ISO8601
+		if( createdOn != null ) {
+			return createdOn.toString();
+		}
+		return null;
+	}
+
+	@JsonProperty("createdOn")
+	public void setCreatedOnString(String createdOn) {
+		if( createdOn != null) {
+			this.createdOn = new DateTime(createdOn);
+		}
+	}	
 }

@@ -24,10 +24,10 @@ import model.workflow.EventType;
 @ApiModel(value = "EventTypeResults")
 public class EventTypeListResponse extends PiazzaResponse {
 
-	@ApiModelProperty(value = "The array of EventType results.", required = true)
+	@ApiModelProperty(value = "The array of EventType results", required = true)
 	public List<EventType> data;
 
-	@ApiModelProperty(value = "The pagination metadata for this query.")
+	@ApiModelProperty(value = "The pagination metadata for this query")
 	public Pagination pagination;
 
 	public EventTypeListResponse() {

@@ -16,8 +16,8 @@
 package model.request;
 
 /**
- * Model used in interactions with the pz-logger REST service. This encapsulates
- * the Logs in the expected format that the pz-logger expects.
+ * Model used in interactions with the pz-logger REST service. This encapsulates the Logs in the expected format that
+ * the pz-logger expects.
  * 
  * @author Patrick.Doody
  * 
@@ -26,17 +26,17 @@ public class LogRequest {
 
 	private String service;
 	private String address;
-	private Long stamp;
+	private String createdOn;
 	private String message;
 	private String severity;
 
 	public LogRequest() {
 	}
 
-	public LogRequest(String service, String address, Long stamp, String message, String severity) {
+	public LogRequest(String service, String address, String createdOn, String message, String severity) {
 		setService(service);
 		setAddress(address);
-		setStamp(stamp);
+		setCreatedOn(createdOn);
 		setMessage(message);
 		setSeverity(severity);
 	}
@@ -57,12 +57,12 @@ public class LogRequest {
 		this.address = address;
 	}
 
-	public Long getStamp() {
-		return stamp;
+	public String getCreatedOn() {
+		return createdOn;
 	}
 
-	public void setStamp(Long stamp) {
-		this.stamp = stamp;
+	public void setCreatedOn(String createdOn) {
+		this.createdOn = createdOn;
 	}
 
 	public String getMessage() {
@@ -85,7 +85,7 @@ public class LogRequest {
 		StringBuffer sb = new StringBuffer();
 		sb.append("Service : " + getService() + "\n");
 		sb.append("Address : " + getAddress() + "\n");
-		sb.append("Time Stamp : " + getStamp() + "\n");
+		sb.append("Time Stamp : " + getCreatedOn() + "\n");
 		sb.append("Message : " + getMessage() + "\n");
 		sb.append("Severity : " + getSeverity() + "\n");
 

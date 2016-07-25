@@ -19,6 +19,9 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.joda.time.DateTime;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
@@ -54,26 +57,33 @@ import model.request.PiazzaJobRequest;
 @JsonInclude(Include.NON_NULL)
 public class Trigger {
 
-	@ApiModelProperty(value = "The unique Id for this Trigger.")
+	@ApiModelProperty(value = "The unique Id for this Trigger. Not used in POST requests", required=true)
 	public String triggerId;
 
-	@ApiModelProperty(value = "The description of what this Trigger intends to accomplish.", required = true)
+	@ApiModelProperty(value = "The description of what this Trigger intends to accomplish", required = true)
 	@NotNull
 	@Size(min=1)
 	public String title;
 
-	@ApiModelProperty(value = "The Event Type to match and the query to run on events.", required=true)
+	@ApiModelProperty(value = "The Event Type to match and the query to run on events", required=true)
 	@NotNull
 	@Valid
 	public Condition condition;
 
-	@ApiModelProperty(value = "The template of the Job to be executed when the conditions are met.", required=true)
+	@ApiModelProperty(value = "The template of the Job to be executed when the conditions are met", required=true)
 	@NotNull
 	public PiazzaJobRequest job;
 
-	@ApiModelProperty(value = "A system generated Id.")
+	@ApiModelProperty(value = "Supplied by system", required = true)
 	public String percolationId;
 
-	@ApiModelProperty(value = "Username of the individual submitting the Trigger.")
+	@ApiModelProperty(value = "Supplied by system", required=true)
 	public String createdBy;
+	
+	@ApiModelProperty(value = "Supplied by system", required = true)
+	@JsonIgnore
+	public DateTime createdOn;
+	
+	@ApiModelProperty(value = "Field that will determine if the trigger fires", required = true)
+	public Boolean enabled;
 }

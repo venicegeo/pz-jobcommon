@@ -15,7 +15,6 @@
  **/
 package model.job.type;
 
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -24,19 +23,15 @@ import io.swagger.annotations.ApiModelProperty;
 import model.job.PiazzaJobType;
 
 /**
- * Describes a user Request for Accessing data out of the Piazza core system.
- * This could potentially be for data that is held within the Piazza holdings,
- * or data that is external to Piazza core which has had its Metadata previously
+ * Describes a user Request for Accessing data out of the Piazza core system. This could potentially be for data that is
+ * held within the Piazza holdings, or data that is external to Piazza core which has had its Metadata previously
  * loaded.
  * 
- * The two current deployment types are 1) Hosted on a Piazza GeoServer
- * instance, which can allow for Web Coverage Service or Web Feature Service,
- * depending on the type of data to be accessed. 2) Raw file download. This will
- * place the file in a accessible location that the user can access, such as an
- * FTP or an S3 location.
+ * The two current deployment types are 1) Hosted on a Piazza GeoServer instance, which can allow for Web Coverage
+ * Service or Web Feature Service, depending on the type of data to be accessed. 2) Raw file download. This will place
+ * the file in a accessible location that the user can access, such as an FTP or an S3 location.
  * 
- * Currently, a single resource ID is provided to denote the Resource in the
- * Piazza holdings to access.
+ * Currently, a single resource ID is provided to denote the Resource in the Piazza holdings to access.
  * 
  * @author Patrick.Doody
  * 
@@ -52,12 +47,18 @@ public class AccessJob implements PiazzaJobType {
 	public static final String ACCESS_TYPE_FILE = "file";
 
 	@ApiModelProperty(required = true, value = "The Id of the subject data")
-	@Size(min=1)
+	@Size(min = 1)
 	public String dataId;
 
 	@ApiModelProperty(required = true, value = "The type of deployment, either hosted on a Piazza GeoServer instance, or raw file download")
-	@Size(min=1)
+	@Size(min = 1)
 	public String deploymentType;
+
+	@ApiModelProperty(value = "Optional. If provided, the deployment will also be added to the specified deployment group.", required = false)
+	public String deploymentGroupId;
+
+	@ApiModelProperty(value = "Optional. The number of days that this Deployment will be needed for. Once the Deployment expires, it is subject to automatic resource cleanup on the Piazza GIS Server.", required = false)
+	public Integer durationDays;
 
 	public AccessJob() {
 	}
@@ -85,5 +86,21 @@ public class AccessJob implements PiazzaJobType {
 
 	public String getDeploymentType() {
 		return deploymentType;
+	}
+
+	public String getDeploymentGroupId() {
+		return deploymentGroupId;
+	}
+
+	public void setDeploymentGroupId(String deploymentGroupId) {
+		this.deploymentGroupId = deploymentGroupId;
+	}
+
+	public Integer getDurationDays() {
+		return durationDays;
+	}
+
+	public void setDurationDays(Integer durationDays) {
+		this.durationDays = durationDays;
 	}
 }

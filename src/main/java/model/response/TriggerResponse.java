@@ -13,24 +13,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-package model.data.type;
-
-import javax.validation.constraints.NotNull;
+package model.response;
 
 import io.swagger.annotations.ApiModelProperty;
+import model.workflow.Trigger;
 
 /**
- * Indicates that text content is to be used in URL key-value pair
+ * A Response containing information regarding a Piazza Trigger.
  * 
- * @author bkrasner
+ * @author Russell.Orf
  *
  */
-public class URLParameterDataType extends TextDataType {
+public class TriggerResponse extends PiazzaResponse {
 
-	@ApiModelProperty(required = true, value = "The type of data.", allowableValues = "urlparameter")
-	public String type;
+	@ApiModelProperty(value = "Object containing information regarding a Piazza Trigger.")
+	public Trigger data;
 
-	public String getMimeType() {
-		return null;
+	public TriggerResponse() {
+
+	}
+
+	public TriggerResponse(Trigger trigger) {
+		this.data = trigger;
 	}
 }

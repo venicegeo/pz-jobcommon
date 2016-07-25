@@ -42,17 +42,21 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 		@Type(value = DataResourceResponse.class, name = "data"),
 		@Type(value = DeploymentListResponse.class, name = "deployment-list"),
 		@Type(value = DeploymentResponse.class, name = "deployment"),
+		@Type(value = DeploymentGroupResponse.class, name = "deployment-group"),
 		@Type(value = ErrorResponse.class, name = "error"),
 		@Type(value = EventListResponse.class, name = "event-list"),
+		@Type(value = EventResponse.class, name = "event"),
 		@Type(value = EventTypeListResponse.class, name = "eventtype-list"),
-		@Type(value = JobErrorResponse.class, name = "job-error"),
+		@Type(value = EventTypeResponse.class, name = "eventtype"),
+		@Type(value = JobErrorResponse.class, name = "job-error"), 
 		@Type(value = JobResponse.class, name = "job"),
 		@Type(value = JobStatusResponse.class, name = "status"),
 		@Type(value = ServiceIdResponse.class, name = "service-id"),
 		@Type(value = ServiceListResponse.class, name = "service-list"),
-		@Type(value = ServiceResponse.class, name = "service"),
+		@Type(value = ServiceResponse.class, name = "service"), 
 		@Type(value = SuccessResponse.class, name = "success"),
 		@Type(value = TriggerListResponse.class, name = "trigger-list"),
+		@Type(value = TriggerResponse.class, name = "trigger"),
 		@Type(value = UUIDResponse.class, name = "uuid")})
 @JsonInclude(Include.NON_NULL)
 public class PiazzaResponse {

@@ -13,24 +13,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-package model.data.type;
-
-import javax.validation.constraints.NotNull;
+package model.response;
 
 import io.swagger.annotations.ApiModelProperty;
+import model.data.deployment.DeploymentGroup;
 
 /**
- * Indicates that text content is to be used in URL key-value pair
+ * A Response containing information regarding a Piazza Deployment Group.
  * 
- * @author bkrasner
+ * @author Patrick.Doody
  *
  */
-public class URLParameterDataType extends TextDataType {
+public class DeploymentGroupResponse extends PiazzaResponse {
 
-	@ApiModelProperty(required = true, value = "The type of data.", allowableValues = "urlparameter")
-	public String type;
+	@ApiModelProperty(value = "Object containing metadata regarding a Piazza Deployment Group.")
+	public DeploymentGroup data;
 
-	public String getMimeType() {
-		return null;
+	public DeploymentGroupResponse() {
+
+	}
+
+	public DeploymentGroupResponse(DeploymentGroup deploymentGroup) {
+		this.data = deploymentGroup;
 	}
 }

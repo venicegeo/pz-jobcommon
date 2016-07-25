@@ -24,10 +24,10 @@ import model.workflow.Alert;
 @ApiModel(value = "AlertResults")
 public class AlertListResponse extends PiazzaResponse {
 
-	@ApiModelProperty(value = "The array of Alert results.")
+	@ApiModelProperty(value = "The array of Alert results.", required=true)
 	public List<Alert> data;
 
-	@ApiModelProperty(value = "The pagination metadata for this query.")
+	@ApiModelProperty(value = "The pagination metadata for this query.", required=true)
 	public Pagination pagination;
 
 	public AlertListResponse() {
