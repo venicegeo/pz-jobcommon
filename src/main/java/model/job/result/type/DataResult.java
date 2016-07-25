@@ -20,7 +20,7 @@ import model.job.result.ResultType;
 
 /**
  * A Job result for returning a DataResource item held by the internal Piazza
- * stores. This returns the ID of the Resource - not the resource information,
+ * stores. This returns the Id of the Resource - not the resource information,
  * as this is weighty and is held elsewhere.
  * 
  * @author Patrick.Doody

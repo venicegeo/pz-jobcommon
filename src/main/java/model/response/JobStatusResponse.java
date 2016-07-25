@@ -45,7 +45,7 @@ public class JobStatusResponse extends PiazzaResponse {
 	 *
 	 */
 	public class JobStatusData {
-		@ApiModelProperty(value = "A reference to the Result of the Job. This could be a Resource ID, or a Service ID, in certain cases. Or perhaps an error if the Job encountered an error during processing.", dataType = "model.swagger.SwaggerResultType")
+		@ApiModelProperty(value = "A reference to the Result of the Job. This could be a Resource Id, or a Service Id, in certain cases. Or perhaps an error if the Job encountered an error during processing.", dataType = "model.swagger.SwaggerResultType")
 		public ResultType result;
 
 		@ApiModelProperty(value = "The status of the Job. Submitted, Running, Success, Error, or Failure.", required = true)
@@ -60,7 +60,7 @@ public class JobStatusResponse extends PiazzaResponse {
 		@ApiModelProperty(value = "Object containing metadata describing the current status of the Job.")
 		public JobProgress progress;
 
-		@ApiModelProperty(value = "The ID of the Job.")
+		@ApiModelProperty(value = "The Id of the Job.")
 		public String jobId;
 
 		public void populateFromJob(Job job) {

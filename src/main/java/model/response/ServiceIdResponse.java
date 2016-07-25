@@ -18,14 +18,14 @@ package model.response;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * A Response containing an ID regarding a Piazza Service.
+ * A Response containing an Id regarding a Piazza Service.
  * 
  * @author Patrick.Doody
  *
  */
 public class ServiceIdResponse extends PiazzaResponse {
 
-	@ApiModelProperty(value = "The Object containing the Service ID.")
+	@ApiModelProperty(value = "The Object containing the Service Id.")
 	public ServiceIdData data = new ServiceIdData();
 
 	public ServiceIdResponse(String serviceId) {
@@ -36,10 +36,10 @@ public class ServiceIdResponse extends PiazzaResponse {
 	}
 
 	/**
-	 * Used to wrap the Service ID in an annotatable class.
+	 * Used to wrap the Service Id in an annotatable class.
 	 */
 	public class ServiceIdData {
-		@ApiModelProperty(value = "The ID of the Service referenced in the request.")
+		@ApiModelProperty(value = "The Id of the Service referenced in the request.")
 		private String serviceId;
 
 		public String getServiceId() {

@@ -51,7 +51,7 @@ public class JobMessageFactory {
 	 * @param piazzaRequest
 	 *            The Job to be created.
 	 * @param jobId
-	 *            The ID of the Job
+	 *            The Id of the Job
 	 * @return Kafka message
 	 * @throws JsonProcessingException
 	 *             The PiazzaJob cannot be serialized to JSON.
@@ -65,7 +65,7 @@ public class JobMessageFactory {
 
 	/**
 	 * Creates a Kafka message for a Piazza Job to be cancelled; referenced by
-	 * Job ID. This message is consumed by the Job Manager, which will update
+	 * Job Id. This message is consumed by the Job Manager, which will update
 	 * the Job Tables, and any other components that are required to act on the
 	 * Job being cancelled.
 	 * 
@@ -88,11 +88,11 @@ public class JobMessageFactory {
 	 * 
 	 * This can also be used to post the result to the Job. If you're setting
 	 * the status of the job to complete, you can also set the
-	 * StatusUpdate.setResult() method to attach some resulting object or ID
+	 * StatusUpdate.setResult() method to attach some resulting object or Id
 	 * that the job has created.
 	 * 
 	 * @param jobId
-	 *            The ID of the Job being updated
+	 *            The Id of the Job being updated
 	 * @param statusUpdate
 	 *            Status Update information
 	 * @return
@@ -126,7 +126,7 @@ public class JobMessageFactory {
 
 	/**
 	 * Creates a Job Request method for an Ingest Job to ingest the specified
-	 * Data Resource, and assigns the specified Job ID to this Ingest job. The
+	 * Data Resource, and assigns the specified Job Id to this Ingest job. The
 	 * DataResource passed into this first argument MUST have its DataId
 	 * specified.
 	 * 
@@ -145,7 +145,7 @@ public class JobMessageFactory {
 	 * @param dataResource
 	 *            The Data Resource to be ingested
 	 * @param jobId
-	 *            The Job ID of the Ingest Job that will be created
+	 *            The Job Id of the Ingest Job that will be created
 	 * @param userName
 	 *            The authenticated UserName
 	 * @return The Kafka message for creating the Ingest Job, that can be Send
@@ -153,9 +153,9 @@ public class JobMessageFactory {
 	 */
 	public static ProducerRecord<String, String> getIngestJobForDataResource(DataResource dataResource, String jobId,
 			String userName, String space) throws Exception {
-		// Data Resource must have an ID at this point
+		// Data Resource must have an Id at this point
 		if (dataResource.getDataId() == null) {
-			throw new Exception("The DataResource object must have a populated ID.");
+			throw new Exception("The DataResource object must have a populated Id.");
 		}
 
 		// Create the IngestJob

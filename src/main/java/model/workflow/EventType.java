@@ -34,7 +34,7 @@ import io.swagger.annotations.ApiModelProperty;
  */
 
 // type model.workflow.EventType struct {
-// ID Ident `json:"id"`
+// Id Ident `json:"id"`
 // Name string `json:"name" binding:"required"`
 // Mapping map[string]elasticsearch.MappingElementTypeName `json:"mapping"
 // binding:"required"`

@@ -33,7 +33,7 @@ public class JobErrorResponse extends PiazzaResponse {
 	@ApiModelProperty(value = "The Piazza component where the error originated.")
 	public String origin;
 
-	@ApiModelProperty(value = "The ID of the associated Job that encountered an Error.")
+	@ApiModelProperty(value = "The Id of the associated Job that encountered an Error.")
 	public String jobId;
 
 	public JobErrorResponse(String jobId, String message, String origin) {

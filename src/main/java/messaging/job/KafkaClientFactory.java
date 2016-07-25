@@ -64,7 +64,7 @@ public class KafkaClientFactory {
 	 * @param port
 	 *            Cluster port
 	 * @param group
-	 *            Group ID to join
+	 *            Group Id to join
 	 * @return Kafka Consumer
 	 */
 	public static KafkaConsumer<String, String> getConsumer(String host, String port, String group) {

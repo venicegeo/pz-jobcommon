@@ -22,17 +22,17 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 /**
- * Basic container object a Deployment Group ID.
+ * Basic container object a Deployment Group Id.
  * 
  * <p>
  * There is a limitation of GeoServer such that Layer Groups can only be created
  * if there is at least one valid layer populated at the time of creation.
- * However, for Piazza use-cases, we want to allow users to grab a unique ID for
+ * However, for Piazza use-cases, we want to allow users to grab a unique Id for
  * a Layer Group before they have created any actual layers. To support this
  * goal, we use this DeploymentGroup model, as persisted in Mongo, to maintain a
  * connection between a GUID delivered to a user, and a Layer Group (once
  * created) in GeoServer. The user only ever receives the GUID as held by this
- * DeploymentGroup object. In that way, we can deliver some placeholder ID to
+ * DeploymentGroup object. In that way, we can deliver some placeholder Id to
  * the user <b>before</b> the actual Layer Group is ready to be created on
  * GeoServer.
  * </p>
@@ -63,7 +63,7 @@ public class DeploymentGroup {
 	 * Creates a new Deployment Group.
 	 * 
 	 * @param id
-	 *            The deployment group ID for this object
+	 *            The deployment group Id for this object
 	 * @param createdBy
 	 *            The user who created this deployment group.
 	 */

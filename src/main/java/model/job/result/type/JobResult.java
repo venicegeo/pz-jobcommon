@@ -20,7 +20,7 @@ import model.job.result.ResultType;
 
 /**
  * A Job result for returning a Job held by the internal Piazza stores. This
- * returns the ID of the Job - not the Job information.
+ * returns the Id of the Job - not the Job information.
  * 
  * This is used when the result of one Job is to spawn another Job. This Result
  * Type is used to link the two Jobs together.

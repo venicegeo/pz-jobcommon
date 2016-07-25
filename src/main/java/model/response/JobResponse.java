@@ -18,14 +18,14 @@ package model.response;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * Standard Response that contains a simple Job ID.
+ * Standard Response that contains a simple Job Id.
  * 
  * @author Patrick.Doody
  *
  */
 public class JobResponse extends PiazzaResponse {
 
-	@ApiModelProperty(value = "The Object containing the Job ID.")
+	@ApiModelProperty(value = "The Object containing the Job Id.")
 	public JobIdData data = new JobIdData();
 
 	public JobResponse(String jobId) {
@@ -36,10 +36,10 @@ public class JobResponse extends PiazzaResponse {
 	}
 
 	/**
-	 * Used to wrap the Job ID in an annotatable class.
+	 * Used to wrap the Job Id in an annotatable class.
 	 */
 	public class JobIdData {
-		@ApiModelProperty(value = "The ID of the Job referenced in the request.")
+		@ApiModelProperty(value = "The Id of the Job referenced in the request.")
 		private String jobId;
 
 		public String getJobId() {

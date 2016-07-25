@@ -28,7 +28,7 @@ import io.swagger.annotations.ApiModelProperty;
 // Query is specific to the event type
 //
 // type model.workflow.Condition struct {
-// EventTypeIDs []Ident `json:"eventtype_ids" binding:"required"`
+// EventTypeIds []Ident `json:"eventtype_ids" binding:"required"`
 // Query map[string]interface{} `json:"query" binding:"required"`
 // }
 

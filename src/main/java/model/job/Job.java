@@ -33,7 +33,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * Defines a Job in the Piazza system.
  * 
- * A Job is uniquely identified by a Job ID. This is the primary key used for
+ * A Job is uniquely identified by a Job Id. This is the primary key used for
  * lookup in the Jobs collection.
  * 
  * Additional Metadata is also stored with a job, such as who submitted the job,

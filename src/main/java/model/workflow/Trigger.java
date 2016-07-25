@@ -38,12 +38,12 @@ import model.request.PiazzaJobRequest;
 // string
 //
 // type model.workflow.Trigger struct {
-// ID Ident `json:"id"`
+// Id Ident `json:"id"`
 // Title string `json:"title" binding:"required"`
 // model.workflow.Condition model.workflow.Condition `json:"condition"
 // binding:"required"`
 // model.workflow.Job model.workflow.Job `json:"job" binding:"required"`
-// PercolationID Ident `json:"percolation_id"`
+// PercolationId Ident `json:"percolation_id"`
 // }
 /*
  * { "id": "987d6", "title": "my found-a-bad-telephone-number trigger",

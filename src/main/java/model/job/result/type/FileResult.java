@@ -43,7 +43,7 @@ public class FileResult implements ResultType {
 	 *            The URL, off of the Gateway, that the file can be acquired
 	 *            from.
 	 * @param dataId
-	 *            The Data ID of the resource.
+	 *            The Data Id of the resource.
 	 */
 	public FileResult(String dataId) {
 		this.dataId = dataId;

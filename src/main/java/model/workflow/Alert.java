@@ -30,9 +30,9 @@ import io.swagger.annotations.ApiModelProperty;
 // a notification, automatically created when an model.workflow.Trigger happens
 //
 // type model.workflow.Alert struct {
-// ID Ident `json:"id"`
-// TriggerID Ident `json:"trigger_id"`
-// EventID Ident `json:"event_id"`
+// Id Ident `json:"id"`
+// TriggerId Ident `json:"trigger_id"`
+// EventId Ident `json:"event_id"`
 // }
 
 /*

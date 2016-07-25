@@ -64,9 +64,9 @@ public class Deployment {
 	 * Creates a new Deployment.
 	 * 
 	 * @param id
-	 *            The ID of this deployment.
+	 *            The Id of this deployment.
 	 * @param dataId
-	 *            The ID of the DataResource that this deployment represents
+	 *            The Id of the DataResource that this deployment represents
 	 * @param host
 	 *            The Host of the GeoServer instance
 	 * @param port

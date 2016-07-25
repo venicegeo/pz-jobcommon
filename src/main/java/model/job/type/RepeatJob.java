@@ -25,7 +25,7 @@ import model.job.PiazzaJobType;
  * Repeats a Job that is currently stored within the Job Manager's Job Table.
  * This will re-run the Job with the API Key of the user requesting the repeat.
  * 
- * All resources generated (including the Job itself) will have new IDs
+ * All resources generated (including the Job itself) will have new Ids
  * associated with them. This creates an entirely new, decoupled Job that has
  * only its exact inputs tied to the first Job.
  * 

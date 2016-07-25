@@ -54,9 +54,9 @@ public class Lease {
 	 * Creates a new Deployment Lease.
 	 * 
 	 * @param id
-	 *            The ID of this Lease
+	 *            The Id of this Lease
 	 * @param deploymentId
-	 *            The ID of the Deployment that this Lease allows access to
+	 *            The Id of the Deployment that this Lease allows access to
 	 * @param expiresOn
 	 *            The expiration date of this Lease.
 	 */

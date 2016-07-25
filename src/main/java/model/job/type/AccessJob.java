@@ -31,7 +31,7 @@ import model.job.PiazzaJobType;
  * Service or Web Feature Service, depending on the type of data to be accessed. 2) Raw file download. This will place
  * the file in a accessible location that the user can access, such as an FTP or an S3 location.
  * 
- * Currently, a single resource ID is provided to denote the Resource in the Piazza holdings to access.
+ * Currently, a single resource Id is provided to denote the Resource in the Piazza holdings to access.
  * 
  * @author Patrick.Doody
  * 

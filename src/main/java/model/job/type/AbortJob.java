@@ -22,7 +22,7 @@ import io.swagger.annotations.ApiModelProperty;
 import model.job.PiazzaJobType;
 
 /**
- * Describes the request for a user wishing to cancel a job. The Job ID is
+ * Describes the request for a user wishing to cancel a job. The Job Id is
  * required, optional is a reason as to why they wish to job to be cancelled.
  * 
  * @author Patrick.Doody

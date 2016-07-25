@@ -24,12 +24,12 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 /**
  * Represents a Standard Response from the Piazza Gateway. Responses contain, at
- * bare minimum, the ID of the Job they correspond with.
+ * bare minimum, the Id of the Job they correspond with.
  * 
- * Each response typically has, at bare minimum, the Job ID for which the
+ * Each response typically has, at bare minimum, the Job Id for which the
  * request related to. This includes requests such as fetching status, updating
  * metadata, or executing a service. Each request to the Piazza system will have
- * a Job ID generated for it, that can be tracked.
+ * a Job Id generated for it, that can be tracked.
  * 
  * @author Patrick.Doody
  * 

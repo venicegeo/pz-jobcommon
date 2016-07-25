@@ -20,7 +20,7 @@ import io.swagger.annotations.ApiModelProperty;
 
 /**
  * Represents a Standard Response from the Piazza Workflow project. Responses
- * contain, at bare minimum, the ID of the item they correspond with.
+ * contain, at bare minimum, the Id of the item they correspond with.
  * 
  * @author Russell.Orf
  * 
@@ -28,6 +28,6 @@ import io.swagger.annotations.ApiModelProperty;
 @ApiModel
 public class WorkflowResponse {
 
-	@ApiModelProperty(value = "The ID of the item that has been created from the request.", required = true)
+	@ApiModelProperty(value = "The Id of the item that has been created from the request.", required = true)
 	public String id;
 }

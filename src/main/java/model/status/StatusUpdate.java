@@ -89,7 +89,7 @@ public class StatusUpdate {
 	}
 
 	/**
-	 * Sets the Result of the Job. This result will likely be an ID that points
+	 * Sets the Result of the Job. This result will likely be an Id that points
 	 * to a resource in the Resources collection.
 	 * 
 	 * As a reminder, by nature, it would seem silly to submit the Result for

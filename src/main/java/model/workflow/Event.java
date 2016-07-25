@@ -38,8 +38,8 @@ import io.swagger.annotations.ApiModelProperty;
 // TODO: use the delayed-parsing, raw-message json thing?
 //
 // type model.workflow.Event struct {
-// ID Ident `json:"id"`
-// EventTypeID Ident `json:"eventtype_id" binding:"required"`
+// Id Ident `json:"id"`
+// EventTypeId Ident `json:"eventtype_id" binding:"required"`
 // Date time.Time `json:"date" binding:"required"`
 // Data map[string]interface{} `json:"data"`
 // }

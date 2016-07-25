@@ -26,7 +26,7 @@ public interface WorkerCallback {
 	 * Fired when the Worker has finished running; success or fail.
 	 * 
 	 * @param jobId
-	 *            The Job ID being processed that has completed
+	 *            The Job Id being processed that has completed
 	 */
 	void onComplete(String jobId);
 }
