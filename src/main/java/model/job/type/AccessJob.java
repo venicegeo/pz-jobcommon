@@ -43,21 +43,19 @@ public class AccessJob implements PiazzaJobType {
 
 	@JsonIgnore
 	public static final String ACCESS_TYPE_GEOSERVER = "geoserver";
-	@JsonIgnore
-	public static final String ACCESS_TYPE_FILE = "file";
 
 	@ApiModelProperty(required = true, value = "The Id of the subject data")
 	@Size(min = 1)
 	public String dataId;
 
-	@ApiModelProperty(required = true, value = "The type of deployment, either hosted on a Piazza GeoServer instance, or raw file download")
+	@ApiModelProperty(required = true, value = "The type of deployment, such as hosted on a Piazza GeoServer instance. Currently, the only acceptable value for this is 'geoserver'.")
 	@Size(min = 1)
 	public String deploymentType;
 
 	@ApiModelProperty(value = "Optional. If provided, the deployment will also be added to the specified deployment group.", required = false)
 	public String deploymentGroupId;
 
-	@ApiModelProperty(value = "Optional. The number of days that this Deployment will be needed for. Once the Deployment expires, it is subject to automatic resource cleanup on the Piazza GIS Server.", required = false)
+	@ApiModelProperty(value = "Optional. The number of days that this Deployment will be needed for. Once the Deployment expires, it is subject to automatic resource cleanup on the Piazza GIS Server.", required = false, example = "geoserver")
 	public Integer durationDays;
 
 	public AccessJob() {

@@ -50,7 +50,7 @@ public class Service {
 	@Size(min=1)
 	private String url;
 
-	@ApiModelProperty(required = false, value = "URL to the schema or contract to interface with the service, such as a Swagger file, or documentation")
+	@ApiModelProperty(required = true, value = "URL to the schema or contract to interface with the service, such as a Swagger file, or documentation")
 	@NotNull
 	@Size(min=1)
 	private String contractUrl;
