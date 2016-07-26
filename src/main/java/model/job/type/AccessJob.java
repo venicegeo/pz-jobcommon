@@ -15,6 +15,7 @@
  **/
 package model.job.type;
 
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -45,10 +46,12 @@ public class AccessJob implements PiazzaJobType {
 	public static final String ACCESS_TYPE_GEOSERVER = "geoserver";
 
 	@ApiModelProperty(required = true, value = "The Id of the subject data")
+	@NotNull
 	@Size(min = 1)
 	public String dataId;
 
 	@ApiModelProperty(required = true, value = "The type of deployment, such as hosted on a Piazza GeoServer instance. Currently, the only acceptable value for this is 'geoserver'.")
+	@NotNull
 	@Size(min = 1)
 	public String deploymentType;
 
