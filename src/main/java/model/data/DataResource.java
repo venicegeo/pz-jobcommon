@@ -54,7 +54,7 @@ public class DataResource {
 	@Valid
 	public DataType dataType;
 
-	@ApiModelProperty(value = "Object of spatial metadata fields associated with a Resource. Used to generically specify the bounding box and the spatial reference of a dataset")
+	@ApiModelProperty(value = "Supplied by the System. Object of spatial metadata fields associated with a Resource. Used to generically specify the bounding box and the spatial reference of a dataset")
 	public SpatialMetadata spatialMetadata;
 
 	@ApiModelProperty(value = "Object of common metadata fields used to describe Data or Services within the Piazza system")
