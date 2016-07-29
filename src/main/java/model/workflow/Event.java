@@ -64,7 +64,7 @@ public class Event {
 	@JsonIgnore
 	public DateTime createdOn;
 	
-	@ApiModelProperty(required = false, value = "The cron expression representing the schedule at which this event will be repeated")
+	@ApiModelProperty(required = false, value = "Optional. The cron expression representing the schedule at which this event will be repeated")
 	public String cronSchedule;
 
 
