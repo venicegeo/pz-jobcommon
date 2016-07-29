@@ -33,10 +33,10 @@ import model.job.Job;
 @ApiModel("JobResults")
 public class JobListResponse extends PiazzaResponse {
 
-	@ApiModelProperty(value = "The array of Job results.")
+	@ApiModelProperty(value = "The array of Job results")
 	public List<Job> data;
 
-	@ApiModelProperty(value = "The pagination metadata for this query.")
+	@ApiModelProperty(value = "The pagination metadata for this query")
 	public Pagination pagination;
 
 	public JobListResponse() {

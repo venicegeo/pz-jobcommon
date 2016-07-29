@@ -39,10 +39,10 @@ public class Service {
 		GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
 	};
 	
-	@ApiModelProperty(value = "HTTP method types ")
+	@ApiModelProperty(value = "HTTP method types")
 	private METHOD_TYPE methodType;
 	
-	@ApiModelProperty(required = false, value = "The unique Id of the user service.")
+	@ApiModelProperty(required = false, value = "The unique Id of the user service")
 	private String serviceId;
 
 	@ApiModelProperty(required = true, value = "The URL to the user service to be executed")
@@ -60,10 +60,10 @@ public class Service {
 	@Size(min=1)
 	private String method;
 	
-	@ApiModelProperty(value = "The timeout Piazza waits for a response (defaults to 120 seconds) ")
+	@ApiModelProperty(value = "The timeout Piazza waits for a response (defaults to 120 seconds)")
     private Long timeout;
 	
-	@ApiModelProperty(value = "The frequency in which Piazza sends heartbeat requests to check on the health of the service  (defaults to 120 seconds) ")
+	@ApiModelProperty(value = "The frequency in which Piazza sends heartbeat requests to check on the health of the service  (defaults to 120 seconds)")
     private Long heartbeat;
 
 

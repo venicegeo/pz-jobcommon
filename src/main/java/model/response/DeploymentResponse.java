@@ -26,7 +26,7 @@ import model.data.deployment.Deployment;
  */
 public class DeploymentResponse extends PiazzaResponse {
 
-	@ApiModelProperty(value = "Contains the Deployment and the Expiration Date.", required = true)
+	@ApiModelProperty(value = "Contains the Deployment and the Expiration Date", required = true)
 	public DeploymentData data = new DeploymentData();
 
 	public DeploymentResponse() {
@@ -42,9 +42,9 @@ public class DeploymentResponse extends PiazzaResponse {
 	 * Used to wrap the Deployment and Expiration date into the data tag.
 	 */
 	public class DeploymentData {
-		@ApiModelProperty(value = "The Deployment metadata, including GIS Server URL to access the data.", required = true)
+		@ApiModelProperty(value = "The Deployment metadata, including GIS Server URL to access the data", required = true)
 		public Deployment deployment;
-		@ApiModelProperty(value = "If one exists, the date at which this Deployment may be subject to automatic resource cleanup on the Piazza GIS Server.", required = true)
+		@ApiModelProperty(value = "If one exists, the date at which this Deployment may be subject to automatic resource cleanup on the Piazza GIS Server", required = true)
 		public String expiresOn;
 
 		public DeploymentData() {

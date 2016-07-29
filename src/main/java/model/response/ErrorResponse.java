@@ -30,7 +30,7 @@ public class ErrorResponse extends PiazzaResponse {
 	@ApiModelProperty(value = "A description of the error describing the failure", required = true)
 	public String message;
 
-	@ApiModelProperty(value = "The Piazza component where the error originated.")
+	@ApiModelProperty(value = "The Piazza component where the error originated")
 	public String origin;
 
 	public ErrorResponse(String message, String origin) {

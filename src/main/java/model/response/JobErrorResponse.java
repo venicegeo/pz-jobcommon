@@ -27,13 +27,13 @@ import io.swagger.annotations.ApiModelProperty;
  */
 public class JobErrorResponse extends PiazzaResponse {
 
-	@ApiModelProperty(value = "A description of the error describing the failure.")
+	@ApiModelProperty(value = "A description of the error describing the failure")
 	public String message;
 
-	@ApiModelProperty(value = "The Piazza component where the error originated.")
+	@ApiModelProperty(value = "The Piazza component where the error originated")
 	public String origin;
 
-	@ApiModelProperty(value = "The Id of the associated Job that encountered an Error.")
+	@ApiModelProperty(value = "The Id of the associated Job that encountered an Error")
 	public String jobId;
 
 	public JobErrorResponse(String jobId, String message, String origin) {

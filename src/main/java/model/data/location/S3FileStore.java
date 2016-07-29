@@ -26,19 +26,19 @@ import io.swagger.annotations.ApiModelProperty;
  */
 public class S3FileStore implements FileLocation {
 
-	@ApiModelProperty(required = true, value = "The type of file location.", allowableValues = "s3")
+	@ApiModelProperty(required = true, value = "The type of file location", allowableValues = "s3")
 	public String type;
 
-	@ApiModelProperty(value = "The name of the Amazon S3 bucket hosting the data.")
+	@ApiModelProperty(value = "The name of the Amazon S3 bucket hosting the data")
 	public String bucketName;
 
-	@ApiModelProperty(value = "The name of the file stored.")
+	@ApiModelProperty(value = "The name of the file stored")
 	public String fileName;
 
-	@ApiModelProperty(value = "The size of the file stored, in bytes.")
+	@ApiModelProperty(value = "The size of the file stored, in bytes")
 	public Long fileSize;
 
-	@ApiModelProperty(value = "The name of the domain in the Amazon S3 URL hosting the data.")
+	@ApiModelProperty(value = "The name of the domain in the Amazon S3 URL hosting the data")
 	public String domainName;
 
 	public S3FileStore() {

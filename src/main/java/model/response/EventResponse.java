@@ -26,7 +26,7 @@ import model.workflow.Event;
  */
 public class EventResponse extends PiazzaResponse {
 
-	@ApiModelProperty(value = "Object containing information regarding a Piazza Event.")
+	@ApiModelProperty(value = "Object containing information regarding a Piazza Event")
 	public Event data;
 
 	public EventResponse() {

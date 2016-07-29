@@ -35,16 +35,16 @@ import model.job.PiazzaJobType;
 @ApiModel("LoadJob")
 public class IngestJob implements PiazzaJobType {
 
-	@ApiModelProperty(required = true, value = "The type of job.", allowableValues = "ingest")
+	@ApiModelProperty(required = true, value = "The type of job", allowableValues = "ingest")
 	public String type;
 
-	@ApiModelProperty(required = true, value = "The Description of the Data being loaded, including metadata, and the path to the data.")
+	@ApiModelProperty(required = true, value = "The Description of the Data being loaded, including metadata, and the path to the data")
 	@NotNull
 	@Valid
 	public DataResource data;
 
 
-	@ApiModelProperty(required = true, value = "Dictates if Piazza should internally host the data or not. If set to true, then the data will be stored in Piazza's data holdings. If false, then Piazza will point to the location of the data, but will not store the data internally.")
+	@ApiModelProperty(required = true, value = "Dictates if Piazza should internally host the data or not. If set to true, then the data will be stored in Piazza's data holdings. If false, then Piazza will point to the location of the data, but will not store the data internally")
 	@NotNull
 	public Boolean host;
 

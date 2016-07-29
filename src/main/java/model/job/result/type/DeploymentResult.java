@@ -28,7 +28,7 @@ import model.job.result.ResultType;
  */
 public class DeploymentResult implements ResultType {
 
-	@ApiModelProperty(value = "Object containing metadata regarding a Piazza Deployment.", required = true)
+	@ApiModelProperty(value = "Object containing metadata regarding a Piazza Deployment", required = true)
 	public Deployment deployment;
 
 	public DeploymentResult() {

@@ -26,7 +26,7 @@ import io.swagger.annotations.ApiModelProperty;
  * 
  */
 public class SuccessResponse extends PiazzaResponse {
-	@ApiModelProperty(value = "Object describing the nature of the action that took place.")
+	@ApiModelProperty(value = "Object describing the nature of the action that took place")
 	public SuccessData data = new SuccessData();
 
 	public SuccessResponse(String message, String origin) {
@@ -44,10 +44,10 @@ public class SuccessResponse extends PiazzaResponse {
 	 *
 	 */
 	public class SuccessData {
-		@ApiModelProperty(value = "A description of the successful operation performed.")
+		@ApiModelProperty(value = "A description of the successful operation performed")
 		public String message;
 
-		@ApiModelProperty(value = "The Piazza component where the message originated.")
+		@ApiModelProperty(value = "The Piazza component where the message originated")
 		public String origin;
 
 		/**

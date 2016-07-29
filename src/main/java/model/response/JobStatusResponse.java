@@ -30,7 +30,7 @@ import model.job.result.ResultType;
  */
 public class JobStatusResponse extends PiazzaResponse {
 
-	@ApiModelProperty(value = "Contains the Job Status Information.")
+	@ApiModelProperty(value = "Contains the Job Status Information")
 	public JobStatusData data = new JobStatusData();
 
 	public JobStatusResponse() {
@@ -45,19 +45,19 @@ public class JobStatusResponse extends PiazzaResponse {
 	 *
 	 */
 	public class JobStatusData {
-		@ApiModelProperty(value = "A reference to the Result of the Job. This could be a Resource Id, or a Service Id, in certain cases. Or perhaps an error if the Job encountered an error during processing.", dataType = "model.swagger.SwaggerResultType")
+		@ApiModelProperty(value = "A reference to the Result of the Job. This could be a Resource Id, or a Service Id, in certain cases. Or perhaps an error if the Job encountered an error during processing", dataType = "model.swagger.SwaggerResultType")
 		public ResultType result;
 
-		@ApiModelProperty(value = "The status of the Job. Submitted, Running, Success, Error, or Failure.", required = true)
+		@ApiModelProperty(value = "The status of the Job. Submitted, Running, Success, Error, or Failure", required = true)
 		public String status;
 
-		@ApiModelProperty(value = "Polymorphically describes the information defining what actions this Job should take.", required = true)
+		@ApiModelProperty(value = "Polymorphically describes the information defining what actions this Job should take", required = true)
 		public String jobType;
 
-		@ApiModelProperty(value = "The name of the user who submitted the Job.", required = true)
+		@ApiModelProperty(value = "The name of the user who submitted the Job", required = true)
 		public String createdBy;
 
-		@ApiModelProperty(value = "Object containing metadata describing the current status of the Job.")
+		@ApiModelProperty(value = "Object containing metadata describing the current status of the Job")
 		public JobProgress progress;
 
 		@ApiModelProperty(value = "The Id of the Job.")

@@ -26,7 +26,7 @@ import model.workflow.Trigger;
  */
 public class TriggerResponse extends PiazzaResponse {
 
-	@ApiModelProperty(value = "Object containing information regarding a Piazza Trigger.")
+	@ApiModelProperty(value = "Object containing information regarding a Piazza Trigger")
 	public Trigger data;
 
 	public TriggerResponse() {

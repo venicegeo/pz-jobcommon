@@ -25,7 +25,7 @@ import io.swagger.annotations.ApiModelProperty;
  */
 public class JobResponse extends PiazzaResponse {
 
-	@ApiModelProperty(value = "The Object containing the Job Id.")
+	@ApiModelProperty(value = "The Object containing the Job Id")
 	public JobIdData data = new JobIdData();
 
 	public JobResponse(String jobId) {
@@ -39,7 +39,7 @@ public class JobResponse extends PiazzaResponse {
 	 * Used to wrap the Job Id in an annotatable class.
 	 */
 	public class JobIdData {
-		@ApiModelProperty(value = "The Id of the Job referenced in the request.")
+		@ApiModelProperty(value = "The Id of the Job referenced in the request")
 		private String jobId;
 
 		public String getJobId() {

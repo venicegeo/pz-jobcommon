@@ -64,11 +64,11 @@ public class Event {
 	@JsonIgnore
 	public DateTime createdOn;
 	
-	@ApiModelProperty(required = false, value = "The CRON expression representing the schedule at which this event will be repeated.")
+	@ApiModelProperty(required = false, value = "The CRON expression representing the schedule at which this event will be repeated")
 	public String cronSchedule;
 
 
-	@ApiModelProperty(value = "The populated values for the Key-value pairs defined by the Event Type's 'mapping' dictionary. Each value in this dictionary must be populated here under this 'data' property.", required = true)
+	@ApiModelProperty(value = "The populated values for the Key-value pairs defined by the Event Type's 'mapping' dictionary. Each value in this dictionary must be populated here under this 'data' property", required = true)
 	@NotNull
 	public Map<String, Object> data;
 	

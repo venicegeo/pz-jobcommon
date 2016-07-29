@@ -34,10 +34,10 @@ public class JobProgress {
 	@ApiModelProperty(value = "The percentage complete for the Job, in whole numbers, out of 100 percent")
 	public Integer percentComplete;
 
-	@ApiModelProperty(value = "The last value for the Time Remaining as reported by the processor of this Job.")
+	@ApiModelProperty(value = "The last value for the Time Remaining as reported by the processor of this Job")
 	public String timeRemaining;
 
-	@ApiModelProperty(value = "The amount of time spent by the processor of this Job, according to that processor.")
+	@ApiModelProperty(value = "The amount of time spent by the processor of this Job, according to that processor")
 	public String timeSpent;
 
 	public JobProgress() {

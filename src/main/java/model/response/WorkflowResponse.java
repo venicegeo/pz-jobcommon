@@ -28,6 +28,6 @@ import io.swagger.annotations.ApiModelProperty;
 @ApiModel
 public class WorkflowResponse {
 
-	@ApiModelProperty(value = "The Id of the item that has been created from the request.", required = true)
+	@ApiModelProperty(value = "The Id of the item that has been created from the request", required = true)
 	public String id;
 }

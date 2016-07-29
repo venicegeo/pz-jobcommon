@@ -43,10 +43,10 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 @JsonInclude(Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class DeploymentGroup {
-	@ApiModelProperty(value = "The unique identifier for this Deployment Group.", required = true)
+	@ApiModelProperty(value = "The unique identifier for this Deployment Group", required = true)
 	public String deploymentGroupId;
 
-	@ApiModelProperty(value = "The user who created this Deployment Group.", required = true)
+	@ApiModelProperty(value = "The user who created this Deployment Group", required = true)
 	public String createdBy;
 
 	@ApiModelProperty(value = "Determines if the GeoServer instance has a corresponding Layer Group for this Deployment Group", required = true)

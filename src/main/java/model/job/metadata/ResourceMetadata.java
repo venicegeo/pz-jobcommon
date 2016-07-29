@@ -81,11 +81,11 @@ public class ResourceMetadata {
 	@NotNull
 	public SecurityClassification classType;
 
-	@ApiModelProperty(value = "The date the service will be terminated ")
+	@ApiModelProperty(value = "The date the service will be terminated")
 	@JsonIgnore
 	public DateTime expiresOn;
 
-	@ApiModelProperty(value = "Indication on whether a client certificate required to access thie resource.   Could be a user certificate or computer certificate")
+	@ApiModelProperty(value = "Indication on whether a client certificate required to access thie resource.  Could be a user certificate or computer certificate")
 	public Boolean clientCertRequired;
 
 	@ApiModelProperty(value = "Indication on whether credentials are required to access this resource")
@@ -110,7 +110,7 @@ public class ResourceMetadata {
 	public String createdBy;
 
 
-	@ApiModelProperty(value = "The date and time of data submission to Piazza.")
+	@ApiModelProperty(value = "The date and time of data submission to Piazza")
 	public String createdOn;
 
 
