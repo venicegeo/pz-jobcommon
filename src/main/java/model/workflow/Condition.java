@@ -25,7 +25,7 @@ import io.swagger.annotations.ApiModelProperty;
  * Created by sbortman on 6/2/16.
  */
 // expresses the idea of "this ES query returns an event"
-// Query is specific to the event type
+// Query is specific to the EventType
 //
 // type model.workflow.Condition struct {
 // EventTypeIds []Ident `json:"eventtype_ids" binding:"required"`
@@ -34,7 +34,7 @@ import io.swagger.annotations.ApiModelProperty;
 
 public class Condition {
 
-	@ApiModelProperty(value = "The array of Event Type Ids", required = true)
+	@ApiModelProperty(value = "The array of EventType Ids", required = true)
 	@NotNull
 	public String[] eventTypeIds;
 

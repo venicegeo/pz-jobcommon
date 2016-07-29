@@ -49,15 +49,15 @@ import io.swagger.annotations.ApiModelProperty;
 @JsonInclude(Include.NON_NULL)
 public class EventType {
 
-	@ApiModelProperty(value = "The unique Id of this Event Type. Not used in POST requests", required = true)
+	@ApiModelProperty(value = "The unique Id of this EventType. Not used in POST requests", required = true)
 	public String eventTypeId;
 
-	@ApiModelProperty(value = "A human-readable name for this Event Type", required = true)
+	@ApiModelProperty(value = "A human-readable name for this EventType", required = true)
 	@NotNull
 	@Size(min=1)
 	public String name;
 
-	@ApiModelProperty(value = "The map of key-value pairs that define the properties of this Event Type. The key is the name of the property, and the value is the type of that property. Valid types are 'string', 'boolean', 'integer', 'double' 'date', 'float', 'short', 'long' and 'byte''")
+	@ApiModelProperty(value = "The map of key-value pairs that define the properties of this EventType. The key is the name of the property, and the value is the type of that property. Valid types are 'string', 'boolean', 'integer', 'double' 'date', 'float', 'short', 'long' and 'byte''")
 	@NotNull
 	public Map<String, String> mapping;
 

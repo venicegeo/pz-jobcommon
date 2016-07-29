@@ -34,7 +34,7 @@ import io.swagger.annotations.ApiModelProperty;
  */
 
 // posted by some source (service, user, etc) to indicate Something Happened
-// Data is specific to the event type
+// Data is specific to the EventType
 // TODO: use the delayed-parsing, raw-message json thing?
 //
 // type model.workflow.Event struct {
@@ -55,7 +55,7 @@ public class Event {
 	@ApiModelProperty(value = "The unique Id for this Event.  Not used in POST requests", required = true)
 	public String eventId;
 
-	@ApiModelProperty(value = "The unique Id of the Event Type whose schema this Event conforms to", required = true)
+	@ApiModelProperty(value = "The unique Id of the EventType whose schema this Event conforms to", required = true)
 	@NotNull
 	@Size(min=1)
 	public String eventTypeId;
@@ -68,7 +68,7 @@ public class Event {
 	public String cronSchedule;
 
 
-	@ApiModelProperty(value = "The populated values for the Key-value pairs defined by the Event Type's 'mapping' dictionary. Each value in this dictionary must be populated here under this 'data' property", required = true)
+	@ApiModelProperty(value = "The populated values for the Key-value pairs defined by the EventType's 'mapping' dictionary. Each value in this dictionary must be populated here under this 'data' property", required = true)
 	@NotNull
 	public Map<String, Object> data;
 	

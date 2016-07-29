@@ -47,7 +47,7 @@ import model.request.PiazzaJobRequest;
 // }
 /*
  * { "id": "987d6", "title": "my found-a-bad-telephone-number trigger",
- * "condition": { "eventtype_ids": ["17de4"], # array of event type ids "query":
+ * "condition": { "eventtype_ids": ["17de4"], # array of EventType ids "query":
  * { "query" : { # the Elasticsearch query string "bool": { "must": [ { "match"
  * : { "Severity" : 4 } }, { "match" : { "Problem" : "us-bbox" } } ] } } },
  * "job": { "Task":
@@ -65,7 +65,7 @@ public class Trigger {
 	@Size(min=1)
 	public String title;
 
-	@ApiModelProperty(value = "The Event Type to match and the query to run on events", required=true)
+	@ApiModelProperty(value = "The EventType to match and the query to run on events", required=true)
 	@NotNull
 	@Valid
 	public Condition condition;
