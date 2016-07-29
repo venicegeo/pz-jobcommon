@@ -43,14 +43,14 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 @JsonInclude(Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class DeploymentGroup {
-	@ApiModelProperty(value = "The unique identifier for this Deployment Group", required = true)
+	@ApiModelProperty(value = "The unique identifier for this DeploymentGroup", required = true)
 	public String deploymentGroupId;
 
-	@ApiModelProperty(value = "The user who created this Deployment Group", required = true)
+	@ApiModelProperty(value = "The user who created this DeploymentGroup", required = true)
 	public String createdBy;
 
-	@ApiModelProperty(value = "Determines if the GeoServer instance has a corresponding Layer Group for this Deployment Group", required = true)
-	public Boolean hasGeoServerLayer;
+	@ApiModelProperty(value = "Determines if the GIS Server instance has a corresponding Layer Group for this DeploymentGroup", required = true)
+	public Boolean hasGisServerLayer;
 
 	/**
 	 * Creates a new Deployment Group.
@@ -72,11 +72,11 @@ public class DeploymentGroup {
 		this.createdBy = createdBy;
 	}
 
-	public Boolean getHasGeoServerLayer() {
-		return hasGeoServerLayer;
+	public Boolean getHasGisServerLayer() {
+		return hasGisServerLayer;
 	}
 
-	public void setHasGeoServerLayer(Boolean hasGeoServerLayer) {
-		this.hasGeoServerLayer = hasGeoServerLayer;
+	public void setHasGisServerLayer(Boolean hasGisServerLayer) {
+		this.hasGisServerLayer = hasGisServerLayer;
 	}
 }

@@ -50,12 +50,12 @@ public class AccessJob implements PiazzaJobType {
 	@Size(min = 1)
 	public String dataId;
 
-	@ApiModelProperty(required = true, value = "The type of deployment, such as hosted on a Piazza GeoServer instance. Currently, the only acceptable value for this is 'geoserver'")
+	@ApiModelProperty(required = true, value = "The type of deployment, such as hosted on a Piazza GIS Server instance. Currently, the only acceptable value for this is 'geoserver'")
 	@NotNull
 	@Size(min = 1)
 	public String deploymentType;
 
-	@ApiModelProperty(value = "Optional. If provided, the deployment will also be added to the specified deployment group", required = false)
+	@ApiModelProperty(value = "Optional. If provided, the deployment will also be added to the specified DeploymentGroup", required = false)
 	public String deploymentGroupId;
 
 	@ApiModelProperty(value = "Optional. The number of days that this Deployment will be needed for. Once the Deployment expires, it is subject to automatic resource cleanup on the Piazza GIS Server", required = false, example = "geoserver")
