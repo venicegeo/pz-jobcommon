@@ -45,7 +45,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class DataResource {
 
-	@ApiModelProperty(value = "The Id of the data to download", required = true)
+	@ApiModelProperty(value = "The Id of the Data to download", required = true)
 	public String dataId;
 
 	@ApiModelProperty(value = "Polymorphically defines the information specific to this Data Resource, based on its format", required = true, dataType = "model.swagger.SwaggerDataType")

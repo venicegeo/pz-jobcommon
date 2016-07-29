@@ -26,7 +26,7 @@ import io.swagger.annotations.ApiModelProperty;
  */
 public class Pagination {
 
-	@ApiModelProperty(value = " The number of results that matched the query", required = true)
+	@ApiModelProperty(value = "The number of results that matched the query", required = true)
 	public Integer count;
 
 	@ApiModelProperty(value = "The current page returned", required = true)

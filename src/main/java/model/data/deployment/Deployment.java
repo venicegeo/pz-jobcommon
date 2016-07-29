@@ -38,19 +38,19 @@ public class Deployment {
 	@NotNull
 	public String deploymentId;
 
-	@ApiModelProperty(value = "The unique Id of the Data that this deployment hosts")
+	@ApiModelProperty(value = "The unique Id of the Data that this Deployment hosts")
 	public String dataId;
 
-	@ApiModelProperty(value = "The host name for the deployment server")
+	@ApiModelProperty(value = "The host name for the Deployment server")
 	public String host;
 
-	@ApiModelProperty(value = "The port number for the deployment server")
+	@ApiModelProperty(value = "The port number for the Deployment server")
 	public String port;
 
-	@ApiModelProperty(value = "The layer name for the hosted service on the deployment server")
+	@ApiModelProperty(value = "The layer name for the hosted service on the Deployment server")
 	public String layer;
 
-	@ApiModelProperty(value = "Fully qualified URL for accessing the GetCapabilities action for the deployment service")
+	@ApiModelProperty(value = "Fully qualified URL for accessing the GetCapabilities action for the Deployment service")
 	public String capabilitiesUrl;
 
 	/**

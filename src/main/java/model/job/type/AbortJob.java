@@ -30,15 +30,15 @@ import model.job.PiazzaJobType;
  */
 public class AbortJob implements PiazzaJobType {
 
-	@ApiModelProperty(required = true, value = "The type of job", allowableValues = "abort")
+	@ApiModelProperty(required = true, value = "The type of Job", allowableValues = "abort")
 	public String type;
 
-	@ApiModelProperty(required = true, value = "The Id of the subject job")
+	@ApiModelProperty(required = true, value = "The Id of the subject Job")
 	@NotNull
 	@Size(min=1)
 	public String jobId = null;
 
-	@ApiModelProperty(value = "The reason given for aborting the job")
+	@ApiModelProperty(value = "The reason given for aborting the Job")
 	public String reason;
 
 	public AbortJob() {

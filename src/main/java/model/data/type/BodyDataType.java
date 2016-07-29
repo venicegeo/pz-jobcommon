@@ -25,6 +25,6 @@ import io.swagger.annotations.ApiModelProperty;
 
 public class BodyDataType extends TextDataType {
 
-	@ApiModelProperty(required = true, value = "The type of data", allowableValues = "body")
+	@ApiModelProperty(required = true, value = "The type of Data", allowableValues = "body")
 	public String type;
 }

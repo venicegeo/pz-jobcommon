@@ -30,15 +30,15 @@ import model.data.DataType;
  */
 public class TextDataType implements DataType {
 
-	@ApiModelProperty(required = true, value = "The type of data", allowableValues = "text")
+	@ApiModelProperty(required = true, value = "The type of Data", allowableValues = "text")
 	public String type;
 
-	@ApiModelProperty(value = "The text content of the data", required = true)
+	@ApiModelProperty(value = "The text content of the Data", required = true)
 	@NotNull
 	@Size(min=1)
 	public String content;
 
-	@ApiModelProperty(value = "The media type of the stored data.  Refer to http://www.iana.org for standard values")
+	@ApiModelProperty(value = "The media type of the stored Data.  Refer to http://www.iana.org for standard values")
 	public String mimeType;
 
 	public TextDataType() {

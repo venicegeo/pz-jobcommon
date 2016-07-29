@@ -42,20 +42,20 @@ public class Service {
 	@ApiModelProperty(value = "HTTP method types")
 	private METHOD_TYPE methodType;
 	
-	@ApiModelProperty(required = false, value = "The unique Id of the user service")
+	@ApiModelProperty(required = false, value = "The unique Id of the Service")
 	private String serviceId;
 
-	@ApiModelProperty(required = true, value = "The URL to the user service to be executed")
+	@ApiModelProperty(required = true, value = "The URL to the user Service to be executed")
 	@NotNull
 	@Size(min=1)
 	private String url;
 
-	@ApiModelProperty(required = true, value = "URL to the schema or contract to interface with the service, such as a Swagger file, or documentation")
+	@ApiModelProperty(required = true, value = "URL to the schema or contract to interface with the Service, such as a Swagger file, or documentation")
 	@NotNull
 	@Size(min=1)
 	private String contractUrl;
 
-	@ApiModelProperty(required = true, value = "The HTTP method used to invoke this user service", allowableValues = "method_type")
+	@ApiModelProperty(required = true, value = "The HTTP method used to invoke this user Service", allowableValues = "method_type")
 	@NotNull
 	@Size(min=1)
 	private String method;
@@ -63,7 +63,7 @@ public class Service {
 	@ApiModelProperty(value = "The timeout Piazza waits for a response (defaults to 120 seconds)")
     private Long timeout;
 	
-	@ApiModelProperty(value = "The frequency in which Piazza sends heartbeat requests to check on the health of the service  (defaults to 120 seconds)")
+	@ApiModelProperty(value = "The frequency in which Piazza sends heartbeat requests to check on the health of the Service  (defaults to 120 seconds)")
     private Long heartbeat;
 
 

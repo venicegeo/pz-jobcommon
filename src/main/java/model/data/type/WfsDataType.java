@@ -29,7 +29,7 @@ import model.data.DataType;
  */
 public class WfsDataType implements DataType {
 
-	@ApiModelProperty(required = true, value = "The type of data", allowableValues = "wfs")
+	@ApiModelProperty(required = true, value = "The type of Data", allowableValues = "wfs")
 	public String type;
 
 	@ApiModelProperty(required = true, value = "HTTP web address to the WFS endpoint")
@@ -37,17 +37,17 @@ public class WfsDataType implements DataType {
 	@Size(min=1)
 	public String url;
 
-	@ApiModelProperty(required = true, value = "The current version of the data")
+	@ApiModelProperty(required = true, value = "The current version of the Data")
 	@NotNull
 	@Size(min=1)
 	public String version;
 
-	@ApiModelProperty(required = true, value = "The type of geospatial feature represented in the data")
+	@ApiModelProperty(required = true, value = "The type of geospatial feature represented in the Data")
 	@NotNull
 	@Size(min=1)
 	public String featureType;
 
-	@ApiModelProperty(value = "The media type of the stored data")
+	@ApiModelProperty(value = "The media type of the stored Data")
 	public String mimeType;
 
 	public WfsDataType() {

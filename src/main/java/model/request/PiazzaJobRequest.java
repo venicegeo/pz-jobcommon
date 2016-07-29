@@ -34,6 +34,6 @@ public class PiazzaJobRequest {
 	@ApiModelProperty(value = "The user that submitted the job")
 	public String createdBy;
 	
-	@ApiModelProperty(value = "The type of job submitted", dataType = "model.swagger.SwaggerJobType")
+	@ApiModelProperty(value = "The type of Job submitted", dataType = "model.swagger.SwaggerJobType")
 	public PiazzaJobType jobType;
 }

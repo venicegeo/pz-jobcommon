@@ -27,7 +27,7 @@ import io.swagger.annotations.ApiModelProperty;
  */
 public class SecurityClassification {
 
-	@ApiModelProperty(value = "The security classification marking for the data")
+	@ApiModelProperty(value = "The security classification marking for the Data")
 	@NotNull
 	private String classification;
 

@@ -26,7 +26,7 @@ import model.job.result.ResultType;
  */
 public class TextResult implements ResultType {
 	
-	@ApiModelProperty(value = "The text content of the data", required = true)
+	@ApiModelProperty(value = "The text content of the Data", required = true)
 	public String text;
 
 	public TextResult() {

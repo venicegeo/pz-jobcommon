@@ -25,7 +25,7 @@ import io.swagger.annotations.ApiModelProperty;
  */
 public class UUIDResponse extends PiazzaResponse {
 
-	@ApiModelProperty(value = "Contains the UUID for the requested user")
+	@ApiModelProperty(value = "Contains the Id for the requested user")
 	public String uuid;
 	
 	public UUIDResponse() {

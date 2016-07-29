@@ -26,10 +26,10 @@ import model.service.metadata.ExecuteServiceData;
 @ApiModel(value = "ExecuteJob")
 public class ExecuteServiceJob implements PiazzaJobType {
 
-	@ApiModelProperty(required = true, value = "The type of job", allowableValues = "execute-service")
+	@ApiModelProperty(required = true, value = "The type of Job", allowableValues = "execute-service")
 	public String type;
 
-	@ApiModelProperty(value = "The Job Id created for executing the service")
+	@ApiModelProperty(value = "The Job Id created for executing the Service")
 	public String jobId = null;
 
 	@ApiModelProperty(value = "The parameter inputs for Service execution", required = true)

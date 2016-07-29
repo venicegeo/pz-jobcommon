@@ -15,8 +15,6 @@
  **/
 package model.data.type;
 
-import javax.validation.constraints.NotNull;
-
 import io.swagger.annotations.ApiModelProperty;
 
 /**
@@ -27,7 +25,7 @@ import io.swagger.annotations.ApiModelProperty;
  */
 public class URLParameterDataType extends TextDataType {
 
-	@ApiModelProperty(required = true, value = "The type of data", allowableValues = "urlparameter")
+	@ApiModelProperty(required = true, value = "The type of Data", allowableValues = "urlparameter")
 	public String type;
 
 	public String getMimeType() {
