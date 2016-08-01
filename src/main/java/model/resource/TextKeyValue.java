@@ -20,10 +20,10 @@ import io.swagger.annotations.ApiModelProperty;
 
 public class TextKeyValue {
 
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(value = "The pair key", required = true)
 	private String key;
 
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(value = "The value for the key", required = true)
 	private String value;
 
 	public TextKeyValue() {

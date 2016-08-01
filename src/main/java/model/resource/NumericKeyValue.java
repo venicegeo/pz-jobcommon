@@ -19,10 +19,10 @@ import io.swagger.annotations.ApiModelProperty;
 
 public class NumericKeyValue {
 	
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(value = "The pair key", required = true)
 	private String key;
 
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(value = "The value for the key", required = true)
 	private Double value;
 
 	public NumericKeyValue() {

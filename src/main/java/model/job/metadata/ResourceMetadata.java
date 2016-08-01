@@ -21,21 +21,17 @@ import java.util.Map;
 
 import javax.validation.constraints.NotNull;
 
-import model.data.type.LiteralDataType.LITERAL;
-import model.resource.NumericKeyValue;
-import model.resource.TextKeyValue;
-import model.security.SecurityClassification;
-
 import org.joda.time.DateTime;
 import org.springframework.data.elasticsearch.annotations.Field;
 import org.springframework.data.elasticsearch.annotations.FieldType;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 import io.swagger.annotations.ApiModelProperty;
+import model.resource.NumericKeyValue;
+import model.resource.TextKeyValue;
+import model.security.SecurityClassification;
 
 /**
  * Common Meta-data fields used to describe Data or Resources (e.g. Services, etc.)  within the Piazza
@@ -120,11 +116,11 @@ public class ResourceMetadata {
 	/*
 	 * Need the ability to accommodate arbitrary key/value pairs
 	 */
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(value = "Allows for the optional specification of user-defined key-value pairs of numeric values", required = false)
 	@Field(type = FieldType.Nested)
 	private List<NumericKeyValue> numericKeyValueList;
 
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(value = "Allows for the optional specification ofu ser-defined key-value pairs for string values", required = false)
 	@Field(type = FieldType.Nested)
 	private List<TextKeyValue> textKeyValueList;
 
