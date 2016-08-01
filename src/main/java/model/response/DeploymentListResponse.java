@@ -35,7 +35,7 @@ public class DeploymentListResponse extends PiazzaResponse {
 	@ApiModelProperty(value = "The array of Deployment results")
 	public List<Deployment> data;
 
-	@ApiModelProperty(value = "The pagination metadata for this query")
+	@ApiModelProperty(value = "The pagination metadata for this query", required = true)
 	public Pagination pagination;
 
 	public DeploymentListResponse() {

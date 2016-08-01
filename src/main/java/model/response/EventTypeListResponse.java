@@ -27,7 +27,7 @@ public class EventTypeListResponse extends PiazzaResponse {
 	@ApiModelProperty(value = "The array of EventType results", required = true)
 	public List<EventType> data;
 
-	@ApiModelProperty(value = "The pagination metadata for this query")
+	@ApiModelProperty(value = "The pagination metadata for this query", required = true)
 	public Pagination pagination;
 
 	public EventTypeListResponse() {

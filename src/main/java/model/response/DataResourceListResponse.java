@@ -22,9 +22,8 @@ import io.swagger.annotations.ApiModelProperty;
 import model.data.DataResource;
 
 /**
- * Represents the response that the Gateway returns to the user when the user
- * has requested to see the information on a list of Resources currently held by
- * the Piazza system; represented internally using the DataResource object.
+ * Represents the response that the Gateway returns to the user when the user has requested to see the information on a
+ * list of Resources currently held by the Piazza system; represented internally using the DataResource object.
  * 
  * @author Patrick.Doody
  * 
@@ -35,7 +34,7 @@ public class DataResourceListResponse extends PiazzaResponse {
 	@ApiModelProperty(value = "The array of Data Resource results")
 	public List<DataResource> data;
 
-	@ApiModelProperty(value = "The pagination metadata for this query")
+	@ApiModelProperty(value = "The pagination metadata for this query", required = true)
 	public Pagination pagination;
 
 	public DataResourceListResponse() {

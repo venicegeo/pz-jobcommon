@@ -36,7 +36,7 @@ public class JobListResponse extends PiazzaResponse {
 	@ApiModelProperty(value = "The array of Job results")
 	public List<Job> data;
 
-	@ApiModelProperty(value = "The pagination metadata for this query")
+	@ApiModelProperty(value = "The pagination metadata for this query", required = true)
 	public Pagination pagination;
 
 	public JobListResponse() {

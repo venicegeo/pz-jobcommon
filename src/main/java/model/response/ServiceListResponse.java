@@ -35,7 +35,7 @@ public class ServiceListResponse extends PiazzaResponse {
 	@ApiModelProperty(value = "The array of Service results")
 	public List<Service> data;
 
-	@ApiModelProperty(value = "The pagination metadata for this query")
+	@ApiModelProperty(value = "The pagination metadata for this query", required = true)
 	public Pagination pagination;
 
 	public ServiceListResponse() {
