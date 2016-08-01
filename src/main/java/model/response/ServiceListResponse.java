@@ -32,7 +32,7 @@ import model.service.metadata.Service;
 @ApiModel(value = "ServiceResults")
 public class ServiceListResponse extends PiazzaResponse {
 
-	@ApiModelProperty(value = "The array of Service results")
+	@ApiModelProperty(value = "The array of Service results", required = true)
 	public List<Service> data;
 
 	@ApiModelProperty(value = "The pagination metadata for this query", required = true)

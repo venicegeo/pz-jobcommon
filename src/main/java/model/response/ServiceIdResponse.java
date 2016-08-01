@@ -25,7 +25,7 @@ import io.swagger.annotations.ApiModelProperty;
  */
 public class ServiceIdResponse extends PiazzaResponse {
 
-	@ApiModelProperty(value = "The Object containing the Service Id")
+	@ApiModelProperty(value = "The Object containing the Service Id", required = true)
 	public ServiceIdData data = new ServiceIdData();
 
 	public ServiceIdResponse(String serviceId) {
@@ -39,7 +39,7 @@ public class ServiceIdResponse extends PiazzaResponse {
 	 * Used to wrap the Service Id in an annotatable class.
 	 */
 	public class ServiceIdData {
-		@ApiModelProperty(value = "The Id of the Service referenced in the request")
+		@ApiModelProperty(value = "The Id of the Service referenced in the request", required = true)
 		private String serviceId;
 
 		public String getServiceId() {

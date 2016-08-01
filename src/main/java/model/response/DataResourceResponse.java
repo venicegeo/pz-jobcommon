@@ -28,7 +28,7 @@ import model.data.DataResource;
  */
 public class DataResourceResponse extends PiazzaResponse {
 
-	@ApiModelProperty(value = "Object containing metadata describing the Data")
+	@ApiModelProperty(value = "Object containing metadata describing the Data", required = true)
 	public DataResource data;
 
 	public DataResourceResponse() {

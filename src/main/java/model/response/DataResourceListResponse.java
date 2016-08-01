@@ -31,7 +31,7 @@ import model.data.DataResource;
 @ApiModel("DataResourceResults")
 public class DataResourceListResponse extends PiazzaResponse {
 
-	@ApiModelProperty(value = "The array of Data Resource results")
+	@ApiModelProperty(value = "The array of Data Resource results", required = true)
 	public List<DataResource> data;
 
 	@ApiModelProperty(value = "The pagination metadata for this query", required = true)

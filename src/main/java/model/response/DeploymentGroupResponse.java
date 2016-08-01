@@ -26,7 +26,7 @@ import model.data.deployment.DeploymentGroup;
  */
 public class DeploymentGroupResponse extends PiazzaResponse {
 
-	@ApiModelProperty(value = "Object containing metadata regarding a Piazza DeploymentGroup")
+	@ApiModelProperty(value = "Object containing metadata regarding a Piazza DeploymentGroup", required = true)
 	public DeploymentGroup data;
 
 	public DeploymentGroupResponse() {
