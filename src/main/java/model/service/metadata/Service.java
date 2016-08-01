@@ -42,7 +42,7 @@ public class Service {
 	@ApiModelProperty(value = "HTTP method types")
 	private METHOD_TYPE methodType;
 	
-	@ApiModelProperty(required = false, value = "The unique Id of the Service")
+	@ApiModelProperty(required = false, value = "Provided by the System. The unique Id of the Service")
 	private String serviceId;
 
 	@ApiModelProperty(required = true, value = "The URL to the user Service to be executed")
