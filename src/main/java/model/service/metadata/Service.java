@@ -55,7 +55,7 @@ public class Service {
 	@Size(min=1)
 	private String contractUrl;
 
-	@ApiModelProperty(required = true, value = "The HTTP method used to invoke this user Service", allowableValues = "method_type")
+	@ApiModelProperty(required = true, value = "The HTTP method used to invoke this user Service", dataType = "string", allowableValues = "GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT")
 	@NotNull
 	@Size(min=1)
 	private String method;
