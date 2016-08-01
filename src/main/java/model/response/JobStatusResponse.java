@@ -30,7 +30,7 @@ import model.job.result.ResultType;
  */
 public class JobStatusResponse extends PiazzaResponse {
 
-	@ApiModelProperty(value = "Contains the Job Status Information")
+	@ApiModelProperty(value = "Contains the Job Status Information", required = true)
 	public JobStatusData data = new JobStatusData();
 
 	public JobStatusResponse() {
