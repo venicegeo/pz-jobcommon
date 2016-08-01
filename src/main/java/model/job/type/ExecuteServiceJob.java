@@ -29,7 +29,7 @@ public class ExecuteServiceJob implements PiazzaJobType {
 	@ApiModelProperty(required = true, value = "The type of Job", allowableValues = "execute-service")
 	public String type;
 
-	@ApiModelProperty(value = "The Job Id created for executing the Service")
+	@ApiModelProperty(value = "Specified by the system. The Job Id created for executing the Service")
 	public String jobId = null;
 
 	@ApiModelProperty(value = "The parameter inputs for Service execution", required = true)
