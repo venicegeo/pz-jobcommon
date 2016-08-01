@@ -64,7 +64,7 @@ public class Trigger {
 	@ApiModelProperty(value = "The description of what this Trigger intends to accomplish", required = true)
 	@NotNull
 	@Size(min=1)
-	public String title;
+	public String name;
 
 	@ApiModelProperty(value = "The EventType to match and the query to run on events", required=true)
 	@NotNull
