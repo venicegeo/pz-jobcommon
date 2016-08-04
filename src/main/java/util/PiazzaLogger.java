@@ -44,7 +44,7 @@ import model.request.LogRequest;
  */
 @Component
 public class PiazzaLogger {
-	@Value("#{'${logger.protocol}' + '://' + '${logger.prefix}' + '.' + '${DOMAIN}' + ':' + '${logger.port}'}")
+	@Value("${logger.url}")
 	private String LOGGER_URL;
 	@Value("${logger.endpoint}")
 	private String LOGGER_ENDPOINT;
