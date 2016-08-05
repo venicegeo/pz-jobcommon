@@ -108,6 +108,9 @@ public class ResourceMetadata {
 
 	@ApiModelProperty(value = "The date and time of data submission to Piazza")
 	public String createdOn;
+	
+	@ApiModelProperty(value = "Provided by the system. If available, the Id of the Job that resulted in the creation of this resource.", required = false)
+	public String createdByJobId;
 
 
 	@ApiModelProperty(value = "A generic Map of String:String (key:value) pairs with additional metadata")
@@ -328,5 +331,13 @@ public class ResourceMetadata {
 				}
 			}
 		}
+	}
+
+	public String getCreatedByJobId() {
+		return createdByJobId;
+	}
+
+	public void setCreatedByJobId(String createdByJobId) {
+		this.createdByJobId = createdByJobId;
 	}
 }
