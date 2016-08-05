@@ -33,15 +33,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * Defines a Job in the Piazza system.
  * 
- * A Job is uniquely identified by a Job Id. This is the primary key used for
- * lookup in the Jobs collection.
+ * A Job is uniquely identified by a Job Id. This is the primary key used for lookup in the Jobs collection.
  * 
- * Additional Metadata is also stored with a job, such as who submitted the job,
- * what their API key is, and when the Job was submitted.
+ * Additional Metadata is also stored with a job, such as who submitted the job, what their API key is, and when the Job
+ * was submitted.
  * 
- * Job Status and Progress are also tracked and can be reliably used to
- * determine what the current status of the job is as it passes throughout the
- * Piazza system.
+ * Job Status and Progress are also tracked and can be reliably used to determine what the current status of the job is
+ * as it passes throughout the Piazza system.
  * 
  * @author Patrick.Doody
  * 
@@ -81,8 +79,12 @@ public class Job {
 
 	@JsonProperty("createdOn")
 	public String getCreatedOnString() {
-		// Defaults to ISO8601
-		return createdOn.toString();
+		if (createdOn != null) {
+			// Defaults to ISO8601
+			return createdOn.toString();
+		} else {
+			return null;
+		}
 	}
 
 	@JsonProperty("createdOn")
