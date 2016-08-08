@@ -43,9 +43,9 @@ import org.springframework.web.client.RestTemplate;
  */
 @Component
 public class UUIDFactory {
-	@Value("${uuid.url}")
+	@Value("${uuid.url:}")
 	private String UUIDGEN_URL;
-	@Value("${uuid.endpoint}")
+	@Value("${uuid.endpoint:}")
 	private String UUIDGEN_ENDPOINT;
 	private RestTemplate restTemplate = new RestTemplate();
 	private final static Logger LOG = LoggerFactory.getLogger(UUIDFactory.class);
