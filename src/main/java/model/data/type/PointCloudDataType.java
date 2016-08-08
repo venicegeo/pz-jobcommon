@@ -17,6 +17,8 @@ package model.data.type;
 
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import io.swagger.annotations.ApiModelProperty;
 import model.data.DataType;
 import model.data.FileRepresentation;
@@ -32,6 +34,7 @@ import model.data.location.FileLocation;
 public class PointCloudDataType implements DataType, FileRepresentation {
 
 	@ApiModelProperty(required = true, value = "The type of Data", allowableValues = "pointcloud")
+	@JsonIgnore
 	public String type;
 
 	@ApiModelProperty(required = true, value = "The location of the Data. Used to describe S3 stores, or folder shares, for where the Data is located", dataType = "model.swagger.SwaggerFileLocation")

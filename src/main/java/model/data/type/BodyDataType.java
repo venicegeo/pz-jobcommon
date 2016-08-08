@@ -19,12 +19,13 @@
  */
 package model.data.type;
 
-import javax.validation.constraints.NotNull;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import io.swagger.annotations.ApiModelProperty;
 
 public class BodyDataType extends TextDataType {
 
 	@ApiModelProperty(required = true, value = "The type of Data", allowableValues = "body")
+	@JsonIgnore
 	public String type;
 }

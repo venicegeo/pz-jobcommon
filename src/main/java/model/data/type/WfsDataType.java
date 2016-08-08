@@ -18,6 +18,8 @@ package model.data.type;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import io.swagger.annotations.ApiModelProperty;
 import model.data.DataType;
 
@@ -30,6 +32,7 @@ import model.data.DataType;
 public class WfsDataType implements DataType {
 
 	@ApiModelProperty(required = true, value = "The type of Data", allowableValues = "wfs")
+	@JsonIgnore
 	public String type;
 
 	@ApiModelProperty(required = true, value = "HTTP web address to the WFS endpoint")

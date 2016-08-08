@@ -15,6 +15,7 @@
  **/
 package model.data.type;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import io.swagger.annotations.ApiModelProperty;
 import model.data.DataType;
@@ -22,8 +23,7 @@ import model.data.FileRepresentation;
 import model.data.location.FileLocation;
 
 /**
- * Represents a geojson format with accompanying file stored somewhere
- * accessible to Piazza.
+ * Represents a geojson format with accompanying file stored somewhere accessible to Piazza.
  * 
  * @author Sonny.Saniev
  * 
@@ -31,6 +31,7 @@ import model.data.location.FileLocation;
 public class GeoJsonDataType implements DataType, FileRepresentation {
 
 	@ApiModelProperty(required = true, value = "The type of Data", allowableValues = "geojson")
+	@JsonIgnore
 	public String type;
 
 	@ApiModelProperty(value = "The name of the database table holding the Data")

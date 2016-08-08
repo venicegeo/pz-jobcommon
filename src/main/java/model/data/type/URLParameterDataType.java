@@ -15,6 +15,8 @@
  **/
 package model.data.type;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import io.swagger.annotations.ApiModelProperty;
 
 /**
@@ -26,6 +28,7 @@ import io.swagger.annotations.ApiModelProperty;
 public class URLParameterDataType extends TextDataType {
 
 	@ApiModelProperty(required = true, value = "The type of Data", allowableValues = "urlparameter")
+	@JsonIgnore
 	public String type;
 
 	public String getMimeType() {

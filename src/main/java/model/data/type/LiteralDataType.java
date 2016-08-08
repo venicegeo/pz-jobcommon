@@ -20,6 +20,8 @@ package model.data.type;
 
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import io.swagger.annotations.ApiModelProperty;
 import model.data.DataType;
 
@@ -30,6 +32,7 @@ public class LiteralDataType implements DataType {
 	};
 
 	@ApiModelProperty(required = true, value = "The type of Data", allowableValues = "literal")
+	@JsonIgnore
 	public String type;
 
 	@ApiModelProperty(value = "")

@@ -17,6 +17,8 @@ package model.data.type;
 
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import io.swagger.annotations.ApiModelProperty;
 import model.data.DataType;
 
@@ -29,6 +31,7 @@ import model.data.DataType;
 public class PostGISDataType implements DataType {
 
 	@ApiModelProperty(required = true, value = "The type of Data", allowableValues = "postgis")
+	@JsonIgnore
 	public String type;
 
 	@ApiModelProperty(required = true, value = "The name of the database hosting the Data")

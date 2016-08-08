@@ -18,6 +18,8 @@ package model.data.type;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import io.swagger.annotations.ApiModelProperty;
 import model.data.DataType;
 
@@ -29,8 +31,8 @@ import model.data.DataType;
  * 
  */
 public class TextDataType implements DataType {
-
 	@ApiModelProperty(required = true, value = "The type of Data", allowableValues = "text")
+	@JsonIgnore
 	public String type;
 
 	@ApiModelProperty(value = "The text content of the Data", required = true)

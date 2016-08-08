@@ -15,6 +15,8 @@
  **/
 package model.data.type;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import io.swagger.annotations.ApiModelProperty;
 import model.data.DataType;
 import model.data.FileRepresentation;
@@ -32,6 +34,7 @@ import model.data.location.FileLocation;
 public class ShapefileDataType implements DataType, FileRepresentation {
 
 	@ApiModelProperty(required = true, value = "The type of Data", allowableValues = "shapefile")
+	@JsonIgnore
 	public String type;
 
 	@ApiModelProperty(value = "The PostGIS table name that contains the Shapefile Data")

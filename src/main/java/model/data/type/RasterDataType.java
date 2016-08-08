@@ -16,7 +16,8 @@
 package model.data.type;
 
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import io.swagger.annotations.ApiModelProperty;
 import model.data.DataType;
@@ -36,6 +37,7 @@ import model.data.location.FileLocation;
 public class RasterDataType implements DataType, FileRepresentation {
 
 	@ApiModelProperty(required = true, value = "The type of Data", allowableValues = "raster")
+	@JsonIgnore
 	public String type;
 
 
