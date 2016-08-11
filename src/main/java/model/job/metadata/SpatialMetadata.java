@@ -16,6 +16,7 @@
 package model.job.metadata;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
@@ -29,6 +30,7 @@ import io.swagger.annotations.ApiModelProperty;
  * 
  */
 @JsonInclude(Include.NON_NULL)
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class SpatialMetadata {
 
 	@ApiModelProperty(value = "The CRS (Coordinate Reference System) of the data")
@@ -57,6 +59,10 @@ public class SpatialMetadata {
 
 	@ApiModelProperty(value = "The number of features contained in the resource")
 	private Integer numFeatures;
+	
+	@ApiModelProperty(value = "Supplied by the System. If populated, this contains the spatial bounding box of the dataset in a reprojection to WGS84 (EPSG 4326)")
+	public SpatialMetadata projectedSpatialMetadata;
+
 
 	public SpatialMetadata() {
 
@@ -170,5 +176,13 @@ public class SpatialMetadata {
 
 	public void setNumFeatures(Integer numFeatures) {
 		this.numFeatures = numFeatures;
+	}
+
+	public SpatialMetadata getProjectedSpatialMetadata() {
+		return projectedSpatialMetadata;
+	}
+
+	public void setProjectedSpatialMetadata(SpatialMetadata projectedSpatialMetadata) {
+		this.projectedSpatialMetadata = projectedSpatialMetadata;
 	}
 }
