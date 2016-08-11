@@ -15,6 +15,8 @@
  **/
 package model.job.result.type;
 
+import org.springframework.http.HttpStatus;
+
 import io.swagger.annotations.ApiModelProperty;
 import model.job.result.ResultType;
 
@@ -28,10 +30,14 @@ import model.job.result.ResultType;
 public class ErrorResult implements ResultType {
 	
 	@ApiModelProperty(value = "A description of the error describing the failure", required = true)
-	public String message;
+	public Object message;
 	
 	@ApiModelProperty(value = "Specific details regarding the error")
 	public String details;
+	
+	@ApiModelProperty(value = "Specific statusCode for errors if available")
+	public Integer statusCode;
+
 
 	public ErrorResult() {
 
@@ -42,11 +48,11 @@ public class ErrorResult implements ResultType {
 		this.details = details;
 	}
 
-	public String getMessage() {
+	public Object getMessage() {
 		return message;
 	}
 
-	public void setMessage(String message) {
+	public void setMessage(Object message) {
 		this.message = message;
 	}
 
@@ -56,5 +62,14 @@ public class ErrorResult implements ResultType {
 
 	public void setDetails(String details) {
 		this.details = details;
+	}
+	
+
+	public Integer getStatusCode() {
+		return statusCode;
+	}
+
+	public void setStatusCode(Integer statusCode) {
+		this.statusCode = statusCode;
 	}
 }
