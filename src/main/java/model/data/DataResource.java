@@ -54,8 +54,11 @@ public class DataResource {
 	@Valid
 	public DataType dataType;
 
-	@ApiModelProperty(value = "Supplied by the System. Object of spatial metadata fields associated with a Resource. Used to generically specify the bounding box and the spatial reference of a dataset")
+	@ApiModelProperty(value = "Supplied by the System. Object of spatial metadata fields associated with a Resource. Used to generically specify the bounding box and the spatial reference of a dataset in its native projection system")
 	public SpatialMetadata spatialMetadata;
+	
+	@ApiModelProperty(value = "Supplied by the System. If populated, this contains the spatial bounding box of the dataset in a reprojection to WGS84 (EPSG 4326)")
+	public SpatialMetadata projectedSpatialMetadata;
 
 	@ApiModelProperty(value = "Object of common metadata fields used to describe Data or Services within the Piazza system")
 	public ResourceMetadata metadata;
