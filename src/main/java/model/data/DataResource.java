@@ -86,4 +86,12 @@ public class DataResource {
 	public String getDataId() {
 		return dataId;
 	}
+
+	public SpatialMetadata getProjectedSpatialMetadata() {
+		return projectedSpatialMetadata;
+	}
+
+	public void setProjectedSpatialMetadata(SpatialMetadata projectedSpatialMetadata) {
+		this.projectedSpatialMetadata = projectedSpatialMetadata;
+	}
 }
