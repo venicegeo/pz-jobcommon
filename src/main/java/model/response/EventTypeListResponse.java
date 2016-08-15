@@ -17,11 +17,14 @@ package model.response;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import model.workflow.EventType;
 
 @ApiModel(value = "EventTypeResults")
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class EventTypeListResponse extends PiazzaResponse {
 
 	@ApiModelProperty(value = "The array of EventType results", required = true)
