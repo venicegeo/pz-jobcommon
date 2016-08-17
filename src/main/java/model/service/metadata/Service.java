@@ -192,9 +192,11 @@ public class Service {
 		}
 
 		// ResourceMetadata handles its own merging.
-		if (getResourceMetadata() == null) {
-			this.setResourceMetadata(new ResourceMetadata());
+		if (other.getResourceMetadata() != null) {
+			if (getResourceMetadata() == null) {
+				this.setResourceMetadata(new ResourceMetadata());
+			}
+			this.resourceMetadata.merge(other.getResourceMetadata(), overwriteNull);
 		}
-		this.resourceMetadata.merge(other.getResourceMetadata(), overwriteNull);
 	}
 }
