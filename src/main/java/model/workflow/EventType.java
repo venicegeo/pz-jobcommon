@@ -59,7 +59,7 @@ public class EventType {
 
 	@ApiModelProperty(value = "The map of key-value pairs that define the properties of this EventType. The key is the name of the property, and the value is the type of that property. Valid types are 'string', 'boolean', 'integer', 'double' 'date', 'float', 'short', 'long' and 'byte''")
 	@NotNull
-	public Map<String, String> mapping;
+	public Map<String, Object> mapping;
 
 	@ApiModelProperty(value = "Supplied by system", required = true)
 	public String createdBy;
