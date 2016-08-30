@@ -46,6 +46,9 @@ public class StatusUpdate {
 
 	@JsonIgnore
 	public static final String STATUS_CANCELLED = "Cancelled";
+	
+	@JsonIgnore
+	public static final String STATUS_CANCELLING = "Cancelling";
 
 	@JsonIgnore
 	public static final String STATUS_ERROR = "Error";
