@@ -16,6 +16,8 @@
 package model.data.type;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 import io.swagger.annotations.ApiModelProperty;
 import model.data.DataType;
@@ -28,6 +30,7 @@ import model.data.location.FileLocation;
  * @author Sonny.Saniev
  * 
  */
+@JsonInclude(Include.NON_NULL)
 public class GeoJsonDataType implements DataType, FileRepresentation {
 
 	@ApiModelProperty(required = true, value = "The type of Data", allowableValues = "geojson")

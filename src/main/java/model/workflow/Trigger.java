@@ -15,7 +15,8 @@
  **/
 package model.workflow;
 
-import javax.validation.Valid;
+import java.util.Map;
+
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -66,10 +67,13 @@ public class Trigger {
 	@Size(min=1)
 	public String name;
 
-	@ApiModelProperty(value = "The EventType to match and the query to run on events", required=true)
+	@ApiModelProperty(value = "Elastic Search DSL Query 2.2, for details see https://www.elastic.co/guide/en/elasticsearch/reference/2.2/query-dsl.html", required = true)
 	@NotNull
-	@Valid
-	public Condition condition;
+	public Map<String, Object> condition;
+	
+	@ApiModelProperty(value = "The EventTypeId of the EventType to run the query for", required = true)
+	@NotNull
+	public String eventTypeId;
 
 	@ApiModelProperty(value = "The template of the Job to be executed when the conditions are met", required=true)
 	@NotNull
