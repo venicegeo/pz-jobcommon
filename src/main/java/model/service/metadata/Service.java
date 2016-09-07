@@ -60,7 +60,7 @@ public class Service {
 	@Size(min = 1)
 	private String contractUrl;
 
-	@ApiModelProperty(required = true, value = "The HTTP method used to invoke this user Service", dataType = "string", allowableValues = "GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT")
+	@ApiModelProperty(required = true, value = "The HTTP Method used to invoke this User Service. For Asynchronous Services, this applies only to the Execution endpoint.", dataType = "string", allowableValues = "GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT")
 	@NotNull
 	@Size(min = 1)
 	private String method;
@@ -70,6 +70,9 @@ public class Service {
 
 	@ApiModelProperty(value = "The frequency in which Piazza sends heartbeat requests to check on the health of the Service  (defaults to 120 seconds)")
 	private Long heartbeat;
+	
+	@ApiModelProperty(required = true, value = "Determines if this User Service is a long-running service that supports asynchronous endpoints, or if this is a synchronous service that returns results directly.")
+	private Boolean isAsynchronous;
 
 	@ApiModelProperty(value = "Object of common metadata fields used to describe Data or Services within the Piazza system")
 	@NotNull
@@ -138,6 +141,14 @@ public class Service {
 
 	public void setMethodType(METHOD_TYPE methodType) {
 		this.methodType = methodType;
+	}
+
+	public Boolean getIsAsynchronous() {
+		return isAsynchronous;
+	}
+
+	public void setIsAsynchronous(Boolean isAsynchronous) {
+		this.isAsynchronous = isAsynchronous;
 	}
 
 	/**

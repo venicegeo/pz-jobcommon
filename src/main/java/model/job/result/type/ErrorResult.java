@@ -15,8 +15,6 @@
  **/
 package model.job.result.type;
 
-import org.springframework.http.HttpStatus;
-
 import io.swagger.annotations.ApiModelProperty;
 import model.job.result.ResultType;
 
