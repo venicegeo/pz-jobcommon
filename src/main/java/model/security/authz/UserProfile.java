@@ -44,6 +44,46 @@ public class UserProfile {
 
 	public String profileTemplateId;
 
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public DateTime getCreatedOn() {
+		return createdOn;
+	}
+
+	public void setCreatedOn(DateTime createdOn) {
+		this.createdOn = createdOn;
+	}
+
+	public String getCreatedBy() {
+		return createdBy;
+	}
+
+	public void setCreatedBy(String createdBy) {
+		this.createdBy = createdBy;
+	}
+
+	public Boolean getIsActive() {
+		return isActive;
+	}
+
+	public void setIsActive(Boolean isActive) {
+		this.isActive = isActive;
+	}
+
+	public String getProfileTemplateId() {
+		return profileTemplateId;
+	}
+
+	public void setProfileTemplateId(String profileTemplateId) {
+		this.profileTemplateId = profileTemplateId;
+	}
+
 	@JsonProperty("createdOn")
 	public String getCreatedOnString() {
 		if (createdOn != null) {
