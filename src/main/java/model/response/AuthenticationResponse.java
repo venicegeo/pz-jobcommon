@@ -15,27 +15,29 @@
  **/
 package model.response;
 
+import model.security.authz.UserProfile;
+
 public class AuthenticationResponse extends PiazzaResponse {
-	
-	public String username;
-	
+
 	public Boolean authenticated;
+
+	public UserProfile profile;
 
 	public AuthenticationResponse() {
 
 	}
 
-	public AuthenticationResponse(String username, Boolean authenticated) {
-		this.username = username;
+	public AuthenticationResponse(UserProfile profile, Boolean authenticated) {
+		this.profile = profile;
 		this.authenticated = authenticated;
 	}
 
-	public String getUsername() {
-		return username;
+	public UserProfile getProfile() {
+		return profile;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
+	public void setProfile(UserProfile profile) {
+		this.profile = profile;
 	}
 
 	public Boolean getAuthenticated() {
