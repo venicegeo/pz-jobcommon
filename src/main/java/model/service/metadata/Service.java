@@ -65,7 +65,7 @@ public class Service {
 	@Size(min = 1)
 	private String method;
 
-	@ApiModelProperty(value = "The milliseconds timeout Piazza waits for a response (defaults to 120 seconds)")
+	@ApiModelProperty(value = "The timeout in seconds Piazza waits for a response (defaults to 600 seconds)")
 	private Long timeout;
 
 	@ApiModelProperty(value = "The frequency in which Piazza sends heartbeat requests to check on the health of the Service  (defaults to 120 seconds)")
