@@ -181,6 +181,7 @@ public class ResponseTest {
 		service.getResourceMetadata().setName("Test Service");
 		service.setServiceId("123456");
 		service.setUrl("localhost:8080");
+		service.setTimeout(Long.valueOf(600));
 		ServiceResponse serviceInput = new ServiceResponse(service);
 
 		// Test Single service response
