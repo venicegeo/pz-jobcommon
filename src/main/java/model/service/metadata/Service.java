@@ -104,8 +104,7 @@ public class Service {
 	}
 
 	public Long getTimeout() {
-		// return in milliseconds
-		return timeout * 1000;
+		return timeout;
 	}
 
 	public void setTimeout(Long timeout) {
