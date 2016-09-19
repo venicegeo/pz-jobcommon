@@ -17,6 +17,8 @@ package model.data.location;
 
 import java.io.InputStream;
 
+import com.amazonaws.AmazonClientException;
+import com.amazonaws.AmazonServiceException;
 import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3Client;
@@ -24,8 +26,8 @@ import com.amazonaws.services.s3.model.S3Object;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
- * Factory class that helps with the obtaining of Files represented by
- * FileLocation interfaces; such as S3 files or folder shares.
+ * Factory class that helps with the obtaining of Files represented by FileLocation interfaces; such as S3 files or
+ * folder shares.
  * 
  * @author Patrick.Doody
  * 
@@ -59,8 +61,7 @@ public class FileAccessFactory {
 	}
 
 	/**
-	 * Returns the InputStream for a file represented by an object implementing
-	 * the FileLocation interface
+	 * Returns the InputStream for a file represented by an object implementing the FileLocation interface
 	 * 
 	 * @param fileLocation
 	 *            The file location
@@ -70,20 +71,25 @@ public class FileAccessFactory {
 		if (fileLocation instanceof FolderShare) {
 			return ((FolderShare) fileLocation).getFile();
 		} else if (fileLocation instanceof S3FileStore) {
-			return getS3File(fileLocation, s3AccessKey, s3PrivateKey);
+			try {
+				return getS3File(fileLocation, s3AccessKey, s3PrivateKey);
+			} catch (AmazonClientException exception) {
+				// Add helpful text to Exception
+				throw new Exception(String.format(
+						"Could not retrieve File Bytes for S3 File. Failed with Message : %s. AWS Client Credentials may be incorrect or not specified.",
+						exception.getMessage()));
+			}
 		} else {
 			throw new Exception("Unsupported Object type.");
 		}
 	}
 
 	/**
-	 * Gets the input stream for an S3 file store. This will stream the bytes
-	 * from S3. Null, or exception will be thrown if an error occurs during
-	 * acquisition.
+	 * Gets the input stream for an S3 file store. This will stream the bytes from S3. Null, or exception will be thrown
+	 * if an error occurs during acquisition.
 	 * 
-	 * The S3 Credentials MUST be populated using the setCredentials() method
-	 * before executing this call, or a Credentials exception is likely to be
-	 * thrown by S3.
+	 * The S3 Credentials MUST be populated using the setCredentials() method before executing this call, or a
+	 * Credentials exception is likely to be thrown by S3.
 	 */
 	@JsonIgnore
 	public InputStream getS3File(FileLocation fileLocation, String accessKey, String privateKey) {
@@ -102,8 +108,7 @@ public class FileAccessFactory {
 	}
 
 	/**
-	 * Returns the URI for a file represented by an object implementing the
-	 * FileLocation interface
+	 * Returns the URI for a file represented by an object implementing the FileLocation interface
 	 * 
 	 * @param fileLocation
 	 *            The file location
@@ -114,8 +119,8 @@ public class FileAccessFactory {
 			return ((FolderShare) fileLocation).getFilePath();
 		} else if (fileLocation instanceof S3FileStore) {
 			S3FileStore s3FileStore = ((S3FileStore) fileLocation);
-			return String.format("%s%s/%s/%s", PROTOCOL_PREFIX, s3FileStore.getDomainName(),
-					s3FileStore.getBucketName(), s3FileStore.getFileName());
+			return String.format("%s%s/%s/%s", PROTOCOL_PREFIX, s3FileStore.getDomainName(), s3FileStore.getBucketName(),
+					s3FileStore.getFileName());
 		} else {
 			throw new Exception("Unsupported Object type.");
 		}
