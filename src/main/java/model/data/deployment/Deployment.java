@@ -24,8 +24,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * JSON Database Model, serialized by Jackson, that represents a Deployment in
- * the Piazza System.
+ * JSON Database Model, serialized by Jackson, that represents a Deployment in the Piazza System.
  * 
  * @author Patrick.Doody
  * 
@@ -52,6 +51,9 @@ public class Deployment {
 
 	@ApiModelProperty(value = "Fully qualified URL for accessing the GetCapabilities action for the Deployment service")
 	public String capabilitiesUrl;
+
+	@ApiModelProperty(value = "The date and time of data submission to Piazza")
+	public String createdOn;
 
 	/**
 	 * Creates a new Deployment.
@@ -131,5 +133,13 @@ public class Deployment {
 
 	public void setCapabilitiesUrl(String capabilitiesUrl) {
 		this.capabilitiesUrl = capabilitiesUrl;
+	}
+
+	public String getCreatedOn() {
+		return createdOn;
+	}
+
+	public void setCreatedOn(String createdOn) {
+		this.createdOn = createdOn;
 	}
 }
