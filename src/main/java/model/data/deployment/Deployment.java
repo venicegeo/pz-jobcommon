@@ -17,8 +17,12 @@ package model.data.deployment;
 
 import javax.validation.constraints.NotNull;
 
+import org.joda.time.DateTime;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 import io.swagger.annotations.ApiModelProperty;
@@ -52,8 +56,8 @@ public class Deployment {
 	@ApiModelProperty(value = "Fully qualified URL for accessing the GetCapabilities action for the Deployment service")
 	public String capabilitiesUrl;
 
-	@ApiModelProperty(value = "The date and time of data submission to Piazza")
-	public String createdOn;
+	@JsonIgnore
+	public DateTime createdOn;
 
 	/**
 	 * Creates a new Deployment.
@@ -85,6 +89,7 @@ public class Deployment {
 		this.port = port;
 		this.layer = layer;
 		this.capabilitiesUrl = capabilitiesUrl;
+		this.createdOn = new DateTime();
 	}
 
 	public String getDeploymentId() {
@@ -135,11 +140,18 @@ public class Deployment {
 		this.capabilitiesUrl = capabilitiesUrl;
 	}
 
-	public String getCreatedOn() {
-		return createdOn;
+	@JsonProperty("createdOn")
+	public String getCreatedOnString() {
+		if (createdOn != null) {
+			// Defaults to ISO8601
+			return createdOn.toString();
+		} else {
+			return null;
+		}
 	}
 
-	public void setCreatedOn(String createdOn) {
-		this.createdOn = createdOn;
+	@JsonProperty("createdOn")
+	public void setCreatedOnString(String createdOn) {
+		this.createdOn = new DateTime(createdOn);
 	}
 }
