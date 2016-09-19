@@ -61,6 +61,9 @@ public class AccessJob implements PiazzaJobType {
 	@ApiModelProperty(value = "Optional. The number of days that this Deployment will be needed for. Once the Deployment expires, it is subject to automatic resource cleanup on the Piazza GIS Server", required = false)
 	public Integer durationDays;
 
+	@ApiModelProperty(required = false, value = "Supplied by Piazza system. The name of the user requesting this Deployment")
+	public String createdBy;
+
 	public AccessJob() {
 	}
 
@@ -103,5 +106,13 @@ public class AccessJob implements PiazzaJobType {
 
 	public void setDurationDays(Integer durationDays) {
 		this.durationDays = durationDays;
+	}
+
+	public String getCreatedBy() {
+		return createdBy;
+	}
+
+	public void setCreatedBy(String createdBy) {
+		this.createdBy = createdBy;
 	}
 }
