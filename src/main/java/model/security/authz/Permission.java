@@ -35,8 +35,8 @@ public class Permission {
 
 	private String uri;
 
-	public Permission(RequestMethod requestMethod, String uri) {
-		setRequestMethod(requestMethod.toString());
+	public Permission(String requestMethod, String uri) {
+		setRequestMethod(requestMethod);
 		setUri(uri);
 	}
 
@@ -45,7 +45,8 @@ public class Permission {
 	}
 
 	public void setRequestMethod(String requestMethod) {
-		this.requestMethod = requestMethod;
+		RequestMethod verifiedRequestMethod = RequestMethod.valueOf(requestMethod);
+		this.requestMethod = verifiedRequestMethod.toString();
 	}
 
 	public String getUri() {
