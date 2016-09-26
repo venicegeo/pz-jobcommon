@@ -24,6 +24,8 @@ import java.util.Map;
 
 import javax.annotation.PostConstruct;
 
+import org.apache.http.client.HttpClient;
+import org.apache.http.impl.client.HttpClientBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -31,6 +33,7 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
@@ -52,6 +55,10 @@ public class PiazzaLogger {
 	private String serviceName;
 	@Value("${logger.console:}")
 	private Boolean logToConsole;
+	@Value("${http.max.total:5000}")
+	private int httpMaxTotal;
+	@Value("${http.max.route:2500}")
+	private int httpMaxRoute;
 
 	public static final String DEBUG = "Debug";
 	public static final String ERROR = "Error";
@@ -88,6 +95,8 @@ public class PiazzaLogger {
 	@PostConstruct
 	public void init() {
 		LOG.info(String.format("PiazzaLogger initialized for service %s, url: %s", serviceName, LOGGER_URL));
+		HttpClient httpClient = HttpClientBuilder.create().setMaxConnTotal(httpMaxTotal).setMaxConnPerRoute(httpMaxRoute).build();
+		restTemplate.setRequestFactory(new HttpComponentsClientHttpRequestFactory(httpClient));
 	}
 
 	/**
