@@ -62,8 +62,8 @@ public class Deployment {
 	/**
 	 * Creates a new Deployment.
 	 */
-	public Deployment() {
-
+	public Deployment() { //NOSONAR
+		// Normal for empty constructor even with @NotNull fields
 	}
 
 	/**
@@ -82,7 +82,7 @@ public class Deployment {
 	 * @param capabilitiesUrl
 	 *            The URL that will return the Capabilities document
 	 */
-	public Deployment(String deploymentId, String dataId, String host, String port, String layer, String capabilitiesUrl) {
+	public Deployment(String deploymentId, String dataId, String host, String port, String layer, String capabilitiesUrl) {  //NOSONAR
 		this.deploymentId = deploymentId;
 		this.dataId = dataId;
 		this.host = host;

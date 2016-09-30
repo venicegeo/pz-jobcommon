@@ -43,8 +43,8 @@ public class TextDataType implements DataType {
 	@ApiModelProperty(value = "The media type of the stored Data.  Refer to http://www.iana.org for standard values")
 	public String mimeType;
 
-	public TextDataType() {
-
+	public TextDataType() { //NOSONAR
+		// Normal for empty constructor even with @NotNull fields
 	}
 
 	public String getContent() {

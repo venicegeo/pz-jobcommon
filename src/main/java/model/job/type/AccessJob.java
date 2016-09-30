@@ -61,10 +61,11 @@ public class AccessJob implements PiazzaJobType {
 	@ApiModelProperty(value = "Optional. The number of days that this Deployment will be needed for. Once the Deployment expires, it is subject to automatic resource cleanup on the Piazza GIS Server", required = false)
 	public Integer durationDays;
 
-	public AccessJob() {
+	public AccessJob() { //NOSONAR
+		// Normal for empty constructor even with @NotNull fields
 	}
 
-	public AccessJob(String dataId) {
+	public AccessJob(String dataId) { //NOSONAR
 		this.dataId = dataId;
 	}
 

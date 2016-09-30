@@ -48,8 +48,8 @@ public class IngestJob implements PiazzaJobType {
 	@NotNull
 	public Boolean host;
 
-	public IngestJob() {
-
+	public IngestJob() { //NOSONAR
+		// Normal for empty constructor even with @NotNull fields
 	}
 	
 	public void setData(DataResource data) {

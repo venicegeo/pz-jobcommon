@@ -48,8 +48,8 @@ public class RasterDataType implements DataType, FileRepresentation {
 	@ApiModelProperty(value = "The media type of the stored Data")
 	public String mimeType;
 
-	public RasterDataType() {
-
+	public RasterDataType() { //NOSONAR
+		// Normal for empty constructor even with @NotNull fields
 	}
 
 	public String getMimeType() {

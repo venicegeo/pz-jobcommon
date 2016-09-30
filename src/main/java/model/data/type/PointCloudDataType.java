@@ -44,8 +44,8 @@ public class PointCloudDataType implements DataType, FileRepresentation {
 	@ApiModelProperty(value = "The media type of the stored Data")
 	public String mimeType;
 
-	public PointCloudDataType() {
-
+	public PointCloudDataType() { //NOSONAR
+		// Normal for empty constructor even with @NotNull fields
 	}
 
 	public String getMimeType() {

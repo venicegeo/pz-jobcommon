@@ -19,6 +19,10 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.util.Arrays;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -33,6 +37,8 @@ import io.swagger.annotations.ApiModelProperty;
  */
 public class FolderShare implements FileLocation {
 
+	private final static Logger LOGGER = LoggerFactory.getLogger(FolderShare.class);
+	
 	@ApiModelProperty(required = true, value = "The type of file location", allowableValues = "share")
 	public String type;
 
@@ -71,7 +77,7 @@ public class FolderShare implements FileLocation {
 		try {
 			return new FileInputStream(filePath);
 		} catch (FileNotFoundException exception) {
-			exception.printStackTrace();
+			LOGGER.error(Arrays.toString(exception.getStackTrace()));
 			return null;
 		}
 	}
