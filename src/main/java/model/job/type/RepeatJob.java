@@ -42,10 +42,11 @@ public class RepeatJob implements PiazzaJobType {
 	@Size(min=1)
 	public String jobId = null;
 
-	public RepeatJob() {
+	public RepeatJob() { //NOSONAR
+		// Normal for empty constructor even with @NotNull fields
 	}
 
-	public RepeatJob(String jobId) {
+	public RepeatJob(String jobId) { //NOSONAR
 		this.jobId = jobId;
 	}
 

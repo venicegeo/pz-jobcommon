@@ -31,8 +31,8 @@ public class SecurityClassification {
 	@NotNull
 	private String classification;
 
-	public SecurityClassification() {
-
+	public SecurityClassification() { //NOSONAR
+		// Normal for empty constructor even with @NotNull fields
 	}
 
 	public String getClassification() {
@@ -43,7 +43,7 @@ public class SecurityClassification {
 		this.classification = classification;
 	}
 
-	public SecurityClassification(String classification) {
+	public SecurityClassification(String classification) { //NOSONAR
 		super();
 		this.classification = classification;
 	}

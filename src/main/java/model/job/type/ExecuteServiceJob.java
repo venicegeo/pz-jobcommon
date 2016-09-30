@@ -45,11 +45,11 @@ public class ExecuteServiceJob implements PiazzaJobType {
 		this.data = data;
 	}
 
-	public ExecuteServiceJob() {
-
+	public ExecuteServiceJob() { //NOSONAR
+		// Normal for empty constructor even with @NotNull fields
 	}
 
-	public ExecuteServiceJob(String jobId) {
+	public ExecuteServiceJob(String jobId) { //NOSONAR
 		this.jobId = jobId;
 	}
 

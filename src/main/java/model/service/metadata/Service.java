@@ -17,11 +17,15 @@ package model.service.metadata;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -40,6 +44,8 @@ import model.job.metadata.ResourceMetadata;
 
 public class Service {
 
+	private final static Logger LOGGER = LoggerFactory.getLogger(Service.class);
+	
 	public enum METHOD_TYPE {
 		GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
 	};
@@ -197,7 +203,7 @@ public class Service {
 						toMethod.invoke(this, value);
 					}
 				} catch (Exception exception) {
-					exception.printStackTrace();
+					LOGGER.error(Arrays.toString(exception.getStackTrace()));
 				}
 			}
 		}
