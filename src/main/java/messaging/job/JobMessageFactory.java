@@ -42,7 +42,7 @@ public class JobMessageFactory {
 	public static final String CREATE_JOB_TOPIC_NAME = "Create-Job";
 	public static final String ABORT_JOB_TOPIC_NAME = "Abort-Job";
 	public static final String UPDATE_JOB_TOPIC_NAME = "Update-Job";
-	private static final String KAFKA_TOPIC_TEMPLATE = "%-%";
+	public static final String KAFKA_TOPIC_TEMPLATE = "%s-%s";
 
 	/**
 	 * Creates a Kafka message for a Piazza Job to be created. This Topic is listened to solely by the Job Manager and
