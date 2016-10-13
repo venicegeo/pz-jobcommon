@@ -332,7 +332,7 @@ public class ResourceMetadata {
 						toMethod.invoke(this, value);
 					}
 				} catch (Exception exception) {
-					LOGGER.error(Arrays.toString(exception.getStackTrace()));
+					LOGGER.error("Error merging the properties of ResourceMetadatas", exception);
 				}
 			}
 		}

@@ -77,7 +77,7 @@ public class FolderShare implements FileLocation {
 		try {
 			return new FileInputStream(filePath);
 		} catch (FileNotFoundException exception) {
-			LOGGER.error(Arrays.toString(exception.getStackTrace()));
+			LOGGER.error("File not found", exception);
 			return null;
 		}
 	}

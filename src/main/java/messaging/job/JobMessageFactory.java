@@ -30,6 +30,8 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import exception.PiazzaJobException;
+
 /**
  * Factory class to abstract the production of Job-related Kafka messages using
  * this projects defined POJO Models.
@@ -155,7 +157,7 @@ public class JobMessageFactory {
 			String userName, String space) throws Exception {
 		// Data Resource must have an Id at this point
 		if (dataResource.getDataId() == null) {
-			throw new Exception("The DataResource object must have a populated Id.");
+			throw new PiazzaJobException("The DataResource object must have a populated Id.");
 		}
 
 		// Create the IngestJob

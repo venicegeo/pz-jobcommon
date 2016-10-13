@@ -68,7 +68,7 @@ public class PiazzaLogger {
 	private static final String[] SEVERITY_OPTIONS = { DEBUG, ERROR, FATAL, INFO, WARNING };
 
 	private RestTemplate restTemplate = new RestTemplate();
-	private final static Logger LOG = LoggerFactory.getLogger(PiazzaLogger.class);
+	private final static Logger LOGGER = LoggerFactory.getLogger(PiazzaLogger.class);
 
 	/**
 	 * Default constructor, required for beat instantiation.
@@ -94,7 +94,7 @@ public class PiazzaLogger {
 
 	@PostConstruct
 	public void init() {
-		LOG.info(String.format("PiazzaLogger initialized for service %s, url: %s", serviceName, LOGGER_URL));
+		LOGGER.info(String.format("PiazzaLogger initialized for service %s, url: %s", serviceName, LOGGER_URL));
 		HttpClient httpClient = HttpClientBuilder.create().setMaxConnTotal(httpMaxTotal).setMaxConnPerRoute(httpMaxRoute).build();
 		restTemplate.setRequestFactory(new HttpComponentsClientHttpRequestFactory(httpClient));
 	}
@@ -120,17 +120,17 @@ public class PiazzaLogger {
 				// Log the message locally if requested
 				try {
 					if (logToConsole.booleanValue()) {
-						System.out.println(logRequest.toPrettyString());
+						LOGGER.info(logRequest.toPrettyString());
 					}
 				} catch (Exception exception) { /* Do nothing. */
+					LOGGER.error("Application property is not set", exception);
 				}
 
 				String url = String.format("%s/%s", LOGGER_URL, LOGGER_ENDPOINT);
 				restTemplate.postForEntity(url, new HttpEntity<LogRequest>(logRequest, headers), String.class);
 			} catch (Exception exception) {
-				LOG.error("PiazzaLogger could not log: " + exception.getMessage());
+				LOGGER.error("PiazzaLogger could not log: ", exception);
 			}
-
 		}
 	}
 
@@ -147,7 +147,7 @@ public class PiazzaLogger {
 			ResponseEntity<LogRequest[]> logs = restTemplate.getForEntity(url + "?count={count}", LogRequest[].class, map);
 			return (List<LogRequest>) Arrays.asList(logs.getBody());
 		} catch (Exception exception) {
-			LOG.error(exception.getMessage());
+			LOGGER.error("Error occurred while obtaining logs", exception);
 			return null;
 		}
 	}
@@ -157,15 +157,15 @@ public class PiazzaLogger {
 	 */
 	private boolean isLogInputValid(String logMessage, String severity) {
 		if (logMessage == null || logMessage.length() == 0) {
-			LOG.error("Message is null. Logger cannot send an empty message. This is a required field.");
+			LOGGER.error("Message is null. Logger cannot send an empty message. This is a required field.");
 			return false;
 		}
 		if (severity == null || severity.length() == 0) {
-			LOG.error("Severity is null. Logger cannot send message without a severity. This is a required field.");
+			LOGGER.error("Severity is null. Logger cannot send message without a severity. This is a required field.");
 			return false;
 		}
 		if (!Arrays.asList(SEVERITY_OPTIONS).contains(severity)) {
-			LOG.error("Severity '" + severity + "' is not one of the available options: " + Arrays.toString(SEVERITY_OPTIONS));
+			LOGGER.error("Severity '" + severity + "' is not one of the available options: " + Arrays.toString(SEVERITY_OPTIONS));
 			return false;
 		}
 

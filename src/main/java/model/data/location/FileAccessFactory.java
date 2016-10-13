@@ -17,6 +17,9 @@ package model.data.location;
 
 import java.io.InputStream;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.amazonaws.AmazonClientException;
 import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.services.s3.AmazonS3;
@@ -37,6 +40,8 @@ public class FileAccessFactory {
 	private String s3AccessKey = "";
 	private String s3PrivateKey = "";
 
+	private final static Logger LOGGER = LoggerFactory.getLogger(FileAccessFactory.class);
+	
 	private final String PROTOCOL_PREFIX = "https://";
 
 	public FileAccessFactory() {
@@ -76,9 +81,11 @@ public class FileAccessFactory {
 				return getS3File(fileLocation, s3AccessKey, s3PrivateKey);
 			} catch (AmazonClientException exception) {
 				// Add helpful text to Exception
-				throw new AmazonClientException(String.format(
+				String error = String.format(
 						"Could not retrieve File Bytes for S3 File. Failed with Message : %s. AWS Client Credentials may be incorrect or not specified.",
-						exception.getMessage()));
+						exception.getMessage());
+				LOGGER.error(error, exception);
+				throw new AmazonClientException(error);
 			}
 		} else {
 			throw new InvalidInputException("Unsupported Object type.");
