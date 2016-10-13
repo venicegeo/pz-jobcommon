@@ -154,7 +154,7 @@ public class JobMessageFactory {
 	 *         via a producer.
 	 */
 	public static ProducerRecord<String, String> getIngestJobForDataResource(DataResource dataResource, String jobId,
-			String userName, String space) throws Exception {
+			String userName, String space) throws PiazzaJobException {
 		// Data Resource must have an Id at this point
 		if (dataResource.getDataId() == null) {
 			throw new PiazzaJobException("The DataResource object must have a populated Id.");
