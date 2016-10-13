@@ -24,6 +24,8 @@ import model.request.PiazzaJobRequest;
 import model.status.StatusUpdate;
 
 import org.apache.kafka.clients.producer.ProducerRecord;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -45,6 +47,8 @@ public class JobMessageFactory {
 	public static final String ABORT_JOB_TOPIC_NAME = "Abort-Job";
 	public static final String UPDATE_JOB_TOPIC_NAME = "Update-Job";
 
+	private final static Logger LOGGER = LoggerFactory.getLogger(JobMessageFactory.class);
+	
 	/**
 	 * Creates a Kafka message for a Piazza Job to be created. This Topic is
 	 * listened to solely by the Job Manager and acts as a simple pass-through
@@ -170,8 +174,14 @@ public class JobMessageFactory {
 		PiazzaJobRequest jobRequest = new PiazzaJobRequest();
 		jobRequest.createdBy = userName;
 		jobRequest.jobType = ingestJob;
-		ProducerRecord<String, String> ingestJobMessage = JobMessageFactory.getRequestJobMessage(jobRequest, jobId,
-				space);
+		
+		ProducerRecord<String, String> ingestJobMessage = null;
+		try {
+			ingestJobMessage = JobMessageFactory.getRequestJobMessage(jobRequest, jobId, space);
+		} catch (JsonProcessingException exception) {
+			// TODO Auto-generated catch block
+			LOGGER.error("Json processing error occcured", exception);
+		}
 
 		// This message will now be handled as any
 		// other Job request
