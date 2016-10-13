@@ -158,7 +158,7 @@ public class JobMessageFactory {
 	 *         via a producer.
 	 */
 	public static ProducerRecord<String, String> getIngestJobForDataResource(DataResource dataResource, String jobId,
-			String userName, String space) throws PiazzaJobException {
+			String userName, String space) throws PiazzaJobException, JsonProcessingException {
 		// Data Resource must have an Id at this point
 		if (dataResource.getDataId() == null) {
 			throw new PiazzaJobException("The DataResource object must have a populated Id.");
@@ -175,13 +175,7 @@ public class JobMessageFactory {
 		jobRequest.createdBy = userName;
 		jobRequest.jobType = ingestJob;
 		
-		ProducerRecord<String, String> ingestJobMessage = null;
-		try {
-			ingestJobMessage = JobMessageFactory.getRequestJobMessage(jobRequest, jobId, space);
-		} catch (JsonProcessingException exception) {
-			// TODO Auto-generated catch block
-			LOGGER.error("Json processing error occcured", exception);
-		}
+		ProducerRecord<String, String> ingestJobMessage = JobMessageFactory.getRequestJobMessage(jobRequest, jobId, space);
 
 		// This message will now be handled as any
 		// other Job request
