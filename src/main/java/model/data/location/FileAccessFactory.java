@@ -18,12 +18,13 @@ package model.data.location;
 import java.io.InputStream;
 
 import com.amazonaws.AmazonClientException;
-import com.amazonaws.AmazonServiceException;
 import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.S3Object;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import exception.InvalidInputException;
 
 /**
  * Factory class that helps with the obtaining of Files represented by FileLocation interfaces; such as S3 files or
@@ -67,7 +68,7 @@ public class FileAccessFactory {
 	 *            The file location
 	 * @return The File stream
 	 */
-	public InputStream getFile(FileLocation fileLocation) throws Exception {
+	public InputStream getFile(FileLocation fileLocation) throws AmazonClientException, InvalidInputException {
 		if (fileLocation instanceof FolderShare) {
 			return ((FolderShare) fileLocation).getFile();
 		} else if (fileLocation instanceof S3FileStore) {
@@ -75,12 +76,12 @@ public class FileAccessFactory {
 				return getS3File(fileLocation, s3AccessKey, s3PrivateKey);
 			} catch (AmazonClientException exception) {
 				// Add helpful text to Exception
-				throw new Exception(String.format(
+				throw new AmazonClientException(String.format(
 						"Could not retrieve File Bytes for S3 File. Failed with Message : %s. AWS Client Credentials may be incorrect or not specified.",
 						exception.getMessage()));
 			}
 		} else {
-			throw new Exception("Unsupported Object type.");
+			throw new InvalidInputException("Unsupported Object type.");
 		}
 	}
 
