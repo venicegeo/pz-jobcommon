@@ -115,7 +115,7 @@ public class FileAccessFactory {
 	 *            The file location
 	 * @return The File URI
 	 */
-	public String getFileUri(FileLocation fileLocation) throws Exception {
+	public String getFileUri(FileLocation fileLocation) throws InvalidInputException {
 		if (fileLocation instanceof FolderShare) {
 			return ((FolderShare) fileLocation).getFilePath();
 		} else if (fileLocation instanceof S3FileStore) {
@@ -123,7 +123,7 @@ public class FileAccessFactory {
 			return String.format("%s%s/%s/%s", PROTOCOL_PREFIX, s3FileStore.getDomainName(), s3FileStore.getBucketName(),
 					s3FileStore.getFileName());
 		} else {
-			throw new Exception("Unsupported Object type.");
+			throw new InvalidInputException("Unsupported Object type.");
 		}
 	}
 

@@ -15,6 +15,7 @@
  **/
 package util;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -24,12 +25,10 @@ import org.geotools.feature.simple.SimpleFeatureTypeBuilder;
 import org.opengis.feature.simple.SimpleFeatureType;
 
 /**
- * Helpful utility methods used in conjunction with GeoTools Data Stores and
- * Features.
+ * Helpful utility methods used in conjunction with GeoTools Data Stores and Features.
  * 
- * The Ingest and Access components use GeoTools heavily for data parsing and
- * manipulation, and this utility aims to create a common place for redundant
- * code.
+ * The Ingest and Access components use GeoTools heavily for data parsing and manipulation, and this utility aims to
+ * create a common place for redundant code.
  * 
  * @author Patrick.Doody
  * 
@@ -38,8 +37,8 @@ public class GeoToolsUtil {
 	private static final String POSTGIS_DATASTORE_TYPE = "postgis";
 
 	/**
-	 * GeoTools offers no simple way to rename an existing FeatureType. This
-	 * method provides a nice way to clone a feature type with a new name.
+	 * GeoTools offers no simple way to rename an existing FeatureType. This method provides a nice way to clone a
+	 * feature type with a new name.
 	 * 
 	 * @param featureType
 	 *            The existing Feature Type to clone
@@ -73,10 +72,9 @@ public class GeoToolsUtil {
 	 * @param password
 	 *            The password
 	 * @return GeoTools DataStore for the PostGIS database.
-	 * @throws Exception
 	 */
-	public static DataStore getPostGisDataStore(String host, String port, String schema, String database, String user,
-			String password) throws Exception {
+	public static DataStore getPostGisDataStore(String host, String port, String schema, String database, String user, String password)
+			throws IOException {
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("dbtype", POSTGIS_DATASTORE_TYPE);
 		params.put("host", host);
