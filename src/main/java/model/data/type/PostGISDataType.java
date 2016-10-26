@@ -45,8 +45,8 @@ public class PostGISDataType implements DataType {
 	@ApiModelProperty(value = "The media type of the stored Data")
 	public String mimeType;
 
-	public PostGISDataType() {
-
+	public PostGISDataType() { //NOSONAR
+		// Normal for empty constructor even with @NotNull fields
 	}
 
 	public String getMimeType() {

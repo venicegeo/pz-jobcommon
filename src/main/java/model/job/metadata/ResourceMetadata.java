@@ -16,12 +16,15 @@
 package model.job.metadata;
 
 import java.lang.reflect.Method;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
 import javax.validation.constraints.NotNull;
 
 import org.joda.time.DateTime;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.elasticsearch.annotations.Field;
 import org.springframework.data.elasticsearch.annotations.FieldType;
 
@@ -57,6 +60,8 @@ public class ResourceMetadata {
 
 	@ApiModelProperty(value = "Quality level of the resource (Production, Development)")
 	public String qos;
+
+	private final static Logger LOGGER = LoggerFactory.getLogger(ResourceMetadata.class);
 	
 	// Values indicating the status of the resource
 	public enum STATUS_TYPE {
@@ -327,7 +332,7 @@ public class ResourceMetadata {
 						toMethod.invoke(this, value);
 					}
 				} catch (Exception exception) {
-					exception.printStackTrace();
+					LOGGER.error("Error merging the properties of ResourceMetadatas", exception);
 				}
 			}
 		}

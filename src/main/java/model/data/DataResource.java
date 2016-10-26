@@ -60,8 +60,8 @@ public class DataResource {
 	@ApiModelProperty(value = "Object of common metadata fields used to describe Data or Services within the Piazza system")
 	public ResourceMetadata metadata;
 
-	public DataResource() {
-
+	public DataResource() { //NOSONAR
+		// Normal for empty constructor even with @NotNull fields
 	}
 
 	public ResourceMetadata getMetadata() {

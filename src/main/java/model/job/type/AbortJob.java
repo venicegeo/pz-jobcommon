@@ -41,15 +41,15 @@ public class AbortJob implements PiazzaJobType {
 	@ApiModelProperty(value = "The reason given for aborting the Job")
 	public String reason;
 
-	public AbortJob() {
-
+	public AbortJob() { //NOSONAR
+		// Normal for empty constructor even with @NotNull fields
 	}
 
-	public AbortJob(String jobId) {
+	public AbortJob(String jobId) { //NOSONAR
 		this.jobId = jobId;
 	}
 
-	public AbortJob(String jobId, String reason) {
+	public AbortJob(String jobId, String reason) { //NOSONAR
 		this(jobId);
 		this.reason = reason;
 	}

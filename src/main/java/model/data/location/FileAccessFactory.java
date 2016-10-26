@@ -17,13 +17,17 @@ package model.data.location;
 
 import java.io.InputStream;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.amazonaws.AmazonClientException;
-import com.amazonaws.AmazonServiceException;
 import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.S3Object;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import exception.InvalidInputException;
 
 /**
  * Factory class that helps with the obtaining of Files represented by FileLocation interfaces; such as S3 files or
@@ -36,6 +40,8 @@ public class FileAccessFactory {
 	private String s3AccessKey = "";
 	private String s3PrivateKey = "";
 
+	private final static Logger LOGGER = LoggerFactory.getLogger(FileAccessFactory.class);
+	
 	private final String PROTOCOL_PREFIX = "https://";
 
 	public FileAccessFactory() {
@@ -67,7 +73,7 @@ public class FileAccessFactory {
 	 *            The file location
 	 * @return The File stream
 	 */
-	public InputStream getFile(FileLocation fileLocation) throws Exception {
+	public InputStream getFile(FileLocation fileLocation) throws AmazonClientException, InvalidInputException {
 		if (fileLocation instanceof FolderShare) {
 			return ((FolderShare) fileLocation).getFile();
 		} else if (fileLocation instanceof S3FileStore) {
@@ -75,12 +81,14 @@ public class FileAccessFactory {
 				return getS3File(fileLocation, s3AccessKey, s3PrivateKey);
 			} catch (AmazonClientException exception) {
 				// Add helpful text to Exception
-				throw new Exception(String.format(
+				String error = String.format(
 						"Could not retrieve File Bytes for S3 File. Failed with Message : %s. AWS Client Credentials may be incorrect or not specified.",
-						exception.getMessage()));
+						exception.getMessage());
+				LOGGER.error(error, exception);
+				throw new AmazonClientException(error);
 			}
 		} else {
-			throw new Exception("Unsupported Object type.");
+			throw new InvalidInputException("Unsupported Object type.");
 		}
 	}
 
@@ -114,7 +122,7 @@ public class FileAccessFactory {
 	 *            The file location
 	 * @return The File URI
 	 */
-	public String getFileUri(FileLocation fileLocation) throws Exception {
+	public String getFileUri(FileLocation fileLocation) throws InvalidInputException {
 		if (fileLocation instanceof FolderShare) {
 			return ((FolderShare) fileLocation).getFilePath();
 		} else if (fileLocation instanceof S3FileStore) {
@@ -122,7 +130,7 @@ public class FileAccessFactory {
 			return String.format("%s%s/%s/%s", PROTOCOL_PREFIX, s3FileStore.getDomainName(), s3FileStore.getBucketName(),
 					s3FileStore.getFileName());
 		} else {
-			throw new Exception("Unsupported Object type.");
+			throw new InvalidInputException("Unsupported Object type.");
 		}
 	}
 

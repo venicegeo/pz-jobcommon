@@ -35,8 +35,8 @@ public class SearchMetadataIngestJob implements PiazzaJobType {
 	public DataResource data;
 
 
-	public SearchMetadataIngestJob() {
-
+	public SearchMetadataIngestJob() { //NOSONAR
+		// Normal for empty constructor even with @NotNull fields
 	}
 	public void setData(DataResource data) {
 		this.data = data;

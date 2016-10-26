@@ -56,7 +56,6 @@ public class Alert {
 	@ApiModelProperty(value = "The unique Id for the Job that was submitted", required = true)
 	public String jobId;
 	
-	@JsonIgnore
 	@ApiModelProperty(value = "Supplied by system", required = true)
 	public DateTime createdOn;
 	

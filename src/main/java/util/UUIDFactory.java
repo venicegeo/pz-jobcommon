@@ -48,7 +48,7 @@ public class UUIDFactory {
 	@Value("${uuid.endpoint:}")
 	private String UUIDGEN_ENDPOINT;
 	private RestTemplate restTemplate = new RestTemplate();
-	private final static Logger LOG = LoggerFactory.getLogger(UUIDFactory.class);
+	private final static Logger LOGGER = LoggerFactory.getLogger(UUIDFactory.class);
 
 	/**
 	 * Default constructor required for Bean instantiation.
@@ -71,7 +71,7 @@ public class UUIDFactory {
 
 	@PostConstruct
 	public void init() {
-		LOG.info(String.format("UUIDGen initialized for to url %s", UUIDGEN_URL));
+		LOGGER.info(String.format("UUIDGen initialized for to url %s", UUIDGEN_URL));
 	}
 
 	/**
@@ -98,14 +98,15 @@ public class UUIDFactory {
 		} catch (Exception exception) {
 			// Aiding with debugging, if the above REST call fails, then UUIDs
 			// will be generated locally. This is not a permanent solution.
-			System.out
-					.println(String
-							.format("UUIDGen service encountered an error: %s, and local UUIDs were generated. Please fix your UUIDGen REST Endpoint.",
-									exception.getMessage()));
+			String error = String.format(
+					"UUIDGen service encountered an error: %s, and local UUIDs were generated. Please fix your UUIDGen REST Endpoint.",
+					exception.getMessage());
+			LOGGER.error(error, exception);
 			List<String> uuidList = new ArrayList<String>();
 			for (int i = 0; i < count; i++) {
 				uuidList.add(java.util.UUID.randomUUID().toString());
 			}
+
 			return uuidList;
 		}
 	}
