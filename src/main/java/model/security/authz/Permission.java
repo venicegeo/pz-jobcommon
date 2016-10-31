@@ -56,4 +56,8 @@ public class Permission {
 	public void setUri(String uri) {
 		this.uri = uri;
 	}
+
+	public String toString() {
+		return String.format("%s:%s", requestMethod, uri);
+	}
 }
