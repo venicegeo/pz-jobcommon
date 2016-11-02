@@ -58,6 +58,15 @@ public class Permission {
 	}
 
 	public String toString() {
-		return String.format("%s:%s", requestMethod, uri);
+		return String.format("Method %s : URI %s", requestMethod, uri);
+	}
+
+	/**
+	 * Returns the Key name suitable for the Map of permissions in the ProfileTemplate Model
+	 * 
+	 * @return
+	 */
+	public String getKeyName() {
+		return String.format("%s %s", requestMethod, uri);
 	}
 }

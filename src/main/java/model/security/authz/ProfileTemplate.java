@@ -16,8 +16,7 @@
 package model.security.authz;
 
 import java.util.List;
-
-import org.springframework.data.util.Pair;
+import java.util.Map;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -26,7 +25,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 /**
  * Model for defining a user profile template that can be shared amongst users.
  * 
- * @author Russell Orf
+ * @author Russell Orf, Patrick Doody
  * 
  */
 @JsonInclude(Include.NON_NULL)
@@ -35,13 +34,23 @@ public class ProfileTemplate {
 
 	private String profileTemplateId;
 
+	/**
+	 * The list of Throttles for the user that determine how many invocations of an action that user can perform within
+	 * a period of time in Piazza.
+	 */
 	private List<Throttle> throttles;
 
-	private List<Permission> permissions;
+	/**
+	 * The map of endpoints that the user is able to access. The key is the Permission.getKeyName(), and the value is
+	 * whether the user can execute that endpoint or not.
+	 */
+	private Map<String, Boolean> permissions;
 
-	private List<Pair<String, String>> thirdPartyKeys;
-
-	private List<Pair<String, String>> quotas;
+	/**
+	 * The list of third-party API keys that the user can have. The key is the name of the vendor, and the value is the
+	 * API Key.
+	 */
+	private Map<String, String> thirdPartyKeys;
 
 	public String getProfileTemplateId() {
 		return profileTemplateId;
@@ -59,27 +68,19 @@ public class ProfileTemplate {
 		this.throttles = throttles;
 	}
 
-	public List<Permission> getPermissions() {
+	public Map<String, Boolean> getPermissions() {
 		return permissions;
 	}
 
-	public void setPermissions(List<Permission> permissions) {
+	public void setPermissions(Map<String, Boolean> permissions) {
 		this.permissions = permissions;
 	}
 
-	public List<Pair<String, String>> getThirdPartyKeys() {
+	public Map<String, String> getThirdPartyKeys() {
 		return thirdPartyKeys;
 	}
 
-	public void setThirdPartyKeys(List<Pair<String, String>> thirdPartyKeys) {
+	public void setThirdPartyKeys(Map<String, String> thirdPartyKeys) {
 		this.thirdPartyKeys = thirdPartyKeys;
-	}
-
-	public List<Pair<String, String>> getQuotas() {
-		return quotas;
-	}
-
-	public void setQuotas(List<Pair<String, String>> quotas) {
-		this.quotas = quotas;
 	}
 }
