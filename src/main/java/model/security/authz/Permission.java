@@ -15,8 +15,6 @@
  **/
 package model.security.authz;
 
-import org.springframework.web.bind.annotation.RequestMethod;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
@@ -35,6 +33,10 @@ public class Permission {
 
 	private String uri;
 
+	public Permission() {
+
+	}
+
 	public Permission(String requestMethod, String uri) {
 		setRequestMethod(requestMethod);
 		setUri(uri);
@@ -45,8 +47,7 @@ public class Permission {
 	}
 
 	public void setRequestMethod(String requestMethod) {
-		RequestMethod verifiedRequestMethod = RequestMethod.valueOf(requestMethod);
-		this.requestMethod = verifiedRequestMethod.toString();
+		this.requestMethod = requestMethod;
 	}
 
 	public String getUri() {

@@ -39,6 +39,10 @@ public class Throttle {
 
 	private String perTimeUnit;
 
+	public Throttle() {
+
+	}
+
 	public Throttle(String component, Integer numberOfInvocations, String perTimeUnit) {
 		setComponent(component);
 		setNumberOfInvocations(numberOfInvocations);
