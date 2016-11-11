@@ -37,16 +37,13 @@ public class Throttle {
 
 	private Integer numberOfInvocations;
 
-	private String perTimeUnit;
-
 	public Throttle() {
 
 	}
 
-	public Throttle(String component, Integer numberOfInvocations, String perTimeUnit) {
+	public Throttle(String component, Integer numberOfInvocations) {
 		setComponent(component);
 		setNumberOfInvocations(numberOfInvocations);
-		setPerTimeUnit(perTimeUnit);
 	}
 
 	public String getComponent() {
@@ -64,13 +61,5 @@ public class Throttle {
 
 	public void setNumberOfInvocations(Integer numberOfInvocations) {
 		this.numberOfInvocations = numberOfInvocations;
-	}
-
-	public String getPerTimeUnit() {
-		return perTimeUnit;
-	}
-
-	public void setPerTimeUnit(String perTimeUnit) {
-		this.perTimeUnit = perTimeUnit;
 	}
 }
