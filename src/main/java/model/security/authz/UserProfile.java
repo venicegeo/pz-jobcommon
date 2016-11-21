@@ -52,10 +52,12 @@ public class UserProfile {
 		this.username = username;
 	}
 
+	@JsonIgnore
 	public DateTime getCreatedOn() {
 		return createdOn;
 	}
 
+	@JsonIgnore
 	public void setCreatedOn(DateTime createdOn) {
 		this.createdOn = createdOn;
 	}
