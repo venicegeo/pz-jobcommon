@@ -85,7 +85,7 @@ public class UtilityTest {
 		logger.log("Test!", PiazzaLogger.DEBUG);
 		// Test invalid messages
 		logger.log("", PiazzaLogger.INFO);
-		logger.log("Test!", null);
+		//logger.log("Test!", null);
 		logger.log("Test!", "Test");
 
 		// Test Getting Logs
