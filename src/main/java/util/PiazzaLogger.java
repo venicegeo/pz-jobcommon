@@ -26,6 +26,7 @@ import javax.annotation.PostConstruct;
 
 import org.apache.http.client.HttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
+import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -37,6 +38,10 @@ import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
+import model.logger.AuditElement;
+import model.logger.LoggerPayload;
+import model.logger.MetricElement;
+import model.logger.Severity;
 import model.request.LogRequest;
 
 /**
@@ -59,7 +64,11 @@ public class PiazzaLogger {
 	private int httpMaxTotal;
 	@Value("${http.max.route:2500}")
 	private int httpMaxRoute;
-
+	@Value("${logger.app.name}")
+	private String applicationName;
+	@Value("${logger.host.name}")
+	private String hostName;
+	
 	public static final String DEBUG = "Debug";
 	public static final String ERROR = "Error";
 	public static final String FATAL = "Fatal";
@@ -68,6 +77,7 @@ public class PiazzaLogger {
 	private static final String[] SEVERITY_OPTIONS = { DEBUG, ERROR, FATAL, INFO, WARNING };
 
 	private RestTemplate restTemplate = new RestTemplate();
+	private LoggerPayload loggerPayload;
 	private final static Logger LOGGER = LoggerFactory.getLogger(PiazzaLogger.class);
 
 	/**
@@ -97,6 +107,11 @@ public class PiazzaLogger {
 		LOGGER.info(String.format("PiazzaLogger initialized for service %s, url: %s", serviceName, LOGGER_URL));
 		HttpClient httpClient = HttpClientBuilder.create().setMaxConnTotal(httpMaxTotal).setMaxConnPerRoute(httpMaxRoute).build();
 		restTemplate.setRequestFactory(new HttpComponentsClientHttpRequestFactory(httpClient));
+		
+		// Initializing the logger payload
+		loggerPayload = new LoggerPayload();
+		loggerPayload.setApplication(applicationName);
+		loggerPayload.setHostName(hostName);
 	}
 
 	/**
@@ -131,6 +146,101 @@ public class PiazzaLogger {
 			} catch (Exception exception) {
 				LOGGER.error("PiazzaLogger could not log: ", exception);
 			}
+		}
+	}
+	
+	/**
+	 * Sends a syslog payload message to pz-logger for logging into logstash.
+	 * 
+	 * @param logMessage
+	 *            the message you want to log
+	 * @param severity
+	 *            the severity of the log
+	 */
+	public void log(String logMessage, Severity severity) {
+		sendLogs(loggerPayload, logMessage, severity);
+	}
+	
+	/**
+	 * Sends an audit message to pz-logger
+	 * 
+	 * @param logMessage
+	 *            the message you want to log
+	 * @param severity
+	 *            the severity of the log
+	 * @param auditElement
+	 *            syslog audit parameter
+	 */
+	public void audit(String logMessage, Severity severity, AuditElement auditElement) {
+		loggerPayload.setAuditData(auditElement);
+		sendLogs(loggerPayload, logMessage, severity);
+	}
+	
+	/**
+	 * Sends a metric message to pz-logger
+	 * 
+	 * @param logMessage
+	 *            the message you want to log
+	 * @param severity
+	 *            the severity of the log
+	 * @param metricElement
+	 *            syslog metric parameter
+	 */
+	public void metric(String logMessage, Severity severity, MetricElement metricElement) {
+		loggerPayload.setMetricData(metricElement);
+		sendLogs(loggerPayload, logMessage, severity);
+	}
+
+	/**
+	 * Sends a metric message to pz-logger
+	 * 
+	 * @param logMessage
+	 *            the message you want to log
+	 * @param severity
+	 *            the severity of the log
+	 * @param auditElement
+	 *            syslog audit parameter
+	 * @param metricElement
+	 *            syslog metric parameter
+	 */
+	public void metric(String logMessage, Severity severity, AuditElement auditElement, MetricElement metricElement) {
+		loggerPayload.setAuditData(auditElement);
+		loggerPayload.setMetricData(metricElement);
+		sendLogs(loggerPayload, logMessage, severity);
+	}
+	
+	/**
+	 * Sends the logger payload to pz-logger
+	 * 
+	 * @param loggerPayload payload
+	 * 
+	 */
+	private void sendLogs(LoggerPayload loggerPayload, String logMessage, Severity severity) {
+
+		// Setting generic fields on logger payload
+		loggerPayload.setSeverity(severity);
+		loggerPayload.setMessage(logMessage);
+		loggerPayload.setMessageId(logMessage.hashCode());
+		loggerPayload.setTimestamp(new DateTime());
+
+		try {
+			HttpHeaders headers = new HttpHeaders();
+			headers.setContentType(MediaType.APPLICATION_JSON);
+
+			// Log to console if requested
+			try {
+				if (logToConsole.booleanValue()) {
+					LOGGER.info(loggerPayload.toString());
+				}
+			} catch (Exception exception) { /* Do nothing. */
+				LOGGER.error("Application property is not set", exception);
+			}
+
+			// post to pz-logger
+			String url = String.format("%s/%s", LOGGER_URL, LOGGER_ENDPOINT);
+			restTemplate.postForEntity(url, new HttpEntity<LoggerPayload>(loggerPayload, headers), String.class);
+		} catch (Exception exception) {
+			LOGGER.error("PiazzaLogger could not log: ", exception);
 		}
 	}
 
