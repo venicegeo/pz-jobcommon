@@ -68,7 +68,7 @@ public class PiazzaLogger {
 	private String applicationName;
 	@Value("${logger.host.name}")
 	private String hostName;
-	
+
 	public static final String DEBUG = "Debug";
 	public static final String ERROR = "Error";
 	public static final String FATAL = "Fatal";
@@ -77,7 +77,6 @@ public class PiazzaLogger {
 	private static final String[] SEVERITY_OPTIONS = { DEBUG, ERROR, FATAL, INFO, WARNING };
 
 	private RestTemplate restTemplate = new RestTemplate();
-	private LoggerPayload loggerPayload;
 	private final static Logger LOGGER = LoggerFactory.getLogger(PiazzaLogger.class);
 
 	/**
@@ -107,48 +106,8 @@ public class PiazzaLogger {
 		LOGGER.info(String.format("PiazzaLogger initialized for service %s, url: %s", serviceName, LOGGER_URL));
 		HttpClient httpClient = HttpClientBuilder.create().setMaxConnTotal(httpMaxTotal).setMaxConnPerRoute(httpMaxRoute).build();
 		restTemplate.setRequestFactory(new HttpComponentsClientHttpRequestFactory(httpClient));
-		
-		// Initializing the logger payload
-		loggerPayload = new LoggerPayload();
-		loggerPayload.setApplication(applicationName);
-		loggerPayload.setHostName(hostName);
 	}
 
-	/**
-	 * Sends a Log message to the Pz-Logger service.
-	 * 
-	 * @param logMessage
-	 *            the message you want to log
-	 * @param severity
-	 *            the severity of the log
-	 */
-	public void log(String logMessage, String severity) {
-		if (isLogInputValid(logMessage, severity)) {
-			// Log the message with the Piazza Logger service
-			try {
-				HttpHeaders headers = new HttpHeaders();
-				headers.setContentType(MediaType.APPLICATION_JSON);
-
-				LogRequest logRequest = new LogRequest(serviceName, InetAddress.getLocalHost().toString(), Instant.now().toString(),
-						logMessage, severity);
-
-				// Log the message locally if requested
-				try {
-					if (logToConsole.booleanValue()) {
-						LOGGER.info(logRequest.toPrettyString());
-					}
-				} catch (Exception exception) { /* Do nothing. */
-					LOGGER.error("Application property is not set", exception);
-				}
-
-				String url = String.format("%s/%s", LOGGER_URL, LOGGER_ENDPOINT);
-				restTemplate.postForEntity(url, new HttpEntity<LogRequest>(logRequest, headers), String.class);
-			} catch (Exception exception) {
-				LOGGER.error("PiazzaLogger could not log: ", exception);
-			}
-		}
-	}
-	
 	/**
 	 * Sends a syslog payload message to pz-logger for logging into logstash.
 	 * 
@@ -158,9 +117,10 @@ public class PiazzaLogger {
 	 *            the severity of the log
 	 */
 	public void log(String logMessage, Severity severity) {
+		LoggerPayload loggerPayload = getLoggerPayload();
 		sendLogs(loggerPayload, logMessage, severity);
 	}
-	
+
 	/**
 	 * Sends an audit message to pz-logger
 	 * 
@@ -171,11 +131,12 @@ public class PiazzaLogger {
 	 * @param auditElement
 	 *            syslog audit parameter
 	 */
-	public void audit(String logMessage, Severity severity, AuditElement auditElement) {
+	public void log(String logMessage, Severity severity, AuditElement auditElement) {
+		LoggerPayload loggerPayload = getLoggerPayload();
 		loggerPayload.setAuditData(auditElement);
 		sendLogs(loggerPayload, logMessage, severity);
 	}
-	
+
 	/**
 	 * Sends a metric message to pz-logger
 	 * 
@@ -186,7 +147,8 @@ public class PiazzaLogger {
 	 * @param metricElement
 	 *            syslog metric parameter
 	 */
-	public void metric(String logMessage, Severity severity, MetricElement metricElement) {
+	public void log(String logMessage, Severity severity, MetricElement metricElement) {
+		LoggerPayload loggerPayload = getLoggerPayload();
 		loggerPayload.setMetricData(metricElement);
 		sendLogs(loggerPayload, logMessage, severity);
 	}
@@ -203,16 +165,18 @@ public class PiazzaLogger {
 	 * @param metricElement
 	 *            syslog metric parameter
 	 */
-	public void metric(String logMessage, Severity severity, AuditElement auditElement, MetricElement metricElement) {
+	public void log(String logMessage, Severity severity, AuditElement auditElement, MetricElement metricElement) {
+		LoggerPayload loggerPayload = getLoggerPayload();
 		loggerPayload.setAuditData(auditElement);
 		loggerPayload.setMetricData(metricElement);
 		sendLogs(loggerPayload, logMessage, severity);
 	}
-	
+
 	/**
 	 * Sends the logger payload to pz-logger
 	 * 
-	 * @param loggerPayload payload
+	 * @param loggerPayload
+	 *            payload
 	 * 
 	 */
 	private void sendLogs(LoggerPayload loggerPayload, String logMessage, Severity severity) {
@@ -233,52 +197,24 @@ public class PiazzaLogger {
 					LOGGER.info(loggerPayload.toString());
 				}
 			} catch (Exception exception) { /* Do nothing. */
-				LOGGER.error("Application property is not set", exception);
+				LOGGER.error("Could not log message to console. Application property is not set", exception);
 			}
 
 			// post to pz-logger
 			String url = String.format("%s/%s", LOGGER_URL, LOGGER_ENDPOINT);
 			restTemplate.postForEntity(url, new HttpEntity<LoggerPayload>(loggerPayload, headers), String.class);
 		} catch (Exception exception) {
-			LOGGER.error("PiazzaLogger could not log: ", exception);
+			LOGGER.error("Failed to send message to Pz-Logger component.", exception);
 		}
 	}
 
 	/**
-	 * 
-	 * @param count
-	 * @return
+	 * Generates a LoggerPayload with default values populated
 	 */
-	public List<LogRequest> getLogs(Integer count) {
-		try {
-			Map<String, Integer> map = new HashMap<String, Integer>();
-			map.put("count", count);
-			String url = String.format("%s/%s", LOGGER_URL, LOGGER_ENDPOINT);
-			ResponseEntity<LogRequest[]> logs = restTemplate.getForEntity(url + "?count={count}", LogRequest[].class, map);
-			return (List<LogRequest>) Arrays.asList(logs.getBody());
-		} catch (Exception exception) {
-			LOGGER.error("Error occurred while obtaining logs", exception);
-			return null;
-		}
-	}
-
-	/**
-	 * Provides simple validation for log messages.
-	 */
-	private boolean isLogInputValid(String logMessage, String severity) {
-		if (logMessage == null || logMessage.length() == 0) {
-			LOGGER.error("Message is null. Logger cannot send an empty message. This is a required field.");
-			return false;
-		}
-		if (severity == null || severity.length() == 0) {
-			LOGGER.error("Severity is null. Logger cannot send message without a severity. This is a required field.");
-			return false;
-		}
-		if (!Arrays.asList(SEVERITY_OPTIONS).contains(severity)) {
-			LOGGER.error("Severity '" + severity + "' is not one of the available options: " + Arrays.toString(SEVERITY_OPTIONS));
-			return false;
-		}
-
-		return true;
+	private LoggerPayload getLoggerPayload() {
+		LoggerPayload loggerPayload = new LoggerPayload();
+		loggerPayload.setApplication(applicationName);
+		loggerPayload.setHostName(hostName);
+		return loggerPayload;
 	}
 }

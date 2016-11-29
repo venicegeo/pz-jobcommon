@@ -25,6 +25,9 @@ import static org.mockito.Mockito.when;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.logger.AuditElement;
+import model.logger.MetricElement;
+import model.logger.Severity;
 import model.request.LogRequest;
 import model.resource.UUID;
 
@@ -74,27 +77,20 @@ public class UtilityTest {
 	/**
 	 * Tests logging
 	 */
-	@SuppressWarnings("unchecked")
 	@Test
 	public void testLog() {
-		// Test
-		logger.log("Test!", PiazzaLogger.INFO);
-		logger.log("Test!", PiazzaLogger.WARNING);
-		logger.log("Test!", PiazzaLogger.ERROR);
-		logger.log("Test!", PiazzaLogger.FATAL);
-		logger.log("Test!", PiazzaLogger.DEBUG);
-		// Test invalid messages
-		logger.log("", PiazzaLogger.INFO);
-		//logger.log("Test!", null);
-		logger.log("Test!", "Test");
+		// Sample Data
+		AuditElement auditElement = new AuditElement("me", "tests", "you");
+		MetricElement metricElement = new MetricElement("test", "tests", "10");
 
-		// Test Getting Logs
-		LogRequest[] mockLogs = new LogRequest[1];
-		mockLogs[0] = new LogRequest();
-		when(restTemplate.getForEntity(anyString(), eq(LogRequest[].class), anyMap())).thenReturn(
-				new ResponseEntity<LogRequest[]>(mockLogs, HttpStatus.OK));
-		List<LogRequest> logs = logger.getLogs(10);
-		assertTrue(logs.size() == 1);
+		// Test
+		logger.log("Test!", Severity.INFORMATIONAL);
+		logger.log("Test!", Severity.WARNING);
+		logger.log("Test!", Severity.CRITICAL);
+		logger.log("Test!", Severity.DEBUG);
+		logger.log("Test!", Severity.INFORMATIONAL, auditElement);
+		logger.log("Test!", Severity.INFORMATIONAL, metricElement);
+		logger.log("Test!", Severity.DEBUG, auditElement, metricElement);
 	}
 
 	/**
@@ -107,16 +103,15 @@ public class UtilityTest {
 		UUID mockUuid = new UUID();
 		mockUuid.setData(new ArrayList<String>());
 		mockUuid.getData().add("123456");
-		when(restTemplate.postForEntity(anyString(), any(), eq(UUID.class), anyMap())).thenReturn(
-				new ResponseEntity<UUID>(mockUuid, HttpStatus.OK));
+		when(restTemplate.postForEntity(anyString(), any(), eq(UUID.class), anyMap()))
+				.thenReturn(new ResponseEntity<UUID>(mockUuid, HttpStatus.OK));
 
 		// Test
 		String uuid = uuidFactory.getUUID();
 		assertTrue(uuid.equals("123456"));
 
 		// Mock local generation
-		Mockito.doThrow(new RestClientException("Test")).when(restTemplate)
-				.postForEntity(anyString(), any(), eq(UUID.class), anyMap());
+		Mockito.doThrow(new RestClientException("Test")).when(restTemplate).postForEntity(anyString(), any(), eq(UUID.class), anyMap());
 		uuid = uuidFactory.getUUID();
 		assertTrue(uuid.isEmpty() == false);
 	}
