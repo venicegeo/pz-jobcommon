@@ -60,13 +60,6 @@ public class PiazzaLogger {
 	@Value("${logger.host.name}")
 	private String hostName;
 
-	public static final String DEBUG = "Debug";
-	public static final String ERROR = "Error";
-	public static final String FATAL = "Fatal";
-	public static final String INFO = "Info";
-	public static final String WARNING = "Warning";
-	private static final String[] SEVERITY_OPTIONS = { DEBUG, ERROR, FATAL, INFO, WARNING };
-
 	private RestTemplate restTemplate = new RestTemplate();
 	private final static Logger LOGGER = LoggerFactory.getLogger(PiazzaLogger.class);
 
