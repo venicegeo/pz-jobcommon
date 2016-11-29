@@ -15,13 +15,6 @@
  **/
 package util;
 
-import java.net.InetAddress;
-import java.time.Instant;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import javax.annotation.PostConstruct;
 
 import org.apache.http.client.HttpClient;
@@ -33,7 +26,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
@@ -42,7 +34,6 @@ import model.logger.AuditElement;
 import model.logger.LoggerPayload;
 import model.logger.MetricElement;
 import model.logger.Severity;
-import model.request.LogRequest;
 
 /**
  * PiazzaLogger is a class that logs using the Piazza Core Logger service.
