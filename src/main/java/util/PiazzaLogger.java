@@ -15,6 +15,8 @@
  **/
 package util;
 
+import java.net.InetAddress;
+
 import javax.annotation.PostConstruct;
 
 import org.apache.http.client.HttpClient;
@@ -55,10 +57,6 @@ public class PiazzaLogger {
 	private int httpMaxTotal;
 	@Value("${http.max.route:2500}")
 	private int httpMaxRoute;
-	@Value("${logger.app.name}")
-	private String applicationName;
-	@Value("${logger.host.name}")
-	private String hostName;
 
 	private RestTemplate restTemplate = new RestTemplate();
 	private final static Logger LOGGER = LoggerFactory.getLogger(PiazzaLogger.class);
@@ -197,8 +195,12 @@ public class PiazzaLogger {
 	 */
 	private LoggerPayload getLoggerPayload() {
 		LoggerPayload loggerPayload = new LoggerPayload();
-		loggerPayload.setApplication(applicationName);
-		loggerPayload.setHostName(hostName);
+		loggerPayload.setApplication(serviceName);
+		try {
+			loggerPayload.setHostName(InetAddress.getLocalHost().getHostName());
+		} catch (Exception exception) {
+			LOGGER.error("Could not get hostname for component.", exception);
+		}
 		return loggerPayload;
 	}
 }
