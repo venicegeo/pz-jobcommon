@@ -15,6 +15,7 @@
  **/
 package util;
 
+import java.lang.management.ManagementFactory;
 import java.net.InetAddress;
 
 import javax.annotation.PostConstruct;
@@ -176,9 +177,9 @@ public class PiazzaLogger {
 
 			// Log to console if requested
 			try {
-				//if (logToConsole.booleanValue()) {
-					LOGGER.info(new ObjectMapper().writeValueAsString(loggerPayload));
-				//}
+				if (logToConsole.booleanValue()) {
+					LOGGER.info(loggerPayload.toString());
+				}
 			} catch (Exception exception) { /* Do nothing. */
 				LOGGER.error("Could not log message to console. Application property is not set", exception);
 			}
@@ -200,7 +201,7 @@ public class PiazzaLogger {
 	private LoggerPayload getLoggerPayload() {
 		LoggerPayload loggerPayload = new LoggerPayload();
 		loggerPayload.setApplication(serviceName);
-		loggerPayload.setProcess(serviceName);
+		loggerPayload.setProcess(ManagementFactory.getRuntimeMXBean().getName());
 		try {
 			loggerPayload.setHostName(InetAddress.getLocalHost().getHostName());
 		} catch (Exception exception) {
