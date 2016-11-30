@@ -16,8 +16,11 @@
 package model.logger;
 
 import org.joda.time.DateTime;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 /**
@@ -34,6 +37,7 @@ public class LoggerPayload {
 	public int facility = 1;
 	public Severity severity;
 	public int version = 1;
+	@JsonIgnore
 	public DateTime timestamp;
 	public String hostName;
 	public String application;
@@ -71,12 +75,29 @@ public class LoggerPayload {
 		this.version = version;
 	}
 
+	@JsonIgnore
 	public DateTime getTimestamp() {
 		return timestamp;
 	}
 
+	@JsonIgnore
 	public void setTimestamp(DateTime timestamp) {
 		this.timestamp = timestamp;
+	}
+	
+	@JsonProperty("timeStamp")
+	public String getCreatedOnString() {
+		if (timestamp != null) {
+			// Defaults to ISO8601
+			return timestamp.toString();
+		} else {
+			return null;
+		}
+	}
+
+	@JsonProperty("timeStamp")
+	public void setCreatedOnString(String createdOn) {
+		this.timestamp = new DateTime(createdOn);
 	}
 
 	public String getHostName() {
