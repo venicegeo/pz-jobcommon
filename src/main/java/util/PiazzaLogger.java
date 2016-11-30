@@ -184,6 +184,9 @@ public class PiazzaLogger {
 
 			// post to pz-logger
 			String url = String.format("%s/%s", LOGGER_URL, LOGGER_ENDPOINT);
+			
+			LOGGER.info(String.format("%s:%s", "pz-logger url", url));
+			
 			restTemplate.postForEntity(url, new HttpEntity<LoggerPayload>(loggerPayload, headers), String.class);
 		} catch (Exception exception) {
 			LOGGER.error("Failed to send message to Pz-Logger component.", exception);
