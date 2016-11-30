@@ -200,6 +200,7 @@ public class PiazzaLogger {
 	private LoggerPayload getLoggerPayload() {
 		LoggerPayload loggerPayload = new LoggerPayload();
 		loggerPayload.setApplication(serviceName);
+		loggerPayload.setProcess(serviceName);
 		try {
 			loggerPayload.setHostName(InetAddress.getLocalHost().getHostName());
 		} catch (Exception exception) {
