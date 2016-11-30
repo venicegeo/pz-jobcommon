@@ -176,18 +176,18 @@ public class PiazzaLogger {
 
 			// Log to console if requested
 			try {
-				if (logToConsole.booleanValue()) {
-					LOGGER.info(loggerPayload.toString());
-				}
+				//if (logToConsole.booleanValue()) {
+					LOGGER.info(new ObjectMapper().writeValueAsString(loggerPayload));
+				//}
 			} catch (Exception exception) { /* Do nothing. */
 				LOGGER.error("Could not log message to console. Application property is not set", exception);
 			}
 
 			// post to pz-logger
 			String url = String.format("%s/%s", LOGGER_URL, LOGGER_ENDPOINT);
-
+			
 			LOGGER.info(String.format("%s:%s", "pz-logger url", url));
-
+			
 			restTemplate.postForEntity(url, new HttpEntity<LoggerPayload>(loggerPayload, headers), String.class);
 		} catch (Exception exception) {
 			LOGGER.error("Failed to send message to Pz-Logger component.", exception);

@@ -24,8 +24,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 /**
- * Defines logger payload for syslog RFC 5424 standard to be used in ELK-Stack
- * logging/audit/metrics.
+ * Defines logger payload for syslog RFC 5424 standard to be used in ELK-Stack logging/audit/metrics.
  * 
  * @author Sonny.Saniev
  * 
@@ -35,6 +34,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 public class LoggerPayload {
 
 	public int facility = 1;
+	@JsonIgnore
 	public Severity severity;
 	public int version = 1;
 	@JsonIgnore
@@ -59,10 +59,12 @@ public class LoggerPayload {
 		this.facility = facility;
 	}
 
+	@JsonIgnore
 	public Severity getSeverity() {
 		return severity;
 	}
 
+	@JsonIgnore
 	public void setSeverity(Severity severity) {
 		this.severity = severity;
 	}
@@ -84,7 +86,7 @@ public class LoggerPayload {
 	public void setTimestamp(DateTime timestamp) {
 		this.timestamp = timestamp;
 	}
-	
+
 	@JsonProperty("timeStamp")
 	public String getCreatedOnString() {
 		if (timestamp != null) {
@@ -98,6 +100,11 @@ public class LoggerPayload {
 	@JsonProperty("timeStamp")
 	public void setCreatedOnString(String createdOn) {
 		this.timestamp = new DateTime(createdOn);
+	}
+
+	@JsonProperty("severity")
+	public int getSeverityInt() {
+		return this.severity.value();
 	}
 
 	public String getHostName() {
