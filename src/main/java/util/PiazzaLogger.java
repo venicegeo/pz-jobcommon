@@ -171,6 +171,8 @@ public class PiazzaLogger {
 		loggerPayload.setMessage(logMessage);
 		loggerPayload.setTimestamp(new DateTime());
 
+		String url = String.format("%s/%s", LOGGER_URL, LOGGER_ENDPOINT);
+
 		try {
 			HttpHeaders headers = new HttpHeaders();
 			headers.setContentType(MediaType.APPLICATION_JSON);
@@ -184,14 +186,17 @@ public class PiazzaLogger {
 				LOGGER.error("Could not log message to console. Application property is not set", exception);
 			}
 
-			// post to pz-logger
-			String url = String.format("%s/%s", LOGGER_URL, LOGGER_ENDPOINT);
-			
-			LOGGER.info(String.format("%s:%s", "pz-logger url", url));
-			
 			restTemplate.postForEntity(url, new HttpEntity<LoggerPayload>(loggerPayload, headers), String.class);
 		} catch (Exception exception) {
-			LOGGER.error("Failed to send message to Pz-Logger component.", exception);
+			String loggerPayloadString = loggerPayload.toString();
+			try {
+				loggerPayloadString = new ObjectMapper().writeValueAsString(loggerPayload);
+			} catch (Exception jsonException) {
+				LOGGER.error("Failed to serialize JSON for Payload. Printing String instead.", exception);
+			}
+			LOGGER.error(
+					String.format("Failed to send message to Pz-Logger component. Endpoint is %s. Payload is %s", url, loggerPayloadString),
+					exception);
 		}
 	}
 
