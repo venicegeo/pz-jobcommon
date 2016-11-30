@@ -151,7 +151,7 @@ public class LoggerPayload {
 		String metricDataStr = getMetricData() != null ? getMetricData().toString() : "";
 		obj.append("facility: " + getFacility() + "\n");
 		obj.append("severity: " + getSeverity() + "\n");
-		obj.append("version : " + getSeverity() + "\n");
+		obj.append("version : " + getVersion() + "\n");
 		obj.append("timeStamp: " + getTimestamp() + "\n");
 		obj.append("hostName : " + getHostName() + "\n");
 		obj.append("ipAddress : " + getIpAddress() + "\n");
