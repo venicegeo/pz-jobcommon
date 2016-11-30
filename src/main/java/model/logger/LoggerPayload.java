@@ -36,10 +36,9 @@ public class LoggerPayload {
 	public int version = 1;
 	public DateTime timestamp;
 	public String hostName;
-	public String ipAddress;
 	public String application;
-	public int process;
-	public int messageId;
+	public String process;
+	public String messageId;
 	private AuditElement auditData;
 	private MetricElement metricData;
 	public String message;
@@ -88,14 +87,6 @@ public class LoggerPayload {
 		this.hostName = hostName;
 	}
 
-	public String getIpAddress() {
-		return ipAddress;
-	}
-
-	public void setIpAddress(String ipAddress) {
-		this.ipAddress = ipAddress;
-	}
-
 	public String getApplication() {
 		return application;
 	}
@@ -104,19 +95,19 @@ public class LoggerPayload {
 		this.application = application;
 	}
 
-	public int getProcess() {
+	public String getProcess() {
 		return process;
 	}
 
-	public void setProcess(int process) {
+	public void setProcess(String process) {
 		this.process = process;
 	}
 
-	public int getMessageId() {
+	public String getMessageId() {
 		return messageId;
 	}
 
-	public void setMessageId(int messageId) {
+	public void setMessageId(String messageId) {
 		this.messageId = messageId;
 	}
 
@@ -154,7 +145,6 @@ public class LoggerPayload {
 		obj.append("version : " + getVersion() + "\n");
 		obj.append("timeStamp: " + getTimestamp() + "\n");
 		obj.append("hostName : " + getHostName() + "\n");
-		obj.append("ipAddress : " + getIpAddress() + "\n");
 		obj.append("application : " + getApplication() + "\n");
 		obj.append("process : " + getProcess() + "\n");
 		obj.append("messageId : " + getMessageId() + "\n");

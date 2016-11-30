@@ -166,7 +166,6 @@ public class PiazzaLogger {
 		// Setting generic fields on logger payload
 		loggerPayload.setSeverity(severity);
 		loggerPayload.setMessage(logMessage);
-		loggerPayload.setMessageId(logMessage.hashCode());
 		loggerPayload.setTimestamp(new DateTime());
 
 		try {
