@@ -31,6 +31,8 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.stereotype.Component;
+import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -187,17 +189,27 @@ public class PiazzaLogger {
 			}
 
 			restTemplate.postForEntity(url, new HttpEntity<LoggerPayload>(loggerPayload, headers), String.class);
+		} catch (HttpClientErrorException httpException) {
+			handleHttpError(loggerPayload, url, httpException.getResponseBodyAsString());
+		} catch (HttpServerErrorException httpException) {
+			handleHttpError(loggerPayload, url, httpException.getResponseBodyAsString());
 		} catch (Exception exception) {
-			String loggerPayloadString = loggerPayload.toString();
-			try {
-				loggerPayloadString = new ObjectMapper().writeValueAsString(loggerPayload);
-			} catch (Exception jsonException) {
-				LOGGER.error("Failed to serialize JSON for Payload. Printing String instead.", exception);
-			}
-			LOGGER.error(
-					String.format("Failed to send message to Pz-Logger component. Endpoint is %s. Payload is %s", url, loggerPayloadString),
-					exception);
+			LOGGER.error(String.format("Could not log due to an unhandled exception: %s", exception.getMessage()), exception);
 		}
+	}
+
+	/**
+	 * Handles an HTTP Error from the pz-logger service.
+	 */
+	private void handleHttpError(LoggerPayload loggerPayload, String url, String responseString) {
+		String loggerPayloadString = loggerPayload.toString();
+		try {
+			loggerPayloadString = new ObjectMapper().writeValueAsString(loggerPayload);
+		} catch (Exception jsonException) {
+			LOGGER.error("Failed to serialize JSON for Payload. Printing String instead.", jsonException);
+		}
+		LOGGER.error(String.format("Failed to send message to Pz-Logger component. Endpoint is %s. Payload is %s. Response was %s", url,
+				loggerPayloadString, responseString));
 	}
 
 	/**
