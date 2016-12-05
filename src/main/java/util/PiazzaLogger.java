@@ -190,8 +190,10 @@ public class PiazzaLogger {
 
 			restTemplate.postForEntity(url, new HttpEntity<LoggerPayload>(loggerPayload, headers), String.class);
 		} catch (HttpClientErrorException httpException) {
+			LOGGER.error("HTTP Client Error", httpException);
 			handleHttpError(loggerPayload, url, httpException.getResponseBodyAsString());
 		} catch (HttpServerErrorException httpException) {
+			LOGGER.error("HTTP Server Error", httpException);
 			handleHttpError(loggerPayload, url, httpException.getResponseBodyAsString());
 		} catch (Exception exception) {
 			LOGGER.error(String.format("Could not log due to an unhandled exception: %s", exception.getMessage()), exception);
