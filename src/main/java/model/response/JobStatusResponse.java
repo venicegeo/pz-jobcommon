@@ -56,6 +56,9 @@ public class JobStatusResponse extends PiazzaResponse {
 
 		@ApiModelProperty(value = "The name of the user who submitted the Job", required = true)
 		public String createdBy;
+		
+		@ApiModelProperty(value = "The time the Job was requested.", required = true)
+		public String createdOn;
 
 		@ApiModelProperty(value = "Object containing metadata describing the current status of the Job")
 		public JobProgress progress;
@@ -70,6 +73,7 @@ public class JobStatusResponse extends PiazzaResponse {
 			progress = job.progress;
 			jobType = job.getJobType().getClass().getSimpleName();
 			createdBy = job.createdBy;
+			createdOn = job.createdOn.toString();
 		}
 	}
 
