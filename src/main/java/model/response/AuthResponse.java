@@ -53,6 +53,11 @@ public class AuthResponse extends PiazzaResponse implements Serializable {
 		this.details = details;
 	}
 
+	public AuthResponse(Boolean isAuthSuccess, UserProfile userProfile) {
+		this(isAuthSuccess);
+		this.userProfile = userProfile;
+	}
+
 	public AuthResponse(Boolean isAuthSuccess, UserProfile userProfile, String details) {
 		this(isAuthSuccess, details);
 		this.userProfile = userProfile;
