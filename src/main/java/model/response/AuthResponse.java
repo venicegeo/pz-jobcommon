@@ -21,6 +21,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
+import io.swagger.annotations.ApiModelProperty;
 import model.security.authz.UserProfile;
 
 /**
@@ -31,10 +32,13 @@ import model.security.authz.UserProfile;
  */
 @JsonInclude(Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class AuthResponse implements Serializable {
+public class AuthResponse extends PiazzaResponse implements Serializable {
 	private static final long serialVersionUID = 1L;
+	@ApiModelProperty(value = "True if the auth is granted, false if not.", required = true)
 	public Boolean isAuthSuccess;
+	@ApiModelProperty(value = "The user profile associated with the Auth check.", required = false)
 	public String details;
+	@ApiModelProperty(value = "Details on success or failure of an auth check.", required = false)
 	public UserProfile userProfile;
 
 	public AuthResponse() {
