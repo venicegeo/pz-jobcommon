@@ -23,7 +23,19 @@ package exception;
  */
 @SuppressWarnings("serial")
 public class PiazzaJobException extends Exception {
+	
+	private int statusCode;
+	
 	public PiazzaJobException(String message) {
 		super(message);
+	}
+	
+	public PiazzaJobException(String message, int statusCode) {
+		super(message);
+		this.statusCode = statusCode;
+	}
+
+	public int getStatusCode() {
+		return statusCode;
 	}
 }
