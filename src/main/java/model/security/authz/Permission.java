@@ -19,6 +19,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
+import io.swagger.annotations.ApiModelProperty;
+
 /**
  * Model for defining resource permissions
  * 
@@ -28,9 +30,9 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 @JsonInclude(Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Permission {
-
+	@ApiModelProperty(value = "The HTTP Method.", required = true)
 	private String requestMethod;
-
+	@ApiModelProperty(value = "The URL Endpoint.", required = true)
 	private String uri;
 
 	public Permission() {
