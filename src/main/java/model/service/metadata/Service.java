@@ -66,7 +66,7 @@ public class Service {
 	@Size(min = 1)
 	private String contractUrl;
 
-	@ApiModelProperty(required = true, value = "The HTTP Method used to invoke this User Service. For Asynchronous Services, this applies only to the Execution endpoint.", dataType = "string", allowableValues = "GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT")
+	@ApiModelProperty(required = true, value = "The HTTP Method used to invoke this User Service. For Asynchronous Services, this applies only to the Execution endpoint.", dataType = "string", allowableValues = "method_type")
 	@NotNull
 	@Size(min = 1)
 	private String method;
