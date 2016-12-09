@@ -37,7 +37,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "type")
 @JsonSubTypes({ 
 		@Type(value = AlertListResponse.class, name = "alert-list"),
-		@Type(value = AuthenticationResponse.class, name = "auth"),
+		@Type(value = AuthResponse.class, name = "auth"),
 		@Type(value = DataResourceListResponse.class, name = "data-list"),
 		@Type(value = DataResourceResponse.class, name = "data"),
 		@Type(value = DeploymentListResponse.class, name = "deployment-list"),
