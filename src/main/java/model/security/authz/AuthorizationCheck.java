@@ -23,6 +23,9 @@ import io.swagger.annotations.ApiModelProperty;
 
 /**
  * Model for incoming Authorization check requests, as used by the Authorization Controller.
+ * <p>
+ * When performing this Authorization check, either the username or the API Key (or both) must be specified.
+ * </p>
  * 
  * @author Patrick.Doody
  *
@@ -30,7 +33,7 @@ import io.swagger.annotations.ApiModelProperty;
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(Include.NON_NULL)
 public class AuthorizationCheck {
-	@ApiModelProperty(value = "The name of the user.", required = true)
+	@ApiModelProperty(value = "The name of the user.", required = false)
 	public String username;
 	@ApiModelProperty(value = "Describes the action the user wishes to take.", required = true)
 	public Permission action;
