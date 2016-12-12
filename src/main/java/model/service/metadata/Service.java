@@ -22,6 +22,7 @@ import java.util.List;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import org.slf4j.Logger;
@@ -68,6 +69,8 @@ public class Service {
 
 	@ApiModelProperty(required = true, value = "The HTTP Method used to invoke this User Service. For Asynchronous Services, this applies only to the Execution endpoint.", dataType = "string", allowableValues = "method_type")
 	@NotNull
+	
+	@Pattern(regexp = "GET|HEAD|POST|PUT|DELETE|TRACE|CONNECT", flags = Pattern.Flag.CASE_INSENSITIVE)
 	@Size(min = 1)
 	private String method;
 
