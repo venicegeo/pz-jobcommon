@@ -104,7 +104,7 @@ public class JobStatusResponse extends PiazzaResponse {
 				// Log the error.
 				LOGGER.error(String.format(
 						"Error populating `executedServiceId` field for Job %s: %s. This will not be included in the Job Status payload.",
-						jobId, exception.getMessage()));
+						jobId, exception.getMessage()), exception);
 			}
 		}
 	}
