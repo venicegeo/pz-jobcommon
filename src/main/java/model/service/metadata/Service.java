@@ -17,7 +17,6 @@ package model.service.metadata;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -46,7 +45,7 @@ import model.job.metadata.ResourceMetadata;
 public class Service {
 
 	private final static Logger LOGGER = LoggerFactory.getLogger(Service.class);
-	
+
 	public enum METHOD_TYPE {
 		GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
 	};
@@ -67,9 +66,8 @@ public class Service {
 	@Size(min = 1)
 	private String contractUrl;
 
-	@ApiModelProperty(required = true, value = "The HTTP Method used to invoke this User Service. For Asynchronous Services, this applies only to the Execution endpoint.", dataType = "string", allowableValues = "method_type")
+	@ApiModelProperty(required = true, value = "The HTTP Method used to invoke this User Service. For Asynchronous Services, this applies only to the Execution endpoint.", dataType = "string", allowableValues = "GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT")
 	@NotNull
-	
 	@Pattern(regexp = "GET|HEAD|POST|PUT|DELETE|TRACE|CONNECT", flags = Pattern.Flag.CASE_INSENSITIVE)
 	@Size(min = 1)
 	private String method;
@@ -79,7 +77,7 @@ public class Service {
 
 	@ApiModelProperty(value = "The frequency in which Piazza sends heartbeat requests to check on the health of the Service  (defaults to 120 seconds)")
 	private Long heartbeat;
-	
+
 	@ApiModelProperty(required = true, value = "Determines if this User Service is a long-running service that supports asynchronous endpoints, or if this is a synchronous service that returns results directly.")
 	private Boolean isAsynchronous;
 
