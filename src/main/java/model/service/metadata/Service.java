@@ -78,8 +78,14 @@ public class Service {
 	@ApiModelProperty(value = "The frequency in which Piazza sends heartbeat requests to check on the health of the Service  (defaults to 120 seconds)")
 	private Long heartbeat;
 
-	@ApiModelProperty(required = true, value = "Determines if this User Service is a long-running service that supports asynchronous endpoints, or if this is a synchronous service that returns results directly.")
+	@ApiModelProperty(required = false, value = "Determines if this User Service is a long-running service that supports asynchronous endpoints, or if this is a synchronous service that returns results directly. If `isTaskManaged` is set to `true`, then this value is ignored.")
 	private Boolean isAsynchronous;
+
+	@ApiModelProperty(required = false, value = "Determines if this User Service uses Piazza Task Management as a Service functionality. If this value is set to true, then the `isSynchronous` value is ignored.")
+	private Boolean isTaskManaged;
+
+	@ApiModelProperty(required = false, value = "The list of Piazza user names (not API Keys) who are able to administrate this services Task Management capabilities. By default, the user registering the service will have these privelages. This user list is only applicable if `isTaskManaged` is set to `true`.")
+	private List<String> taskAdministrators;
 
 	@ApiModelProperty(value = "Object of common metadata fields used to describe Data or Services within the Piazza system")
 	@NotNull
@@ -156,6 +162,22 @@ public class Service {
 
 	public void setIsAsynchronous(Boolean isAsynchronous) {
 		this.isAsynchronous = isAsynchronous;
+	}
+
+	public Boolean getIsTaskManaged() {
+		return isTaskManaged;
+	}
+
+	public void setIsTaskManaged(Boolean isTaskManaged) {
+		this.isTaskManaged = isTaskManaged;
+	}
+
+	public List<String> getTaskAdministrators() {
+		return taskAdministrators;
+	}
+
+	public void setTaskAdministrators(List<String> taskAdministrators) {
+		this.taskAdministrators = taskAdministrators;
 	}
 
 	/**
