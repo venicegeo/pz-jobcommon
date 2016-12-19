@@ -21,6 +21,7 @@ import javax.validation.constraints.Size;
 import org.joda.time.DateTime;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import io.swagger.annotations.ApiModelProperty;
 
@@ -57,8 +58,26 @@ public class Alert {
 	public String jobId;
 	
 	@ApiModelProperty(value = "Supplied by system", required = true)
+	@JsonIgnore
 	public DateTime createdOn;
 	
 	@ApiModelProperty(value = "Supplied by system", required = true)
 	public String createdBy;
+	
+	@ApiModelProperty(value = "Supplied by system", required = true)
+	@JsonProperty("createdOn")
+	public String getCreatedOnString() {
+		// Defaults to ISO8601
+		if( createdOn != null ) {
+			return createdOn.toString();
+		}
+		return null;
+	}
+
+	@JsonProperty("createdOn")
+	public void setCreatedOnString(String createdOn) {
+		if( createdOn != null) {
+			this.createdOn = new DateTime(createdOn);
+		}
+	}
 }
