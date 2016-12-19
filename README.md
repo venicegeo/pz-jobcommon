@@ -33,7 +33,7 @@ Now, you will be able to add the artifact for this project:
 	<dependency>
 		<groupId>io.piazzageo</groupId>
 		<artifactId>pz-jobcommon</artifactId>
-		<version>LATEST</version>
+		<version>{version_number_here}</version>
 	</dependency>
 ```
 
