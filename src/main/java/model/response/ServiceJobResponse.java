@@ -16,20 +16,22 @@
 package model.response;
 
 import io.swagger.annotations.ApiModelProperty;
+import model.job.type.ExecuteServiceJob;
 import model.service.taskmanaged.ServiceJob;
 
 /**
- * Response containing a Service Job.
+ * Response containing a Service Job, and the input data for execution
  * 
  * @author Patrick.Doody
  *
  */
 public class ServiceJobResponse extends PiazzaResponse {
-	@ApiModelProperty(value = "The Service Job Object.", required = true)
+	@ApiModelProperty(value = "The Service Job Metadata.", required = true)
 	public ServiceJobData data = new ServiceJobData();
 
-	public ServiceJobResponse(ServiceJob serviceJob) {
+	public ServiceJobResponse(ServiceJob serviceJob, ExecuteServiceJob serviceData) {
 		data.setServiceJob(serviceJob);
+		data.setServiceData(serviceData);
 	}
 
 	public ServiceJobResponse() {
@@ -41,6 +43,8 @@ public class ServiceJobResponse extends PiazzaResponse {
 	public class ServiceJobData {
 		@ApiModelProperty(value = "The Service Job Metadata.", required = true)
 		private ServiceJob serviceJob;
+		@ApiModelProperty(value = "The Service Job Execution Metadata", required = true)
+		private ExecuteServiceJob serviceData;
 
 		public ServiceJob getServiceJob() {
 			return this.serviceJob;
@@ -48,6 +52,14 @@ public class ServiceJobResponse extends PiazzaResponse {
 
 		public void setServiceJob(ServiceJob serviceJob) {
 			this.serviceJob = serviceJob;
+		}
+
+		public ExecuteServiceJob getServiceData() {
+			return serviceData;
+		}
+
+		public void setServiceData(ExecuteServiceJob serviceData) {
+			this.serviceData = serviceData;
 		}
 	}
 }
