@@ -19,7 +19,6 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
-
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 /**
@@ -52,6 +51,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 		@Type(value = JobResponse.class, name = "job"),
 		@Type(value = JobStatusResponse.class, name = "status"),
 		@Type(value = ServiceIdResponse.class, name = "service-id"),
+		@Type(value = ServiceJobResponse.class, name = "service-job"),
 		@Type(value = ServiceListResponse.class, name = "service-list"),
 		@Type(value = ServiceResponse.class, name = "service"), 
 		@Type(value = SuccessResponse.class, name = "success"),
