@@ -78,17 +78,17 @@ public class ServiceJob {
 	}
 
 	@JsonProperty("startedOn")
-	public String getStartedOnString() {
+	public Long getStartedOnString() {
 		if (startedOn != null) {
 			// Defaults to ISO8601
-			return startedOn.toString();
+			return startedOn.getMillis();
 		} else {
 			return null;
 		}
 	}
 
 	@JsonProperty("startedOn")
-	public void setStartedOnString(String startedOn) {
+	public void setStartedOnString(Long startedOn) {
 		this.startedOn = new DateTime(startedOn);
 	}
 
@@ -103,17 +103,17 @@ public class ServiceJob {
 	}
 
 	@JsonProperty("queuedOn")
-	public String getQueuedOnString() {
+	public Long getQueuedOnString() {
 		if (queuedOn != null) {
 			// Defaults to ISO8601
-			return queuedOn.toString();
+			return queuedOn.getMillis();
 		} else {
 			return null;
 		}
 	}
 
 	@JsonProperty("queuedOn")
-	public void setQueuedOnString(String queuedOn) {
+	public void setQueuedOnString(Long queuedOn) {
 		this.queuedOn = new DateTime(queuedOn);
 	}
 
