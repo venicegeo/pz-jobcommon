@@ -29,8 +29,9 @@ public class ServiceJobResponse extends PiazzaResponse {
 	@ApiModelProperty(value = "The Service Job Metadata.", required = true)
 	public ServiceJobData data = new ServiceJobData();
 
-	public ServiceJobResponse(ExecuteServiceJob serviceData) {
+	public ServiceJobResponse(ExecuteServiceJob serviceData, String jobId) {
 		data.setServiceData(serviceData);
+		data.setJobId(jobId);
 	}
 
 	public ServiceJobResponse() {
@@ -42,6 +43,8 @@ public class ServiceJobResponse extends PiazzaResponse {
 	public class ServiceJobData {
 		@ApiModelProperty(value = "The Service Job Execution Metadata", required = true)
 		private ExecuteServiceJob serviceData;
+		@ApiModelProperty(value = "The Id of the Job", required = true)
+		private String jobId;
 
 		public ExecuteServiceJob getServiceData() {
 			return serviceData;
@@ -49,6 +52,14 @@ public class ServiceJobResponse extends PiazzaResponse {
 
 		public void setServiceData(ExecuteServiceJob serviceData) {
 			this.serviceData = serviceData;
+		}
+
+		public String getJobId() {
+			return jobId;
+		}
+
+		public void setJobId(String jobId) {
+			this.jobId = jobId;
 		}
 	}
 }
