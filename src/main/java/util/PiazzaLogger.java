@@ -166,38 +166,43 @@ public class PiazzaLogger {
 	 *            payload
 	 * 
 	 */
-	private void sendLogs(LoggerPayload loggerPayload, String logMessage, Severity severity) {
+	private void sendLogs(final LoggerPayload loggerPayload, final String logMessage, final Severity severity) {
+		// Run the HTTP message on a separate thread
+		Thread logThread = new Thread(new Runnable() {
+			public void run() {
+				// Setting generic fields on logger payload
+				loggerPayload.setSeverity(severity);
+				loggerPayload.setMessage(logMessage);
+				loggerPayload.setTimestamp(new DateTime());
 
-		// Setting generic fields on logger payload
-		loggerPayload.setSeverity(severity);
-		loggerPayload.setMessage(logMessage);
-		loggerPayload.setTimestamp(new DateTime());
+				String url = String.format("%s/%s", LOGGER_URL, LOGGER_ENDPOINT);
 
-		String url = String.format("%s/%s", LOGGER_URL, LOGGER_ENDPOINT);
+				try {
+					HttpHeaders headers = new HttpHeaders();
+					headers.setContentType(MediaType.APPLICATION_JSON);
 
-		try {
-			HttpHeaders headers = new HttpHeaders();
-			headers.setContentType(MediaType.APPLICATION_JSON);
+					// Log to console if requested
+					try {
+						if (logToConsole.booleanValue()) {
+							LOGGER.info(loggerPayload.toString());
+						}
+					} catch (Exception exception) { /* Do nothing. */
+						LOGGER.error("Could not log message to console. Application property is not set", exception);
+					}
 
-			// Log to console if requested
-			try {
-				if (logToConsole.booleanValue()) {
-					LOGGER.info(loggerPayload.toString());
+					restTemplate.postForEntity(url, new HttpEntity<LoggerPayload>(loggerPayload, headers), String.class);
+				} catch (HttpClientErrorException httpException) {
+					LOGGER.error("HTTP Client Error", httpException);
+					handleHttpError(loggerPayload, url, httpException.getResponseBodyAsString());
+				} catch (HttpServerErrorException httpException) {
+					LOGGER.error("HTTP Server Error", httpException);
+					handleHttpError(loggerPayload, url, httpException.getResponseBodyAsString());
+				} catch (Exception exception) {
+					LOGGER.error("Could not log due to an unhandled exception.", exception);
 				}
-			} catch (Exception exception) { /* Do nothing. */
-				LOGGER.error("Could not log message to console. Application property is not set", exception);
 			}
-
-			restTemplate.postForEntity(url, new HttpEntity<LoggerPayload>(loggerPayload, headers), String.class);
-		} catch (HttpClientErrorException httpException) {
-			LOGGER.error("HTTP Client Error", httpException);
-			handleHttpError(loggerPayload, url, httpException.getResponseBodyAsString());
-		} catch (HttpServerErrorException httpException) {
-			LOGGER.error("HTTP Server Error", httpException);
-			handleHttpError(loggerPayload, url, httpException.getResponseBodyAsString());
-		} catch (Exception exception) {
-			LOGGER.error(String.format("Could not log due to an unhandled exception: %s", exception.getMessage()), exception);
-		}
+		});
+		logThread.start();
 	}
 
 	/**
