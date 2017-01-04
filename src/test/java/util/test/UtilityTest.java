@@ -72,6 +72,8 @@ public class UtilityTest {
 		ReflectionTestUtils.setField(logger, "LOGGER_ENDPOINT", "logs");
 		ReflectionTestUtils.setField(logger, "restTemplate", restTemplate);
 		ReflectionTestUtils.setField(uuidFactory, "restTemplate", restTemplate);
+		
+		logger.init();
 	}
 
 	/**

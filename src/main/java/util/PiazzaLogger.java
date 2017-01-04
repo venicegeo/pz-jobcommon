@@ -30,6 +30,7 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.HttpServerErrorException;
@@ -62,12 +63,17 @@ public class PiazzaLogger {
 	private int httpMaxTotal;
 	@Value("${http.max.route:2500}")
 	private int httpMaxRoute;
+	@Value("${logger.thread.count.size:100}")
+	private int threadCountSize;
+	@Value("${logger.thread.count.limit:150}")
+	private int threadCountLimit;
 
 	private RestTemplate restTemplate = new RestTemplate();
 	private final static Logger LOGGER = LoggerFactory.getLogger(PiazzaLogger.class);
+	private ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
 
 	/**
-	 * Default constructor, required for beat instantiation.
+	 * Default constructor, required for bean instantiation.
 	 */
 	public PiazzaLogger() {
 	}
@@ -90,9 +96,14 @@ public class PiazzaLogger {
 
 	@PostConstruct
 	public void init() {
+		// Initialize the connection pool
 		LOGGER.info(String.format("PiazzaLogger initialized for service %s, url: %s", serviceName, LOGGER_URL));
 		HttpClient httpClient = HttpClientBuilder.create().setMaxConnTotal(httpMaxTotal).setMaxConnPerRoute(httpMaxRoute).build();
 		restTemplate.setRequestFactory(new HttpComponentsClientHttpRequestFactory(httpClient));
+		// Initialize the Thread Pool
+		executor.setCorePoolSize(threadCountSize > 0 ? threadCountSize : 100); // Give some default values, in case Spring isn't enabled
+		executor.setMaxPoolSize(threadCountSize > 0 ? threadCountSize : 150); // Give some default values, in case Spring isn't enabled
+		executor.initialize();
 	}
 
 	/**
@@ -105,7 +116,7 @@ public class PiazzaLogger {
 	 */
 	public void log(String logMessage, Severity severity) {
 		LoggerPayload loggerPayload = getLoggerPayload();
-		sendLogs(loggerPayload, logMessage, severity);
+		executor.execute(new LogWorker(loggerPayload, logMessage, severity));
 	}
 
 	/**
@@ -121,7 +132,7 @@ public class PiazzaLogger {
 	public void log(String logMessage, Severity severity, AuditElement auditElement) {
 		LoggerPayload loggerPayload = getLoggerPayload();
 		loggerPayload.setAuditData(auditElement);
-		sendLogs(loggerPayload, logMessage, severity);
+		executor.execute(new LogWorker(loggerPayload, logMessage, severity));
 	}
 
 	/**
@@ -137,7 +148,7 @@ public class PiazzaLogger {
 	public void log(String logMessage, Severity severity, MetricElement metricElement) {
 		LoggerPayload loggerPayload = getLoggerPayload();
 		loggerPayload.setMetricData(metricElement);
-		sendLogs(loggerPayload, logMessage, severity);
+		executor.execute(new LogWorker(loggerPayload, logMessage, severity));
 	}
 
 	/**
@@ -156,61 +167,7 @@ public class PiazzaLogger {
 		LoggerPayload loggerPayload = getLoggerPayload();
 		loggerPayload.setAuditData(auditElement);
 		loggerPayload.setMetricData(metricElement);
-		sendLogs(loggerPayload, logMessage, severity);
-	}
-
-	/**
-	 * Sends the logger payload to pz-logger
-	 * 
-	 * @param loggerPayload
-	 *            payload
-	 * 
-	 */
-	private void sendLogs(final LoggerPayload loggerPayload, final String logMessage, final Severity severity) {
-		// Setting generic fields on logger payload
-		loggerPayload.setSeverity(severity);
-		loggerPayload.setMessage(logMessage);
-		loggerPayload.setTimestamp(new DateTime());
-
-		String url = String.format("%s/%s", LOGGER_URL, LOGGER_ENDPOINT);
-
-		try {
-			HttpHeaders headers = new HttpHeaders();
-			headers.setContentType(MediaType.APPLICATION_JSON);
-
-			// Log to console if requested
-			try {
-				if (logToConsole.booleanValue()) {
-					LOGGER.info(loggerPayload.toString());
-				}
-			} catch (Exception exception) { /* Do nothing. */
-				LOGGER.error("Could not log message to console. Application property is not set", exception);
-			}
-
-			restTemplate.postForEntity(url, new HttpEntity<LoggerPayload>(loggerPayload, headers), String.class);
-		} catch (HttpClientErrorException httpException) {
-			LOGGER.error("HTTP Client Error", httpException);
-			handleHttpError(loggerPayload, url, httpException.getResponseBodyAsString());
-		} catch (HttpServerErrorException httpException) {
-			LOGGER.error("HTTP Server Error", httpException);
-			handleHttpError(loggerPayload, url, httpException.getResponseBodyAsString());
-		} catch (Exception exception) {
-			LOGGER.error("Could not log due to an unhandled exception.", exception);
-		}
-	}
-
-	/**
-	 * Handles an HTTP Error from the pz-logger service.
-	 */
-	private void handleHttpError(LoggerPayload loggerPayload, String url, String responseString) {
-		String loggerPayloadString = loggerPayload.toString();
-		try {
-			loggerPayloadString = new ObjectMapper().writeValueAsString(loggerPayload);
-		} catch (Exception jsonException) {
-			LOGGER.error("Failed to serialize JSON for Payload. Printing String instead.", jsonException);
-		}
-		LOGGER.error(String.format("Failed to send message to Pz-Logger component. Endpoint is %s. Payload is %s. Response was %s", url,
-				loggerPayloadString, responseString));
+		executor.execute(new LogWorker(loggerPayload, logMessage, severity));
 	}
 
 	/**
@@ -226,5 +183,78 @@ public class PiazzaLogger {
 			LOGGER.error("Could not get hostname for component.", exception);
 		}
 		return loggerPayload;
+	}
+
+	/**
+	 * Runnable that sends logs to the pz-logger component HTTP endpoint
+	 */
+	public class LogWorker implements Runnable {
+		private LoggerPayload loggerPayload;
+		private String logMessage;
+		private Severity severity;
+
+		public LogWorker(LoggerPayload loggerPayload, String logMessage, Severity severity) {
+			this.loggerPayload = loggerPayload;
+			this.logMessage = logMessage;
+			this.severity = severity;
+		}
+
+		public void run() {
+			sendLogs(loggerPayload, logMessage, severity);
+		}
+
+		/**
+		 * Sends the logger payload to pz-logger
+		 * 
+		 * @param loggerPayload
+		 *            payload
+		 * 
+		 */
+		private void sendLogs(LoggerPayload loggerPayload, String logMessage, Severity severity) {
+			// Setting generic fields on logger payload
+			loggerPayload.setSeverity(severity);
+			loggerPayload.setMessage(logMessage);
+			loggerPayload.setTimestamp(new DateTime());
+
+			String url = String.format("%s/%s", LOGGER_URL, LOGGER_ENDPOINT);
+
+			try {
+				HttpHeaders headers = new HttpHeaders();
+				headers.setContentType(MediaType.APPLICATION_JSON);
+
+				// Log to console if requested
+				try {
+					if (logToConsole.booleanValue()) {
+						LOGGER.info(loggerPayload.toString());
+					}
+				} catch (Exception exception) { /* Do nothing. */
+					LOGGER.error("Could not log message to console. Application property is not set", exception);
+				}
+
+				restTemplate.postForEntity(url, new HttpEntity<LoggerPayload>(loggerPayload, headers), String.class);
+			} catch (HttpClientErrorException httpException) {
+				LOGGER.error("HTTP Client Error", httpException);
+				handleHttpError(loggerPayload, url, httpException.getResponseBodyAsString());
+			} catch (HttpServerErrorException httpException) {
+				LOGGER.error("HTTP Server Error", httpException);
+				handleHttpError(loggerPayload, url, httpException.getResponseBodyAsString());
+			} catch (Exception exception) {
+				LOGGER.error("Could not log due to an unhandled exception.", exception);
+			}
+		}
+
+		/**
+		 * Handles an HTTP Error from the pz-logger service.
+		 */
+		private void handleHttpError(LoggerPayload loggerPayload, String url, String responseString) {
+			String loggerPayloadString = loggerPayload.toString();
+			try {
+				loggerPayloadString = new ObjectMapper().writeValueAsString(loggerPayload);
+			} catch (Exception jsonException) {
+				LOGGER.error("Failed to serialize JSON for Payload. Printing String instead.", jsonException);
+			}
+			LOGGER.error(String.format("Failed to send message to Pz-Logger component. Endpoint is %s. Payload is %s. Response was %s", url,
+					loggerPayloadString, responseString));
+		}
 	}
 }
