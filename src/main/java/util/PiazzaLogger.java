@@ -101,8 +101,10 @@ public class PiazzaLogger {
 		HttpClient httpClient = HttpClientBuilder.create().setMaxConnTotal(httpMaxTotal).setMaxConnPerRoute(httpMaxRoute).build();
 		restTemplate.setRequestFactory(new HttpComponentsClientHttpRequestFactory(httpClient));
 		// Initialize the Thread Pool
-		executor.setCorePoolSize(threadCountSize > 0 ? threadCountSize : 50); // Give some default values, in case Spring isn't enabled
-		executor.setMaxPoolSize(threadCountSize > 0 ? threadCountSize : 50); // Give some default values, in case Spring isn't enabled
+		executor.setCorePoolSize(threadCountSize > 0 ? threadCountSize : 50); // Give some default values, in case
+																				// Spring isn't enabled
+		executor.setMaxPoolSize(threadCountSize > 0 ? threadCountSize : 50); // Give some default values, in case Spring
+																				// isn't enabled
 		executor.initialize();
 	}
 
@@ -183,6 +185,13 @@ public class PiazzaLogger {
 			LOGGER.error("Could not get hostname for component.", exception);
 		}
 		return loggerPayload;
+	}
+
+	/**
+	 * Gets the Executor that manages the log threads.
+	 */
+	public ThreadPoolTaskExecutor getExecutor() {
+		return executor;
 	}
 
 	/**
