@@ -63,9 +63,9 @@ public class PiazzaLogger {
 	private int httpMaxTotal;
 	@Value("${http.max.route:2500}")
 	private int httpMaxRoute;
-	@Value("${logger.thread.count.size:100}")
+	@Value("${logger.thread.count.size:50}")
 	private int threadCountSize;
-	@Value("${logger.thread.count.limit:150}")
+	@Value("${logger.thread.count.limit:50}")
 	private int threadCountLimit;
 
 	private RestTemplate restTemplate = new RestTemplate();
@@ -101,8 +101,8 @@ public class PiazzaLogger {
 		HttpClient httpClient = HttpClientBuilder.create().setMaxConnTotal(httpMaxTotal).setMaxConnPerRoute(httpMaxRoute).build();
 		restTemplate.setRequestFactory(new HttpComponentsClientHttpRequestFactory(httpClient));
 		// Initialize the Thread Pool
-		executor.setCorePoolSize(threadCountSize > 0 ? threadCountSize : 100); // Give some default values, in case Spring isn't enabled
-		executor.setMaxPoolSize(threadCountSize > 0 ? threadCountSize : 150); // Give some default values, in case Spring isn't enabled
+		executor.setCorePoolSize(threadCountSize > 0 ? threadCountSize : 50); // Give some default values, in case Spring isn't enabled
+		executor.setMaxPoolSize(threadCountSize > 0 ? threadCountSize : 50); // Give some default values, in case Spring isn't enabled
 		executor.initialize();
 	}
 
