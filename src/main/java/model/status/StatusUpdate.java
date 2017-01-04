@@ -18,13 +18,19 @@ package model.status;
 import model.job.JobProgress;
 import model.job.result.ResultType;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
+import io.swagger.annotations.ApiModelProperty;
+
 /**
- * A Status Update message for a Job. This is intended to be fired by Worker
- * components throughout the processing of a Job.
+ * A Status Update message for a Job. This is intended to be fired by Worker components throughout the processing of a
+ * Job.
  * 
  * @author Patrick.Doody
  * 
@@ -46,7 +52,7 @@ public class StatusUpdate {
 
 	@JsonIgnore
 	public static final String STATUS_CANCELLED = "Cancelled";
-	
+
 	@JsonIgnore
 	public static final String STATUS_CANCELLING = "Cancelling";
 
@@ -56,10 +62,14 @@ public class StatusUpdate {
 	@JsonIgnore
 	public static final String STATUS_FAIL = "Fail";
 
+	@ApiModelProperty(required = false, value = "The Status of the Service.", dataType = "string", allowableValues = "Submitted, Pending, Running, Success, Cancelled, Cancelling, Error, Fail")
+	@Pattern(regexp = "Submitted|Pending|Running|Success|Cancelled|Cancelling|Error|Fail", flags = Pattern.Flag.CASE_INSENSITIVE)
 	private String status;
 
+	@ApiModelProperty(required = false, value = "The Progress information of the Job, including time spent/remaining, or percentage complete.")
 	private JobProgress progress;
 
+	@ApiModelProperty(required = false, value = "The Result object of this Job.")
 	private ResultType result;
 
 	public StatusUpdate() {
@@ -92,13 +102,12 @@ public class StatusUpdate {
 	}
 
 	/**
-	 * Sets the Result of the Job. This result will likely be an Id that points
-	 * to a resource in the Resources collection.
+	 * Sets the Result of the Job. This result will likely be an Id that points to a resource in the Resources
+	 * collection.
 	 * 
-	 * As a reminder, by nature, it would seem silly to submit the Result for
-	 * the Job before the Status of the Job is set to COMPLETE. If you're
-	 * attaching the Result to this StatusUpdate object, then it's suggested you
-	 * also set the status flag to completed.
+	 * As a reminder, by nature, it would seem silly to submit the Result for the Job before the Status of the Job is
+	 * set to COMPLETE. If you're attaching the Result to this StatusUpdate object, then it's suggested you also set the
+	 * status flag to completed.
 	 * 
 	 * @param result
 	 *            The result of the Job.

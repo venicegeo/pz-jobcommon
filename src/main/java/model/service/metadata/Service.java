@@ -41,7 +41,6 @@ import model.job.metadata.ResourceMetadata;
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(Include.NON_NULL)
-
 public class Service {
 
 	private final static Logger LOGGER = LoggerFactory.getLogger(Service.class);
