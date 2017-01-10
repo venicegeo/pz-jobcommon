@@ -44,8 +44,6 @@ public class UserProfile implements Serializable {
 
 	public String createdBy;
 
-	public Boolean isActive;
-
 	public String profileTemplateId;
 
 	public String getUsername() {
@@ -72,14 +70,6 @@ public class UserProfile implements Serializable {
 
 	public void setCreatedBy(String createdBy) {
 		this.createdBy = createdBy;
-	}
-
-	public Boolean getIsActive() {
-		return isActive;
-	}
-
-	public void setIsActive(Boolean isActive) {
-		this.isActive = isActive;
 	}
 
 	public String getProfileTemplateId() {
