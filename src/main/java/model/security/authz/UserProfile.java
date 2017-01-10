@@ -37,6 +37,8 @@ public class UserProfile implements Serializable {
 
 	public String username;
 
+	public String distinguishedName;
+
 	@JsonIgnore
 	public DateTime createdOn;
 
@@ -101,5 +103,13 @@ public class UserProfile implements Serializable {
 	@JsonProperty("createdOn")
 	public void setCreatedOnString(String createdOn) {
 		this.createdOn = new DateTime(createdOn);
+	}
+
+	public String getDistinguishedName() {
+		return distinguishedName;
+	}
+
+	public void setDistinguishedName(String distinguishedName) {
+		this.distinguishedName = distinguishedName;
 	}
 }
