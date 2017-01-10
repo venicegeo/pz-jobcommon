@@ -43,22 +43,10 @@ import model.logger.Severity;
  */
 @Component
 public class PiazzaLoggerV2 {
-	@Value("${logger.url}")
-	private String LOGGER_URL;
-	@Value("${logger.endpoint}")
-	private String LOGGER_ENDPOINT;
 	@Value("${logger.name:}")
 	private String serviceName;
 	@Value("${logger.console:}")
 	private Boolean logToConsole;
-	@Value("${http.max.total:5000}")
-	private int httpMaxTotal;
-	@Value("${http.max.route:2500}")
-	private int httpMaxRoute;
-	@Value("${logger.thread.count.size:50}")
-	private int threadCountSize;
-	@Value("${logger.thread.count.limit:50}")
-	private int threadCountLimit;
 	@Value("${LOGGER_INDEX}")
 	private String loggerIndexName;
 
@@ -87,7 +75,6 @@ public class PiazzaLoggerV2 {
 	 */
 	public PiazzaLoggerV2(String loggerServiceUrl, String serviceName) {
 		this.serviceName = serviceName;
-		this.LOGGER_URL = loggerServiceUrl;
 	}
 
 	/**
