@@ -17,7 +17,6 @@ package util;
 
 import java.lang.management.ManagementFactory;
 import java.net.InetAddress;
-import javax.annotation.PostConstruct;
 import org.elasticsearch.action.admin.indices.create.CreateIndexRequestBuilder;
 import org.elasticsearch.action.admin.indices.create.CreateIndexResponse;
 import org.elasticsearch.action.index.IndexRequest;
@@ -28,11 +27,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Component;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import de.bytefish.elasticutils.elasticsearch2.utils.ElasticSearchUtils;
 import model.logger.AuditElement;
 import model.logger.LoggerPayload;
 import model.logger.MetricElement;
@@ -62,25 +59,15 @@ public class PiazzaLoggerV2 {
 	private int threadCountSize;
 	@Value("${logger.thread.count.limit:50}")
 	private int threadCountLimit;
-	@Value("${vcap.services.pz-elasticsearch.credentials.port}")
-	private Integer elasticSearchPort;
-	@Value("${vcap.services.pz-elasticsearch.credentials.hostname}")
-	private String elasticSearchHost;
-	@Value("${elasticsearch.clustername}")
-	private String clustername;
 	@Value("${LOGGER_INDEX}")
 	private String loggerIndexName;
 
 	@Autowired
 	private Client client;
 	
-	@Autowired
-	private ObjectMapper objectMapper;
-	
 	private final static Logger LOGGER = LoggerFactory.getLogger(PiazzaLoggerV2.class);
-	private ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
-
-	private String logSchema = "piazzaLogs8888";
+	private final String LOG_SCHEMA = "pzlogs";
+	
 	/**
 	 * Default constructor, required for bean instantiation.
 	 */
@@ -101,11 +88,6 @@ public class PiazzaLoggerV2 {
 	public PiazzaLoggerV2(String loggerServiceUrl, String serviceName) {
 		this.serviceName = serviceName;
 		this.LOGGER_URL = loggerServiceUrl;
-	}
-
-	@PostConstruct
-	public void init() throws Exception {
-		//TODO: all post setups added here
 	}
 
 	/**
@@ -135,7 +117,7 @@ public class PiazzaLoggerV2 {
 	 * @return boolean
 	 */
 	public boolean createIndexWithMapping(Client client, String indexName, String type, String mapping) {
-		if (!ElasticSearchUtils.indexExist(client, indexName).isExists()) {
+		if (!indexExists(indexName)) {
 			CreateIndexRequestBuilder createIndexRequestBuilder = client.admin().indices().prepareCreate(indexName);
 			if (mapping != null) {
 				createIndexRequestBuilder.addMapping(type, mapping);
@@ -147,6 +129,16 @@ public class PiazzaLoggerV2 {
 			return response.isAcknowledged();
 		}
 		return false;
+	}
+	
+	/**
+	 * Checks to see if elastic index exists
+	 * 
+	 * @param indexName
+	 * @return boolean
+	 */
+	public boolean indexExists(String indexName) {
+		return client.admin().indices().prepareExists(indexName).execute().actionGet().isExists();
 	}
 	
 	/**
@@ -251,12 +243,12 @@ public class PiazzaLoggerV2 {
 		}
 
 		// Create elasticsearch index with mapping
-		createIndexWithMapping(client, loggerIndexName, logSchema, null);
+		createIndexWithMapping(client, loggerIndexName, LOG_SCHEMA, null);
 
 		LOGGER.debug(String.format("Writing the following log object to elastic search:\n%s\n", loggerPayloadJson));
 
-		// Save to elasticsearch
-		IndexRequest indexRequest = new IndexRequest(loggerIndexName, logSchema);
+		// Index to elasticsearch
+		IndexRequest indexRequest = new IndexRequest(loggerIndexName, LOG_SCHEMA);
 		indexRequest.source(loggerPayloadJson);
 		IndexResponse esResponse = client.index(indexRequest).actionGet();
 	}
