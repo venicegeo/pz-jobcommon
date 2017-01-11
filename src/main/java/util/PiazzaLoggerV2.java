@@ -17,16 +17,23 @@ package util;
 
 import java.lang.management.ManagementFactory;
 import java.net.InetAddress;
+import java.net.InetSocketAddress;
+import java.net.UnknownHostException;
+
 import org.elasticsearch.action.admin.indices.create.CreateIndexRequestBuilder;
 import org.elasticsearch.action.admin.indices.create.CreateIndexResponse;
 import org.elasticsearch.action.index.IndexRequest;
 import org.elasticsearch.action.index.IndexResponse;
 import org.elasticsearch.client.Client;
+import org.elasticsearch.client.transport.TransportClient;
+import org.elasticsearch.common.settings.Settings;
+import org.elasticsearch.common.transport.InetSocketTransportAddress;
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -34,6 +41,7 @@ import model.logger.AuditElement;
 import model.logger.LoggerPayload;
 import model.logger.MetricElement;
 import model.logger.Severity;
+import javax.annotation.PostConstruct;
 
 /**
  * PiazzaLogger is a class to write syslog logs into Elasticsearch
@@ -49,12 +57,18 @@ public class PiazzaLoggerV2 {
 	private Boolean logToConsole;
 	@Value("${LOGGER_INDEX}")
 	private String loggerIndexName;
-
+	@Value("${vcap.services.pz-elasticsearch.credentials.port}")
+	private Integer elasticSearchPort;
+	@Value("${vcap.services.pz-elasticsearch.credentials.hostname}")
+	private String elasticSearchHost;
+	@Value("${elasticsearch.clustername}")
+	private String clustername;
+	
 	@Autowired
-	private Client client;
+	private Client elasticClient;
 	
 	private final static Logger LOGGER = LoggerFactory.getLogger(PiazzaLoggerV2.class);
-	private final String LOG_SCHEMA = "pzlogs";
+	private final String LOG_SCHEMA = "LogData";
 	
 	/**
 	 * Default constructor, required for bean instantiation.
@@ -77,6 +91,26 @@ public class PiazzaLoggerV2 {
 		this.serviceName = serviceName;
 	}
 
+	@PostConstruct
+	public void init() throws Exception {
+		// Create elasticsearch index with mapping
+		createIndexWithMapping(elasticClient, loggerIndexName, LOG_SCHEMA, null);
+	}
+
+	/**
+	 * Spring bean for injecting elasticsearch client.
+	 * 
+	 * @return Elasticsearch client
+	 * @throws UnknownHostException
+	 */
+	@Bean
+	public Client client() throws UnknownHostException {
+		Settings settings = Settings.settingsBuilder().put("cluster.name", clustername).build();
+		TransportClient transportClient = TransportClient.builder().settings(settings).build();
+		transportClient.addTransportAddress(new InetSocketTransportAddress(new InetSocketAddress(elasticSearchHost, elasticSearchPort)));
+		return transportClient;
+	}
+	
 	/**
 	 * Writes syslog format log message to elasticsearch
 	 * 
@@ -125,7 +159,7 @@ public class PiazzaLoggerV2 {
 	 * @return boolean
 	 */
 	public boolean indexExists(String indexName) {
-		return client.admin().indices().prepareExists(indexName).execute().actionGet().isExists();
+		return elasticClient.admin().indices().prepareExists(indexName).execute().actionGet().isExists();
 	}
 	
 	/**
@@ -229,14 +263,15 @@ public class PiazzaLoggerV2 {
 			e.printStackTrace();
 		}
 
-		// Create elasticsearch index with mapping
-		createIndexWithMapping(client, loggerIndexName, LOG_SCHEMA, null);
-
 		LOGGER.debug(String.format("Writing the following log object to elastic search:\n%s\n", loggerPayloadJson));
 
-		// Index to elasticsearch
-		IndexRequest indexRequest = new IndexRequest(loggerIndexName, LOG_SCHEMA);
-		indexRequest.source(loggerPayloadJson);
-		IndexResponse esResponse = client.index(indexRequest).actionGet();
+		try {
+			// Index to elasticsearch
+			IndexRequest indexRequest = new IndexRequest(loggerIndexName, LOG_SCHEMA);
+			indexRequest.source(loggerPayloadJson);
+			IndexResponse esResponse = elasticClient.index(indexRequest).actionGet();
+		} catch (Exception e) {
+			LOGGER.info(String.format("Unable to index logs into Elasticsearch: %s", e.getMessage()));
+		}
 	}
 }
