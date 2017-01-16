@@ -94,7 +94,6 @@ public class PiazzaLogger {
 	@PostConstruct
 	public void init() throws Exception {
 		// Create elasticsearch index with mapping
-		//elasticClient = getClient();
 		createIndexWithMapping(elasticClient, loggerIndexName, LOG_SCHEMA, null);
 	}
 
@@ -270,9 +269,7 @@ public class PiazzaLogger {
 			// Index to elasticsearch
 			IndexRequest indexRequest = new IndexRequest(loggerIndexName, LOG_SCHEMA);
 			indexRequest.source(loggerPayloadJson);
-System.out.println("================================ prior to writing to elastic searchhhhhhhhhhhhhhhh......");
 			IndexResponse esResponse = elasticClient.index(indexRequest).actionGet();
-System.out.println("================================ after to writing to elastic searchhhhhhhhhhhhhhhh......\n\n");
 		} catch (Exception e) {
 			LOGGER.info(String.format("Unable to index logs into Elasticsearch: %s", e.getMessage()));
 		}
