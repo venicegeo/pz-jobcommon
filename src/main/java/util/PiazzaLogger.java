@@ -149,9 +149,10 @@ public class PiazzaLogger {
 				CreateIndexResponse response = createIndexRequestBuilder.execute().actionGet();
 				return response.isAcknowledged();
 			}
-		} catch (Exception e) {
-			LOGGER.info(String.format("Unable to create Elasticsearch index %s, it should already exist, error: %s",
-					indexName, e.getMessage()));
+		} catch (Exception exception) {
+			LOGGER.info(
+					String.format("Unable to create Elasticsearch index %s, it should already exist, error", indexName),
+					exception);
 		}
 
 		return false;
@@ -265,7 +266,7 @@ public class PiazzaLogger {
 		try {
 			loggerPayloadJson = new ObjectMapper().writeValueAsString(loggerPayload);
 		} catch (JsonProcessingException e) {
-			e.printStackTrace();
+			LOGGER.error("Failed to serialize the log payload", e);
 		}
 
 		LOGGER.debug(String.format("Writing the following log object to elastic search:\n%s\n", loggerPayloadJson));
@@ -276,7 +277,7 @@ public class PiazzaLogger {
 			indexRequest.source(loggerPayloadJson);
 			IndexResponse esResponse = elasticClient.index(indexRequest).actionGet();
 		} catch (Exception e) {
-			LOGGER.info(String.format("Unable to index logs into Elasticsearch: %s", e.getMessage()));
+			LOGGER.info(String.format("Unable to index logs into Elasticsearch"), e);
 		}
 	}
 }
