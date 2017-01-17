@@ -138,17 +138,22 @@ public class PiazzaLogger {
 	 * @return boolean
 	 */
 	public boolean createIndexWithMapping(Client client, String indexName, String type, String mapping) {
-		if (!indexExists(indexName)) {
-			CreateIndexRequestBuilder createIndexRequestBuilder = client.admin().indices().prepareCreate(indexName);
-			if (mapping != null) {
-				createIndexRequestBuilder.addMapping(type, mapping);
-			} else {
-				createIndexRequestBuilder.addMapping(type);
+		try {
+			if (!indexExists(indexName)) {
+				CreateIndexRequestBuilder createIndexRequestBuilder = client.admin().indices().prepareCreate(indexName);
+				if (mapping != null) {
+					createIndexRequestBuilder.addMapping(type, mapping);
+				} else {
+					createIndexRequestBuilder.addMapping(type);
+				}
+				CreateIndexResponse response = createIndexRequestBuilder.execute().actionGet();
+				return response.isAcknowledged();
 			}
-
-			CreateIndexResponse response = createIndexRequestBuilder.execute().actionGet();
-			return response.isAcknowledged();
+		} catch (Exception e) {
+			LOGGER.info(String.format("Unable to create Elasticsearch index %s, it should already exist, error: %s",
+					indexName, e.getMessage()));
 		}
+
 		return false;
 	}
 	
