@@ -23,12 +23,9 @@ import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
-import java.util.List;
-
 import model.logger.AuditElement;
 import model.logger.MetricElement;
 import model.logger.Severity;
-import model.request.LogRequest;
 import model.resource.UUID;
 
 import org.junit.Before;
@@ -66,14 +63,8 @@ public class UtilityTest {
 	@Before
 	public void setup() {
 		MockitoAnnotations.initMocks(this);
-
 		ReflectionTestUtils.setField(logger, "logToConsole", true);
-		ReflectionTestUtils.setField(logger, "LOGGER_URL", "http://localhost");
-		ReflectionTestUtils.setField(logger, "LOGGER_ENDPOINT", "logs");
-		ReflectionTestUtils.setField(logger, "restTemplate", restTemplate);
 		ReflectionTestUtils.setField(uuidFactory, "restTemplate", restTemplate);
-		
-		logger.init();
 	}
 
 	/**

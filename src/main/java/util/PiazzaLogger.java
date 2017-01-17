@@ -17,61 +17,59 @@ package util;
 
 import java.lang.management.ManagementFactory;
 import java.net.InetAddress;
+import java.net.InetSocketAddress;
+import java.net.UnknownHostException;
 
-import javax.annotation.PostConstruct;
-
-import org.apache.http.client.HttpClient;
-import org.apache.http.impl.client.HttpClientBuilder;
+import org.elasticsearch.action.admin.indices.create.CreateIndexRequestBuilder;
+import org.elasticsearch.action.admin.indices.create.CreateIndexResponse;
+import org.elasticsearch.action.index.IndexRequest;
+import org.elasticsearch.action.index.IndexResponse;
+import org.elasticsearch.client.Client;
+import org.elasticsearch.client.transport.TransportClient;
+import org.elasticsearch.common.settings.Settings;
+import org.elasticsearch.common.transport.InetSocketTransportAddress;
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
-import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
-import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
-import org.springframework.web.client.HttpClientErrorException;
-import org.springframework.web.client.HttpServerErrorException;
-import org.springframework.web.client.RestTemplate;
-
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
 import model.logger.AuditElement;
 import model.logger.LoggerPayload;
 import model.logger.MetricElement;
 import model.logger.Severity;
+import javax.annotation.PostConstruct;
 
 /**
- * PiazzaLogger is a class that logs using the Piazza Core Logger service.
+ * PiazzaLogger is a class to write syslog logs into Elasticsearch
  * 
- * @author mlynum, rorf, patrick.doody
+ * @author Sonny.Saniev
  * @version 1.0
  */
 @Component
 public class PiazzaLogger {
-	@Value("${logger.url}")
-	private String LOGGER_URL;
-	@Value("${logger.endpoint}")
-	private String LOGGER_ENDPOINT;
 	@Value("${logger.name:}")
 	private String serviceName;
 	@Value("${logger.console:}")
 	private Boolean logToConsole;
-	@Value("${http.max.total:5000}")
-	private int httpMaxTotal;
-	@Value("${http.max.route:2500}")
-	private int httpMaxRoute;
-	@Value("${logger.thread.count.size:50}")
-	private int threadCountSize;
-	@Value("${logger.thread.count.limit:50}")
-	private int threadCountLimit;
-
-	private RestTemplate restTemplate = new RestTemplate();
+	@Value("${LOGGER_INDEX}")
+	private String loggerIndexName;
+	@Value("${vcap.services.pz-elasticsearch.credentials.port}")
+	private Integer elasticSearchPort;
+	@Value("${vcap.services.pz-elasticsearch.credentials.hostname}")
+	private String elasticSearchHost;
+	@Value("${elasticsearch.clustername}")
+	private String clustername;
+	
+	@Autowired
+	private Client elasticClient;
+	
 	private final static Logger LOGGER = LoggerFactory.getLogger(PiazzaLogger.class);
-	private ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
-
+	private final String LOG_SCHEMA = "LogData";
+	
 	/**
 	 * Default constructor, required for bean instantiation.
 	 */
@@ -91,25 +89,30 @@ public class PiazzaLogger {
 	 */
 	public PiazzaLogger(String loggerServiceUrl, String serviceName) {
 		this.serviceName = serviceName;
-		this.LOGGER_URL = loggerServiceUrl;
 	}
 
 	@PostConstruct
-	public void init() {
-		// Initialize the connection pool
-		LOGGER.info(String.format("PiazzaLogger initialized for service %s, url: %s", serviceName, LOGGER_URL));
-		HttpClient httpClient = HttpClientBuilder.create().setMaxConnTotal(httpMaxTotal).setMaxConnPerRoute(httpMaxRoute).build();
-		restTemplate.setRequestFactory(new HttpComponentsClientHttpRequestFactory(httpClient));
-		// Initialize the Thread Pool
-		executor.setCorePoolSize(threadCountSize > 0 ? threadCountSize : 50); // Give some default values, in case
-																				// Spring isn't enabled
-		executor.setMaxPoolSize(threadCountSize > 0 ? threadCountSize : 50); // Give some default values, in case Spring
-																				// isn't enabled
-		executor.initialize();
+	public void init() throws Exception {
+		// Create elasticsearch index with mapping
+		createIndexWithMapping(elasticClient, loggerIndexName, LOG_SCHEMA, null);
 	}
 
 	/**
-	 * Sends a syslog payload message to pz-logger for logging into logstash.
+	 * Spring bean for injecting elasticsearch client.
+	 * 
+	 * @return Elasticsearch client
+	 * @throws UnknownHostException
+	 */
+	@Bean
+	public Client getClient() throws UnknownHostException {
+		Settings settings = Settings.settingsBuilder().put("cluster.name", clustername).build();
+		TransportClient transportClient = TransportClient.builder().settings(settings).build();
+		transportClient.addTransportAddress(new InetSocketTransportAddress(new InetSocketAddress(elasticSearchHost, elasticSearchPort)));
+		return transportClient;
+	}
+	
+	/**
+	 * Writes syslog format log message to elasticsearch
 	 * 
 	 * @param logMessage
 	 *            the message you want to log
@@ -118,11 +121,55 @@ public class PiazzaLogger {
 	 */
 	public void log(String logMessage, Severity severity) {
 		LoggerPayload loggerPayload = getLoggerPayload();
-		executor.execute(new LogWorker(loggerPayload, logMessage, severity));
+		indexLog(loggerPayload, logMessage, severity); 
 	}
 
 	/**
-	 * Sends an audit message to pz-logger
+	 * Creates elasticsearch index with default mapping.
+	 * 
+	 * @param client
+	 *            elasticsearch client
+	 * @param indexName
+	 *            index to save to
+	 * @param type
+	 *            schema to save to
+	 * @param mapping
+	 *            mapping object
+	 * @return boolean
+	 */
+	public boolean createIndexWithMapping(Client client, String indexName, String type, String mapping) {
+		try {
+			if (!indexExists(indexName)) {
+				CreateIndexRequestBuilder createIndexRequestBuilder = client.admin().indices().prepareCreate(indexName);
+				if (mapping != null) {
+					createIndexRequestBuilder.addMapping(type, mapping);
+				} else {
+					createIndexRequestBuilder.addMapping(type);
+				}
+				CreateIndexResponse response = createIndexRequestBuilder.execute().actionGet();
+				return response.isAcknowledged();
+			}
+		} catch (Exception exception) {
+			LOGGER.info(
+					String.format("Unable to create Elasticsearch index %s, it should already exist, error", indexName),
+					exception);
+		}
+
+		return false;
+	}
+	
+	/**
+	 * Checks to see if elastic index exists
+	 * 
+	 * @param indexName
+	 * @return boolean
+	 */
+	public boolean indexExists(String indexName) {
+		return elasticClient.admin().indices().prepareExists(indexName).execute().actionGet().isExists();
+	}
+	
+	/**
+	 * Saves an audit message to elasticsearch
 	 * 
 	 * @param logMessage
 	 *            the message you want to log
@@ -134,11 +181,11 @@ public class PiazzaLogger {
 	public void log(String logMessage, Severity severity, AuditElement auditElement) {
 		LoggerPayload loggerPayload = getLoggerPayload();
 		loggerPayload.setAuditData(auditElement);
-		executor.execute(new LogWorker(loggerPayload, logMessage, severity));
+		indexLog(loggerPayload, logMessage, severity); 
 	}
 
 	/**
-	 * Sends a metric message to pz-logger
+	 * Saves a metric message to elasticsearch
 	 * 
 	 * @param logMessage
 	 *            the message you want to log
@@ -150,11 +197,11 @@ public class PiazzaLogger {
 	public void log(String logMessage, Severity severity, MetricElement metricElement) {
 		LoggerPayload loggerPayload = getLoggerPayload();
 		loggerPayload.setMetricData(metricElement);
-		executor.execute(new LogWorker(loggerPayload, logMessage, severity));
+		indexLog(loggerPayload, logMessage, severity);
 	}
 
 	/**
-	 * Sends a metric message to pz-logger
+	 * Saves full log payload with metric and audit elements present to elasticsearch
 	 * 
 	 * @param logMessage
 	 *            the message you want to log
@@ -169,11 +216,13 @@ public class PiazzaLogger {
 		LoggerPayload loggerPayload = getLoggerPayload();
 		loggerPayload.setAuditData(auditElement);
 		loggerPayload.setMetricData(metricElement);
-		executor.execute(new LogWorker(loggerPayload, logMessage, severity));
+		indexLog(loggerPayload, logMessage, severity);
 	}
 
 	/**
 	 * Generates a LoggerPayload with default values populated
+	 * 
+	 * @return LoggerPayload payload object
 	 */
 	private LoggerPayload getLoggerPayload() {
 		LoggerPayload loggerPayload = new LoggerPayload();
@@ -186,84 +235,49 @@ public class PiazzaLogger {
 		}
 		return loggerPayload;
 	}
-
+	
 	/**
-	 * Gets the Executor that manages the log threads.
+	 * Method to index the log payload into elasticsearch.
+	 * 
+	 * @param loggerPayload
+	 *            Syslog RFC 5424 standard log payload
+	 * @param logMessage
+	 *            actual log message
+	 * @param severity
+	 *            Syslog RFC-5424 Protocol severity codes
 	 */
-	public ThreadPoolTaskExecutor getExecutor() {
-		return executor;
-	}
+	private void indexLog(LoggerPayload loggerPayload, String logMessage, Severity severity) {
+		// Setting generic fields on logger payload
+		loggerPayload.setSeverity(severity);
+		loggerPayload.setMessage(logMessage);
+		loggerPayload.setTimestamp(new DateTime());
 
-	/**
-	 * Runnable that sends logs to the pz-logger component HTTP endpoint
-	 */
-	public class LogWorker implements Runnable {
-		private LoggerPayload loggerPayload;
-		private String logMessage;
-		private Severity severity;
-
-		public LogWorker(LoggerPayload loggerPayload, String logMessage, Severity severity) {
-			this.loggerPayload = loggerPayload;
-			this.logMessage = logMessage;
-			this.severity = severity;
-		}
-
-		public void run() {
-			sendLogs(loggerPayload, logMessage, severity);
-		}
-
-		/**
-		 * Sends the logger payload to pz-logger
-		 * 
-		 * @param loggerPayload
-		 *            payload
-		 * 
-		 */
-		private void sendLogs(LoggerPayload loggerPayload, String logMessage, Severity severity) {
-			// Setting generic fields on logger payload
-			loggerPayload.setSeverity(severity);
-			loggerPayload.setMessage(logMessage);
-			loggerPayload.setTimestamp(new DateTime());
-
-			String url = String.format("%s/%s", LOGGER_URL, LOGGER_ENDPOINT);
-
-			try {
-				HttpHeaders headers = new HttpHeaders();
-				headers.setContentType(MediaType.APPLICATION_JSON);
-
-				// Log to console if requested
-				try {
-					if (logToConsole.booleanValue()) {
-						LOGGER.info(loggerPayload.toString());
-					}
-				} catch (Exception exception) { /* Do nothing. */
-					LOGGER.error("Could not log message to console. Application property is not set", exception);
-				}
-
-				restTemplate.postForEntity(url, new HttpEntity<LoggerPayload>(loggerPayload, headers), String.class);
-			} catch (HttpClientErrorException httpException) {
-				LOGGER.error("HTTP Client Error", httpException);
-				handleHttpError(loggerPayload, url, httpException.getResponseBodyAsString());
-			} catch (HttpServerErrorException httpException) {
-				LOGGER.error("HTTP Server Error", httpException);
-				handleHttpError(loggerPayload, url, httpException.getResponseBodyAsString());
-			} catch (Exception exception) {
-				LOGGER.error("Could not log due to an unhandled exception.", exception);
+		// Log to console if requested
+		try {
+			if (logToConsole.booleanValue()) {
+				LOGGER.info(loggerPayload.toString());
 			}
+		} catch (Exception exception) { /* Do nothing. */
+			LOGGER.error("Could not log message to console. Application property is not set", exception);
 		}
 
-		/**
-		 * Handles an HTTP Error from the pz-logger service.
-		 */
-		private void handleHttpError(LoggerPayload loggerPayload, String url, String responseString) {
-			String loggerPayloadString = loggerPayload.toString();
-			try {
-				loggerPayloadString = new ObjectMapper().writeValueAsString(loggerPayload);
-			} catch (Exception jsonException) {
-				LOGGER.error("Failed to serialize JSON for Payload. Printing String instead.", jsonException);
-			}
-			LOGGER.error(String.format("Failed to send message to Pz-Logger component. Endpoint is %s. Payload is %s. Response was %s", url,
-					loggerPayloadString, responseString));
+		// saving log to elastic search
+		String loggerPayloadJson = "";
+		try {
+			loggerPayloadJson = new ObjectMapper().writeValueAsString(loggerPayload);
+		} catch (JsonProcessingException e) {
+			LOGGER.error("Failed to serialize the log payload", e);
+		}
+
+		LOGGER.debug(String.format("Writing the following log object to elastic search:\n%s\n", loggerPayloadJson));
+
+		try {
+			// Index to elasticsearch
+			IndexRequest indexRequest = new IndexRequest(loggerIndexName, LOG_SCHEMA);
+			indexRequest.source(loggerPayloadJson);
+			IndexResponse esResponse = elasticClient.index(indexRequest).actionGet();
+		} catch (Exception e) {
+			LOGGER.info(String.format("Unable to index logs into Elasticsearch"), e);
 		}
 	}
 }
