@@ -37,12 +37,12 @@ public class UserProfile implements Serializable {
 
 	public String username;
 
+	public String distinguishedName;
+
 	@JsonIgnore
 	public DateTime createdOn;
 
 	public String createdBy;
-
-	public Boolean isActive;
 
 	public String profileTemplateId;
 
@@ -72,14 +72,6 @@ public class UserProfile implements Serializable {
 		this.createdBy = createdBy;
 	}
 
-	public Boolean getIsActive() {
-		return isActive;
-	}
-
-	public void setIsActive(Boolean isActive) {
-		this.isActive = isActive;
-	}
-
 	public String getProfileTemplateId() {
 		return profileTemplateId;
 	}
@@ -101,5 +93,13 @@ public class UserProfile implements Serializable {
 	@JsonProperty("createdOn")
 	public void setCreatedOnString(String createdOn) {
 		this.createdOn = new DateTime(createdOn);
+	}
+
+	public String getDistinguishedName() {
+		return distinguishedName;
+	}
+
+	public void setDistinguishedName(String distinguishedName) {
+		this.distinguishedName = distinguishedName;
 	}
 }
