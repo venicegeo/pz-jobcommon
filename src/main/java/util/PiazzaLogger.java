@@ -107,7 +107,7 @@ public class PiazzaLogger {
 	public Client getClient() throws UnknownHostException {
 		Settings settings = Settings.settingsBuilder().put("cluster.name", clustername).build();
 		TransportClient transportClient = TransportClient.builder().settings(settings).build();
-		transportClient.addTransportAddress(new InetSocketTransportAddress(new InetSocketAddress(elasticSearchHost, elasticSearchPort)));
+		transportClient.addTransportAddress(new InetSocketTransportAddress(new InetSocketAddress(elasticSearchHost, 9300)));
 		return transportClient;
 	}
 
