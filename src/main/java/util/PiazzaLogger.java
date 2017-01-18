@@ -57,7 +57,7 @@ public class PiazzaLogger {
 	private Boolean logToConsole;
 	@Value("${LOGGER_INDEX}")
 	private String loggerIndexName;
-	@Value("${vcap.services.pz-elasticsearch.credentials.port}")
+	@Value("${vcap.services.pz-elasticsearch.credentials.transportClientPort}")
 	private Integer elasticSearchPort;
 	@Value("${vcap.services.pz-elasticsearch.credentials.hostname}")
 	private String elasticSearchHost;
@@ -107,7 +107,7 @@ public class PiazzaLogger {
 	public Client getClient() throws UnknownHostException {
 		Settings settings = Settings.settingsBuilder().put("cluster.name", clustername).build();
 		TransportClient transportClient = TransportClient.builder().settings(settings).build();
-		transportClient.addTransportAddress(new InetSocketTransportAddress(new InetSocketAddress(elasticSearchHost, 9300)));
+		transportClient.addTransportAddress(new InetSocketTransportAddress(new InetSocketAddress(elasticSearchHost, elasticSearchPort)));
 		return transportClient;
 	}
 
