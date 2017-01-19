@@ -55,9 +55,7 @@ public class Service {
 	@ApiModelProperty(required = false, value = "Provided by the System. The unique Id of the Service")
 	private String serviceId;
 
-	@ApiModelProperty(required = true, value = "The URL to the user Service to be executed")
-	@NotNull
-	@Size(min = 1)
+	@ApiModelProperty(required = true, value = "The URL to the user Service to be executed. This is *optional* for Task Managed services, and rqeuired for all other types.")
 	private String url;
 
 	@ApiModelProperty(required = true, value = "URL to the schema or contract to interface with the Service, such as a Swagger file, or documentation")
