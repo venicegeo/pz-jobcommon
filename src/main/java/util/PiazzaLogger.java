@@ -114,16 +114,12 @@ public class PiazzaLogger {
 		TransportClient transportClient = TransportClient.builder().settings(settings).build();
 		// Check if the ES Host property has multiple Hosts.
 		if (elasticSearchHost.contains(";")) {
-			// (In the form of "host:port;host2:port")
+			// (In the form of "host;host2;host3")
 			//
 			// Multiple hosts. Split the string and add each host.
 			List<String> hosts = Arrays.asList(elasticSearchHost.split(";"));
 			for (String host : hosts) {
-				// Get the Host and Port
-				String hostName = host.split(":")[0];
-				String port = host.split(":")[1];
-				transportClient
-						.addTransportAddress(new InetSocketTransportAddress(new InetSocketAddress(hostName, Integer.parseInt(port))));
+				transportClient.addTransportAddress(new InetSocketTransportAddress(new InetSocketAddress(host, elasticSearchPort)));
 			}
 		} else {
 			// (In the form of "host", and "port" as separate properties)
