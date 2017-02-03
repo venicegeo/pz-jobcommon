@@ -19,6 +19,10 @@ import java.lang.management.ManagementFactory;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.UnknownHostException;
+import java.util.Arrays;
+import java.util.List;
+
+import javax.annotation.PostConstruct;
 
 import org.elasticsearch.action.admin.indices.create.CreateIndexRequestBuilder;
 import org.elasticsearch.action.admin.indices.create.CreateIndexResponse;
@@ -35,13 +39,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
+
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
 import model.logger.AuditElement;
 import model.logger.LoggerPayload;
 import model.logger.MetricElement;
 import model.logger.Severity;
-import javax.annotation.PostConstruct;
 
 /**
  * PiazzaLogger is a class to write syslog logs into Elasticsearch
@@ -107,7 +112,26 @@ public class PiazzaLogger {
 	public Client getClient() throws UnknownHostException {
 		Settings settings = Settings.settingsBuilder().put("cluster.name", clustername).build();
 		TransportClient transportClient = TransportClient.builder().settings(settings).build();
-		transportClient.addTransportAddress(new InetSocketTransportAddress(new InetSocketAddress(elasticSearchHost, elasticSearchPort)));
+		// Check if the ES Host property has multiple Hosts.
+		if (elasticSearchHost.contains(";")) {
+			// (In the form of "host:port;host2:port")
+			//
+			// Multiple hosts. Split the string and add each host.
+			List<String> hosts = Arrays.asList(elasticSearchHost.split(";"));
+			for (String host : hosts) {
+				// Get the Host and Port
+				String hostName = host.split(":")[0];
+				String port = host.split(":")[1];
+				transportClient
+						.addTransportAddress(new InetSocketTransportAddress(new InetSocketAddress(hostName, Integer.parseInt(port))));
+			}
+		} else {
+			// (In the form of "host", and "port" as separate properties)
+			//
+			// Single host. Add this one host.
+			transportClient
+					.addTransportAddress(new InetSocketTransportAddress(new InetSocketAddress(elasticSearchHost, elasticSearchPort)));
+		}
 		return transportClient;
 	}
 
