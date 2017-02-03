@@ -122,7 +122,7 @@ public class PiazzaLogger {
 				transportClient.addTransportAddress(new InetSocketTransportAddress(new InetSocketAddress(host, elasticSearchPort)));
 			}
 		} else {
-			// (In the form of "host", and "port" as separate properties)
+			// (A single host)
 			//
 			// Single host. Add this one host.
 			transportClient
