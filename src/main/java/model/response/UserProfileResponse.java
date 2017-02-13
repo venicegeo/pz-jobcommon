@@ -16,6 +16,7 @@
 package model.response;
 
 import java.io.Serializable;
+import java.util.Map;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -33,7 +34,12 @@ public class UserProfileResponse extends PiazzaResponse implements Serializable 
 	public UserProfileData data = new UserProfileData();
 
 	public UserProfileResponse(UserProfile userProfile) {
-		data.setUserProfile(userProfile);
+		this.data.setUserProfile(userProfile);
+	}
+
+	public UserProfileResponse(UserProfile userProfile, Map<String, Integer> throttles) {
+		this(userProfile);
+		this.data.setThrottles(throttles);
 	}
 
 	public UserProfileResponse() {
@@ -43,8 +49,15 @@ public class UserProfileResponse extends PiazzaResponse implements Serializable 
 	 * Used to wrap the User Profile in an annotatable class.
 	 */
 	public class UserProfileData {
-		@ApiModelProperty(required = true, value = "The User Profile information.")
+		@ApiModelProperty(required = true, value = "User Profile information.")
 		private UserProfile userProfile;
+		/**
+		 * Corresponds with the map in the IDAM UserThrottles object. We wrap it here because that object contains the
+		 * username and other potential information, which we don't want duplicated here. In this case, we just want the
+		 * throttles.
+		 */
+		@ApiModelProperty(required = true, value = "User Throttle information")
+		public Map<String, Integer> throttles;
 
 		public UserProfile getUserProfile() {
 			return this.userProfile;
@@ -52,6 +65,14 @@ public class UserProfileResponse extends PiazzaResponse implements Serializable 
 
 		public void setUserProfile(UserProfile userProfile) {
 			this.userProfile = userProfile;
+		}
+
+		public Map<String, Integer> getThrottles() {
+			return this.throttles;
+		}
+
+		public void setThrottles(Map<String, Integer> throttles) {
+			this.throttles = throttles;
 		}
 	}
 }
