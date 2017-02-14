@@ -24,8 +24,6 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 
-import org.elasticsearch.action.admin.indices.create.CreateIndexRequestBuilder;
-import org.elasticsearch.action.admin.indices.create.CreateIndexResponse;
 import org.elasticsearch.action.index.IndexRequest;
 import org.elasticsearch.action.index.IndexResponse;
 import org.elasticsearch.client.Client;
@@ -74,6 +72,7 @@ public class PiazzaLogger {
 
 	private final static Logger LOGGER = LoggerFactory.getLogger(PiazzaLogger.class);
 	private final String LOG_SCHEMA = "LogData";
+	private boolean skipElasticSearchLogs = false;
 
 	/**
 	 * Default constructor, required for bean instantiation.
@@ -160,14 +159,8 @@ public class PiazzaLogger {
 	public boolean createIndexWithMapping(Client client, String indexName, String type, String mapping) {
 		try {
 			if (!indexExists(indexName)) {
-				CreateIndexRequestBuilder createIndexRequestBuilder = client.admin().indices().prepareCreate(indexName);
-				if (mapping != null) {
-					createIndexRequestBuilder.addMapping(type, mapping);
-				} else {
-					createIndexRequestBuilder.addMapping(type);
-				}
-				CreateIndexResponse response = createIndexRequestBuilder.execute().actionGet();
-				return response.isAcknowledged();
+				skipElasticSearchLogs =  true;
+				LOGGER.info(String.format("Piazza logger index %s does not exist, logging to Elasticsearch will not work. Restage the app after creating the index.", indexName));
 			}
 		} catch (Exception exception) {
 			LOGGER.info(String.format("Unable to create Elasticsearch index %s, it should already exist, error", indexName), exception);
@@ -280,22 +273,24 @@ public class PiazzaLogger {
 		}
 
 		// saving log to elastic search
-		String loggerPayloadJson = "";
-		try {
-			loggerPayloadJson = new ObjectMapper().writeValueAsString(loggerPayload);
-		} catch (JsonProcessingException e) {
-			LOGGER.error("Failed to serialize the log payload", e);
-		}
+		if (!skipElasticSearchLogs) {
+			String loggerPayloadJson = "";
+			try {
+				loggerPayloadJson = new ObjectMapper().writeValueAsString(loggerPayload);
+			} catch (JsonProcessingException e) {
+				LOGGER.error("Failed to serialize the log payload", e);
+			}
 
-		LOGGER.debug(String.format("Writing the following log object to elastic search:%n%s", loggerPayloadJson));
+			LOGGER.debug(String.format("Writing the following log object to elastic search:%n%s", loggerPayloadJson));
 
-		try {
-			// Index to elasticsearch
-			IndexRequest indexRequest = new IndexRequest(loggerIndexName, LOG_SCHEMA);
-			indexRequest.source(loggerPayloadJson);
-			IndexResponse esResponse = elasticClient.index(indexRequest).actionGet();
-		} catch (Exception e) {
-			LOGGER.info(String.format("Unable to index logs into Elasticsearch: %s", e.getMessage()), e);
+			try {
+				// Index to elasticsearch
+				IndexRequest indexRequest = new IndexRequest(loggerIndexName, LOG_SCHEMA);
+				indexRequest.source(loggerPayloadJson);
+				IndexResponse esResponse = elasticClient.index(indexRequest).actionGet();
+			} catch (Exception e) {
+				LOGGER.info(String.format("Unable to index logs into Elasticsearch: %s", e.getMessage()), e);
+			}
 		}
 	}
 }
