@@ -64,7 +64,6 @@ public class UtilityTest {
 	public void setup() {
 		MockitoAnnotations.initMocks(this);
 		ReflectionTestUtils.setField(logger, "logToConsole", true);
-		ReflectionTestUtils.setField(uuidFactory, "restTemplate", restTemplate);
 	}
 
 	/**
@@ -92,20 +91,9 @@ public class UtilityTest {
 	@SuppressWarnings("unchecked")
 	@Test
 	public void testUuid() {
-		// Mock
-		UUID mockUuid = new UUID();
-		mockUuid.setData(new ArrayList<String>());
-		mockUuid.getData().add("123456");
-		when(restTemplate.postForEntity(anyString(), any(), eq(UUID.class), anyMap()))
-				.thenReturn(new ResponseEntity<UUID>(mockUuid, HttpStatus.OK));
-
 		// Test
 		String uuid = uuidFactory.getUUID();
-		assertTrue(uuid.equals("123456"));
+		assertTrue(uuid != null);
 
-		// Mock local generation
-		Mockito.doThrow(new RestClientException("Test")).when(restTemplate).postForEntity(anyString(), any(), eq(UUID.class), anyMap());
-		uuid = uuidFactory.getUUID();
-		assertTrue(uuid.isEmpty() == false);
 	}
 }
