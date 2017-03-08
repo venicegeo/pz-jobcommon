@@ -11,7 +11,7 @@
 		<java.version>1.8</java.version>
 		<geotools.version>14.2</geotools.version>
 		<jackson.version>2.6.3</jackson.version>
-		<spring.version>4.3.3.RELEASE</spring.version>
+		<spring.version>4.3.5.RELEASE</spring.version>
 	</properties>
 	
 	<repositories>
