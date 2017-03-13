@@ -52,7 +52,11 @@ public class GeoToolsUtil {
 		builder.setNamespaceURI(featureType.getName().getNamespaceURI());
 		builder.setCRS(featureType.getCoordinateReferenceSystem());
 		builder.addAll(featureType.getAttributeDescriptors());
-		builder.setDefaultGeometry(featureType.getGeometryDescriptor().getLocalName());
+		if (featureType.getGeometryDescriptor() != null) {
+			builder.setDefaultGeometry(featureType.getGeometryDescriptor().getLocalName());
+		} else {
+			builder.setDefaultGeometry(null);
+		}
 		return builder.buildFeatureType();
 	}
 
