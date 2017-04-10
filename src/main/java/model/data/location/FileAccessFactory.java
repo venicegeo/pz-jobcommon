@@ -19,10 +19,12 @@ import java.io.InputStream;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import com.amazonaws.AmazonClientException;
 import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.regions.Region;
 import com.amazonaws.regions.Regions;
+import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.AmazonS3EncryptionClient;
 import com.amazonaws.services.s3.model.CryptoConfiguration;
@@ -36,7 +38,7 @@ import exception.InvalidInputException;
  * Factory class that helps with the obtaining of Files represented by FileLocation interfaces; such as S3 files or
  * folder shares.
  * 
- * @author Patrick.Doody
+ * @author Patrick.Doody, Sonny.Saniev
  * 
  */
 public class FileAccessFactory {
@@ -45,11 +47,9 @@ public class FileAccessFactory {
 	private String s3EncryptKey = "";
 
 	private final static Logger LOGGER = LoggerFactory.getLogger(FileAccessFactory.class);
-	
+
 	private final String PROTOCOL_PREFIX = "https://";
 
-	private static AmazonS3Client s3Client;
-	
 	public FileAccessFactory() {
 
 	}
@@ -60,13 +60,22 @@ public class FileAccessFactory {
 		this.s3EncryptKey = s3EncryptKey;
 	}
 
+	public FileAccessFactory(String s3AccessKey, String s3PrivateKey) {
+		this.s3AccessKey = s3AccessKey;
+		this.s3PrivateKey = s3PrivateKey;
+		this.s3EncryptKey = null;
+	}
+
 	/**
-	 * Sets the AWS Credentials, required for pulling S3 files.
+	 * Sets the AWS Credentials, required for pulling S3 files. If encryption is required, then the key should be
+	 * specified. If encryption is not required, then null should be specified as this value.
 	 * 
 	 * @param accessKey
 	 *            Access key
 	 * @param privateKey
 	 *            Private key
+	 * @param s3EncryptKey
+	 *            The encryption key. If specified, then encryption will be used. Set to null if not desired.
 	 */
 	public void setS3Credentials(String s3AccessKey, String s3PrivateKey, String s3EncryptKey) {
 		this.s3AccessKey = s3AccessKey;
@@ -102,23 +111,29 @@ public class FileAccessFactory {
 	}
 
 	/**
-	 * Gets the input stream for an S3 file store. This will stream the bytes from S3. Null, or exception will be thrown 
+	 * Gets the input stream for an S3 file store. This will stream the bytes from S3. Null, or exception will be thrown
 	 * if an error occurs during acquisition.
 	 * 
-	 * The S3 Credentials MUST be populated using the setCredentials() method before executing this call, or a Credentials
-	 * exception is likely to be thrown by S3.
+	 * The S3 Credentials MUST be populated using the setCredentials() method before executing this call, or a
+	 * Credentials exception is likely to be thrown by S3.
 	 */
 	@JsonIgnore
 	public InputStream getS3File(FileLocation fileLocation, String accessKey, String privateKey, String s3EncryptKey) {
 		// Get the file from S3. Connect to S3 Bucket. Only apply credentials if they are present.
+		AmazonS3Client s3Client = null;
 		S3FileStore fileStore = (S3FileStore) fileLocation;
 		if (accessKey.isEmpty() || privateKey.isEmpty()) {
 			s3Client = new AmazonS3Client();
 		} else {
-			KMSEncryptionMaterialsProvider materialProvider = new KMSEncryptionMaterialsProvider(s3EncryptKey);
+			// If an encryption key was provided, use the encrypted client
 			BasicAWSCredentials credentials = new BasicAWSCredentials(accessKey, privateKey);
-			s3Client = new AmazonS3EncryptionClient(credentials, materialProvider,
-					new CryptoConfiguration().withKmsRegion(Regions.US_EAST_1)).withRegion(Region.getRegion(Regions.US_EAST_1));
+			if (s3EncryptKey != null) {
+				KMSEncryptionMaterialsProvider materialProvider = new KMSEncryptionMaterialsProvider(s3EncryptKey);
+				s3Client = new AmazonS3EncryptionClient(credentials, materialProvider,
+						new CryptoConfiguration().withKmsRegion(Regions.US_EAST_1)).withRegion(Region.getRegion(Regions.US_EAST_1));
+			} else {
+				s3Client = new AmazonS3Client(credentials);
+			}
 		}
 		S3Object s3Object = s3Client.getObject(fileStore.getBucketName(), fileStore.getFileName());
 		return s3Object.getObjectContent();
@@ -136,8 +151,8 @@ public class FileAccessFactory {
 			return ((FolderShare) fileLocation).getFilePath();
 		} else if (fileLocation instanceof S3FileStore) {
 			S3FileStore s3FileStore = ((S3FileStore) fileLocation);
-			return String.format("%s%s/%s/%s", PROTOCOL_PREFIX, s3FileStore.getDomainName(),
-					s3FileStore.getBucketName(), s3FileStore.getFileName());
+			return String.format("%s%s/%s/%s", PROTOCOL_PREFIX, s3FileStore.getDomainName(), s3FileStore.getBucketName(),
+					s3FileStore.getFileName());
 		} else {
 			throw new InvalidInputException("Unsupported Object type.");
 		}
