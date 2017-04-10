@@ -59,12 +59,17 @@ public class FileAccessTest {
 		FileAccessFactory factory = new FileAccessFactory();
 		assertTrue(ReflectionTestUtils.getField(factory, "s3AccessKey").equals(""));
 		assertTrue(ReflectionTestUtils.getField(factory, "s3PrivateKey").equals(""));
-		factory = new FileAccessFactory("access", "private");
+		assertTrue(ReflectionTestUtils.getField(factory, "s3EncryptKey").equals(""));
+		
+		factory = new FileAccessFactory("access", "private", "encrypt");
 		assertTrue(ReflectionTestUtils.getField(factory, "s3AccessKey").equals("access"));
 		assertTrue(ReflectionTestUtils.getField(factory, "s3PrivateKey").equals("private"));
-		factory.setS3Credentials("newAccess", "newPrivate");
+		assertTrue(ReflectionTestUtils.getField(factory, "s3EncryptKey").equals("encrypt"));
+		
+		factory.setS3Credentials("newAccess", "newPrivate", "newEncrypt");
 		assertTrue(ReflectionTestUtils.getField(factory, "s3AccessKey").equals("newAccess"));
 		assertTrue(ReflectionTestUtils.getField(factory, "s3PrivateKey").equals("newPrivate"));
+		assertTrue(ReflectionTestUtils.getField(factory, "s3EncryptKey").equals("newEncrypt"));
 	}
 
 	/**
