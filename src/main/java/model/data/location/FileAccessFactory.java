@@ -42,7 +42,7 @@ import exception.InvalidInputException;
 public class FileAccessFactory {
 	private String s3AccessKey = "";
 	private String s3PrivateKey = "";
-	private String kms_cmk_id = "";
+	private String s3EncryptKey = "";
 
 	private final static Logger LOGGER = LoggerFactory.getLogger(FileAccessFactory.class);
 	
@@ -54,10 +54,10 @@ public class FileAccessFactory {
 
 	}
 
-	public FileAccessFactory(String s3AccessKey, String s3PrivateKey, String kms_cmk_id) {
+	public FileAccessFactory(String s3AccessKey, String s3PrivateKey, String s3EncryptKey) {
 		this.s3AccessKey = s3AccessKey;
 		this.s3PrivateKey = s3PrivateKey;
-		this.kms_cmk_id = kms_cmk_id;
+		this.s3EncryptKey = s3EncryptKey;
 	}
 
 	/**
@@ -68,10 +68,10 @@ public class FileAccessFactory {
 	 * @param privateKey
 	 *            Private key
 	 */
-	public void setS3Credentials(String s3AccessKey, String s3PrivateKey, String kms_cmk_id) {
+	public void setS3Credentials(String s3AccessKey, String s3PrivateKey, String s3EncryptKey) {
 		this.s3AccessKey = s3AccessKey;
 		this.s3PrivateKey = s3PrivateKey;
-		this.kms_cmk_id = kms_cmk_id;
+		this.s3EncryptKey = s3EncryptKey;
 	}
 
 	/**
@@ -86,7 +86,7 @@ public class FileAccessFactory {
 			return ((FolderShare) fileLocation).getFile();
 		} else if (fileLocation instanceof S3FileStore) {
 			try {
-				return getS3File(fileLocation, s3AccessKey, s3PrivateKey, kms_cmk_id);
+				return getS3File(fileLocation, s3AccessKey, s3PrivateKey, s3EncryptKey);
 			} catch (AmazonClientException exception) {
 				// Add helpful text to Exception
 				String systemError = String.format(
@@ -109,13 +109,13 @@ public class FileAccessFactory {
 	 * exception is likely to be thrown by S3.
 	 */
 	@JsonIgnore
-	public InputStream getS3File(FileLocation fileLocation, String accessKey, String privateKey, String kms_cmk_id) {
+	public InputStream getS3File(FileLocation fileLocation, String accessKey, String privateKey, String s3EncryptKey) {
 		// Get the file from S3. Connect to S3 Bucket. Only apply credentials if they are present.
 		S3FileStore fileStore = (S3FileStore) fileLocation;
 		if (accessKey.isEmpty() || privateKey.isEmpty()) {
 			s3Client = new AmazonS3Client();
 		} else {
-			KMSEncryptionMaterialsProvider materialProvider = new KMSEncryptionMaterialsProvider(kms_cmk_id);
+			KMSEncryptionMaterialsProvider materialProvider = new KMSEncryptionMaterialsProvider(s3EncryptKey);
 			BasicAWSCredentials credentials = new BasicAWSCredentials(accessKey, privateKey);
 			s3Client = new AmazonS3EncryptionClient(credentials, materialProvider,
 					new CryptoConfiguration().withKmsRegion(Regions.US_EAST_1)).withRegion(Region.getRegion(Regions.US_EAST_1));
