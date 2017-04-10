@@ -19,11 +19,14 @@ import java.io.InputStream;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import com.amazonaws.AmazonClientException;
 import com.amazonaws.auth.BasicAWSCredentials;
-import com.amazonaws.services.s3.AmazonS3;
+import com.amazonaws.regions.Region;
+import com.amazonaws.regions.Regions;
 import com.amazonaws.services.s3.AmazonS3Client;
+import com.amazonaws.services.s3.AmazonS3EncryptionClient;
+import com.amazonaws.services.s3.model.CryptoConfiguration;
+import com.amazonaws.services.s3.model.KMSEncryptionMaterialsProvider;
 import com.amazonaws.services.s3.model.S3Object;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -39,18 +42,22 @@ import exception.InvalidInputException;
 public class FileAccessFactory {
 	private String s3AccessKey = "";
 	private String s3PrivateKey = "";
+	private String kms_cmk_id = "";
 
 	private final static Logger LOGGER = LoggerFactory.getLogger(FileAccessFactory.class);
 	
 	private final String PROTOCOL_PREFIX = "https://";
 
+	private static AmazonS3Client s3Client;
+	
 	public FileAccessFactory() {
 
 	}
 
-	public FileAccessFactory(String s3AccessKey, String s3PrivateKey) {
+	public FileAccessFactory(String s3AccessKey, String s3PrivateKey, String kms_cmk_id) {
 		this.s3AccessKey = s3AccessKey;
 		this.s3PrivateKey = s3PrivateKey;
+		this.kms_cmk_id = kms_cmk_id;
 	}
 
 	/**
@@ -61,9 +68,10 @@ public class FileAccessFactory {
 	 * @param privateKey
 	 *            Private key
 	 */
-	public void setS3Credentials(String s3AccessKey, String s3PrivateKey) {
+	public void setS3Credentials(String s3AccessKey, String s3PrivateKey, String kms_cmk_id) {
 		this.s3AccessKey = s3AccessKey;
 		this.s3PrivateKey = s3PrivateKey;
+		this.kms_cmk_id = kms_cmk_id;
 	}
 
 	/**
@@ -78,14 +86,15 @@ public class FileAccessFactory {
 			return ((FolderShare) fileLocation).getFile();
 		} else if (fileLocation instanceof S3FileStore) {
 			try {
-				return getS3File(fileLocation, s3AccessKey, s3PrivateKey);
+				return getS3File(fileLocation, s3AccessKey, s3PrivateKey, kms_cmk_id);
 			} catch (AmazonClientException exception) {
 				// Add helpful text to Exception
-				String error = String.format(
+				String systemError = String.format(
 						"Could not retrieve File Bytes for S3 File. Failed with Message : %s. AWS Client Credentials may be incorrect or not specified.",
 						exception.getMessage());
-				LOGGER.error(error, exception);
-				throw new AmazonClientException(error);
+				String userError = "There was an issue pushing the file to Piazza S3 Bucket. Please contact a Piazza administrator for details.";
+				LOGGER.error(systemError, exception);
+				throw new AmazonClientException(userError);
 			}
 		} else {
 			throw new InvalidInputException("Unsupported Object type.");
@@ -93,25 +102,25 @@ public class FileAccessFactory {
 	}
 
 	/**
-	 * Gets the input stream for an S3 file store. This will stream the bytes from S3. Null, or exception will be thrown
+	 * Gets the input stream for an S3 file store. This will stream the bytes from S3. Null, or exception will be thrown 
 	 * if an error occurs during acquisition.
 	 * 
-	 * The S3 Credentials MUST be populated using the setCredentials() method before executing this call, or a
-	 * Credentials exception is likely to be thrown by S3.
+	 * The S3 Credentials MUST be populated using the setCredentials() method before executing this call, or a Credentials
+	 * exception is likely to be thrown by S3.
 	 */
 	@JsonIgnore
-	public InputStream getS3File(FileLocation fileLocation, String accessKey, String privateKey) {
+	public InputStream getS3File(FileLocation fileLocation, String accessKey, String privateKey, String kms_cmk_id) {
+		// Get the file from S3. Connect to S3 Bucket. Only apply credentials if they are present.
 		S3FileStore fileStore = (S3FileStore) fileLocation;
-		// Get the file from S3. Connect to S3 Bucket. Only apply credentials if
-		// they are present.
-		AmazonS3 client;
-		if ((accessKey.isEmpty()) && (privateKey.isEmpty())) {
-			client = new AmazonS3Client();
+		if (accessKey.isEmpty() || privateKey.isEmpty()) {
+			s3Client = new AmazonS3Client();
 		} else {
+			KMSEncryptionMaterialsProvider materialProvider = new KMSEncryptionMaterialsProvider(kms_cmk_id);
 			BasicAWSCredentials credentials = new BasicAWSCredentials(accessKey, privateKey);
-			client = new AmazonS3Client(credentials);
+			s3Client = new AmazonS3EncryptionClient(credentials, materialProvider,
+					new CryptoConfiguration().withKmsRegion(Regions.US_EAST_1)).withRegion(Region.getRegion(Regions.US_EAST_1));
 		}
-		S3Object s3Object = client.getObject(fileStore.getBucketName(), fileStore.getFileName());
+		S3Object s3Object = s3Client.getObject(fileStore.getBucketName(), fileStore.getFileName());
 		return s3Object.getObjectContent();
 	}
 
@@ -127,11 +136,10 @@ public class FileAccessFactory {
 			return ((FolderShare) fileLocation).getFilePath();
 		} else if (fileLocation instanceof S3FileStore) {
 			S3FileStore s3FileStore = ((S3FileStore) fileLocation);
-			return String.format("%s%s/%s/%s", PROTOCOL_PREFIX, s3FileStore.getDomainName(), s3FileStore.getBucketName(),
-					s3FileStore.getFileName());
+			return String.format("%s%s/%s/%s", PROTOCOL_PREFIX, s3FileStore.getDomainName(),
+					s3FileStore.getBucketName(), s3FileStore.getFileName());
 		} else {
 			throw new InvalidInputException("Unsupported Object type.");
 		}
 	}
-
 }
