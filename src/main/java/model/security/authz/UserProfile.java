@@ -35,17 +35,23 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class UserProfile implements Serializable {
 
-	public String username;
+	private String username;
 
-	public String distinguishedName;
+	private String distinguishedName;
 
 	@JsonIgnore
-	public DateTime createdOn;
+	private DateTime createdOn;
 
-	public String createdBy;
+	private String createdBy;
 
-	public String profileTemplateId;
+	private String profileTemplateId;
 
+	private String adminCode;
+	
+	private String dutyCode;
+	
+	private String country;
+	
 	public String getUsername() {
 		return username;
 	}
@@ -101,5 +107,29 @@ public class UserProfile implements Serializable {
 
 	public void setDistinguishedName(String distinguishedName) {
 		this.distinguishedName = distinguishedName;
+	}
+
+	public String getAdminCode() {
+		return adminCode;
+	}
+
+	public void setAdminCode(String adminCode) {
+		this.adminCode = adminCode;
+	}
+
+	public String getDutyCode() {
+		return dutyCode;
+	}
+
+	public void setDutyCode(String dutyCode) {
+		this.dutyCode = dutyCode;
+	}
+
+	public String getCountry() {
+		return country;
+	}
+
+	public void setCountry(String country) {
+		this.country = country;
 	}
 }
