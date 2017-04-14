@@ -52,6 +52,8 @@ public class UserProfile implements Serializable {
 	
 	private String country;
 	
+	private boolean isNPE;
+	
 	public String getUsername() {
 		return username;
 	}
@@ -131,5 +133,13 @@ public class UserProfile implements Serializable {
 
 	public void setCountry(String country) {
 		this.country = country;
+	}
+
+	public boolean isNPE() {
+		return isNPE;
+	}
+
+	public void setNPE(boolean isNPE) {
+		this.isNPE = isNPE;
 	}
 }
