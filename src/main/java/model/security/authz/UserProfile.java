@@ -35,6 +35,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class UserProfile implements Serializable {
 
+	private static final long serialVersionUID = 1L;
+
 	private String username;
 
 	private String distinguishedName;
@@ -141,5 +143,12 @@ public class UserProfile implements Serializable {
 
 	public void setNPE(boolean isNPE) {
 		this.isNPE = isNPE;
+	}
+
+	@Override
+	public String toString() {
+		return "UserProfile [username=" + username + ", distinguishedName=" + distinguishedName + ", createdOn="
+				+ createdOn + ", createdBy=" + createdBy + ", profileTemplateId=" + profileTemplateId + ", adminCode="
+				+ adminCode + ", dutyCode=" + dutyCode + ", country=" + country + ", isNPE=" + isNPE + "]";
 	}
 }
