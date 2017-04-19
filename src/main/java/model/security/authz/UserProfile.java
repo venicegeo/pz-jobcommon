@@ -35,22 +35,32 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class UserProfile implements Serializable {
 
-	public String username;
+	private static final long serialVersionUID = 1L;
 
-	public String distinguishedName;
+	private String username;
+
+	private String distinguishedName;
 
 	@JsonIgnore
-	public DateTime createdOn;
+	private DateTime createdOn;
 
-	public String createdBy;
+	private String createdBy;
 
-	public String profileTemplateId;
+	private String profileTemplateId;
 
+	private String adminCode;
+	
+	private String dutyCode;
+	
+	private String country;
+	
+	private boolean isNPE;
+	
 	public String getUsername() {
 		return username;
 	}
 
-	public void setUsername(String username) {
+	public void setUsername(final String username) {
 		this.username = username;
 	}
 
@@ -60,7 +70,7 @@ public class UserProfile implements Serializable {
 	}
 
 	@JsonIgnore
-	public void setCreatedOn(DateTime createdOn) {
+	public void setCreatedOn(final DateTime createdOn) {
 		this.createdOn = createdOn;
 	}
 
@@ -68,7 +78,7 @@ public class UserProfile implements Serializable {
 		return createdBy;
 	}
 
-	public void setCreatedBy(String createdBy) {
+	public void setCreatedBy(final String createdBy) {
 		this.createdBy = createdBy;
 	}
 
@@ -76,7 +86,7 @@ public class UserProfile implements Serializable {
 		return profileTemplateId;
 	}
 
-	public void setProfileTemplateId(String profileTemplateId) {
+	public void setProfileTemplateId(final String profileTemplateId) {
 		this.profileTemplateId = profileTemplateId;
 	}
 
@@ -91,7 +101,7 @@ public class UserProfile implements Serializable {
 	}
 
 	@JsonProperty("createdOn")
-	public void setCreatedOnString(String createdOn) {
+	public void setCreatedOnString(final String createdOn) {
 		this.createdOn = new DateTime(createdOn);
 	}
 
@@ -99,7 +109,46 @@ public class UserProfile implements Serializable {
 		return distinguishedName;
 	}
 
-	public void setDistinguishedName(String distinguishedName) {
+	public void setDistinguishedName(final String distinguishedName) {
 		this.distinguishedName = distinguishedName;
+	}
+
+	public String getAdminCode() {
+		return adminCode;
+	}
+
+	public void setAdminCode(final String adminCode) {
+		this.adminCode = adminCode;
+	}
+
+	public String getDutyCode() {
+		return dutyCode;
+	}
+
+	public void setDutyCode(final String dutyCode) {
+		this.dutyCode = dutyCode;
+	}
+
+	public String getCountry() {
+		return country;
+	}
+
+	public void setCountry(final String country) {
+		this.country = country;
+	}
+
+	public boolean isNPE() {
+		return isNPE;
+	}
+
+	public void setNPE(final boolean isNPE) {
+		this.isNPE = isNPE;
+	}
+
+	@Override
+	public String toString() {
+		return "UserProfile [username=" + username + ", distinguishedName=" + distinguishedName + ", createdOn="
+				+ createdOn + ", createdBy=" + createdBy + ", profileTemplateId=" + profileTemplateId + ", adminCode="
+				+ adminCode + ", dutyCode=" + dutyCode + ", country=" + country + ", isNPE=" + isNPE + "]";
 	}
 }
