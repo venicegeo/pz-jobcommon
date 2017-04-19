@@ -60,7 +60,7 @@ public class UserProfile implements Serializable {
 		return username;
 	}
 
-	public void setUsername(String username) {
+	public void setUsername(final String username) {
 		this.username = username;
 	}
 
@@ -70,7 +70,7 @@ public class UserProfile implements Serializable {
 	}
 
 	@JsonIgnore
-	public void setCreatedOn(DateTime createdOn) {
+	public void setCreatedOn(final DateTime createdOn) {
 		this.createdOn = createdOn;
 	}
 
@@ -78,7 +78,7 @@ public class UserProfile implements Serializable {
 		return createdBy;
 	}
 
-	public void setCreatedBy(String createdBy) {
+	public void setCreatedBy(final String createdBy) {
 		this.createdBy = createdBy;
 	}
 
@@ -86,7 +86,7 @@ public class UserProfile implements Serializable {
 		return profileTemplateId;
 	}
 
-	public void setProfileTemplateId(String profileTemplateId) {
+	public void setProfileTemplateId(final String profileTemplateId) {
 		this.profileTemplateId = profileTemplateId;
 	}
 
@@ -101,7 +101,7 @@ public class UserProfile implements Serializable {
 	}
 
 	@JsonProperty("createdOn")
-	public void setCreatedOnString(String createdOn) {
+	public void setCreatedOnString(final String createdOn) {
 		this.createdOn = new DateTime(createdOn);
 	}
 
@@ -109,7 +109,7 @@ public class UserProfile implements Serializable {
 		return distinguishedName;
 	}
 
-	public void setDistinguishedName(String distinguishedName) {
+	public void setDistinguishedName(final String distinguishedName) {
 		this.distinguishedName = distinguishedName;
 	}
 
@@ -117,7 +117,7 @@ public class UserProfile implements Serializable {
 		return adminCode;
 	}
 
-	public void setAdminCode(String adminCode) {
+	public void setAdminCode(final String adminCode) {
 		this.adminCode = adminCode;
 	}
 
@@ -125,7 +125,7 @@ public class UserProfile implements Serializable {
 		return dutyCode;
 	}
 
-	public void setDutyCode(String dutyCode) {
+	public void setDutyCode(final String dutyCode) {
 		this.dutyCode = dutyCode;
 	}
 
@@ -133,7 +133,7 @@ public class UserProfile implements Serializable {
 		return country;
 	}
 
-	public void setCountry(String country) {
+	public void setCountry(final String country) {
 		this.country = country;
 	}
 
@@ -141,7 +141,7 @@ public class UserProfile implements Serializable {
 		return isNPE;
 	}
 
-	public void setNPE(boolean isNPE) {
+	public void setNPE(final boolean isNPE) {
 		this.isNPE = isNPE;
 	}
 
