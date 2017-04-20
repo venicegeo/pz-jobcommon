@@ -44,6 +44,9 @@ public class UserProfile implements Serializable {
 	@JsonIgnore
 	private DateTime createdOn;
 
+	@JsonIgnore
+	private DateTime lastUpdatedOn;
+
 	private String createdBy;
 
 	private String profileTemplateId;
@@ -55,7 +58,7 @@ public class UserProfile implements Serializable {
 	private String country;
 	
 	private boolean isNPE;
-	
+
 	public String getUsername() {
 		return username;
 	}
@@ -74,6 +77,16 @@ public class UserProfile implements Serializable {
 		this.createdOn = createdOn;
 	}
 
+	@JsonIgnore
+	public DateTime getLastUpdatedOn() {
+		return lastUpdatedOn;
+	}
+
+	@JsonIgnore
+	public void setLastUpdatedOn(final DateTime lastUpdatedOn) {
+		this.lastUpdatedOn = lastUpdatedOn;
+	}
+	
 	public String getCreatedBy() {
 		return createdBy;
 	}
@@ -103,6 +116,21 @@ public class UserProfile implements Serializable {
 	@JsonProperty("createdOn")
 	public void setCreatedOnString(final String createdOn) {
 		this.createdOn = new DateTime(createdOn);
+	}
+
+	@JsonProperty("lastUpdatedOn")
+	public String getLastUpdatedOnString() {
+		if (lastUpdatedOn != null) {
+			// Defaults to ISO8601
+			return lastUpdatedOn.toString();
+		} else {
+			return null;
+		}
+	}
+
+	@JsonProperty("lastUpdatedOn")
+	public void setLastUpdatedOnString(final String lastUpdatedOn) {
+		this.lastUpdatedOn = new DateTime(lastUpdatedOn);
 	}
 
 	public String getDistinguishedName() {
@@ -148,7 +176,8 @@ public class UserProfile implements Serializable {
 	@Override
 	public String toString() {
 		return "UserProfile [username=" + username + ", distinguishedName=" + distinguishedName + ", createdOn="
-				+ createdOn + ", createdBy=" + createdBy + ", profileTemplateId=" + profileTemplateId + ", adminCode="
-				+ adminCode + ", dutyCode=" + dutyCode + ", country=" + country + ", isNPE=" + isNPE + "]";
+				+ createdOn + ", lastUpdatedOn=" + lastUpdatedOn + ", createdBy=" + createdBy + ", profileTemplateId="
+				+ profileTemplateId + ", adminCode=" + adminCode + ", dutyCode=" + dutyCode + ", country=" + country
+				+ ", isNPE=" + isNPE + "]";
 	}
 }
