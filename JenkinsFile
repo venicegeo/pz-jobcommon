@@ -13,8 +13,9 @@ node ('sl61'){
     }
 
     stage("OWASP Scan") {
-      sh '/opt/dependency-check/bin/dependency-check.sh --project "PZ Job Common" --scan "." --format "XML" --enableExperimental'
-      sh "/bin/curl -v --insecure -H 'Accept: application/json' -X POST --form file=@dependency-check-report.xml https://threadfix.devops.geointservices.io/rest/applications/10/upload?apiKey=$THREADFIXKEY"
+      sh "ls -al /jslave/workspace/venice/piazza/pz-jobcommon-pipeline/.m2/repository/org/venice/piazza/pz-jobcommon/LATEST"
+      //sh '/opt/dependency-check/bin/dependency-check.sh --project "PZ Job Common" --scan "." --format "XML" --enableExperimental'
+      //sh "/bin/curl -v --insecure -H 'Accept: application/json' -X POST --form file=@dependency-check-report.xml https://threadfix.devops.geointservices.io/rest/applications/10/upload?apiKey=$THREADFIXKEY"
     }
   }
 }
