@@ -1,6 +1,11 @@
-node ('sl61'){
+node (){
   git url: 'https://github.com/venicegeo/pz-jobcommon', branch: 'master'
   withCredentials([[$class: 'StringBinding', credentialsId: '978C467A-2B26-47AE-AD2F-4AFD5A4AF695', variable: 'THREADFIXKEY']]) {
+
+    stage("Clean") {
+      deleteDir()
+    }
+
     stage("Fortify Scan") {
       def mvnHome = tool 'M3'
       withEnv(["HOME=${pwd()}"]) {
@@ -13,7 +18,8 @@ node ('sl61'){
     }
 
     stage("OWASP Scan") {
-      sh "ls -al /jslave/workspace/venice/piazza/pz-jobcommon-pipeline/.m2/repository/org/venice/piazza/pz-jobcommon/LATEST"
+      sh "ls -al /jslave/workspace/venice/piazza/pz-jobcommon-pipeline/.m2/repository/org/venice/piazza/pz-jobcommon/LATEST/pz-jobcommon-LATEST.jar"
+      sh "file /jslave/workspace/venice/piazza/pz-jobcommon-pipeline/.m2/repository/org/venice/piazza/pz-jobcommon/LATEST/pz-jobcommon-LATEST.jar"
       sh '/opt/dependency-check/bin/dependency-check.sh --project "PZ Job Common" --scan "." --format "XML" --enableExperimental'
       //sh "/bin/curl -v --insecure -H 'Accept: application/json' -X POST --form file=@dependency-check-report.xml https://threadfix.devops.geointservices.io/rest/applications/10/upload?apiKey=$THREADFIXKEY"
     }
