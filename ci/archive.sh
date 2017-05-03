@@ -1,8 +1,8 @@
 #!/bin/bash -ex
 
-pushd `dirname $0`/.. > /dev/null
 root=$(pwd -P)
 popd > /dev/null
+mkdir -p $root/.m2/repository
 
 # gather some data about the repo
 source $root/ci/vars.sh
@@ -11,7 +11,8 @@ source $root/ci/vars.sh
 src=$root/target/pz-jobcommon-LATEST.jar
 
 # Build Spring-boot JAR
-[ -f $src ] || mvn clean package -U
+[ -f $src ] || mvn clean package -U -Dmaven.repo.local="$root/.m2/repository"
 
 # stage the artifact for a mvn deploy
 mv $src $root/$APP.$EXT
+
