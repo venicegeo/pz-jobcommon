@@ -1,7 +1,6 @@
 #!/bin/bash -ex
 
 root=$(pwd -P)
-popd > /dev/null
 mkdir -p $root/.m2/repository
 
 # gather some data about the repo
