@@ -42,9 +42,9 @@ import exception.InvalidInputException;
  * 
  */
 public class FileAccessFactory {
-	private String s3AccessKey = "";
-	private String s3PrivateKey = "";
-	private String s3EncryptKey = "";
+	private String s3ak = "";
+	private String s3pk = "";
+	private String s3ek = "";
 
 	private final static Logger LOGGER = LoggerFactory.getLogger(FileAccessFactory.class);
 
@@ -55,15 +55,15 @@ public class FileAccessFactory {
 	}
 
 	public FileAccessFactory(String s3AccessKey, String s3PrivateKey, String s3EncryptKey) {
-		this.s3AccessKey = s3AccessKey;
-		this.s3PrivateKey = s3PrivateKey;
-		this.s3EncryptKey = s3EncryptKey;
+		this.s3ak = s3AccessKey;
+		this.s3pk = s3PrivateKey;
+		this.s3ek = s3EncryptKey;
 	}
 
 	public FileAccessFactory(String s3AccessKey, String s3PrivateKey) {
-		this.s3AccessKey = s3AccessKey;
-		this.s3PrivateKey = s3PrivateKey;
-		this.s3EncryptKey = null;
+		this.s3ak = s3AccessKey;
+		this.s3pk = s3PrivateKey;
+		this.s3ek = null;
 	}
 
 	/**
@@ -78,9 +78,9 @@ public class FileAccessFactory {
 	 *            The encryption key. If specified, then encryption will be used. Set to null if not desired.
 	 */
 	public void setS3Credentials(String s3AccessKey, String s3PrivateKey, String s3EncryptKey) {
-		this.s3AccessKey = s3AccessKey;
-		this.s3PrivateKey = s3PrivateKey;
-		this.s3EncryptKey = s3EncryptKey;
+		this.s3ak = s3AccessKey;
+		this.s3pk = s3PrivateKey;
+		this.s3ek = s3EncryptKey;
 	}
 
 	/**
@@ -95,7 +95,7 @@ public class FileAccessFactory {
 			return ((FolderShare) fileLocation).getFile();
 		} else if (fileLocation instanceof S3FileStore) {
 			try {
-				return getS3File(fileLocation, s3AccessKey, s3PrivateKey, s3EncryptKey);
+				return getS3File(fileLocation, s3ak, s3pk, s3ek);
 			} catch (AmazonClientException exception) {
 				// Add helpful text to Exception
 				String systemError = String.format(
