@@ -6,7 +6,7 @@ node {
 
   stage('Setup') {
     git([
-      url: env.GIT_URL ? env.GIT_URL : 'https://github.com/venicegeo/pz-gateway',
+      url: env.GIT_URL ? env.GIT_URL : 'https://github.com/venicegeo/pz-jobcommon',
       branch: "master"
     ])
   }
@@ -14,7 +14,7 @@ node {
   stage('Archive') {
     sh """
       ${mvn}/bin/mvn clean package -U -Dmaven.repo.local=${root}
-      cp target/pz-jobcommon-LATEST.jar ${root}/pz-jobcommon.jar
+      cp ${root}/target/pz-jobcommon-LATEST.jar ${root}/pz-jobcommon.jar
     """
     mavenPush()
   }
