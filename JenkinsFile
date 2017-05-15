@@ -6,7 +6,7 @@ node {
 
   stage('Setup') {
     git([
-      url: "https://github.com/venicegeo/pz-jobcommon",
+      url: env.GIT_URL ? env.GIT_URL : 'https://github.com/venicegeo/pz-gateway',
       branch: "master"
     ])
   }
@@ -20,7 +20,9 @@ node {
   }
 
   stage('Scans') {
-//    dependencyCheck()
+    dependencyCheck {
+      threadfixId = THREADFIX_ID
+    }
     ionConnect()
     sh """
       mkdir -p ${root}/.m2/repository
@@ -33,7 +35,9 @@ node {
     sh """
       ${mvn}/bin/mvn install:install-file -Dmaven.repo.local=${root} -Dfile=pom.xml -DpomFile=pom.xml
     """
-    fortify()
+    fortify {
+      threadfixId = THREADFIX_ID
+    }
   }
 
   stage('Cleanup') {
