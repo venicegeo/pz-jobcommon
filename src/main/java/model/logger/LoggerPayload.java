@@ -182,4 +182,43 @@ public class LoggerPayload {
 
 		return obj.toString();
 	}
+
+	/**
+	 * Gets the RFC 5424 string for this log messages
+	 */
+	public String toRfc5424() {
+		StringBuilder builder = new StringBuilder();
+
+		// Priority and severity
+		builder.append("<");
+		builder.append(getFacility() * 8 + getSeverityInt());
+		builder.append(">");
+		builder.append(getVersion());
+
+		// Time and place metadata
+		builder.append(" ");
+		builder.append(getTimestamp());
+		builder.append(" ");
+		builder.append(getHostName());
+		builder.append(" ");
+		builder.append(getApplication());
+		builder.append(" ");
+		builder.append(getProcess());
+		builder.append(" ");
+		builder.append(getMessageId());
+
+		// SDE Element if present
+		if (getAuditData() != null) {
+			builder.append(" ");
+			builder.append(getAuditData().toSDE());
+		}
+
+		// Message is Present
+		if (getMessage() != null) {
+			builder.append(" ");
+			builder.append(getMessage());
+		}
+
+		return builder.toString();
+	}
 }
