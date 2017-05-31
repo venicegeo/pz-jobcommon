@@ -266,7 +266,7 @@ public class PiazzaLogger {
 		// Log to console if requested
 		try {
 			if (logToConsole.booleanValue()) {
-				LOGGER.info(loggerPayload.toString());
+				LOGGER.info(loggerPayload.toRfc5424());
 			}
 		} catch (Exception exception) { /* Do nothing. */
 			LOGGER.error("Could not log message to console. Application property is not set", exception);

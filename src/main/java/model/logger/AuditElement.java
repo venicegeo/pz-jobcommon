@@ -66,7 +66,7 @@ public class AuditElement {
 	public void setActee(String actee) {
 		this.actee = actee;
 	}
-	
+
 	@Override
 	public String toString() {
 		StringBuilder obj = new StringBuilder();
@@ -74,5 +74,28 @@ public class AuditElement {
 		obj.append("action: " + getAction() + "\n");
 		obj.append("actee : " + getActee() + "\n");
 		return obj.toString();
+	}
+
+	public String toSDE() {
+		StringBuilder builder = new StringBuilder();
+
+		// Form SDE
+		builder.append("[");
+		builder.append("pzaudit@48851");
+
+		// Add attributes if present
+		if (getActee() != null) {
+			builder.append(" actee=\"" + getActee() + "\"");
+		}
+		if (getActee() != null) {
+			builder.append(" action=\"" + getAction() + "\"");
+		}
+		if (getActee() != null) {
+			builder.append(" actor=\"" + getActor() + "\"");
+		}
+
+		builder.append("]");
+
+		return builder.toString();
 	}
 }
