@@ -1,14 +1,16 @@
 @Library('pipelib@master') _
 
 def THREADFIX_ID = env.THREADFIX_ID ? env.THREADFIX_ID : '115'
+
 node {
-  def root = pwd()
   def mvn = tool 'M3'
-  def appvers = sh(script: "git describe --long --tags --always | sed 's/\\./-/'g", returnStdout: true)
+  def root = pwd()
 
   stage('Setup') {
-    deleteDir()
-    git url: "git@gitlab.gs.mil:venice/pz-jobcommon", branch: "master", credentialsId: "aaef610c-9fd0-4812-9027-755ff3a872a5"
+    git([
+      url: env.GIT_URL ? env.GIT_URL : 'https://github.com/venicegeo/pz-jobcommon',
+      branch: "master"
+    ])
   }
 
   stage('Archive') {
@@ -16,16 +18,7 @@ node {
       ${mvn}/bin/mvn clean package -U -Dmaven.repo.local=${root}
       cp ${root}/target/pz-jobcommon-LATEST.jar ${root}/pz-jobcommon.jar
     """
-    sh """mvn -X --settings ~/.m2/settings.xml deploy:deploy-file -Dfile=${root}/pz-jobcommon.jar \
-      -DrepositoryId=nexus \
-      -Durl="https://nexus.gs.mil/content/repositories/venice-release/" \
-      -DgroupId="org.piazza" \
-      -DgeneratePom=false \
-      -Dpackaging=jar \
-      -Dmaven.repo.local="${root}/.m2/repository" \
-      -DartifactId=pz-jobcommon \
-      -Dversion=${appvers}
-    """
+    mavenPush()
   }
 
   stage('Scans') {
@@ -49,4 +42,7 @@ node {
     }
   }
 
+  stage('Cleanup') {
+    deleteDir()
+  }
 }
