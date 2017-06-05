@@ -16,16 +16,16 @@ node {
       ${mvn}/bin/mvn clean package -U -Dmaven.repo.local=${root}
       cp ${root}/target/pz-jobcommon-LATEST.jar ${root}/pz-jobcommon.jar
     """
-    sh """mvn -X --settings ~/.m2/settings.xml deploy:deploy-file -Dfile=${root}/pz-jobcommon.jar \
-      -DrepositoryId=nexus \
-      -Durl="https://nexus.gs.mil/content/repositories/venice-release/" \
-      -DgroupId="org.piazza" \
-      -DgeneratePom=false \
-      -Dpackaging=jar \
-      -Dmaven.repo.local="${root}/.m2/repository" \
-      -DartifactId=pz-jobcommon \
-      -Dversion=${appvers}
-    """
+//    sh """mvn -X --settings ~/.m2/settings.xml deploy:deploy-file -Dfile=${root}/pz-jobcommon.jar \
+//      -DrepositoryId=nexus \
+//      -Durl="https://nexus.gs.mil/content/repositories/venice-release/" \
+//      -DgroupId="org.piazza" \
+//      -DgeneratePom=false \
+//      -Dpackaging=jar \
+//      -Dmaven.repo.local="${root}/.m2/repository" \
+//      -DartifactId=pz-jobcommon \
+//      -Dversion=${appvers}
+//    """
   }
 
   stage('Scans') {
@@ -49,7 +49,4 @@ node {
     }
   }
 
-  stage('Cleanup') {
-    deleteDir()
-  }
 }
