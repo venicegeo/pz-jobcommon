@@ -1,7 +1,5 @@
 #!/usr/bin/groovy
 
-def THREADFIX_ID = env.THREADFIX_ID
-
 node {
   def root = pwd()
   def mvn = tool 'M3'
@@ -9,8 +7,12 @@ node {
 
   stage('Setup') {
     deleteDir()
-    //git url: "git@gitlab.gs.mil:venice/pz-jobcommon", branch: "master", credentialsId: "aaef610c-9fd0-4812-9027-755ff3a872a5"
-    git url: "${env.GIT_URL}", branch: "${env.GIT_BRANCH}"
+    // github is open gitlab requires credentials to clone
+    if(env.GITLAB_CREDS) {
+      git url: "${env.GIT_URL}", branch: "${env.GIT_BRANCH}", credentialsId: "${env.GITLAB_CREDS}"
+    } else {
+      git url: "${env.GIT_URL}", branch: "${env.GIT_BRANCH}"
+    }
   }
 
   stage('Archive') {
