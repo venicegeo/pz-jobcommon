@@ -3,7 +3,6 @@
 node {
   def root = pwd()
   def mvn = tool 'M3'
-  def appvers = sh(script: "git describe --long --tags --always | sed 's/\\./-/'g", returnStdout: true)
 
   stage('Setup') {
     deleteDir()
@@ -14,6 +13,8 @@ node {
       git url: "${env.GIT_URL}", branch: "${env.GIT_BRANCH}"
     }
   }
+
+  def appvers = sh(script: "git describe --long --tags --always | sed 's/\\./-/'g", returnStdout: true)
 
   stage('Archive') {
 //    sh """
