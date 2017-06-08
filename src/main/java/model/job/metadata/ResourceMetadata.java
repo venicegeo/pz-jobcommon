@@ -16,6 +16,7 @@
 package model.job.metadata;
 
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -25,6 +26,7 @@ import javax.validation.constraints.NotNull;
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.elasticsearch.annotations.Field;
 import org.springframework.data.elasticsearch.annotations.FieldType;
 
@@ -317,13 +319,21 @@ public class ResourceMetadata {
 	 *            overwrite values in this object. False if not.
 	 */
 	public void merge(ResourceMetadata other, boolean overwriteNull) {
+		List<String> protectedNames = new ArrayList<String>();
+		protectedNames.add("setCreatedBy");
+		protectedNames.add("setCreatedOn");
+		protectedNames.add("setCreatedByJobId");
+		
 		Method[] methods = this.getClass().getMethods();
-
 		for (Method fromMethod : methods) {
 			if (fromMethod.getDeclaringClass().equals(this.getClass()) && fromMethod.getName().startsWith("get")) {
 
 				String fromName = fromMethod.getName();
 				String toName = fromName.replace("get", "set");
+
+				if (protectedNames.contains(toName)) {
+					continue;
+				}
 
 				try {
 					Method toMethod = this.getClass().getMethod(toName, fromMethod.getReturnType());
