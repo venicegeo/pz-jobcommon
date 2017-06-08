@@ -17,24 +17,24 @@ node {
   def appvers = sh(script: "git describe --long --tags --always | sed 's/\\./-/'g", returnStdout: true)
 
   stage('Archive') {
-//    sh """
-//      ${mvn}/bin/mvn clean package -U -Dmaven.repo.local=${root}
-//      cp ${root}/target/pz-jobcommon-LATEST.jar ${root}/pz-jobcommon.jar
-//    """
-//   sh """mvn -X --settings ~/.m2/settings.xml deploy:deploy-file -Dfile=${root}/pz-jobcommon.jar \
-//      -DrepositoryId=nexus \
-//      -Durl="https://nexus.gs.mil/content/repositories/venice-release/" \
-//      -DgroupId="org.piazza" \
-//      -DgeneratePom=false \
-//      -Dpackaging=jar \
-//      -Dmaven.repo.local="${root}/.m2/repository" \
-//      -DartifactId=pz-jobcommon \
-//      -Dversion=${appvers}
-//    """
+    sh """
+      ${mvn}/bin/mvn clean package -U -Dmaven.repo.local=${root}
+      cp ${root}/target/pz-jobcommon-LATEST.jar ${root}/pz-jobcommon.jar
+    """
+   sh """mvn -X --settings ~/.m2/settings.xml deploy:deploy-file -Dfile=${root}/pz-jobcommon.jar \
+      -DrepositoryId=nexus \
+      -Durl="https://nexus.gs.mil/content/repositories/venice-release/" \
+      -DgroupId="org.piazza" \
+      -DgeneratePom=false \
+      -Dpackaging=jar \
+      -Dmaven.repo.local="${root}/.m2/repository" \
+      -DartifactId=pz-jobcommon \
+      -Dversion=${appvers}
+    """
   }
 
   stage('Scans') {
-    withCredentials([[$class: 'StringBinding', credentialsId: 'THREADFIXKEY', variable: 'THREADFIX_KEY']]) {
+    withCredentials([[$class: "StringBinding", credentialsId: "${env.PZ_THREADFIX_API_KEY", variable: 'THREADFIX_KEY']]) {
       sh "/jslave/dependency-check/dependency-check/bin/dependency-check.sh --version"
       sh '/jslave/dependency-check/dependency-check/bin/dependency-check.sh --project "pz-jobcommon" --scan "." --format "XML" --enableExperimental --disableBundleAudit' 
       sh "/bin/curl -v --insecure -H 'Accept: application/json' -X POST --form file=@dependency-check-report.xml https://threadfix.gs.mil/rest/applications/${THREADFIX_ID}/upload?apiKey=${THREADFIX_KEY}"
