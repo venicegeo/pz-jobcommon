@@ -23,7 +23,7 @@ node {
     """
    sh """mvn -X --settings ~/.m2/settings.xml deploy:deploy-file -Dfile=${root}/pz-jobcommon.jar \
       -DrepositoryId=nexus \
-      -Durl="https://nexus.gs.mil/content/repositories/venice-release/" \
+      -Durl="${env.ARTIFACT_STORAGE_DEPLOY_URL}" \
       -DgroupId="org.piazza" \
       -DgeneratePom=false \
       -Dpackaging=jar \
@@ -46,7 +46,36 @@ node {
       //    -Pcoverage-per-test org.jacoco:jacoco-maven-plugin:report \
       //    -DdataFile=target/jacoco.exec
       //"""
-      //sonar()
+
+      sh """
+        mkdir -p ${root}/.m2/repository
+        ${mvn}/bin/mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install \
+          -Dmaven.repo.local=${root}/.m2/repository \
+          -Pcoverage-per-test org.jacoco:jacoco-maven-plugin:report \
+          -DdataFile=target/jacoco.exec
+      """
+
+      sh """
+        sonar-scanner -Dsonar.jacoco.reportPath=target/jacoco.exec \
+        -Dsonar.binaries=target/classes \
+        -Dsonar.language=java \
+        -Dsonar.links.scm=${env.GIT_URL} \
+        -Dsonar.links.scm_dev=${env.GIT_URL}.git \
+        -Dsonar.links.issue= \
+        -Dsonar.links.homepage= \
+        -Dsonar.links.ci=${env.JOB_URL} \
+        -Dsonar.projectKey=venicegeo:piazza:${artifactId} \
+        -Dsonar.projectName=venicegeo:piazza:${artifactId} \
+        -Dsonar.projectBaseDir=${root} \
+        -Dsonar.projectVersion=${appvers} \
+        -Dsonar.redmine.url= \
+        -Dsonar.redmine.api-access-key= \
+        -Dsonar.redmine.project-key= \
+        -Dsonar.sourceEncoding=utf-8 \
+        -Dsonar.sources=src/main/java \
+        -Dsonar.exclusions= \
+        -Dsonar.tests=src/test/java
+      """
 
       //sh "${mvn}/bin/mvn install:install-file -Dmaven.repo.local=${root} -Dfile=pom.xml -DpomFile=pom.xml"
       sh "/opt/hp_fortify_sca/bin/sourceanalyzer -b ${env.BUILD_NUMBER} src/main/java/{*.java,**/*.java}"
