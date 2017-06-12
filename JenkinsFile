@@ -26,7 +26,7 @@ node {
    sh """mvn -X --settings ~/.m2/settings.xml deploy:deploy-file -Dfile=${root}/pz-jobcommon.jar \
       -DrepositoryId=nexus \
       -Durl="${env.ARTIFACT_STORAGE_DEPLOY_URL}" \
-      -DgroupId="org.piazza" \
+      -DgroupId="org.venice.piazza" \
       -DgeneratePom=false \
       -Dpackaging=jar \
       -Dmaven.repo.local="${root}/.m2/repository" \
