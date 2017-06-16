@@ -30,7 +30,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 public class Throttle {
 
 	public enum Component {
-		job, trigger, query
+		JOB, TRIGGER, QUERY
 	}
 
 	private String component;
@@ -38,7 +38,7 @@ public class Throttle {
 	private Integer numberOfInvocations;
 
 	public Throttle() {
-
+		// Empty constructor required by Jackson
 	}
 
 	public Throttle(String component, Integer numberOfInvocations) {

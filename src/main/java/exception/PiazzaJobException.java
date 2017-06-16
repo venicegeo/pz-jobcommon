@@ -24,10 +24,11 @@ package exception;
 @SuppressWarnings("serial")
 public class PiazzaJobException extends Exception {
 	
-	private int statusCode;
+	private final int statusCode;
 	
 	public PiazzaJobException(String message) {
 		super(message);
+		this.statusCode = -1;
 	}
 	
 	public PiazzaJobException(String message, int statusCode) {

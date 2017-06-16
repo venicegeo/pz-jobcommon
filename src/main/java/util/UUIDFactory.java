@@ -35,6 +35,7 @@ public class UUIDFactory {
 	 * Default constructor required for Bean instantiation.
 	 */
 	public UUIDFactory() {
+		// Empty constructor required by Jackson
 	}
 
 	/**

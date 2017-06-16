@@ -36,7 +36,7 @@ public class Permission {
 	private String uri;
 
 	public Permission() {
-
+		// Empty constructor required by Jackson
 	}
 
 	public Permission(String requestMethod, String uri) {

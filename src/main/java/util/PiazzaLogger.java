@@ -78,6 +78,7 @@ public class PiazzaLogger {
 	 * Default constructor, required for bean instantiation.
 	 */
 	public PiazzaLogger() {
+		// Empty constructor required by Jackson
 	}
 
 	/**
