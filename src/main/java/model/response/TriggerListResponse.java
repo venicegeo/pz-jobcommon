@@ -31,7 +31,7 @@ public class TriggerListResponse extends PiazzaResponse {
 	public Pagination pagination;
 
 	public TriggerListResponse() {
-
+		// Empty constructor required by Jackson
 	}
 
 	public TriggerListResponse(List<Trigger> data) {

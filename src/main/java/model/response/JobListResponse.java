@@ -40,7 +40,7 @@ public class JobListResponse extends PiazzaResponse {
 	public Pagination pagination;
 
 	public JobListResponse() {
-
+		// Empty constructor required by Jackson
 	}
 
 	public JobListResponse(List<Job> jobs) {

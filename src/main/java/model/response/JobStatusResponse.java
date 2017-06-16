@@ -42,6 +42,7 @@ public class JobStatusResponse extends PiazzaResponse {
 	private final static Logger LOGGER = LoggerFactory.getLogger(JobStatusResponse.class);
 
 	public JobStatusResponse() {
+		// Empty constructor required by Jackson
 	}
 
 	public JobStatusResponse(Job job) {

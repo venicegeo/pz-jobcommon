@@ -39,6 +39,6 @@ public class ErrorResponse extends PiazzaResponse {
 	}
 
 	public ErrorResponse() {
-
+		// Empty constructor required by Jackson
 	}
 }

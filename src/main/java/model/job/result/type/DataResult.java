@@ -32,6 +32,7 @@ public class DataResult implements ResultType {
 	public String dataId;
 
 	public DataResult() {
+		// Empty constructor required by Jackson
 	}
 
 	public DataResult(String dataId) {

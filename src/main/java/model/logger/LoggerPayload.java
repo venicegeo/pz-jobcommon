@@ -48,7 +48,7 @@ public class LoggerPayload {
 	public String message;
 
 	public LoggerPayload() {
-
+		// Empty constructor required by Jackson
 	}
 
 	public int getFacility() {

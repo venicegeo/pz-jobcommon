@@ -30,7 +30,7 @@ public class EventResponse extends PiazzaResponse {
 	public Event data;
 
 	public EventResponse() {
-
+		// Empty constructor required by Jackson
 	}
 
 	public EventResponse(Event event) {

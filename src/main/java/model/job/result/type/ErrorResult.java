@@ -38,7 +38,7 @@ public class ErrorResult implements ResultType {
 
 
 	public ErrorResult() {
-
+		// Empty constructor required by Jackson
 	}
 
 	public ErrorResult(String message, String details) {

@@ -23,7 +23,7 @@ public class SearchServiceJob implements PiazzaJobType {
 	public SearchCriteria data;
 
 	public SearchServiceJob() {
-
+		// Empty constructor required by Jackson
 	}
 
 	public SearchServiceJob(String jobId) {

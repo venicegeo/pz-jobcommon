@@ -43,6 +43,6 @@ public class JobErrorResponse extends PiazzaResponse {
 	}
 
 	public JobErrorResponse() {
-
+		// Empty constructor required by Jackson
 	}
 }

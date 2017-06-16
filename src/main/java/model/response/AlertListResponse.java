@@ -31,7 +31,7 @@ public class AlertListResponse extends PiazzaResponse {
 	public Pagination pagination;
 
 	public AlertListResponse() {
-
+		// Empty constructor required by Jackson
 	}
 
 	public AlertListResponse(List<Alert> data) {

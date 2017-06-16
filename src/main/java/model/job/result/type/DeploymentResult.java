@@ -32,7 +32,7 @@ public class DeploymentResult implements ResultType {
 	public Deployment deployment;
 
 	public DeploymentResult() {
-
+		// Empty constructor required by Jackson
 	}
 
 	public DeploymentResult(Deployment deployment) {

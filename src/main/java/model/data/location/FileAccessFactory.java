@@ -51,7 +51,7 @@ public class FileAccessFactory {
 	private final String PROTOCOL_PREFIX = "https://";
 
 	public FileAccessFactory() {
-
+		// Empty constructor required by Jackson
 	}
 
 	public FileAccessFactory(String s3AccessKey, String s3PrivateKey, String s3EncryptKey) {

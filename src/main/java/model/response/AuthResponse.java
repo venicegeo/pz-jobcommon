@@ -42,6 +42,7 @@ public class AuthResponse extends PiazzaResponse implements Serializable {
 	public UserProfile userProfile;
 
 	public AuthResponse() {
+		// Empty constructor required by Jackson
 	}
 
 	public AuthResponse(Boolean isAuthSuccess) {

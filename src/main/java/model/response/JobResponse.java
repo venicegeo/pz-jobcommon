@@ -33,6 +33,7 @@ public class JobResponse extends PiazzaResponse {
 	}
 
 	public JobResponse() {
+		// Empty constructor required by Jackson
 	}
 
 	/**

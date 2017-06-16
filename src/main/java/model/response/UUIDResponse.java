@@ -29,7 +29,7 @@ public class UUIDResponse extends PiazzaResponse {
 	public String uuid;
 	
 	public UUIDResponse() {
-		
+		// Empty constructor required by Jackson
 	}
 	
 	public UUIDResponse(String uuid) {

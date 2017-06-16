@@ -38,7 +38,7 @@ public class DataResourceListResponse extends PiazzaResponse {
 	public Pagination pagination;
 
 	public DataResourceListResponse() {
-
+		// Empty constructor required by Jackson
 	}
 
 	public DataResourceListResponse(List<DataResource> dataResources) {

@@ -65,7 +65,7 @@ public class SpatialMetadata {
 
 
 	public SpatialMetadata() {
-
+		// Empty constructor required by Jackson
 	}
 
 	/**

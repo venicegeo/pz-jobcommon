@@ -34,7 +34,7 @@ public class FileResult implements ResultType {
 	 * Default Constructor
 	 */
 	public FileResult() {
-
+		// Empty constructor required by Jackson\
 	}
 
 	/**

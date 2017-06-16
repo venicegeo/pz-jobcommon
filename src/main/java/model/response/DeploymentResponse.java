@@ -30,7 +30,7 @@ public class DeploymentResponse extends PiazzaResponse {
 	public DeploymentData data = new DeploymentData();
 
 	public DeploymentResponse() {
-
+		// Empty constructor required by Jackson
 	}
 
 	public DeploymentResponse(Deployment deployment, String expiresOn) {
@@ -48,7 +48,7 @@ public class DeploymentResponse extends PiazzaResponse {
 		public String expiresOn;
 
 		public DeploymentData() {
-
+			// Empty constructor required by Jackson
 		}
 
 		public Deployment getDeployment() {

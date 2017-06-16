@@ -39,7 +39,7 @@ public class DeploymentListResponse extends PiazzaResponse {
 	public Pagination pagination;
 
 	public DeploymentListResponse() {
-
+		// Empty constructor required by Jackson
 	}
 
 	public DeploymentListResponse(List<Deployment> deployments) {

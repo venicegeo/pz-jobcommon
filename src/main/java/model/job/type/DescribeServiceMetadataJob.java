@@ -23,7 +23,7 @@ public class DescribeServiceMetadataJob implements PiazzaJobType {
 	public String serviceID;
 
 	public DescribeServiceMetadataJob() {
-
+		// Empty constructor required by Jackson\
 	}
 
 	public DescribeServiceMetadataJob(String jobId) {

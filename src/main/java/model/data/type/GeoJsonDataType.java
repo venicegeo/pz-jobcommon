@@ -58,7 +58,7 @@ public class GeoJsonDataType implements DataType, FileRepresentation {
 	}
 
 	public GeoJsonDataType() {
-
+		// Empty constructor required by Jackson
 	}
 
 	/**

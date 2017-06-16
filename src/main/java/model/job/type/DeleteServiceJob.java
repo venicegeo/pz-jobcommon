@@ -24,7 +24,7 @@ public class DeleteServiceJob implements PiazzaJobType {
 	public String reason;
 
 	public DeleteServiceJob() {
-
+		// Empty constructor required by Jackson\
 	}
 
 	public DeleteServiceJob(String jobId) {

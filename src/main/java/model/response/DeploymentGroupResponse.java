@@ -30,7 +30,7 @@ public class DeploymentGroupResponse extends PiazzaResponse {
 	public DeploymentGroup data;
 
 	public DeploymentGroupResponse() {
-
+		// Empty constructor required by Jackson
 	}
 
 	public DeploymentGroupResponse(DeploymentGroup deploymentGroup) {

@@ -319,32 +319,32 @@ public class ResourceMetadata {
 	 *            overwrite values in this object. False if not.
 	 */
 	public void merge(ResourceMetadata other, boolean overwriteNull) {
-		List<String> protectedNames = new ArrayList<String>();
-		protectedNames.add("setCreatedBy");
-		protectedNames.add("setCreatedOn");
-		protectedNames.add("setCreatedByJobId");
+		final List<String> protectedNames = Arrays.asList("setCreatedBy", "setCreatedOn", "setCreatedByJobId");
 		
-		Method[] methods = this.getClass().getMethods();
-		for (Method fromMethod : methods) {
+		for (Method fromMethod : this.getClass().getMethods()) {
 			if (fromMethod.getDeclaringClass().equals(this.getClass()) && fromMethod.getName().startsWith("get")) {
-
-				String fromName = fromMethod.getName();
-				String toName = fromName.replace("get", "set");
-
-				if (protectedNames.contains(toName)) {
-					continue;
-				}
-
-				try {
-					Method toMethod = this.getClass().getMethod(toName, fromMethod.getReturnType());
-					Object value = fromMethod.invoke(other, (Object[]) null);
-					if ((value != null) || (overwriteNull == true)) {
-						toMethod.invoke(this, value);
-					}
-				} catch (Exception exception) {
-					LOGGER.error("Error merging the properties of ResourceMetadatas", exception);
-				}
+				mergeMethod(other, overwriteNull, fromMethod, protectedNames);
 			}
+		}
+	}
+	
+	private void mergeMethod(final ResourceMetadata other, boolean overwriteNull, final Method fromMethod, final List<String> protectedNames) {
+		
+		String fromName = fromMethod.getName();
+		String toName = fromName.replace("get", "set");
+
+		if (protectedNames.contains(toName)) {
+			return;
+		}
+
+		try {
+			Method toMethod = this.getClass().getMethod(toName, fromMethod.getReturnType());
+			Object value = fromMethod.invoke(other, (Object[]) null);
+			if ((value != null) || (overwriteNull == true)) {
+				toMethod.invoke(this, value);
+			}
+		} catch (Exception exception) {
+			LOGGER.error("Error merging the properties of ResourceMetadatas", exception);
 		}
 	}
 

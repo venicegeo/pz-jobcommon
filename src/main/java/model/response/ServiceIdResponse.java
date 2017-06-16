@@ -33,6 +33,7 @@ public class ServiceIdResponse extends PiazzaResponse {
 	}
 
 	public ServiceIdResponse() {
+		// Empty constructor required by Jackson
 	}
 
 	/**

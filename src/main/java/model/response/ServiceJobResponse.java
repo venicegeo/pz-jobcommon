@@ -35,6 +35,7 @@ public class ServiceJobResponse extends PiazzaResponse {
 	}
 
 	public ServiceJobResponse() {
+		// Empty constructor required by Jackson
 	}
 
 	/**

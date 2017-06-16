@@ -43,6 +43,7 @@ public class UserProfileResponse extends PiazzaResponse implements Serializable 
 	}
 
 	public UserProfileResponse() {
+		// Empty constructor required by Jackson
 	}
 
 	/**

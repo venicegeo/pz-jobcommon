@@ -34,7 +34,7 @@ public class AuditElement {
 	public String actee;
 
 	public AuditElement() {
-
+		// Empty constructor required by Jackson
 	}
 
 	public AuditElement(String actor, String action, String actee) {

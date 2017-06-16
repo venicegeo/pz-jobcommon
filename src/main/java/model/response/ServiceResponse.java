@@ -30,7 +30,7 @@ public class ServiceResponse extends PiazzaResponse {
 	public Service data;
 
 	public ServiceResponse() {
-
+		// Empty constructor required by Jackson
 	}
 
 	public ServiceResponse(Service service) {

@@ -31,7 +31,7 @@ public class SearchQueryJob implements PiazzaJobType {
 	public Object data;
 
 	public SearchQueryJob() {
-
+		// Empty constructor required by Jackson\
 	}
 
 	public Object getData() {

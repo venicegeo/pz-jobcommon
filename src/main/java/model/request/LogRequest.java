@@ -31,6 +31,7 @@ public class LogRequest {
 	private String severity;
 
 	public LogRequest() {
+		// Empty constructor required by Jackson
 	}
 
 	public LogRequest(String service, String address, String createdOn, String message, String severity) {

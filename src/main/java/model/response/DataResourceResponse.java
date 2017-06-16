@@ -32,7 +32,7 @@ public class DataResourceResponse extends PiazzaResponse {
 	public DataResource data;
 
 	public DataResourceResponse() {
-
+		// Empty constructor required by Jackson
 	}
 
 	public DataResourceResponse(DataResource dataResource) {

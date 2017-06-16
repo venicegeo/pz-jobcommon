@@ -27,7 +27,7 @@ public class TextKeyValue {
 	private String value;
 
 	public TextKeyValue() {
-
+		// Empty constructor required by Jackson
 	}
 
 	public TextKeyValue(String key, String value) {

@@ -31,7 +31,7 @@ public class EventListResponse extends PiazzaResponse {
 	public Pagination pagination;
 
 	public EventListResponse() {
-
+		// Empty constructor required by Jackson
 	}
 
 	public EventListResponse(List<Event> data) {

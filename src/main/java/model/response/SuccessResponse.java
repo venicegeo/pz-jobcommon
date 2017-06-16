@@ -35,6 +35,7 @@ public class SuccessResponse extends PiazzaResponse {
 	}
 
 	public SuccessResponse() {
+		// Empty constructor required by Jackson
 	}
 
 	/**

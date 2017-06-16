@@ -63,6 +63,6 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 public class PiazzaResponse {
 
 	public PiazzaResponse() {
-
+		// Empty constructor required by Jackson
 	}
 }

@@ -47,7 +47,7 @@ public class Lease {
 	 * Creates a new Deployment Lease.
 	 */
 	public Lease() {
-
+		// Empty constructor required by Jackson
 	}
 
 	/**

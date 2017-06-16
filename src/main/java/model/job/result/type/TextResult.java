@@ -30,7 +30,7 @@ public class TextResult implements ResultType {
 	public Object text;
 
 	public TextResult() {
-
+		// Empty constructor required by Jackson\
 	}
 
 	public TextResult(Object text) {

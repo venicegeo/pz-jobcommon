@@ -25,7 +25,7 @@ public class UpdateServiceJob implements PiazzaJobType {
 	public Service data;
 
 	public UpdateServiceJob() {
-
+		// Empty constructor required by Jackson
 	}
 
 	public UpdateServiceJob(String jobId) {

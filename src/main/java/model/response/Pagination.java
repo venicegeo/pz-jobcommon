@@ -42,7 +42,7 @@ public class Pagination {
 	public String order;
 
 	public Pagination() {
-
+		// Empty constructor required by Jackson
 	}
 
 	public Pagination(Integer count, Integer page, Integer perPage, String sortBy, String order) {

@@ -41,6 +41,7 @@ public class JobProgress {
 	public String timeSpent;
 
 	public JobProgress() {
+		// Empty constructor required by Jackson
 	}
 
 	public JobProgress(Integer percentComplete) {

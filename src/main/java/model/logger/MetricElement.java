@@ -34,7 +34,7 @@ public class MetricElement {
 	public String object;
 	
 	public MetricElement() {
-
+		// Empty constructor required by Jackson
 	}
 	
 	public MetricElement(String name, String value, String object) {

@@ -39,7 +39,7 @@ public class ServiceListResponse extends PiazzaResponse {
 	public Pagination pagination;
 
 	public ServiceListResponse() {
-
+		// Empty constructor required by Jackson
 	}
 
 	public ServiceListResponse(List<Service> services) {

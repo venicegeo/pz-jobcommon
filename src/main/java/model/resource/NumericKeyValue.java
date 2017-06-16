@@ -26,7 +26,7 @@ public class NumericKeyValue {
 	private Double value;
 
 	public NumericKeyValue() {
-
+		// Empty constructor required by Jackson
 	}
 
 	public NumericKeyValue(String key, Double value) {

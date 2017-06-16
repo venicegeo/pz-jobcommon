@@ -34,6 +34,7 @@ public class JobResult implements ResultType {
 	public String jobId;
 
 	public JobResult() {
+		// Empty constructor required by Jackson\
 	}
 
 	public JobResult(String jobId) {

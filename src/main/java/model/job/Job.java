@@ -58,7 +58,7 @@ public class Job {
 	public ResultType result;
 
 	public Job() {
-
+		// Empty constructor required by Jackson
 	}
 
 	public Job(PiazzaJobRequest request, String jobId) {

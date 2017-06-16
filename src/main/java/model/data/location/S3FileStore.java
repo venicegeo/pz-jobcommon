@@ -42,7 +42,7 @@ public class S3FileStore implements FileLocation {
 	public String domainName;
 
 	public S3FileStore() {
-
+		// Empty constructor required by Jackson
 	}
 
 	public S3FileStore(String bucketName, String fileName, Long fileSize, String domainName) {

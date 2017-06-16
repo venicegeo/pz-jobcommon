@@ -47,7 +47,7 @@ public class ShapefileDataType implements DataType, FileRepresentation {
 	public String mimeType;
 
 	public ShapefileDataType() {
-
+		// Empty constructor required by Jackson
 	}
 
 	public String getMimeType() {

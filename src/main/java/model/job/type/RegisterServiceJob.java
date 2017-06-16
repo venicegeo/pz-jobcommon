@@ -22,7 +22,7 @@ public class RegisterServiceJob implements PiazzaJobType {
 	public Service data;
 
 	public RegisterServiceJob() {
-
+		// Empty constructor required by Jackson\
 	}
 
 	public RegisterServiceJob(Service data) {

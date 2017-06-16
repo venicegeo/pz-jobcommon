@@ -30,7 +30,7 @@ public class TriggerResponse extends PiazzaResponse {
 	public Trigger data;
 
 	public TriggerResponse() {
-
+		// Empty constructor required by Jackson
 	}
 
 	public TriggerResponse(Trigger trigger) {

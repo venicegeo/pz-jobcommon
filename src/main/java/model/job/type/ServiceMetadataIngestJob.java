@@ -32,7 +32,7 @@ public class ServiceMetadataIngestJob implements PiazzaJobType {
 	public Service data;
 
 	public ServiceMetadataIngestJob() {
-
+		// Empty constructor required by Jackson
 	}
 
 	public Service getData() {

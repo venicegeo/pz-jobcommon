@@ -56,7 +56,7 @@ public class DeploymentGroup {
 	 * Creates a new Deployment Group.
 	 */
 	public DeploymentGroup() {
-
+		// Empty constructor required by Jackson
 	}
 
 	/**
