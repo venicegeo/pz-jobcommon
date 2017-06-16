@@ -68,7 +68,7 @@ public class ResourceMetadata {
 	// Values indicating the status of the resource
 	public enum STATUS_TYPE {
 		ONLINE, OFFLINE, DEGRADED, FAILED
-	};
+	}
 	
 	@ApiModelProperty(value = "Status of the resource")
 	private STATUS_TYPE statusType;

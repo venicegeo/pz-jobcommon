@@ -29,7 +29,7 @@ public class LiteralDataType implements DataType {
 
 	public enum LITERAL {
 		DOUBLE, FLOAT, SHORT, LONG, BYTE, CHAR, BOOLEAN, STRING
-	};
+	}
 
 	@ApiModelProperty(required = true, value = "The type of Data", allowableValues = "literal")
 	@JsonIgnore

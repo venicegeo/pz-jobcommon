@@ -55,7 +55,7 @@ public class ServiceJob {
 
 	public ServiceJob() {
 		this.queuedOn = new DateTime();
-		this.timeouts = new Integer(0);
+		this.timeouts = Integer.valueOf(0);
 	}
 
 	public ServiceJob(String jobId, String serviceId) {

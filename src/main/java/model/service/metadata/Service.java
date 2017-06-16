@@ -47,7 +47,7 @@ public class Service {
 
 	public enum METHOD_TYPE {
 		GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
-	};
+	}
 
 	@ApiModelProperty(value = "HTTP method types")
 	private METHOD_TYPE methodType;

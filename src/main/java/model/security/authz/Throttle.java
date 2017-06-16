@@ -31,7 +31,7 @@ public class Throttle {
 
 	public enum Component {
 		job, trigger, query
-	};
+	}
 
 	private String component;
 

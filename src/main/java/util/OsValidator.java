@@ -33,7 +33,7 @@ public class OsValidator {
 	 */
 	public enum OperatingSystemType {
 		WINDOWS, MAC_OS, LINUX, OTHER
-	};
+	}
 
 	/**
 	 * detect the operating system from the os.name System property and cache
@@ -43,17 +43,16 @@ public class OsValidator {
 	 */
 	public OperatingSystemType getOperatingSystemType() {
 		OperatingSystemType osType = null;
-		if (osType == null) {
-			String os = System.getProperty("os.name", "generic").toLowerCase(Locale.ENGLISH);
-			if ((os.indexOf("mac") >= 0) || (os.indexOf("darwin") >= 0)) {
-				osType = OperatingSystemType.MAC_OS;
-			} else if (os.indexOf("win") >= 0) {
-				osType = OperatingSystemType.WINDOWS;
-			} else if (os.indexOf("nux") >= 0) {
-				osType = OperatingSystemType.LINUX;
-			} else {
-				osType = OperatingSystemType.OTHER;
-			}
+		String os = System.getProperty("os.name", "generic").toLowerCase(Locale.ENGLISH);
+		
+		if ((os.indexOf("mac") >= 0) || (os.indexOf("darwin") >= 0)) {
+			osType = OperatingSystemType.MAC_OS;
+		} else if (os.indexOf("win") >= 0) {
+			osType = OperatingSystemType.WINDOWS;
+		} else if (os.indexOf("nux") >= 0) {
+			osType = OperatingSystemType.LINUX;
+		} else {
+			osType = OperatingSystemType.OTHER;
 		}
 
 		return osType;

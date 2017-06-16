@@ -120,7 +120,7 @@ public class FileAccessFactory {
 	@JsonIgnore
 	public InputStream getS3File(FileLocation fileLocation, String accessKey, String privateKey, String s3EncryptKey) {
 		// Get the file from S3. Connect to S3 Bucket. Only apply credentials if they are present.
-		AmazonS3Client s3Client = null;
+		final AmazonS3Client s3Client;
 		S3FileStore fileStore = (S3FileStore) fileLocation;
 		if (accessKey.isEmpty() || privateKey.isEmpty()) {
 			s3Client = new AmazonS3Client();

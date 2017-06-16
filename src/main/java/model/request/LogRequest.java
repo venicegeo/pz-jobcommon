@@ -82,7 +82,7 @@ public class LogRequest {
 	}
 
 	public String toPrettyString() {
-		StringBuffer sb = new StringBuffer();
+		StringBuilder sb = new StringBuilder();
 		sb.append("Service : " + getService() + "\n");
 		sb.append("Address : " + getAddress() + "\n");
 		sb.append("Time Stamp : " + getCreatedOn() + "\n");

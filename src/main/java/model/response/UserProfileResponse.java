@@ -48,7 +48,7 @@ public class UserProfileResponse extends PiazzaResponse implements Serializable 
 	/**
 	 * Used to wrap the User Profile in an annotatable class.
 	 */
-	public class UserProfileData {
+	public class UserProfileData implements Serializable {
 		@ApiModelProperty(required = true, value = "User Profile information.")
 		private UserProfile userProfile;
 		/**
