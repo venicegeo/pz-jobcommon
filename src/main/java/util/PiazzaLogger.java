@@ -97,7 +97,7 @@ public class PiazzaLogger {
 	@PostConstruct
 	public void init() {
 		// Create elasticsearch index with mapping
-		createIndexWithMapping(loggerIndexName, LOG_SCHEMA, null);
+		createIndexWithMapping(loggerIndexName, null);
 	}
 
 	/**
@@ -149,13 +149,11 @@ public class PiazzaLogger {
 	 *            elasticsearch client
 	 * @param indexName
 	 *            index to save to
-	 * @param type
-	 *            schema to save to
 	 * @param mapping
 	 *            mapping object
 	 * @return boolean
 	 */
-	public boolean createIndexWithMapping(String indexName, String type, String mapping) {
+	public boolean createIndexWithMapping(String indexName, String mapping) {
 		try {
 			if (!indexExists(indexName)) {
 				skipElasticSearchLogs =  true;
