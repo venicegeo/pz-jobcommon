@@ -32,22 +32,22 @@ import model.request.PiazzaJobRequest;
 
 /**
  * Created by sbortman on 6/2/16.
- */
-// when the and'ed set of Conditions all are true, do Something
-// Events are the results of the Conditions queries
-// model.workflow.Job is the JobMessage to submit back to Pz
-// TODO: some sort of mapping from the event info into the model.workflow.Job
-// string
-//
-// type model.workflow.Trigger struct {
-// Id Ident `json:"id"`
-// Title string `json:"title" binding:"required"`
-// model.workflow.Condition model.workflow.Condition `json:"condition"
-// binding:"required"`
-// model.workflow.Job model.workflow.Job `json:"job" binding:"required"`
-// PercolationId Ident `json:"percolation_id"`
-// }
-/*
+ *
+ * when the and'ed set of Conditions all are true, do Something
+ * Events are the results of the Conditions queries
+ * model.workflow.Job is the JobMessage to submit back to Pz
+ * TODO: some sort of mapping from the event info into the model.workflow.Job
+ * string
+ *
+ * type model.workflow.Trigger struct {
+ * Id Ident `json:"id"`
+ * Title string `json:"title" binding:"required"`
+ * model.workflow.Condition model.workflow.Condition `json:"condition"
+ * binding:"required"`
+ * model.workflow.Job model.workflow.Job `json:"job" binding:"required"`
+ * PercolationId Ident `json:"percolation_id"`
+ * }
+ *
  * { "id": "987d6", "title": "my found-a-bad-telephone-number trigger",
  * "condition": { "eventtype_ids": ["17de4"], # array of EventType ids "query":
  * { "query" : { # the Elasticsearch query string "bool": { "must": [ { "match"

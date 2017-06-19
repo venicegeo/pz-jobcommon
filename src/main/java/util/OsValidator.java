@@ -42,7 +42,7 @@ public class OsValidator {
 	 * @returns - the operating system detected
 	 */
 	public OperatingSystemType getOperatingSystemType() {
-		OperatingSystemType osType = null;
+		final OperatingSystemType osType;
 		String os = System.getProperty("os.name", "generic").toLowerCase(Locale.ENGLISH);
 		
 		if ((os.indexOf("mac") >= 0) || (os.indexOf("darwin") >= 0)) {

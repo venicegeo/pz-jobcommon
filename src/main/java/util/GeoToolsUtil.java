@@ -33,7 +33,9 @@ import org.opengis.feature.simple.SimpleFeatureType;
  * @author Patrick.Doody
  * 
  */
-public class GeoToolsUtil {
+public enum GeoToolsUtil {
+	;
+	
 	private static final String POSTGIS_DATASTORE_TYPE = "postgis";
 
 	/**

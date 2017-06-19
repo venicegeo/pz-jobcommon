@@ -31,6 +31,7 @@ public class URLParameterDataType extends TextDataType {
 	@JsonIgnore
 	public String type;
 
+	@Override
 	public String getMimeType() {
 		return null;
 	}

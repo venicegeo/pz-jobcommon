@@ -60,6 +60,7 @@ public class Permission {
 		this.uri = uri;
 	}
 
+	@Override
 	public String toString() {
 		return String.format("Method %s : URI %s", requestMethod, uri);
 	}

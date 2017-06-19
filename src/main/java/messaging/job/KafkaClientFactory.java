@@ -27,8 +27,9 @@ import org.apache.kafka.clients.producer.KafkaProducer;
  * @author Patrick.Doody
  * 
  */
-public class KafkaClientFactory {
-
+public enum KafkaClientFactory {
+	;
+	
 	private static final String BOOTSTRAP_SERVERS = "bootstrap.servers";
 	private static final String STRING_SERIALIZER = "org.apache.kafka.common.serialization.StringSerializer";
 	private static final String STRING_DESERIALIZER = "org.apache.kafka.common.serialization.StringDeserializer";
