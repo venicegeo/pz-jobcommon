@@ -31,23 +31,24 @@ import io.swagger.annotations.ApiModelProperty;
 
 /**
  * Created by sbortman on 6/2/16.
- */
-
-// posted by some source (service, user, etc) to indicate Something Happened
-// Data is specific to the EventType
-// TODO: use the delayed-parsing, raw-message json thing?
-//
-// type model.workflow.Event struct {
-// Id Ident `json:"id"`
-// EventTypeId Ident `json:"eventtype_id" binding:"required"`
-// Date time.Time `json:"date" binding:"required"`
-// Data map[string]interface{} `json:"data"`
-// }
-/*
+ * 
+ * posted by some source (service, user, etc) to indicate Something Happened
+ * Data is specific to the EventType
+ * TODO: use the delayed-parsing, raw-message json thing?
+ * 
+ * {@code
+ * type model.workflow.Event struct {
+ * Id Ident `json:"id"`
+ * EventTypeId Ident `json:"eventtype_id" binding:"required"`
+ * Date time.Time `json:"date" binding:"required"`
+ * Data map[string]interface{} `json:"data"`
+ * }
+ * 
  * { "id": "53dac" "eventtype_id": "17de4", "date": "2007-04-05T14:30:00Z",
  * "data": { "ItemId": "eb872", # in this case, the id of a data item loaded
  * into Pz "Severity": 4, "Problem": "us-bbox", "userName": "my-api-key-38n987",
  * "jobId": "43688858-b6d4-4ef9-a98b-163e1980bba8" } }
+ * }
  */
 @JsonInclude(Include.NON_NULL)
 public class Event {

@@ -31,16 +31,14 @@ import io.swagger.annotations.ApiModelProperty;
 
 /**
  * Created by sbortman on 6/2/16.
- */
-
-// type model.workflow.EventType struct {
-// Id Ident `json:"id"`
-// Name string `json:"name" binding:"required"`
-// Mapping map[string]elasticsearch.MappingElementTypeName `json:"mapping"
-// binding:"required"`
-// }
-
-/*
+ *
+ * type model.workflow.EventType struct {
+ * Id Ident `json:"id"`
+ * Name string `json:"name" binding:"required"`
+ * Mapping map[string]elasticsearch.MappingElementTypeName `json:"mapping"
+ * binding:"required"`
+ * }
+ *
  * { "id": "17de4", "name": "USDataFound", # short, id-like string "mapping": {
  * "ItemId": "string", # the uuid of the bad data "Severity": "integer", # level
  * of offense, 1..5 "Problem": "string" # nature of the issue, e.g. US bbox, US

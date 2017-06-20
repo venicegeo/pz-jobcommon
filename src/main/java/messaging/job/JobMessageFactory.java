@@ -37,7 +37,9 @@ import model.status.StatusUpdate;
  * @author Patrick.Doody
  * 
  */
-public class JobMessageFactory {
+public enum JobMessageFactory {
+	;
+	
 	public static final String REQUEST_JOB_TOPIC_NAME = "Request-Job";
 	public static final String CREATE_JOB_TOPIC_NAME = "Create-Job";
 	public static final String ABORT_JOB_TOPIC_NAME = "Abort-Job";

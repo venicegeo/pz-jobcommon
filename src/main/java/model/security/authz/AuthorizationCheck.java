@@ -44,7 +44,7 @@ public class AuthorizationCheck {
 	 * Default constructor
 	 */
 	public AuthorizationCheck() {
-
+		// Empty constructor required by Jackson
 	}
 
 	/**

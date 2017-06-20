@@ -73,7 +73,7 @@ public class StatusUpdate {
 	private ResultType result;
 
 	public StatusUpdate() {
-
+		// Empty constructor required by Jackson
 	}
 
 	public StatusUpdate(String status) {

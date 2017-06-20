@@ -208,23 +208,7 @@ public class Service {
 		// Loop through every Property
 		for (Method fromMethod : methods) {
 			if (fromMethod.getDeclaringClass().equals(this.getClass()) && fromMethod.getName().startsWith("get")) {
-
-				String fromName = fromMethod.getName();
-				String toName = fromName.replace("get", "set");
-
-				if (protectedNames.contains(toName)) {
-					continue;
-				}
-
-				try {
-					Method toMethod = this.getClass().getMethod(toName, fromMethod.getReturnType());
-					Object value = fromMethod.invoke(other, (Object[]) null);
-					if ((value != null) || (overwriteNull == true)) {
-						toMethod.invoke(this, value);
-					}
-				} catch (Exception exception) {
-					LOGGER.error("Error merging the properties of ResourceMetadatas", exception);
-				}
+				mergeMethod(other, overwriteNull, fromMethod, protectedNames);
 			}
 		}
 
@@ -234,6 +218,26 @@ public class Service {
 				this.setResourceMetadata(new ResourceMetadata());
 			}
 			this.resourceMetadata.merge(other.getResourceMetadata(), overwriteNull);
+		}
+	}
+	
+	private void mergeMethod(final Service other, boolean overwriteNull, final Method fromMethod, final List<String> protectedNames) {
+		
+		String fromName = fromMethod.getName();
+		String toName = fromName.replace("get", "set");
+
+		if (protectedNames.contains(toName)) {
+			return;
+		}
+
+		try {
+			Method toMethod = this.getClass().getMethod(toName, fromMethod.getReturnType());
+			Object value = fromMethod.invoke(other, (Object[]) null);
+			if ((value != null) || (overwriteNull == true)) {
+				toMethod.invoke(this, value);
+			}
+		} catch (Exception exception) {
+			LOGGER.error("Error merging the properties of ResourceMetadatas", exception);
 		}
 	}
 }

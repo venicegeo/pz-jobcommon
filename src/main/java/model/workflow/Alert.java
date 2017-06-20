@@ -27,19 +27,19 @@ import io.swagger.annotations.ApiModelProperty;
 
 /**
  * Created by sbortman on 6/2/16.
- */
-// a notification, automatically created when an model.workflow.Trigger happens
-//
-// type model.workflow.Alert struct {
-// Id Ident `json:"id"`
-// TriggerId Ident `json:"trigger_id"`
-// EventId Ident `json:"event_id"`
-// }
-
-/*
+ * 
+ *  a notification, automatically created when an model.workflow.Trigger happens
+ *  
+ * {@code
+ * type model.workflow.Alert struct {
+ *  Id Ident `json:"id"`
+ *  TriggerId Ident `json:"trigger_id"`
+ *  EventId Ident `json:"event_id"`
+ * }
+ * 
  * { "id": "8e6fa", "trigger_id": "987d6", "event_id": "53dac" }
+ * }
  */
-
 public class Alert {
 	@ApiModelProperty(value = "The unique Id for this Alert", required = true)
 	public String alertId;
