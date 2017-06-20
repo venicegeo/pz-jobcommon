@@ -19,8 +19,8 @@ import model.job.PiazzaJobType;
 import model.service.SearchCriteria;
 
 public class SearchServiceJob implements PiazzaJobType {
-	public String jobId = null;
-	public SearchCriteria data;
+	private String jobId = null;
+	private SearchCriteria data;
 
 	public SearchServiceJob() {
 		// Empty constructor required by Jackson
@@ -36,5 +36,13 @@ public class SearchServiceJob implements PiazzaJobType {
 
 	public void setJobId(String jobId) {
 		this.jobId = jobId;
+	}
+
+	public SearchCriteria getData() {
+		return data;
+	}
+
+	public void setData(SearchCriteria data) {
+		this.data = data;
 	}
 }

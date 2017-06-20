@@ -39,9 +39,9 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 @JsonInclude(Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Lease {
-	public String leaseId;
-	public String deploymentId;
-	public String expiresOn;
+	private String leaseId;
+	private String deploymentId;
+	private String expiresOn;
 
 	/**
 	 * Creates a new Deployment Lease.

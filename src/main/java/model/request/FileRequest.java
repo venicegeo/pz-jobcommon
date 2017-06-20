@@ -24,6 +24,19 @@ package model.request;
  * 
  */
 public class FileRequest {
-	public String createdBy;
-	public String dataId;
+	private String createdBy;
+	private String dataId;
+	
+	public String getCreatedBy() {
+		return createdBy;
+	}
+	public void setCreatedBy(String createdBy) {
+		this.createdBy = createdBy;
+	}
+	public String getDataId() {
+		return dataId;
+	}
+	public void setDataId(String dataId) {
+		this.dataId = dataId;
+	}
 }

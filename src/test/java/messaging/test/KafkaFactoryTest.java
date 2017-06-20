@@ -78,7 +78,7 @@ public class KafkaFactoryTest {
 		assertTrue(record.topic().equals(JobMessageFactory.CREATE_JOB_TOPIC_NAME + "-TEST"));
 		assertTrue(record.key().equals("123456"));
 		Job serializedJob = new ObjectMapper().readValue(record.value(), Job.class);
-		assertTrue(serializedJob.jobType instanceof AbortJob);
+		assertTrue(serializedJob.getJobType() instanceof AbortJob);
 
 		// Test Ingest Job Creation
 		DataResource mockData = new DataResource();
@@ -94,7 +94,7 @@ public class KafkaFactoryTest {
 
 		// Test Worker Job Creation
 		record = JobMessageFactory.getWorkerJobCreateMessage(mockJob, "TEST");
-		assertTrue(record.topic().equals(mockJob.jobType.getClass().getSimpleName() + "-TEST"));
+		assertTrue(record.topic().equals(mockJob.getJobType().getClass().getSimpleName() + "-TEST"));
 		assertTrue(record.key().equals("123456"));
 
 		// Test deserialized helper method

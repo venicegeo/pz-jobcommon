@@ -29,9 +29,9 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class MetricElement {
 	
-	public String name;
-	public String value;
-	public String object;
+	private String name;
+	private String value;
+	private String object;
 	
 	public MetricElement() {
 		// Empty constructor required by Jackson

@@ -47,15 +47,15 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonInclude(Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Job {
-	public String jobId;
-	public PiazzaJobType jobType;
+	private String jobId;
+	private PiazzaJobType jobType;
 	@JsonIgnore
-	public DateTime createdOn;
-	public String createdBy;
-	public String status;
-	public JobProgress progress = new JobProgress();
-	public List<JobProgress> history = new ArrayList<JobProgress>();
-	public ResultType result;
+	private DateTime createdOn;
+	private String createdBy;
+	private String status;
+	private JobProgress progress = new JobProgress();
+	private List<JobProgress> history = new ArrayList<JobProgress>();
+	private ResultType result;
 
 	public Job() {
 		// Empty constructor required by Jackson
@@ -130,5 +130,13 @@ public class Job {
 
 	public void setResult(ResultType result) {
 		this.result = result;
+	}
+
+	public List<JobProgress> getHistory() {
+		return history;
+	}
+
+	public void setHistory(List<JobProgress> history) {
+		this.history = history;
 	}
 }

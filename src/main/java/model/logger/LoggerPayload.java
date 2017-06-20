@@ -33,19 +33,19 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class LoggerPayload {
 
-	public int facility = 1;
+	private int facility = 1;
 	@JsonIgnore
-	public Severity severity;
-	public int version = 1;
+	private Severity severity;
+	private int version = 1;
 	@JsonIgnore
-	public DateTime timestamp;
-	public String hostName;
-	public String application;
-	public String process;
-	public String messageId;
+	private DateTime timestamp;
+	private String hostName;
+	private String application;
+	private String process;
+	private String messageId;
 	private AuditElement auditData;
 	private MetricElement metricData;
-	public String message;
+	private String message;
 
 	public LoggerPayload() {
 		// Empty constructor required by Jackson

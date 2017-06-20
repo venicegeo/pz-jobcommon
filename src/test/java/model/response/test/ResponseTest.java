@@ -157,9 +157,9 @@ public class ResponseTest {
 		Job job = new Job();
 		job.setJobId("123456");
 		job.setCreatedOnString(new DateTime().toString());
-		job.jobType = new AbortJob("123456", "Test");
-		job.createdBy = "Tester";
-		job.status = StatusUpdate.STATUS_SUCCESS;
+		job.setJobType(new AbortJob("123456", "Test"));
+		job.setCreatedBy("Tester");
+		job.setStatus(StatusUpdate.STATUS_SUCCESS);
 		JobStatusResponse input = new JobStatusResponse(job);
 
 		String serialized = mapper.writeValueAsString(input);

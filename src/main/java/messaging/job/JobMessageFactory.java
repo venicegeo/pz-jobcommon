@@ -176,7 +176,7 @@ public enum JobMessageFactory {
 	 */
 	public static ProducerRecord<String, String> getWorkerJobCreateMessage(Job job, String space) throws JsonProcessingException {
 		ObjectMapper mapper = new ObjectMapper();
-		return new ProducerRecord<String, String>(String.format(KAFKA_TOPIC_TEMPLATE, job.jobType.getClass().getSimpleName(), space),
+		return new ProducerRecord<String, String>(String.format(KAFKA_TOPIC_TEMPLATE, job.getJobType().getClass().getSimpleName(), space),
 				job.getJobId(), mapper.writeValueAsString(job));
 	}
 

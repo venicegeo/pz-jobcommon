@@ -88,12 +88,12 @@ public class JobStatusResponse extends PiazzaResponse {
 		 */
 		public void populateFromJob(Job job) {
 			jobId = job.getJobId();
-			result = job.result;
-			status = job.status;
-			progress = job.progress;
+			result = job.getResult();
+			status = job.getStatus();
+			progress = job.getProgress();
 			jobType = job.getJobType().getClass().getSimpleName();
-			createdBy = job.createdBy;
-			createdOn = job.createdOn.toString();
+			createdBy = job.getCreatedBy();
+			createdOn = job.getCreatedOnString();
 
 			// If a Service Job, populate the Id for traceability. Try/catch so as not to break on legacy Jobs that
 			// might still exist that do not follow the model of the current Execute Service Job.

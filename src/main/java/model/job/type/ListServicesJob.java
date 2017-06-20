@@ -18,5 +18,13 @@ package model.job.type;
 import model.job.PiazzaJobType;
 
 public class ListServicesJob implements PiazzaJobType {
-	public boolean detailed = false;
+	private boolean detailed = false;
+
+	public boolean isDetailed() {
+		return detailed;
+	}
+
+	public void setDetailed(boolean detailed) {
+		this.detailed = detailed;
+	}
 }

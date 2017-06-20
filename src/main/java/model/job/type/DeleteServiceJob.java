@@ -19,9 +19,9 @@ import model.job.PiazzaJobType;
 
 public class DeleteServiceJob implements PiazzaJobType {
 
-	public String jobId = null;
-	public String serviceID;
-	public String reason;
+	private String jobId = null;
+	private String serviceID;
+	private String reason;
 
 	public DeleteServiceJob() {
 		// Empty constructor required by Jackson\
@@ -37,5 +37,21 @@ public class DeleteServiceJob implements PiazzaJobType {
 
 	public void setJobId(String jobId) {
 		this.jobId = jobId;
+	}
+
+	public String getServiceID() {
+		return serviceID;
+	}
+
+	public void setServiceID(String serviceID) {
+		this.serviceID = serviceID;
+	}
+
+	public String getReason() {
+		return reason;
+	}
+
+	public void setReason(String reason) {
+		this.reason = reason;
 	}
 }

@@ -19,8 +19,8 @@ import model.job.PiazzaJobType;
 
 public class DescribeServiceMetadataJob implements PiazzaJobType {
 
-	public String jobId = null;
-	public String serviceID;
+	private String jobId = null;
+	private String serviceID;
 
 	public DescribeServiceMetadataJob() {
 		// Empty constructor required by Jackson\
@@ -36,5 +36,13 @@ public class DescribeServiceMetadataJob implements PiazzaJobType {
 
 	public void setJobId(String jobId) {
 		this.jobId = jobId;
+	}
+
+	public String getServiceID() {
+		return serviceID;
+	}
+
+	public void setServiceID(String serviceID) {
+		this.serviceID = serviceID;
 	}
 }

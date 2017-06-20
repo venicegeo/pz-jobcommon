@@ -39,9 +39,9 @@ public class ServiceJob {
 	/**
 	 * The ID of the Service this Job pertains to.
 	 */
-	public String serviceId;
-	public String jobId;
-	public Integer timeouts;
+	private String serviceId;
+	private String jobId;
+	private Integer timeouts;
 	/**
 	 * The time that work began processing on this Job.
 	 */

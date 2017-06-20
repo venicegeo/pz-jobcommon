@@ -24,9 +24,9 @@ package model.service;
  */
 public class SearchCriteria {
 
-	public String field;
+	private String field;
 
-	public String pattern;
+	private String pattern;
 
 	public String getField() {
 		return field;

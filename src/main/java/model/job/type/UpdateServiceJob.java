@@ -20,9 +20,9 @@ import model.service.metadata.Service;
 
 public class UpdateServiceJob implements PiazzaJobType {
 
-	public String jobId = null;
-	public String serviceID;
-	public Service data;
+	private String jobId = null;
+	private String serviceID;
+	private Service data;
 
 	public UpdateServiceJob() {
 		// Empty constructor required by Jackson
@@ -38,5 +38,21 @@ public class UpdateServiceJob implements PiazzaJobType {
 
 	public void setJobId(String jobId) {
 		this.jobId = jobId;
+	}
+
+	public String getServiceID() {
+		return serviceID;
+	}
+
+	public void setServiceID(String serviceID) {
+		this.serviceID = serviceID;
+	}
+
+	public Service getData() {
+		return data;
+	}
+
+	public void setData(Service data) {
+		this.data = data;
 	}
 }

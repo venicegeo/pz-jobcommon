@@ -29,9 +29,9 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class AuditElement {
 
-	public String actor;
-	public String action;
-	public String actee;
+	private String actor;
+	private String action;
+	private String actee;
 
 	public AuditElement() {
 		// Empty constructor required by Jackson

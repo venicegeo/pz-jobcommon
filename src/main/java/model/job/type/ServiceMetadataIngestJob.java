@@ -29,7 +29,7 @@ import model.service.metadata.Service;
  */
 public class ServiceMetadataIngestJob implements PiazzaJobType {
 
-	public Service data;
+	private Service data;
 
 	public ServiceMetadataIngestJob() {
 		// Empty constructor required by Jackson

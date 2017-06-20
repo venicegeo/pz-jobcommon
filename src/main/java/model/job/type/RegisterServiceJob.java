@@ -19,13 +19,21 @@ import model.job.PiazzaJobType;
 import model.service.metadata.Service;
 
 public class RegisterServiceJob implements PiazzaJobType {
-	public Service data;
+	private Service data;
 
 	public RegisterServiceJob() {
-		// Empty constructor required by Jackson\
+		// Empty constructor required by Jackson
 	}
 
 	public RegisterServiceJob(Service data) {
+		this.setData(data);
+	}
+
+	public Service getData() {
+		return data;
+	}
+
+	public void setData(Service data) {
 		this.data = data;
 	}
 }
