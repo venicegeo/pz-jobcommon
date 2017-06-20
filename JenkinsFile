@@ -3,12 +3,10 @@
 node {
   def root = pwd()
   def mvn = tool 'M3'
-  def sonarUrl = "https://sonar.gs.mil"
-  def projectKey = "venicegeo:piazza:pz-jobcommon"
-  def projectName = "venicegeo:piazza:pz-jobcommon"
-  def appvers = sh(script: "git describe --long --tags --always | sed 's/\\./-/'g", returnStdout: true)
- 
-  stage('Setup') {
+  def zapHome = tool 'ZAProxy_v2_5_0'
+
+
+  stage("Setup") {
     deleteDir()
     // github is open gitlab requires credentials to clone
     if(env.GITLAB_CREDS) {
@@ -18,22 +16,10 @@ node {
     }
   }
 
-  stage('Archive') {
-    sh """
-      ${mvn}/bin/mvn clean package -U -Dmaven.repo.local=${root}
-      cp ${root}/target/pz-jobcommon-LATEST.jar ${root}/pz-jobcommon.jar
-    """
-   sh """mvn -X --settings ~/.m2/settings.xml deploy:deploy-file -Dfile=${root}/pz-jobcommon.jar \
-      -DrepositoryId=nexus \
-      -Durl="${env.ARTIFACT_STORAGE_DEPLOY_URL}" \
-      -DgroupId="org.venice.piazza" \
-      -DgeneratePom=false \
-      -Dpackaging=jar \
-      -Dmaven.repo.local="${root}/.m2/repository" \
-      -DartifactId=pz-jobcommon \
-      -Dversion=${appvers}
-    """
-  }
+  def appvers = sh(script: "git describe --long --tags --always | sed 's/\\./-/'g", returnStdout: true)
+  appvers = appvers.trim()
+  def appName = "pz-jobcommon-${appvers}"
+
 
   stage('Scans') {
     withCredentials([[$class: "StringBinding", credentialsId: "${env.THREADFIX_API_KEY}", variable: "THREADFIX_KEY"]]) {
@@ -62,11 +48,47 @@ node {
       sh "/opt/hp_fortify_sca/bin/sourceanalyzer -b ${env.BUILD_NUMBER}  -scan -Xmx1G -f fortifyResults-${env.BUILD_NUMBER}.fpr"
       sh "/bin/curl -v --insecure -H 'Accept: application/json' -X POST --form file=@fortifyResults-${env.BUILD_NUMBER}.fpr ${env.THREADFIX_URL}/rest/applications/${env.THREADFIX_ID}/upload?apiKey=${THREADFIX_KEY}"
     }
-    
-    withCredentials([string(credentialsId: 'sonar-prod-publish-token', variable: 'USERNAME')]) {
+
+    withCredentials([string(credentialsId: "${env.SONAR_TOKEN}", variable: "USERNAME")]) {
       withEnv(["HOME=${root}", "_JAVA_OPTIONS=-Duser.home=${root}"]) {
-        sh "${mvn}/bin/mvn sonar:sonar -Dmaven.repo.local=${root} -Dsonar.host.url=${sonarUrl} -Dsonar.projectKey=${projectKey} -Dsonar.projectName=${projectName} -Dsonar.login=${USERNAME} -P nga"
+        def projectId = "venicegeo:piazza:pz-jobcommon"
+        sh "${mvn}/bin/mvn sonar:sonar -Dmaven.repo.local=${root} -Dsonar.host.url=${SONAR_URL} -Dsonar.projectKey=${projectId} -Dsonar.projectName=${projectId} -Dsonar.login=${USERNAME} -P nga"
       }
     }
   }
+
+  stage("Archive") {
+    def archiveName = "pz-jobcommon-LATEST.jar"
+    // Check if exists already
+    def getDependencyStatus = sh(script: """mvn --quiet --settings ~/.m2/settings.xml dependency:get \
+			-Dmaven.repo.local="${root}/.m2/repository" \
+			-DrepositoryId=nexus \
+			-DartifactId=pz-jobcommon \
+			-Dversion=${appvers} \
+			-DgroupId="org.venice.piazza" \
+			-Dpackaging=jar \
+			-DremoteRepositories="nexus::default::${env.ARTIFACT_STORAGE_DEPLOY_URL}" \
+			>> /dev/null 2>&1 \
+		""", returnStatus: true)
+	if (getDependencyStatus == 0) {
+		echo "Artifact version ${appvers} exists in Nexus, nothing to do"
+	} else {
+	  // Deploy file
+
+        sh """${mvn}/bin/mvn clean package -U -Dmaven.repo.local=${root}
+           cp ${root}/target/pz-jobcommon-LATEST.jar ${root}/pz-jobcommon.jar
+           """
+        sh """mvn -X --settings ~/.m2/settings.xml deploy:deploy-file -Dfile=${root}/pz-jobcommon.jar \
+           -DrepositoryId=nexus \
+           -Durl="${env.ARTIFACT_STORAGE_DEPLOY_URL}" \
+           -DgroupId="org.venice.piazza" \
+           -DgeneratePom=false \
+           -Dpackaging=jar \
+           -Dmaven.repo.local="${root}/.m2/repository" \
+           -DartifactId=pz-jobcommon \
+           -Dversion=${appvers}
+         """
+       }
+  }
 }
+

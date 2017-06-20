@@ -16,7 +16,7 @@
 package model.response;
 
 import java.io.Serializable;
-import java.util.HashMap;
+import java.util.Map;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import model.security.authz.UserProfile;
@@ -36,7 +36,7 @@ public class UserProfileResponse extends PiazzaResponse implements Serializable 
 		this.data.setUserProfile(userProfile);
 	}
 
-	public UserProfileResponse(UserProfile userProfile, HashMap<String, Integer> throttles) {
+	public UserProfileResponse(UserProfile userProfile, Map<String, Integer> throttles) {
 		this(userProfile);
 		this.data.setThrottles(throttles);
 	}
@@ -57,7 +57,7 @@ public class UserProfileResponse extends PiazzaResponse implements Serializable 
 		 * throttles.
 		 */
 		@ApiModelProperty(required = true, value = "User Throttle information")
-		public HashMap<String, Integer> throttles;
+		public Map<String, Integer> throttles;
 
 		public UserProfile getUserProfile() {
 			return this.userProfile;
@@ -67,11 +67,11 @@ public class UserProfileResponse extends PiazzaResponse implements Serializable 
 			this.userProfile = userProfile;
 		}
 
-		public HashMap<String, Integer> getThrottles() {
+		public Map<String, Integer> getThrottles() {
 			return this.throttles;
 		}
 
-		public void setThrottles(HashMap<String, Integer> throttles) {
+		public void setThrottles(Map<String, Integer> throttles) {
 			this.throttles = throttles;
 		}
 	}
