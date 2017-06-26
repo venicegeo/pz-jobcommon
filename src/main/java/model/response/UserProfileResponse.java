@@ -57,7 +57,7 @@ public class UserProfileResponse extends PiazzaResponse implements Serializable 
 		 * throttles.
 		 */
 		@ApiModelProperty(required = true, value = "User Throttle information")
-		public Map<String, Integer> throttles;
+		private Map<String, Integer> throttles;
 
 		public UserProfile getUserProfile() {
 			return this.userProfile;
