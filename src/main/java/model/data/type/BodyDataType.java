@@ -19,13 +19,37 @@
  */
 package model.data.type;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import io.swagger.annotations.ApiModelProperty;
+import model.data.DataType;
 
-public class BodyDataType extends TextDataType {
+public class BodyDataType implements DataType {
 
 	@ApiModelProperty(required = true, value = "The type of Data", allowableValues = "body")
 	@JsonIgnore
 	public String type;
+
+	@ApiModelProperty(value = "The text content of the Data", required = true)
+	@NotNull
+	@Size(min=1)
+	public String content;
+
+	@ApiModelProperty(value = "The media type of the stored Data.  Refer to http://www.iana.org for standard values")
+	public String mimeType;
+
+	public BodyDataType() { //NOSONAR
+		// Normal for empty constructor even with @NotNull fields
+	}
+
+	public String getContent() {
+		return content;
+	}
+
+	public String getMimeType() {
+		return mimeType;
+	}
 }

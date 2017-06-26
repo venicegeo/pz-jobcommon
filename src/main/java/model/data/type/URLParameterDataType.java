@@ -15,9 +15,13 @@
  **/
 package model.data.type;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import io.swagger.annotations.ApiModelProperty;
+import model.data.DataType;
 
 /**
  * Indicates that text content is to be used in URL key-value pair
@@ -25,13 +29,28 @@ import io.swagger.annotations.ApiModelProperty;
  * @author bkrasner
  *
  */
-public class URLParameterDataType extends TextDataType {
+public class URLParameterDataType implements DataType {
 
 	@ApiModelProperty(required = true, value = "The type of Data", allowableValues = "urlparameter")
 	@JsonIgnore
 	public String type;
 
-	@Override
+	@ApiModelProperty(value = "The text content of the Data", required = true)
+	@NotNull
+	@Size(min=1)
+	public String content;
+
+	@ApiModelProperty(value = "The media type of the stored Data.  Refer to http://www.iana.org for standard values")
+	public String mimeType;
+
+	public URLParameterDataType() { //NOSONAR
+		// Normal for empty constructor even with @NotNull fields
+	}
+
+	public String getContent() {
+		return content;
+	}
+	
 	public String getMimeType() {
 		return null;
 	}
