@@ -13,8 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-package hibernate.usertype;
+package hibernate.util;
 
-public class DeploymentType {
+import java.sql.Types;
 
+import org.hibernate.dialect.PostgreSQL94Dialect;
+
+/**
+ * Extends the PostgresQL Dialect to add a reference to the jsonb postgresql data type; which Hibernate otherwise would
+ * not have any knowledge of.
+ * 
+ * @author Patrick.Doody
+ *
+ */
+public class JsonPostgreSQL94Dialect extends PostgreSQL94Dialect {
+
+	public JsonPostgreSQL94Dialect() {
+		this.registerColumnType(Types.JAVA_OBJECT, "jsonb");
+	}
 }

@@ -22,6 +22,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 /**
  * Model for defining throttling restrictions to be checked during Authorization decisions.
  * 
+ * 
  * @author Russell Orf
  * 
  */
