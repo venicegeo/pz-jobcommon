@@ -15,6 +15,19 @@
  **/
 package hibernate.dao;
 
-public interface ServiceJobDao {
+import javax.transaction.Transactional;
+
+import org.springframework.data.repository.CrudRepository;
+
+import model.service.taskmanaged.ServiceJob;
+
+/**
+ * Data Access Object for Service Job Entities
+ * 
+ * @author Patrick.Doody
+ *
+ */
+@Transactional
+public interface ServiceJobDao extends CrudRepository<ServiceJob, Long> {
 
 }

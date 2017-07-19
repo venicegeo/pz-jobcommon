@@ -15,6 +15,19 @@
  **/
 package hibernate.dao;
 
-public interface ServiceDao {
+import javax.transaction.Transactional;
+
+import org.springframework.data.repository.CrudRepository;
+
+import model.service.metadata.Service;
+
+/**
+ * Data Access Object for Service Entities
+ * 
+ * @author Patrick.Doody
+ *
+ */
+@Transactional
+public interface ServiceDao extends CrudRepository<Service, Long> {
 
 }

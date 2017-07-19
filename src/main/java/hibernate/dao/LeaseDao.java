@@ -15,6 +15,19 @@
  **/
 package hibernate.dao;
 
-public interface LeaseDao {
+import javax.transaction.Transactional;
+
+import org.springframework.data.repository.CrudRepository;
+
+import model.data.deployment.Lease;
+
+/**
+ * Data Access Object for Lease Entities
+ * 
+ * @author Patrick.Doody
+ *
+ */
+@Transactional
+public interface LeaseDao extends CrudRepository<Lease, Long> {
 
 }

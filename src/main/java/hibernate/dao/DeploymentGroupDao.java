@@ -15,6 +15,19 @@
  **/
 package hibernate.dao;
 
-public interface DeploymentGroupDao {
+import javax.transaction.Transactional;
+
+import org.springframework.data.repository.CrudRepository;
+
+import model.data.deployment.DeploymentGroup;
+
+/**
+ * Data Access Object for Deployment Group Entities
+ * 
+ * @author Patrick.Doody
+ *
+ */
+@Transactional
+public interface DeploymentGroupDao extends CrudRepository<DeploymentGroup, Long> {
 
 }

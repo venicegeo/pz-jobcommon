@@ -15,6 +15,19 @@
  **/
 package hibernate.dao;
 
-public interface JobDao {
+import javax.transaction.Transactional;
+
+import org.springframework.data.repository.CrudRepository;
+
+import model.job.Job;
+
+/**
+ * Data Access Object for Job Entities
+ * 
+ * @author Patrick.Doody
+ *
+ */
+@Transactional
+public interface JobDao extends CrudRepository<Job, Long> {
 
 }

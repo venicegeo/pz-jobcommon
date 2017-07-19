@@ -15,6 +15,19 @@
  **/
 package hibernate.dao;
 
-public interface UserThrottlesDao {
+import javax.transaction.Transactional;
+
+import org.springframework.data.repository.CrudRepository;
+
+import model.security.authz.UserThrottles;
+
+/**
+ * Data Access Object for User Throttles Entities
+ * 
+ * @author Patrick.Doody
+ *
+ */
+@Transactional
+public interface UserThrottlesDao extends CrudRepository<UserThrottles, Long> {
 
 }

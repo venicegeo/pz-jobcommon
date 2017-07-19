@@ -15,6 +15,19 @@
  **/
 package hibernate.dao;
 
-public interface UserProfileDao {
+import javax.transaction.Transactional;
+
+import org.springframework.data.repository.CrudRepository;
+
+import model.security.authz.UserProfile;
+
+/**
+ * Data Access Object for User Profile Entities
+ * 
+ * @author Patrick.Doody
+ *
+ */
+@Transactional
+public interface UserProfileDao extends CrudRepository<UserProfile, Long> {
 
 }

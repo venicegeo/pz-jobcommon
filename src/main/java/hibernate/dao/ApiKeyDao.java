@@ -15,6 +15,19 @@
  **/
 package hibernate.dao;
 
-public interface ApiKeyDao {
+import javax.transaction.Transactional;
+
+import org.springframework.data.repository.CrudRepository;
+
+import springfox.documentation.service.ApiKey;
+
+/**
+ * Data Access Object for Api Key Entities
+ * 
+ * @author Patrick.Doody
+ *
+ */
+@Transactional
+public interface ApiKeyDao extends CrudRepository<ApiKey, Long> {
 
 }

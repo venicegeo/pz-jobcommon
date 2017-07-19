@@ -15,6 +15,19 @@
  **/
 package hibernate.dao;
 
-public interface DataResourceDao {
+import javax.transaction.Transactional;
+
+import org.springframework.data.repository.CrudRepository;
+
+import model.data.DataResource;
+
+/**
+ * Data Access Object for DataResource Entities
+ * 
+ * @author Patrick.Doody
+ *
+ */
+@Transactional
+public interface DataResourceDao extends CrudRepository<DataResource, Long> {
 
 }

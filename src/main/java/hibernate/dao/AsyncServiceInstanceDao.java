@@ -15,6 +15,19 @@
  **/
 package hibernate.dao;
 
-public interface AsyncServiceInstanceDao {
+import javax.transaction.Transactional;
+
+import org.springframework.data.repository.CrudRepository;
+
+import model.service.async.AsyncServiceInstance;
+
+/**
+ * Data Access Object for Asynchronous Service Instance Entities
+ * 
+ * @author Patrick.Doody
+ *
+ */
+@Transactional
+public interface AsyncServiceInstanceDao extends CrudRepository<AsyncServiceInstance, Long> {
 
 }
