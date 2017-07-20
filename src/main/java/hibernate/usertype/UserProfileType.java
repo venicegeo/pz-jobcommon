@@ -15,6 +15,17 @@
  **/
 package hibernate.usertype;
 
-public class UserProfileType {
+import hibernate.util.GenericJsonUserType;
+import model.security.authz.UserProfile;
 
+/**
+ * Hibernate UserProfile Class that ties the API Key POJO to a JSONB table mapping in Postgres
+ * 
+ * @author Patrick.Doody
+ *
+ */
+public class UserProfileType extends GenericJsonUserType {
+	public Class<UserProfile> returnedClass() {
+		return UserProfile.class;
+	}
 }

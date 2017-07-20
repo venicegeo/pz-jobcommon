@@ -15,6 +15,17 @@
  **/
 package hibernate.usertype;
 
-public class DeploymentType {
+import hibernate.util.GenericJsonUserType;
+import model.data.deployment.Deployment;
 
+/**
+ * Hibernate Deployment Class that ties the API Key POJO to a JSONB table mapping in Postgres
+ * 
+ * @author Patrick.Doody
+ *
+ */
+public class DeploymentType extends GenericJsonUserType {
+	public Class<Deployment> returnedClass() {
+		return Deployment.class;
+	}
 }

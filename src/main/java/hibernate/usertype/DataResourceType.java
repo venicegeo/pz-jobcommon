@@ -15,6 +15,17 @@
  **/
 package hibernate.usertype;
 
-public class DataResourceType {
+import hibernate.util.GenericJsonUserType;
+import model.data.DataResource;
 
+/**
+ * Hibernate DataResource Class that ties the API Key POJO to a JSONB table mapping in Postgres
+ * 
+ * @author Patrick.Doody
+ *
+ */
+public class DataResourceType extends GenericJsonUserType {
+	public Class<DataResource> returnedClass() {
+		return DataResource.class;
+	}
 }

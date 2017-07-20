@@ -15,6 +15,17 @@
  **/
 package hibernate.usertype;
 
-public class LeaseType {
+import hibernate.util.GenericJsonUserType;
+import model.data.deployment.Lease;
 
+/**
+ * Hibernate Lease Class that ties the API Key POJO to a JSONB table mapping in Postgres
+ * 
+ * @author Patrick.Doody
+ *
+ */
+public class LeaseType extends GenericJsonUserType {
+	public Class<Lease> returnedClass() {
+		return Lease.class;
+	}
 }

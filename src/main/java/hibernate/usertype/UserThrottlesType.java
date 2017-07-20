@@ -15,6 +15,17 @@
  **/
 package hibernate.usertype;
 
-public class UserThrottlesType {
+import hibernate.util.GenericJsonUserType;
+import model.security.authz.UserThrottles;
 
+/**
+ * Hibernate UserThrottles Class that ties the API Key POJO to a JSONB table mapping in Postgres
+ * 
+ * @author Patrick.Doody
+ *
+ */
+public class UserThrottlesType extends GenericJsonUserType {
+	public Class<UserThrottles> returnedClass() {
+		return UserThrottles.class;
+	}
 }

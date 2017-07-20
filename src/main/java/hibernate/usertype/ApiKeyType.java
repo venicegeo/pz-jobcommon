@@ -15,6 +15,17 @@
  **/
 package hibernate.usertype;
 
-public class ApiKeyType {
+import hibernate.util.GenericJsonUserType;
+import springfox.documentation.service.ApiKey;
 
+/**
+ * Hibernate UserType Class that ties the API Key POJO to a JSONB table mapping in Postgres
+ * 
+ * @author Patrick.Doody
+ *
+ */
+public class ApiKeyType extends GenericJsonUserType {
+	public Class<ApiKey> returnedClass() {
+		return ApiKey.class;
+	}
 }

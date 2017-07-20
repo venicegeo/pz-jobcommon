@@ -15,6 +15,17 @@
  **/
 package hibernate.usertype;
 
-public class AsyncServiceInstanceType {
+import hibernate.util.GenericJsonUserType;
+import model.service.async.AsyncServiceInstance;
 
+/**
+ * Hibernate AsyncService Instance Class that ties the API Key POJO to a JSONB table mapping in Postgres
+ * 
+ * @author Patrick.Doody
+ *
+ */
+public class AsyncServiceInstanceType extends GenericJsonUserType {
+	public Class<AsyncServiceInstance> returnedClass() {
+		return AsyncServiceInstance.class;
+	}
 }

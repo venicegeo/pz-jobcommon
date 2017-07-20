@@ -15,6 +15,17 @@
  **/
 package hibernate.usertype;
 
-public class ServiceType {
+import hibernate.util.GenericJsonUserType;
+import model.service.metadata.Service;
 
+/**
+ * Hibernate Service Class that ties the API Key POJO to a JSONB table mapping in Postgres
+ * 
+ * @author Patrick.Doody
+ *
+ */
+public class ServiceType extends GenericJsonUserType {
+	public Class<Service> returnedClass() {
+		return Service.class;
+	}
 }

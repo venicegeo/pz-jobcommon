@@ -27,7 +27,6 @@ import org.hibernate.dialect.PostgreSQL94Dialect;
  *
  */
 public class JsonPostgreSQL94Dialect extends PostgreSQL94Dialect {
-
 	public JsonPostgreSQL94Dialect() {
 		this.registerColumnType(Types.JAVA_OBJECT, "jsonb");
 	}

@@ -15,6 +15,17 @@
  **/
 package hibernate.usertype;
 
-public class JobType {
+import hibernate.util.GenericJsonUserType;
+import model.job.Job;
 
+/**
+ * Hibernate Job Class that ties the API Key POJO to a JSONB table mapping in Postgres
+ * 
+ * @author Patrick.Doody
+ *
+ */
+public class JobType extends GenericJsonUserType {
+	public Class<Job> returnedClass() {
+		return Job.class;
+	}
 }
