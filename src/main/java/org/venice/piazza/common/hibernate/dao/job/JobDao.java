@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-package org.venice.piazza.common.hibernate.dao;
+package org.venice.piazza.common.hibernate.dao.job;
 
 import javax.transaction.Transactional;
 
@@ -28,6 +28,6 @@ import model.job.Job;
  *
  */
 @Transactional
-public interface JobDao extends CrudRepository<Job, Long> {
+public interface JobDao extends CrudRepository<Job, Long>, CustomJobRepository {
 
 }
