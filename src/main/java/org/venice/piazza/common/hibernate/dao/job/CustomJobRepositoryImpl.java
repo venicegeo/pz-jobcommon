@@ -21,5 +21,5 @@ package org.venice.piazza.common.hibernate.dao.job;
  *
  */
 public class CustomJobRepositoryImpl implements CustomJobRepository {
-
+	
 }
