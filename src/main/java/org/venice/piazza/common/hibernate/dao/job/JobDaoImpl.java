@@ -23,37 +23,25 @@ import model.job.Job;
 public class JobDaoImpl implements JobDao {
 
 	@Override
-	public long count() {
+	public <S extends Job> S save(S entity) {
 		// TODO Auto-generated method stub
-		return 0;
+		return null;
 	}
 
 	@Override
-	public void delete(Long arg0) {
+	public <S extends Job> Iterable<S> save(Iterable<S> entities) {
 		// TODO Auto-generated method stub
-		
+		return null;
 	}
 
 	@Override
-	public void delete(Job arg0) {
+	public Job findOne(Long id) {
 		// TODO Auto-generated method stub
-		
+		return null;
 	}
 
 	@Override
-	public void delete(Iterable<? extends Job> arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void deleteAll() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public boolean exists(Long arg0) {
+	public boolean exists(Long id) {
 		// TODO Auto-generated method stub
 		return false;
 	}
@@ -65,27 +53,46 @@ public class JobDaoImpl implements JobDao {
 	}
 
 	@Override
-	public Iterable<Job> findAll(Iterable<Long> arg0) {
+	public Iterable<Job> findAll(Iterable<Long> ids) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Job findOne(Long arg0) {
+	public long count() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void delete(Long id) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void delete(Job entity) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void delete(Iterable<? extends Job> entities) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void deleteAll() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Long countJobByStatus(String status) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
-	public <S extends Job> S save(S arg0) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
-	@Override
-	public <S extends Job> Iterable<S> save(Iterable<S> arg0) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
 }
