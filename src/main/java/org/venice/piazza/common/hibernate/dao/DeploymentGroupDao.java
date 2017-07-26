@@ -18,8 +18,7 @@ package org.venice.piazza.common.hibernate.dao;
 import javax.transaction.Transactional;
 
 import org.springframework.data.repository.CrudRepository;
-
-import model.data.deployment.DeploymentGroup;
+import org.venice.piazza.common.hibernate.entity.DeploymentGroupEntity;
 
 /**
  * Data Access Object for Deployment Group Entities
@@ -28,6 +27,6 @@ import model.data.deployment.DeploymentGroup;
  *
  */
 @Transactional
-public interface DeploymentGroupDao extends CrudRepository<DeploymentGroup, Long> {
+public interface DeploymentGroupDao extends CrudRepository<DeploymentGroupEntity, Long> {
 
 }

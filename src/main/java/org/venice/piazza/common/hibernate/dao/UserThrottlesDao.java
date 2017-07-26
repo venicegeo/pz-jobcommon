@@ -18,8 +18,7 @@ package org.venice.piazza.common.hibernate.dao;
 import javax.transaction.Transactional;
 
 import org.springframework.data.repository.CrudRepository;
-
-import model.security.authz.UserThrottles;
+import org.venice.piazza.common.hibernate.entity.UserThrottlesEntity;
 
 /**
  * Data Access Object for User Throttles Entities
@@ -28,6 +27,6 @@ import model.security.authz.UserThrottles;
  *
  */
 @Transactional
-public interface UserThrottlesDao extends CrudRepository<UserThrottles, Long> {
+public interface UserThrottlesDao extends CrudRepository<UserThrottlesEntity, Long> {
 
 }

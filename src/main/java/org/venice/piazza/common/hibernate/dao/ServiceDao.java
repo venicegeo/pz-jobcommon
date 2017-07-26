@@ -18,8 +18,7 @@ package org.venice.piazza.common.hibernate.dao;
 import javax.transaction.Transactional;
 
 import org.springframework.data.repository.CrudRepository;
-
-import model.service.metadata.Service;
+import org.venice.piazza.common.hibernate.entity.ServiceEntity;
 
 /**
  * Data Access Object for Service Entities
@@ -28,6 +27,6 @@ import model.service.metadata.Service;
  *
  */
 @Transactional
-public interface ServiceDao extends CrudRepository<Service, Long> {
+public interface ServiceDao extends CrudRepository<ServiceEntity, Long> {
 
 }

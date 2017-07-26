@@ -18,8 +18,7 @@ package org.venice.piazza.common.hibernate.dao;
 import javax.transaction.Transactional;
 
 import org.springframework.data.repository.CrudRepository;
-
-import model.data.deployment.Lease;
+import org.venice.piazza.common.hibernate.entity.LeaseEntity;
 
 /**
  * Data Access Object for Lease Entities
@@ -28,6 +27,6 @@ import model.data.deployment.Lease;
  *
  */
 @Transactional
-public interface LeaseDao extends CrudRepository<Lease, Long> {
+public interface LeaseDao extends CrudRepository<LeaseEntity, Long> {
 
 }

@@ -18,8 +18,7 @@ package org.venice.piazza.common.hibernate.dao;
 import javax.transaction.Transactional;
 
 import org.springframework.data.repository.CrudRepository;
-
-import model.service.taskmanaged.ServiceJob;
+import org.venice.piazza.common.hibernate.entity.ServiceJobEntity;
 
 /**
  * Data Access Object for Service Job Entities
@@ -28,6 +27,6 @@ import model.service.taskmanaged.ServiceJob;
  *
  */
 @Transactional
-public interface ServiceJobDao extends CrudRepository<ServiceJob, Long> {
+public interface ServiceJobDao extends CrudRepository<ServiceJobEntity, Long> {
 
 }

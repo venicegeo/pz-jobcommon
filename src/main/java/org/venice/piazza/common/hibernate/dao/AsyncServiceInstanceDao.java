@@ -18,8 +18,7 @@ package org.venice.piazza.common.hibernate.dao;
 import javax.transaction.Transactional;
 
 import org.springframework.data.repository.CrudRepository;
-
-import model.service.async.AsyncServiceInstance;
+import org.venice.piazza.common.hibernate.entity.AsyncServiceInstanceEntity;
 
 /**
  * Data Access Object for Asynchronous Service Instance Entities
@@ -28,6 +27,6 @@ import model.service.async.AsyncServiceInstance;
  *
  */
 @Transactional
-public interface AsyncServiceInstanceDao extends CrudRepository<AsyncServiceInstance, Long> {
+public interface AsyncServiceInstanceDao extends CrudRepository<AsyncServiceInstanceEntity, Long> {
 
 }

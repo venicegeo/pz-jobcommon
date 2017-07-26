@@ -15,14 +15,11 @@
  **/
 package org.venice.piazza.common.hibernate.dao.job;
 
-import javax.transaction.Transactional;
-
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
-
-import model.job.Job;
+import org.venice.piazza.common.hibernate.entity.JobEntity;
 
 /**
  * Data Access Object for Job Entities
@@ -30,9 +27,8 @@ import model.job.Job;
  * @author Patrick.Doody
  *
  */
-@Transactional
 @Repository
-public interface JobDao extends CrudRepository<Job, Long>, CustomJobRepository {
-	@Query(value = "select count(*) from json_test where data -> 'status' = ':status'", nativeQuery = true)
+public interface JobDao extends CrudRepository<JobEntity, Long>, CustomJobRepository {
+	@Query(value = "select count(*) from job where data -> 'status' = ':status'", nativeQuery = true)
 	Long countJobByStatus(@Param("status") String status);
 }

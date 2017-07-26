@@ -18,8 +18,7 @@ package org.venice.piazza.common.hibernate.dao;
 import javax.transaction.Transactional;
 
 import org.springframework.data.repository.CrudRepository;
-
-import springfox.documentation.service.ApiKey;
+import org.venice.piazza.common.hibernate.entity.ApiKeyEntity;
 
 /**
  * Data Access Object for Api Key Entities
@@ -28,6 +27,6 @@ import springfox.documentation.service.ApiKey;
  *
  */
 @Transactional
-public interface ApiKeyDao extends CrudRepository<ApiKey, Long> {
+public interface ApiKeyDao extends CrudRepository<ApiKeyEntity, Long> {
 
 }

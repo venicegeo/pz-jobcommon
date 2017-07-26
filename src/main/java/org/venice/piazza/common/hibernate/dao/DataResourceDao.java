@@ -18,8 +18,7 @@ package org.venice.piazza.common.hibernate.dao;
 import javax.transaction.Transactional;
 
 import org.springframework.data.repository.CrudRepository;
-
-import model.data.DataResource;
+import org.venice.piazza.common.hibernate.entity.DataResourceEntity;
 
 /**
  * Data Access Object for DataResource Entities
@@ -28,6 +27,6 @@ import model.data.DataResource;
  *
  */
 @Transactional
-public interface DataResourceDao extends CrudRepository<DataResource, Long> {
+public interface DataResourceDao extends CrudRepository<DataResourceEntity, Long> {
 
 }

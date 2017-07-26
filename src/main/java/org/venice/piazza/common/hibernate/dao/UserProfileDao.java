@@ -18,8 +18,7 @@ package org.venice.piazza.common.hibernate.dao;
 import javax.transaction.Transactional;
 
 import org.springframework.data.repository.CrudRepository;
-
-import model.security.authz.UserProfile;
+import org.venice.piazza.common.hibernate.entity.UserProfileEntity;
 
 /**
  * Data Access Object for User Profile Entities
@@ -28,6 +27,6 @@ import model.security.authz.UserProfile;
  *
  */
 @Transactional
-public interface UserProfileDao extends CrudRepository<UserProfile, Long> {
+public interface UserProfileDao extends CrudRepository<UserProfileEntity, Long> {
 
 }
