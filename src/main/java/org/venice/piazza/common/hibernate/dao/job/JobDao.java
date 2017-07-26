@@ -17,7 +17,6 @@ package org.venice.piazza.common.hibernate.dao.job;
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.venice.piazza.common.hibernate.entity.JobEntity;
 
@@ -28,7 +27,7 @@ import org.venice.piazza.common.hibernate.entity.JobEntity;
  *
  */
 @Repository
-public interface JobDao extends CrudRepository<JobEntity, Long>, CustomJobRepository {
-	@Query(value = "select count(*) from job where data -> 'status' = ':status'", nativeQuery = true)
-	Long countJobByStatus(@Param("status") String status);
+public interface JobDao extends CrudRepository<JobEntity, Long> {
+	@Query(value = "select count(*) from job where data -> 'status' = '?1'", nativeQuery = true)
+	Long countJobByStatus(String status);
 }
