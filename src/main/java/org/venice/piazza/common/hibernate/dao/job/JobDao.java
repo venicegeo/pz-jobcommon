@@ -32,7 +32,7 @@ import org.venice.piazza.common.hibernate.entity.JobEntity;
  *
  */
 @Repository
-public interface JobDao extends CrudRepository<JobEntity, Long> {
+public interface JobDao extends CrudRepository<JobEntity, Long>, JobDaoCustom {
 	@Query(value = "select count(*) from job where data ->> 'status' = ?1", nativeQuery = true)
 	Long countJobByStatus(String status);
 
