@@ -15,11 +15,16 @@
  **/
 package org.venice.piazza.common.hibernate.dao.job;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.venice.piazza.common.hibernate.entity.JobEntity;
+
 /**
- * Implementation for Custom Job Queries
+ * Interface for custom Job Queries
+ * 
  * @author Patrick.Doody
  *
  */
-public class CustomJobRepositoryImpl implements CustomJobRepository {
-	
+public interface JobDaoCustom {
+	Page<JobEntity> getJobList(Pageable pageable);
 }
