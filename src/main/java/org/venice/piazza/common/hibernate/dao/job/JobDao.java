@@ -38,4 +38,7 @@ public interface JobDao extends CrudRepository<JobEntity, Long> {
 	@Modifying
 	@Query(value = "delete from job where data ->> 'jobId' = ?1", nativeQuery = true)
 	void deleteJobById(String jobId);
+
+	@Query(value = "select * from job where data ->> 'jobId' = ?1 limit 1", nativeQuery = true)
+	JobEntity getJobByJobId(String jobId);
 }
