@@ -44,6 +44,6 @@ public interface JobDao extends CrudRepository<JobEntity, Long> {
 	@Query(value = "select * from job where data ->> 'jobId' = ?1 limit 1", nativeQuery = true)
 	JobEntity getJobByJobId(String jobId);
 
-	@Query(value = "select * from job \n-- #pageable\n", countQuery = "select count(*) from job", nativeQuery = true)
+	@Query(value = "select * from job \n#pageable\n", countQuery = "select count(*) from job", nativeQuery = true)
 	Page<JobEntity> getListByUsernameAndStatus(/* String userName, String status, */Pageable pageable);
 }
