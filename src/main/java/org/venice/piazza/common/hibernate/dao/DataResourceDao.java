@@ -17,6 +17,8 @@ package org.venice.piazza.common.hibernate.dao;
 
 import javax.transaction.Transactional;
 
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.venice.piazza.common.hibernate.entity.DataResourceEntity;
 
@@ -28,5 +30,12 @@ import org.venice.piazza.common.hibernate.entity.DataResourceEntity;
  */
 @Transactional
 public interface DataResourceDao extends CrudRepository<DataResourceEntity, Long> {
-
+	
+	@Transactional
+	@Modifying
+	@Query(value = "delete from data_resource where data ->> 'dataId' = ?1", nativeQuery = true)
+	public void deleteRecord(String dataId);
+	
+	@Query(value = "select * from data_resource where data ->> 'dataId' = ?1 limit 1", nativeQuery = true)
+	DataResourceEntity fineOneRecord(String dataId);
 }
