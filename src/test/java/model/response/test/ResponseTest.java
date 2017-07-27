@@ -55,7 +55,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  */
 public class ResponseTest {
 	private ObjectMapper mapper = new ObjectMapper();
-	private Pagination pagination = new Pagination(1, 0, 10, "Test", "asc");
+	private Pagination pagination = new Pagination(new Long(1), 0, 10, "Test", "asc");
 
 	/**
 	 * Test Alert List
@@ -74,7 +74,7 @@ public class ResponseTest {
 		AlertListResponse output = mapper.readValue(serialized, AlertListResponse.class);
 
 		assertTrue(output.getData().size() == 1);
-		assertTrue(output.getPagination().getCount().equals(1));
+		assertTrue(output.getPagination().getCount().equals(new Long(1)));
 		assertTrue(output.getData().get(0).eventId.equals("123456"));
 		assertTrue(output.getData().get(0).alertId.equals("654321"));
 		assertTrue(output.getData().get(0).triggerId.equals("123456T"));
@@ -101,7 +101,7 @@ public class ResponseTest {
 		DataResourceListResponse listInput = new DataResourceListResponse(list, pagination);
 		serialized = mapper.writeValueAsString(listInput);
 		DataResourceListResponse listOutput = mapper.readValue(serialized, DataResourceListResponse.class);
-		assertTrue(listOutput.getPagination().getCount().equals(1));
+		assertTrue(listOutput.getPagination().getCount().equals(new Long(1)));
 		assertTrue(listOutput.getData().get(0).getDataId().equals(data.getDataId()));
 	}
 
@@ -132,7 +132,7 @@ public class ResponseTest {
 		DeploymentListResponse listInput = new DeploymentListResponse(list, pagination);
 		serialized = mapper.writeValueAsString(listInput);
 		DeploymentListResponse listOutput = mapper.readValue(serialized, DeploymentListResponse.class);
-		assertTrue(listOutput.getPagination().getCount().equals(1));
+		assertTrue(listOutput.getPagination().getCount().equals(new Long(1)));
 		assertTrue(listOutput.getData().get(0).getLayer().equals(deployment.getLayer()));
 	}
 
@@ -195,7 +195,7 @@ public class ResponseTest {
 		ServiceListResponse listInput = new ServiceListResponse(list, pagination);
 		serialized = mapper.writeValueAsString(listInput);
 		ServiceListResponse listOutput = mapper.readValue(serialized, ServiceListResponse.class);
-		assertTrue(listOutput.getPagination().getCount().equals(1));
+		assertTrue(listOutput.getPagination().getCount().equals(new Long(1)));
 		assertTrue(listOutput.getData().get(0).getServiceId().equals("123456"));
 	}
 

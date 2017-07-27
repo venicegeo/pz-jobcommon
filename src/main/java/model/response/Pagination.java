@@ -27,7 +27,7 @@ import io.swagger.annotations.ApiModelProperty;
 public class Pagination {
 
 	@ApiModelProperty(value = "The number of results that matched the query", required = true)
-	public Integer count;
+	public Long count;
 
 	@ApiModelProperty(value = "The current page returned", required = true)
 	public Integer page;
@@ -45,7 +45,7 @@ public class Pagination {
 		// Empty constructor required by Jackson
 	}
 
-	public Pagination(Integer count, Integer page, Integer perPage, String sortBy, String order) {
+	public Pagination(Long count, Integer page, Integer perPage, String sortBy, String order) {
 		this.count = count;
 		this.page = page;
 		this.perPage = perPage;
@@ -53,7 +53,7 @@ public class Pagination {
 		this.order = order;
 	}
 
-	public Integer getCount() {
+	public Long getCount() {
 		return count;
 	}
 
