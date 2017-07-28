@@ -27,5 +27,47 @@ import model.response.Pagination;
  *
  */
 public interface JobDaoCustom {
-	Page<JobEntity> retrievePageableJobList(Pagination pagination);
+	/**
+	 * Retrieves Jobs list for a particular user and a particular status
+	 * 
+	 * @param status
+	 *            Status of the Job.
+	 * @param userName
+	 *            Username of the Job creator.
+	 * @param pagination
+	 *            Pagination information.
+	 * @return Paginated list of Results
+	 */
+	Page<JobEntity> getJobListForUserAndStatus(String status, String userName, Pagination pagination);
+
+	/**
+	 * Retrieves Jobs list
+	 * 
+	 * @param pagination
+	 *            Pagination information.
+	 * @return Paginated list of Results
+	 */
+	Page<JobEntity> getJobList(Pagination pagination);
+
+	/**
+	 * Retrieves Jobs list for a particular user
+	 * 
+	 * @param userName
+	 *            Username of the Job creator.
+	 * @param pagination
+	 *            Pagination information.
+	 * @return Paginated list of Results
+	 */
+	Page<JobEntity> getJobListByUser(String userName, Pagination pagination);
+
+	/**
+	 * Retrieves Jobs list for a particular status
+	 * 
+	 * @param status
+	 *            Status of the Job.
+	 * @param pagination
+	 *            Pagination information.
+	 * @return Paginated list of Results
+	 */
+	Page<JobEntity> getJobListByStatus(String status, Pagination pagination);
 }

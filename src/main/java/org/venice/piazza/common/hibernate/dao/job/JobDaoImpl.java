@@ -23,6 +23,7 @@ import javax.persistence.Query;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Repository;
 import org.venice.piazza.common.hibernate.entity.JobEntity;
 
@@ -39,11 +40,49 @@ public class JobDaoImpl implements JobDaoCustom {
 	@PersistenceContext
 	EntityManager entityManager;
 
-	public Page<JobEntity> retrievePageableJobList(Pagination pagination) {
-		String queryString = "select * from job order by data ->> ?1 ?2 limit ?3 offset ?4";
+	private static final String JOB_QUERY = "select * from job order by data ->> ?1 %s limit ?2 offset ?3";
+	private static final String STATUS_JOB_QUERY = "select * from job where data -> 'status' = ?1 order by data ->> ?2 %s limit ?3 offset ?4";
+	private static final String USERNAME_JOB_QUERY = "select * from job where data -> 'createdBy' = ?1 order by data ->> ?2 %s limit ?3 offset ?4";
+	private static final String USERNAME_AND_STATUS_JOB_QUERY = "select * from job where data -> 'createdBy' = ?1 and where data -> 'userName' = ?2 order by data ->> ?3 %s limit ?4 offset ?5";
+
+	public Page<JobEntity> getJobList(Pagination pagination) {
+		String queryString = String.format(JOB_QUERY, Direction.fromString(pagination.getOrder()));
 		Query query = entityManager.createNativeQuery(queryString, JobEntity.class);
 		query.setParameter(1, pagination.getSortBy());
-		query.setParameter(2, pagination.getOrder());
+		query.setParameter(2, pagination.getPerPage());
+		query.setParameter(3, pagination.getPage() * pagination.getPerPage());
+		List<JobEntity> results = query.getResultList();
+		return new PageImpl<JobEntity>(results, null, results.size());
+	}
+
+	public Page<JobEntity> getJobListForUserAndStatus(String status, String userName, Pagination pagination) {
+		String queryString = String.format(USERNAME_AND_STATUS_JOB_QUERY, Direction.fromString(pagination.getOrder()));
+		Query query = entityManager.createNativeQuery(queryString, JobEntity.class);
+		query.setParameter(1, userName);
+		query.setParameter(2, status);
+		query.setParameter(3, pagination.getSortBy());
+		query.setParameter(4, pagination.getPerPage());
+		query.setParameter(5, pagination.getPage() * pagination.getPerPage());
+		List<JobEntity> results = query.getResultList();
+		return new PageImpl<JobEntity>(results, null, results.size());
+	}
+
+	public Page<JobEntity> getJobListByUser(String userName, Pagination pagination) {
+		String queryString = String.format(USERNAME_JOB_QUERY, Direction.fromString(pagination.getOrder()));
+		Query query = entityManager.createNativeQuery(queryString, JobEntity.class);
+		query.setParameter(1, userName);
+		query.setParameter(2, pagination.getSortBy());
+		query.setParameter(3, pagination.getPerPage());
+		query.setParameter(4, pagination.getPage() * pagination.getPerPage());
+		List<JobEntity> results = query.getResultList();
+		return new PageImpl<JobEntity>(results, null, results.size());
+	}
+
+	public Page<JobEntity> getJobListByStatus(String status, Pagination pagination) {
+		String queryString = String.format(STATUS_JOB_QUERY, Direction.fromString(pagination.getOrder()));
+		Query query = entityManager.createNativeQuery(queryString, JobEntity.class);
+		query.setParameter(1, status);
+		query.setParameter(2, pagination.getSortBy());
 		query.setParameter(3, pagination.getPerPage());
 		query.setParameter(4, pagination.getPage() * pagination.getPerPage());
 		List<JobEntity> results = query.getResultList();
