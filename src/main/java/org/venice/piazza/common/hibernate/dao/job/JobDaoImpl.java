@@ -40,7 +40,7 @@ public class JobDaoImpl implements JobDaoCustom {
 	EntityManager entityManager;
 
 	public Page<JobEntity> retrievePageableJobList(Pagination pagination) {
-		String queryString = "select * from job order by data ->> '?' ? limit ? offset ?";
+		String queryString = "select * from job order by data ->> ?1 ?2 limit ?3 offset ?4";
 		Query query = entityManager.createNativeQuery(queryString, JobEntity.class);
 		query.setParameter(1, pagination.getSortBy());
 		query.setParameter(2, pagination.getOrder());
