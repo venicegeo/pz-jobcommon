@@ -16,8 +16,9 @@
 package org.venice.piazza.common.hibernate.dao.job;
 
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.venice.piazza.common.hibernate.entity.JobEntity;
+
+import model.response.Pagination;
 
 /**
  * Interface for custom Job Queries
@@ -26,5 +27,5 @@ import org.venice.piazza.common.hibernate.entity.JobEntity;
  *
  */
 public interface JobDaoCustom {
-	Page<JobEntity> getJobList(Pageable pageable);
+	Page<JobEntity> retrievePageableJobList(Pagination pagination);
 }

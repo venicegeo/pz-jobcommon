@@ -23,10 +23,10 @@ import javax.persistence.Query;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 import org.venice.piazza.common.hibernate.entity.JobEntity;
+
+import model.response.Pagination;
 
 /**
  * Implementation for Custom Job Queries
@@ -34,17 +34,20 @@ import org.venice.piazza.common.hibernate.entity.JobEntity;
  * @author Patrick.Doody
  *
  */
-
 @Repository
-@Transactional
-public class JobDaoCustomImpl implements JobDaoCustom {
+public class JobDaoImpl implements JobDaoCustom {
 	@PersistenceContext
 	EntityManager entityManager;
 
-	public Page<JobEntity> getJobList(Pageable pageable) {
-		Query query = entityManager.createNativeQuery("select * from job order by data ->> 'jobId' desc limit 10", JobEntity.class);
+	public Page<JobEntity> retrievePageableJobList(Pagination pagination) {
+		String queryString = "select * from job order by data ->> '?' ? limit ? offset ?";
+		Query query = entityManager.createNativeQuery(queryString, JobEntity.class);
+		query.setParameter(1, pagination.getSortBy());
+		query.setParameter(2, pagination.getOrder());
+		query.setParameter(3, pagination.getPerPage());
+		query.setParameter(4, pagination.getPage() * pagination.getPerPage());
 		List<JobEntity> results = query.getResultList();
-		return new PageImpl<JobEntity>(results, pageable, results.size());
+		return new PageImpl<JobEntity>(results, null, results.size());
 	}
 
 }
