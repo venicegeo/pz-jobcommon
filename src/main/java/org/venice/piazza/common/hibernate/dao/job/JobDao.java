@@ -17,8 +17,6 @@ package org.venice.piazza.common.hibernate.dao.job;
 
 import javax.transaction.Transactional;
 
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -43,7 +41,4 @@ public interface JobDao extends CrudRepository<JobEntity, Long>, JobDaoCustom {
 
 	@Query(value = "select * from job where data ->> 'jobId' = ?1 limit 1", nativeQuery = true)
 	JobEntity getJobByJobId(String jobId);
-
-	@Query(value = "select * from job \n#pageable\n", countQuery = "select count(*) from job", nativeQuery = true)
-	Page<JobEntity> getListByUsernameAndStatus(/* String userName, String status, */Pageable pageable);
 }
