@@ -15,9 +15,9 @@
  **/
 package org.venice.piazza.common.hibernate.dao;
 
-import javax.transaction.Transactional;
-
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 import org.venice.piazza.common.hibernate.entity.UserThrottlesEntity;
 
 /**
@@ -26,7 +26,8 @@ import org.venice.piazza.common.hibernate.entity.UserThrottlesEntity;
  * @author Patrick.Doody
  *
  */
-@Transactional
+@Repository
 public interface UserThrottlesDao extends CrudRepository<UserThrottlesEntity, Long> {
-
+	@Query(value = "select * from user_throttles where data ->> 'username' = ?1 limit 1", nativeQuery = true)
+	UserThrottlesEntity getUserThrottlesByUserName(String userName);
 }
