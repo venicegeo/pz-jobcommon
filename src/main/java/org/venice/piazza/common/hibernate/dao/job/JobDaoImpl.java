@@ -43,7 +43,7 @@ public class JobDaoImpl implements JobDaoCustom {
 	private static final String JOB_QUERY = "select * from job order by data ->> ?1 %s limit ?2 offset ?3";
 	private static final String STATUS_JOB_QUERY = "select * from job where data ->> 'status' = ?1 order by data ->> ?2 %s limit ?3 offset ?4";
 	private static final String USERNAME_JOB_QUERY = "select * from job where data ->> 'createdBy' = ?1 order by data ->> ?2 %s limit ?3 offset ?4";
-	private static final String USERNAME_AND_STATUS_JOB_QUERY = "select * from job where data ->> 'createdBy' = ?1 and where data ->> 'userName' = ?2 order by data ->> ?3 %s limit ?4 offset ?5";
+	private static final String USERNAME_AND_STATUS_JOB_QUERY = "select * from job where data ->> 'createdBy' = ?1 and data ->> 'userName' = ?2 order by data ->> ?3 %s limit ?4 offset ?5";
 
 	public Page<JobEntity> getJobList(Pagination pagination) {
 		String queryString = String.format(JOB_QUERY, Direction.fromString(pagination.getOrder()));
