@@ -17,7 +17,10 @@ package org.venice.piazza.common.hibernate.dao;
 
 import javax.transaction.Transactional;
 
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 import org.venice.piazza.common.hibernate.entity.ApiKeyEntity;
 
 /**
@@ -26,7 +29,16 @@ import org.venice.piazza.common.hibernate.entity.ApiKeyEntity;
  * @author Patrick.Doody
  *
  */
-@Transactional
+@Repository
 public interface ApiKeyDao extends CrudRepository<ApiKeyEntity, Long> {
+	@Query(value = "select * from api_key where data ->> 'username' = ?1 limit 1", nativeQuery = true)
+	ApiKeyEntity getApiKeyByUserName(String userName);
 
+	@Query(value = "select * from api_key where data ->> 'uuid' = ?1 limit 1", nativeQuery = true)
+	ApiKeyEntity getApiKeyByUuid(String uuid);
+
+	@Transactional
+	@Modifying
+	@Query(value = "delete from api_key where data ->> 'uuid' = ?1", nativeQuery = true)
+	void deleteApiKeyByUuid(String uuid);
 }

@@ -17,7 +17,7 @@ package org.venice.piazza.common.hibernate.usertype;
 
 import org.venice.piazza.common.hibernate.util.GenericJsonUserType;
 
-import springfox.documentation.service.ApiKey;
+import model.security.ApiKey;
 
 /**
  * Hibernate UserType Class that ties the API Key POJO to a JSONB table mapping in Postgres
