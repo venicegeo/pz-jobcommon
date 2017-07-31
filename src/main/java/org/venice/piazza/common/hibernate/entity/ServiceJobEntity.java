@@ -44,6 +44,9 @@ public class ServiceJobEntity implements Serializable {
 	@Column(name = "id", updatable = false, nullable = false)
 	private Long id;
 
+	@Column(name = "serviceId")
+	private String serviceId;
+
 	@Column(name = "data")
 	@Type(type = "ServiceJobType")
 	private ServiceJob serviceJob;
@@ -52,7 +55,8 @@ public class ServiceJobEntity implements Serializable {
 
 	}
 
-	public ServiceJobEntity(ServiceJob serviceJob) {
+	public ServiceJobEntity(String serviceId, ServiceJob serviceJob) {
+		this.serviceId = serviceId;
 		this.serviceJob = serviceJob;
 	}
 
@@ -70,6 +74,14 @@ public class ServiceJobEntity implements Serializable {
 
 	public void setServiceJob(ServiceJob serviceJob) {
 		this.serviceJob = serviceJob;
+	}
+
+	public String getServiceId() {
+		return serviceId;
+	}
+
+	public void setServiceId(String serviceId) {
+		this.serviceId = serviceId;
 	}
 
 }

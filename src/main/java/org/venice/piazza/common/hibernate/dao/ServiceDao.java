@@ -17,7 +17,10 @@ package org.venice.piazza.common.hibernate.dao;
 
 import javax.transaction.Transactional;
 
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 import org.venice.piazza.common.hibernate.entity.ServiceEntity;
 
 /**
@@ -26,7 +29,13 @@ import org.venice.piazza.common.hibernate.entity.ServiceEntity;
  * @author Patrick.Doody
  *
  */
-@Transactional
+@Repository
 public interface ServiceDao extends CrudRepository<ServiceEntity, Long> {
+	@Query(value = "select * from service where data ->> 'serviceId' = ?1 limit 1", nativeQuery = true)
+	ServiceEntity getServiceById(String serviceId);
 
+	@Transactional
+	@Modifying
+	@Query(value = "delete from service where data ->> 'serviceId' = ?1", nativeQuery = true)
+	void deleteServiceByServiceId(String serviceId);
 }
