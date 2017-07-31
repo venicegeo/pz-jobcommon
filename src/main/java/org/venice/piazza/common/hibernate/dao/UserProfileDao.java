@@ -34,7 +34,7 @@ public interface UserProfileDao extends CrudRepository<UserProfileEntity, Long> 
 	@Query(value = "select * from user_profile where data ->> 'username' = ?1 limit 1", nativeQuery = true)
 	UserProfileEntity getUserProfileByUserName(String userName);
 
-	@Query(value = "select * from user_profile where data ->> 'username' = ?1 and data ->> 'distinguishedName' = ?2 limit 1")
+	@Query(value = "select * from user_profile where data ->> 'username' = ?1 and where data ->> 'distinguishedName' = ?2 limit 1")
 	UserProfileEntity getUserProfileByUserNameAndDn(String userName, String dn);
 
 	@Transactional
