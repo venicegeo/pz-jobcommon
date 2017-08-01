@@ -15,6 +15,7 @@
  **/
 package org.venice.piazza.common.hibernate.dao.service;
 
+import java.math.BigInteger;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -41,6 +42,7 @@ public class ServiceDaoImpl implements ServiceDaoCustom {
 	EntityManager entityManager;
 
 	private static final String SERVICE_QUERY = "select * from service order by data ->> ?1 %s limit ?2 offset ?3";
+	private static final String SERVICE_QUERY_COUNT = "select count(*) from service";
 	private static final String KEYWORD_SERVICE_QUERY = "select * from service where data->'resourceMetadata'->'name' like ?1 or data->'resourceMetadata'->'description' like ?2 order by data ->> ?3 %s limit ?4 offset ?5";
 	private static final String USERNAME_SERVICE_QUERY = "select * from service where data->'resourceMetadata'->'createdBy' = ?1 order by data ->> ?2 %s limit ?3 offset ?4";
 	private static final String USERNAME_AND_KEYWORD_SERVICE_QUERY = "select * from service where data->'resourceMetadata'->'name' like ?1 or data->'resourceMetadata'->'description' like ?2 and where data->'resourceMetadata'->'createdBy' = ?3 order by data ->> ?4 %s limit ?5 offset ?6";
@@ -59,13 +61,17 @@ public class ServiceDaoImpl implements ServiceDaoCustom {
 	}
 
 	public Page<ServiceEntity> getServiceList(Pagination pagination) {
+		// Query
 		String queryString = String.format(SERVICE_QUERY, Direction.fromString(pagination.getOrder()));
 		Query query = entityManager.createNativeQuery(queryString, ServiceEntity.class);
 		query.setParameter(1, pagination.getSortBy());
 		query.setParameter(2, pagination.getPerPage());
 		query.setParameter(3, pagination.getPage() * pagination.getPerPage());
 		List<ServiceEntity> results = query.getResultList();
-		return new PageImpl<ServiceEntity>(results, null, results.size());
+		// Count
+		query = entityManager.createNativeQuery(SERVICE_QUERY_COUNT);
+		long count = ((BigInteger) query.getSingleResult()).longValue();
+		return new PageImpl<ServiceEntity>(results, null, count);
 	}
 
 	public Page<ServiceEntity> getServiceListByUser(String userName, Pagination pagination) {
