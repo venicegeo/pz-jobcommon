@@ -48,6 +48,8 @@ public class ServiceDaoImpl implements ServiceDaoCustom {
 	private static final String KEYWORD_SERVICE_QUERY_COUNT = "select count(*) from service where data#>>'{resourceMetadata,name}' like ?1 or data#>>'{resourceMetadata,description}' like ?2";
 	private static final String USERNAME_SERVICE_QUERY = "select * from service where data#>>'{resourceMetadata,createdBy}' like ?1 order by data ->> ?2 %s limit ?3 offset ?4";
 	private static final String USERNAME_SERVICE_QUERY_COUNT = "select count(*) from service where data#>>'{resourceMetadata,createdBy}' like ?1";
+	private static final String USERNAME_AND_KEYWORD_SERVICE_QUERY = "select * from service where (data#>>'{resourceMetadata,name}' like ?1 or data#>>'{resourceMetadata,description}' like ?2) and data#>>'{resourceMetadata,createdBy}' like ?3 order by data ->> ?4 %s limit ?5 offset ?6";
+	private static final String USERNAME_AND_KEYWORD_SERVICE_QUERY_COUNT = "select count(*) from service where (data#>>'{resourceMetadata,name}' like ?1 or data#>>'{resourceMetadata,description}' like ?2) and data#>>'{resourceMetadata,createdBy}' like ?3";
 
 	public Page<ServiceEntity> getServiceListForUserAndKeyword(String keyword, String userName, Pagination pagination) {
 		// Query
