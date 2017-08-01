@@ -17,7 +17,9 @@ package org.venice.piazza.common.hibernate.dao;
 
 import javax.transaction.Transactional;
 
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.venice.piazza.common.hibernate.entity.DataResourceEntity;
 import org.venice.piazza.common.hibernate.entity.LeaseEntity;
 
 /**
@@ -28,5 +30,6 @@ import org.venice.piazza.common.hibernate.entity.LeaseEntity;
  */
 @Transactional
 public interface LeaseDao extends CrudRepository<LeaseEntity, Long> {
-
+	@Query(value = "select * from lease where data ->> 'deploymentId' = ?1 limit 1", nativeQuery = true)
+	LeaseEntity findOneLeaseByDeploymentId(String deploymentId);
 }
