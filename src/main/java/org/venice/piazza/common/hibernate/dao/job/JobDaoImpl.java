@@ -15,6 +15,7 @@
  **/
 package org.venice.piazza.common.hibernate.dao.job;
 
+import java.math.BigInteger;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -41,21 +42,30 @@ public class JobDaoImpl implements JobDaoCustom {
 	EntityManager entityManager;
 
 	private static final String JOB_QUERY = "select * from job order by data ->> ?1 %s limit ?2 offset ?3";
+	private static final String JOB_QUERY_COUNT = "select count(*) from job";
 	private static final String STATUS_JOB_QUERY = "select * from job where data ->> 'status' = ?1 order by data ->> ?2 %s limit ?3 offset ?4";
+	private static final String STATUS_JOB_QUERY_COUNT = "select count(*) from job where data ->> 'status' = ?1";
 	private static final String USERNAME_JOB_QUERY = "select * from job where data ->> 'createdBy' = ?1 order by data ->> ?2 %s limit ?3 offset ?4";
-	private static final String USERNAME_AND_STATUS_JOB_QUERY = "select * from job where data ->> 'createdBy' = ?1 and where data ->> 'userName' = ?2 order by data ->> ?3 %s limit ?4 offset ?5";
+	private static final String USERNAME_JOB_QUERY_COUNT = "select count(*) from job where data ->> 'createdBy' = ?1";
+	private static final String USERNAME_AND_STATUS_JOB_QUERY = "select * from job where data ->> 'createdBy' = ?1 and data ->> 'status' = ?2 order by data ->> ?3 %s limit ?4 offset ?5";
+	private static final String USERNAME_AND_STATUS_JOB_QUERY_COUNT = "select count(*) from job where data ->> 'createdBy' = ?1 and data ->> 'status' = ?2";
 
 	public Page<JobEntity> getJobList(Pagination pagination) {
+		// Query
 		String queryString = String.format(JOB_QUERY, Direction.fromString(pagination.getOrder()));
 		Query query = entityManager.createNativeQuery(queryString, JobEntity.class);
 		query.setParameter(1, pagination.getSortBy());
 		query.setParameter(2, pagination.getPerPage());
 		query.setParameter(3, pagination.getPage() * pagination.getPerPage());
 		List<JobEntity> results = query.getResultList();
-		return new PageImpl<JobEntity>(results, null, results.size());
+		// Count
+		query = entityManager.createNativeQuery(JOB_QUERY_COUNT);
+		long count = ((BigInteger) query.getSingleResult()).longValue();
+		return new PageImpl<JobEntity>(results, null, count);
 	}
 
 	public Page<JobEntity> getJobListForUserAndStatus(String status, String userName, Pagination pagination) {
+		// Query
 		String queryString = String.format(USERNAME_AND_STATUS_JOB_QUERY, Direction.fromString(pagination.getOrder()));
 		Query query = entityManager.createNativeQuery(queryString, JobEntity.class);
 		query.setParameter(1, userName);
@@ -64,10 +74,16 @@ public class JobDaoImpl implements JobDaoCustom {
 		query.setParameter(4, pagination.getPerPage());
 		query.setParameter(5, pagination.getPage() * pagination.getPerPage());
 		List<JobEntity> results = query.getResultList();
-		return new PageImpl<JobEntity>(results, null, results.size());
+		// Count
+		query = entityManager.createNativeQuery(USERNAME_AND_STATUS_JOB_QUERY_COUNT);
+		query.setParameter(1, userName);
+		query.setParameter(2, status);
+		long count = ((BigInteger) query.getSingleResult()).longValue();
+		return new PageImpl<JobEntity>(results, null, count);
 	}
 
 	public Page<JobEntity> getJobListByUser(String userName, Pagination pagination) {
+		// Query
 		String queryString = String.format(USERNAME_JOB_QUERY, Direction.fromString(pagination.getOrder()));
 		Query query = entityManager.createNativeQuery(queryString, JobEntity.class);
 		query.setParameter(1, userName);
@@ -75,10 +91,15 @@ public class JobDaoImpl implements JobDaoCustom {
 		query.setParameter(3, pagination.getPerPage());
 		query.setParameter(4, pagination.getPage() * pagination.getPerPage());
 		List<JobEntity> results = query.getResultList();
-		return new PageImpl<JobEntity>(results, null, results.size());
+		// Count
+		query = entityManager.createNativeQuery(USERNAME_JOB_QUERY_COUNT);
+		query.setParameter(1, userName);
+		long count = ((BigInteger) query.getSingleResult()).longValue();
+		return new PageImpl<JobEntity>(results, null, count);
 	}
 
 	public Page<JobEntity> getJobListByStatus(String status, Pagination pagination) {
+		// Query
 		String queryString = String.format(STATUS_JOB_QUERY, Direction.fromString(pagination.getOrder()));
 		Query query = entityManager.createNativeQuery(queryString, JobEntity.class);
 		query.setParameter(1, status);
@@ -86,7 +107,11 @@ public class JobDaoImpl implements JobDaoCustom {
 		query.setParameter(3, pagination.getPerPage());
 		query.setParameter(4, pagination.getPage() * pagination.getPerPage());
 		List<JobEntity> results = query.getResultList();
-		return new PageImpl<JobEntity>(results, null, results.size());
+		// Count
+		query = entityManager.createNativeQuery(STATUS_JOB_QUERY_COUNT);
+		query.setParameter(1, status);
+		long count = ((BigInteger) query.getSingleResult()).longValue();
+		return new PageImpl<JobEntity>(results, null, count);
 	}
 
 }

@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-package org.venice.piazza.common.hibernate.dao;
+package org.venice.piazza.common.hibernate.dao.service;
 
 import javax.transaction.Transactional;
 
@@ -21,24 +21,27 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
-import org.venice.piazza.common.hibernate.entity.ApiKeyEntity;
+import org.venice.piazza.common.hibernate.entity.ServiceEntity;
 
 /**
- * Data Access Object for Api Key Entities
+ * Data Access Object for Service Entities
  * 
  * @author Patrick.Doody
  *
  */
 @Repository
-public interface ApiKeyDao extends CrudRepository<ApiKeyEntity, Long> {
-	@Query(value = "select * from api_key where data ->> 'username' = ?1 limit 1", nativeQuery = true)
-	ApiKeyEntity getApiKeyByUserName(String userName);
-
-	@Query(value = "select * from api_key where data ->> 'uuid' = ?1 limit 1", nativeQuery = true)
-	ApiKeyEntity getApiKeyByUuid(String uuid);
+public interface ServiceDao extends CrudRepository<ServiceEntity, Long>, ServiceDaoCustom {
+	@Query(value = "select * from service where data ->> 'serviceId' = ?1 limit 1", nativeQuery = true)
+	ServiceEntity getServiceById(String serviceId);
 
 	@Transactional
 	@Modifying
-	@Query(value = "delete from api_key where data ->> 'uuid' = ?1", nativeQuery = true)
-	void deleteApiKeyByUuid(String uuid);
+	@Query(value = "delete from service where data ->> 'serviceId' = ?1", nativeQuery = true)
+	void deleteServiceByServiceId(String serviceId);
+
+	/**
+	 * Gets all services that are not OFFLINE
+	 */
+	@Query(value = "select * from service where data->'jobType'->'data'->'metadata'->'availability' != '\"OFFLINE\"'", nativeQuery = true)
+	Iterable<ServiceEntity> getAllAvailableServices();
 }

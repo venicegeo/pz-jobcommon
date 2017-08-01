@@ -26,7 +26,7 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.Type;
 
-import springfox.documentation.service.ApiKey;
+import model.security.ApiKey;
 
 /**
  * Entity class for API Keys

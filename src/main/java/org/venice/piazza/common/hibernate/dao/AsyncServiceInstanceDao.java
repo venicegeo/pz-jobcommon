@@ -17,7 +17,10 @@ package org.venice.piazza.common.hibernate.dao;
 
 import javax.transaction.Transactional;
 
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 import org.venice.piazza.common.hibernate.entity.AsyncServiceInstanceEntity;
 
 /**
@@ -26,7 +29,13 @@ import org.venice.piazza.common.hibernate.entity.AsyncServiceInstanceEntity;
  * @author Patrick.Doody
  *
  */
-@Transactional
+@Repository
 public interface AsyncServiceInstanceDao extends CrudRepository<AsyncServiceInstanceEntity, Long> {
+	@Query(value = "select * from async_service_instance where data ->> 'jobId' = ?1 limit 1", nativeQuery = true)
+	AsyncServiceInstanceEntity getInstanceByJobId(String jobId);
 
+	@Transactional
+	@Modifying
+	@Query(value = "delete from async_service_instance where data ->> 'jobId' = ?1", nativeQuery = true)
+	void deleteInstanceByJobId(String jobId);
 }
