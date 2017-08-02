@@ -24,8 +24,7 @@ import io.swagger.annotations.ApiModelProperty;
 import model.data.DataType;
 
 /**
- * Represents simple text that can be stored directly within MongoDB's Resource
- * collection.
+ * Represents simple text that can be stored directly within the DB
  * 
  * @author Patrick.Doody
  * 

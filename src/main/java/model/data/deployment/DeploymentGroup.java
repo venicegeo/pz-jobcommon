@@ -29,7 +29,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
  * if there is at least one valid layer populated at the time of creation.
  * However, for Piazza use-cases, we want to allow users to grab a unique Id for
  * a Layer Group before they have created any actual layers. To support this
- * goal, we use this DeploymentGroup model, as persisted in Mongo, to maintain a
+ * goal, we use this DeploymentGroup model, as persisted in the DB, to maintain a
  * connection between a GUID delivered to a user, and a Layer Group (once
  * created) in GeoServer. The user only ever receives the GUID as held by this
  * DeploymentGroup object. In that way, we can deliver some placeholder Id to

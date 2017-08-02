@@ -18,7 +18,7 @@ package model.security;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 /**
- * Model for representing an API Key in the Mongo Database. References the key itself, the user, and the creation and
+ * Model for representing an API Key in the Database. References the key itself, the user, and the creation and
  * expiration dates.
  * 
  * @author Patrick.Doody
