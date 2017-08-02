@@ -15,8 +15,12 @@
  **/
 package model.data.deployment;
 
+import org.joda.time.DateTime;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 /**
@@ -41,7 +45,9 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 public class Lease {
 	private String leaseId;
 	private String deploymentId;
-	private String expiresOn;
+	
+	@JsonIgnore
+	public DateTime expiresOn;
 
 	/**
 	 * Creates a new Deployment Lease.
@@ -60,7 +66,7 @@ public class Lease {
 	 * @param expiresOn
 	 *            The expiration date of this Lease.
 	 */
-	public Lease(String leaseId, String deploymentId, String expiresOn) {
+	public Lease(String leaseId, String deploymentId, DateTime expiresOn) {
 		this.leaseId = leaseId;
 		this.deploymentId = deploymentId;
 		this.expiresOn = expiresOn;
@@ -82,11 +88,28 @@ public class Lease {
 		this.deploymentId = deploymentId;
 	}
 
-	public String getExpiresOn() {
+	@JsonIgnore
+	public DateTime getExpiresOn() {
 		return expiresOn;
 	}
 
-	public void setExpiresOn(String expirationDate) {
-		this.expiresOn = expirationDate;
+	@JsonIgnore
+	public void setExpiresOn(DateTime expiresOn) {
+		this.expiresOn = expiresOn;
+	}
+
+	@JsonProperty("expiresOn")
+	public Long getExpiresOnString() {
+		if (expiresOn != null) {
+			// Defaults to ISO8601
+			return expiresOn.getMillis();
+		} else {
+			return null;
+		}
+	}
+
+	@JsonProperty("expiresOn")
+	public void setExpiresOnString(Long expiresOn) {
+		this.expiresOn = new DateTime(expiresOn);
 	}
 }

@@ -35,5 +35,7 @@ public interface LeaseDao extends CrudRepository<LeaseEntity, Long> {
 
 	@Query(value = "select * from lease where data ->> 'leaseId' = ?1 limit 1", nativeQuery = true)
 	LeaseEntity findOneLeaseById(String leaseId);
-	
+
+	@Query(value = "select * from lease where cast(data->> 'expiresOn' as float) < ?1", nativeQuery = true)
+	Iterable<LeaseEntity> findExpiredLeases(long timeoutThreshold);
 }
