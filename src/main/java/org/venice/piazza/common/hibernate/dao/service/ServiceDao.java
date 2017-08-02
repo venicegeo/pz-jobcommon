@@ -42,6 +42,6 @@ public interface ServiceDao extends CrudRepository<ServiceEntity, Long>, Service
 	/**
 	 * Gets all services that are not OFFLINE
 	 */
-	@Query(value = "select * from service where data->'jobType'->'data'->'metadata'->'availability' != '\"OFFLINE\"'", nativeQuery = true)
+	@Query(value = "select * from service where data#>'{resourceMetadata,availability}' != '\"OFFLINE\"'", nativeQuery = true)
 	Iterable<ServiceEntity> getAllAvailableServices();
 }
