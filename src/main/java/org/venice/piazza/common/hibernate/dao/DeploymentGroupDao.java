@@ -17,8 +17,10 @@ package org.venice.piazza.common.hibernate.dao;
 
 import javax.transaction.Transactional;
 
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.venice.piazza.common.hibernate.entity.DeploymentGroupEntity;
+import org.venice.piazza.common.hibernate.entity.LeaseEntity;
 
 /**
  * Data Access Object for Deployment Group Entities
@@ -28,5 +30,6 @@ import org.venice.piazza.common.hibernate.entity.DeploymentGroupEntity;
  */
 @Transactional
 public interface DeploymentGroupDao extends CrudRepository<DeploymentGroupEntity, Long> {
-
+	@Query(value = "select * from deployment_group where data ->> 'deploymentGroupId' = ?1 limit 1", nativeQuery = true)
+	DeploymentGroupEntity findOneDeploymentGroupById(String deploymentGroupId);
 }

@@ -17,6 +17,7 @@ package org.venice.piazza.common.hibernate.dao;
 
 import javax.transaction.Transactional;
 
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.venice.piazza.common.hibernate.entity.DeploymentEntity;
 
@@ -28,5 +29,6 @@ import org.venice.piazza.common.hibernate.entity.DeploymentEntity;
  */
 @Transactional
 public interface DeploymentDao extends CrudRepository<DeploymentEntity, Long> {
-
+	@Query(value = "select * from deployment where data ->> 'deploymentId' = ?1 limit 1", nativeQuery = true)
+	DeploymentEntity findOneById(String deploymentId);
 }

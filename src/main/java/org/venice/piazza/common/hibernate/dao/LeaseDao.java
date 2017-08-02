@@ -32,4 +32,8 @@ import org.venice.piazza.common.hibernate.entity.LeaseEntity;
 public interface LeaseDao extends CrudRepository<LeaseEntity, Long> {
 	@Query(value = "select * from lease where data ->> 'deploymentId' = ?1 limit 1", nativeQuery = true)
 	LeaseEntity findOneLeaseByDeploymentId(String deploymentId);
+
+	@Query(value = "select * from lease where data ->> 'leaseId' = ?1 limit 1", nativeQuery = true)
+	LeaseEntity findOneLeaseById(String leaseId);
+	
 }
