@@ -52,4 +52,13 @@ public interface ServiceJobDao extends CrudRepository<ServiceJobEntity, Long> {
 
 	@Query(value = "select * from service_job where data->> 'serviceId' = ?1 and data->> 'jobId' = ?2 limit 1", nativeQuery = true)
 	ServiceJobEntity getServiceJobByServiceAndJobId(String serviceId, String jobId);
+
+	@Query(value = "delete from service_job where data->> 'serviceId' = ?1 and data->> 'jobId' = ?2", nativeQuery = true)
+	void deleteServiceJobByJobId(String serviceId, String jobId);
+
+	@Query(value = "delete from service_job where data->> 'serviceId' = ?1", nativeQuery = true)
+	void deleteAllJobsByServiceId(String serviceId);
+
+	@Query(value = "select count(*) from service_job where data->> 'serviceId' = ?1", nativeQuery = true)
+	long getServiceJobCountForService(String serviceId);
 }
