@@ -34,6 +34,16 @@ public interface AsyncServiceInstanceDao extends CrudRepository<AsyncServiceInst
 	@Query(value = "select * from async_service_instance where data ->> 'jobId' = ?1 limit 1", nativeQuery = true)
 	AsyncServiceInstanceEntity getInstanceByJobId(String jobId);
 
+	/**
+	 * Checks for Instances who have not been checked since the specified time
+	 * 
+	 * @param thresholdEpoch
+	 *            The specified time (epoch) that all instances prior to are considered stale
+	 * @return List of stale service instances
+	 */
+	@Query(value = "select * from async_service_instance where cast(data ->>'lastCheckedOn' as float) < ?1", nativeQuery = true)
+	Iterable<AsyncServiceInstanceEntity> getStaleServiceInstances(long thresholdEpoch);
+
 	@Transactional
 	@Modifying
 	@Query(value = "delete from async_service_instance where data ->> 'jobId' = ?1", nativeQuery = true)
