@@ -44,4 +44,7 @@ public interface ServiceDao extends CrudRepository<ServiceEntity, Long>, Service
 	 */
 	@Query(value = "select * from service where data#>'{resourceMetadata,availability}' != '\"OFFLINE\"'", nativeQuery = true)
 	Iterable<ServiceEntity> getAllAvailableServices();
+	
+	@Query(value = "select * from service where data ->> 'isTaskManaged' = 'true'", nativeQuery = true)
+	Iterable<ServiceEntity> getAllTaskManagedServices();
 }

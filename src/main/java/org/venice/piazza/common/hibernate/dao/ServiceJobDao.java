@@ -15,9 +15,9 @@
  **/
 package org.venice.piazza.common.hibernate.dao;
 
-import javax.transaction.Transactional;
-
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 import org.venice.piazza.common.hibernate.entity.ServiceJobEntity;
 
 /**
@@ -26,7 +26,30 @@ import org.venice.piazza.common.hibernate.entity.ServiceJobEntity;
  * @author Patrick.Doody
  *
  */
-@Transactional
+@Repository
 public interface ServiceJobDao extends CrudRepository<ServiceJobEntity, Long> {
+	/**
+	 * Gets the next job in the Service Queue of the service with the specified ID
+	 * 
+	 * @param serviceId
+	 *            The ID of the Service Queue
+	 * @return The next job to be processed
+	 */
+	@Query(value = "select * from service_job where data->> 'serviceId' = ?1 and data-> 'startedOn' = 'null' order by data ->> 'queuedOn' asc limit 1", nativeQuery = true)
+	ServiceJobEntity getNextJobInServiceQueue(String serviceId);
 
+	/**
+	 * Gets all Service Jobs that have exceeded the timeout
+	 * 
+	 * @param serviceId
+	 *            The ID of the service for Service Jobs queue
+	 * @param timeoutThreshold
+	 *            The threshold, in epoch ms, that any jobs older than are considered timed out
+	 * @return The list of timed out Service Jobs for the specified service
+	 */
+	@Query(value = "select * from service_job where data->> 'serviceId' = ?1 and data-> 'startedOn' != 'null'  and cast(data->> 'startedOn' as float) < ?2 order by data ->> 'queuedOn'", nativeQuery = true)
+	Iterable<ServiceJobEntity> getTimedOutServiceJobs(String serviceId, long timeoutThreshold);
+
+	@Query(value = "select * from service_job where data->> 'serviceId' = ?1 and data->> 'jobId' = ?2 limit 1", nativeQuery = true)
+	ServiceJobEntity getServiceJobByServiceAndJobId(String serviceId, String jobId);
 }
