@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-package org.venice.piazza.common.hibernate.dao;
+package org.venice.piazza.common.hibernate.dao.dataresource;
 
 import javax.transaction.Transactional;
 
@@ -30,7 +30,7 @@ import org.venice.piazza.common.hibernate.entity.DataResourceEntity;
  *
  */
 @Repository
-public interface DataResourceDao extends CrudRepository<DataResourceEntity, Long> {
+public interface DataResourceDao extends CrudRepository<DataResourceEntity, Long>, DataResourceDaoCustom {
 	
 	@Transactional
 	@Modifying
