@@ -21,7 +21,7 @@ import org.venice.piazza.common.hibernate.entity.DataResourceEntity;
 import model.response.Pagination;
 
 /**
- * Interface for custom Job Queries
+ * Interface for custom DataResource Queries
  * 
  * @author Patrick.Doody & Sonny.Saniev
  *

@@ -31,7 +31,7 @@ import org.venice.piazza.common.hibernate.entity.DataResourceEntity;
 import model.response.Pagination;
 
 /**
- * Implementation for Custom Job Queries
+ * Implementation for Custom DataResource Queries
  * 
  * @author Patrick.Doody & Sonny.Saniev
  *

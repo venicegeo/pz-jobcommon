@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-package org.venice.piazza.common.hibernate.dao;
+package org.venice.piazza.common.hibernate.dao.deployment;
 
 import javax.transaction.Transactional;
 
@@ -24,11 +24,11 @@ import org.venice.piazza.common.hibernate.entity.DeploymentEntity;
 /**
  * Data Access Object for Deployment Entities
  * 
- * @author Patrick.Doody
+ * @author Patrick.Doody & Sonny.Saniev
  *
  */
 @Transactional
-public interface DeploymentDao extends CrudRepository<DeploymentEntity, Long> {
+public interface DeploymentDao extends CrudRepository<DeploymentEntity, Long>, DeploymentDaoCustom {
 	@Query(value = "select * from deployment where data ->> 'deploymentId' = ?1 limit 1", nativeQuery = true)
 	DeploymentEntity findOneById(String deploymentId);
 }
