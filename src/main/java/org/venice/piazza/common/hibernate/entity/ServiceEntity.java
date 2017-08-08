@@ -35,7 +35,7 @@ import model.service.metadata.Service;
  *
  */
 @Entity
-@Table(name = "Service")
+@Table(name = "User_Service")
 public class ServiceEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
