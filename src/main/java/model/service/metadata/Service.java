@@ -31,6 +31,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
+import exception.InvalidInputException;
 import io.swagger.annotations.ApiModelProperty;
 import model.job.metadata.ResourceMetadata;
 
@@ -195,8 +196,9 @@ public class Service {
 	 *            The Service properties to merge
 	 * @param overwriteNull
 	 *            True if null values in the other Service should overwrite values in this object. False if not.
+	 * @throws InvalidInputException 
 	 */
-	public void merge(Service other, boolean overwriteNull) {
+	public void merge(Service other, boolean overwriteNull) throws InvalidInputException {
 		// Protected method names that are not automatically transferred (Id is protected, and ResourceMetadata merging
 		// is delegated to that object.
 		List<String> protectedNames = new ArrayList<String>();
