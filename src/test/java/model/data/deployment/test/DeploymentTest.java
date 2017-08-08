@@ -64,7 +64,7 @@ public class DeploymentTest {
 	@Test
 	public void testLease() throws IOException {
 		// Mock
-		Lease mockLease = new Lease("123456", "654321", new DateTime().toString());
+		Lease mockLease = new Lease("123456", "654321", new DateTime());
 		// Serialize
 		String serialized = mapper.writeValueAsString(mockLease);
 		Lease lease = mapper.readValue(serialized, Lease.class);

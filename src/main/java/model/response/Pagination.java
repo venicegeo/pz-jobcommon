@@ -18,8 +18,7 @@ package model.response;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * Metadata describing pagination information when returning lists of data in
- * responses.
+ * Metadata describing pagination information when returning lists of data in responses.
  * 
  * @author Patrick.Doody
  *
@@ -27,7 +26,7 @@ import io.swagger.annotations.ApiModelProperty;
 public class Pagination {
 
 	@ApiModelProperty(value = "The number of results that matched the query", required = true)
-	public Integer count;
+	public Long count;
 
 	@ApiModelProperty(value = "The current page returned", required = true)
 	public Integer page;
@@ -45,7 +44,7 @@ public class Pagination {
 		// Empty constructor required by Jackson
 	}
 
-	public Pagination(Integer count, Integer page, Integer perPage, String sortBy, String order) {
+	public Pagination(Long count, Integer page, Integer perPage, String sortBy, String order) {
 		this.count = count;
 		this.page = page;
 		this.perPage = perPage;
@@ -53,8 +52,12 @@ public class Pagination {
 		this.order = order;
 	}
 
-	public Integer getCount() {
+	public Long getCount() {
 		return count;
+	}
+
+	public void setCount(Long count) {
+		this.count = count;
 	}
 
 	public Integer getPage() {
