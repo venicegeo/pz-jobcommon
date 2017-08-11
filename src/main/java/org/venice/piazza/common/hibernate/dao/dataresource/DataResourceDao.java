@@ -19,6 +19,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 import org.venice.piazza.common.hibernate.entity.DataResourceEntity;
+import org.venice.piazza.common.hibernate.entity.DeploymentEntity;
 
 /**
  * Data Access Object for DataResource Entities
@@ -29,5 +30,5 @@ import org.venice.piazza.common.hibernate.entity.DataResourceEntity;
 @Repository
 public interface DataResourceDao extends CrudRepository<DataResourceEntity, Long>, DataResourceDaoCustom {
 	@Query(value = "select * from data_resource where data ->> 'dataId' = ?1 limit 1", nativeQuery = true)
-	DataResourceEntity fineOneRecord(String dataId);
+	DataResourceEntity getDataResourceByDataId(String dataId);
 }
