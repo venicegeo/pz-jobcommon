@@ -30,5 +30,8 @@ import org.venice.piazza.common.hibernate.entity.DeploymentEntity;
 @Transactional
 public interface DeploymentDao extends CrudRepository<DeploymentEntity, Long>, DeploymentDaoCustom {
 	@Query(value = "select * from deployment where data ->> 'deploymentId' = ?1 limit 1", nativeQuery = true)
-	DeploymentEntity findOneById(String deploymentId);
+	DeploymentEntity getDeploymentByDeploymentId(String deploymentId);
+	
+	@Query(value = "select * from deployment where data ->> 'dataId' = ?1 limit 1", nativeQuery = true)
+	DeploymentEntity getDeploymentByDataId(String dataId);
 }
