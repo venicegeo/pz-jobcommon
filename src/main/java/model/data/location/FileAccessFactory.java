@@ -89,7 +89,7 @@ public class FileAccessFactory {
 	 *            The file location
 	 * @return The File stream
 	 */
-	public InputStream getFile(FileLocation fileLocation) throws Exception {
+	public InputStream getFile(FileLocation fileLocation) throws AmazonClientException, InvalidInputException {
 		if (fileLocation instanceof FolderShare) {
 			return ((FolderShare) fileLocation).getFile();
 		} else if (fileLocation instanceof S3FileStore) {
