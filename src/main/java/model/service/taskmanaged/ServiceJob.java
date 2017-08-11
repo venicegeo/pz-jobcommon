@@ -33,8 +33,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * @author Patrick.Doody
  *
  */
-@JsonIgnoreProperties(ignoreUnknown = true)
-@JsonInclude(Include.NON_NULL)
 public class ServiceJob {
 	/**
 	 * The ID of the Service this Job pertains to.
