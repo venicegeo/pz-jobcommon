@@ -42,13 +42,13 @@ public class ServiceDaoImpl implements ServiceDaoCustom {
 	EntityManager entityManager;
 
 	private static final String WILDCARD_STRING_QUERY = "%%%s%%";
-	private static final String SERVICE_QUERY = "select * from user_service order by data ->> ?1 %s limit ?2 offset ?3";
+	private static final String SERVICE_QUERY = "select * from user_service order by data #>> regexp_split_to_array(?1, E'\\\\.') %s limit ?2 offset ?3";
 	private static final String SERVICE_QUERY_COUNT = "select count(*) from user_service";
-	private static final String KEYWORD_SERVICE_QUERY = "select * from user_service where data#>>'{resourceMetadata,name}' like ?1 or data#>>'{resourceMetadata,description}' like ?2 order by data ->> ?3 %s limit ?4 offset ?5";
+	private static final String KEYWORD_SERVICE_QUERY = "select * from user_service where data#>>'{resourceMetadata,name}' like ?1 or data#>>'{resourceMetadata,description}' like ?2 order by data #>> regexp_split_to_array(?3, E'\\\\.') %s limit ?4 offset ?5";
 	private static final String KEYWORD_SERVICE_QUERY_COUNT = "select count(*) from user_service where data#>>'{resourceMetadata,name}' like ?1 or data#>>'{resourceMetadata,description}' like ?2";
-	private static final String USERNAME_SERVICE_QUERY = "select * from user_service where data#>>'{resourceMetadata,createdBy}' like ?1 order by data ->> ?2 %s limit ?3 offset ?4";
+	private static final String USERNAME_SERVICE_QUERY = "select * from user_service where data#>>'{resourceMetadata,createdBy}' like ?1 order by data #>> regexp_split_to_array(?2, E'\\\\.') %s limit ?3 offset ?4";
 	private static final String USERNAME_SERVICE_QUERY_COUNT = "select count(*) from user_service where data#>>'{resourceMetadata,createdBy}' like ?1";
-	private static final String USERNAME_AND_KEYWORD_SERVICE_QUERY = "select * from user_service where (data#>>'{resourceMetadata,name}' like ?1 or data#>>'{resourceMetadata,description}' like ?2) and data#>>'{resourceMetadata,createdBy}' like ?3 order by data ->> ?4 %s limit ?5 offset ?6";
+	private static final String USERNAME_AND_KEYWORD_SERVICE_QUERY = "select * from user_service where (data#>>'{resourceMetadata,name}' like ?1 or data#>>'{resourceMetadata,description}' like ?2) and data#>>'{resourceMetadata,createdBy}' like ?3 order by data #>> regexp_split_to_array(?4, E'\\\\.') %s limit ?5 offset ?6";
 	private static final String USERNAME_AND_KEYWORD_SERVICE_QUERY_COUNT = "select count(*) from user_service where (data#>>'{resourceMetadata,name}' like ?1 or data#>>'{resourceMetadata,description}' like ?2) and data#>>'{resourceMetadata,createdBy}' like ?3";
 
 	public Page<ServiceEntity> getServiceListForUserAndKeyword(String keyword, String userName, Pagination pagination) {

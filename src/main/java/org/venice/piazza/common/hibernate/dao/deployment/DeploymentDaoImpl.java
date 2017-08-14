@@ -39,11 +39,11 @@ public class DeploymentDaoImpl implements DeploymentDaoCustom {
 	EntityManager entityManager;
 
 	private static final String WILDCARD_STRING_QUERY = "%%%s%%";
-	private static final String KEYWORD_DEPLOYMENT_ID_QUERY = "select * from deployment where data#>>'{deploymentId}' like ?1 order by data ->> ?2 %s limit ?3 offset ?4";
+	private static final String KEYWORD_DEPLOYMENT_ID_QUERY = "select * from deployment where data#>>'{deploymentId}' like ?1 order by data #>> regexp_split_to_array(?2, E'\\\\.') %s limit ?3 offset ?4";
 	private static final String KEYWORD_DEPLOYMENT_ID_QUERY_COUNT = "select count(*) from deployment where data#>>'{deploymentId}' like ?1";
-	private static final String KEYWORD_DATA_ID_QUERY = "select * from deployment where data#>>'{dataId}' like ?1 order by data ->> ?2 %s limit ?3 offset ?4";
+	private static final String KEYWORD_DATA_ID_QUERY = "select * from deployment where data#>>'{dataId}' like ?1 order by data #>> regexp_split_to_array(?2, E'\\\\.') %s limit ?3 offset ?4";
 	private static final String KEYWORD_DATA_ID_QUERY_COUNT = "select count(*) from deployment where data#>>'{dataId}' like ?1";
-	private static final String KEYWORD_CAPABILITIES_URL_QUERY = "select * from deployment where data#>>'{capabilitiesUrl}' like ?1 order by data ->> ?2 %s limit ?3 offset ?4";
+	private static final String KEYWORD_CAPABILITIES_URL_QUERY = "select * from deployment where data#>>'{capabilitiesUrl}' like ?1 order by data #>> regexp_split_to_array(?2, E'\\\\.') %s limit ?3 offset ?4";
 	private static final String KEYWORD_CAPABILITIES_URL_QUERY_COUNT = "select count(*) from deployment where data#>>'{capabilitiesUrl}' like ?1";
 	private static final String DEPLOYMENT_QUERY = "select * from deployment order by data ->> ?1 %s limit ?2 offset ?3";
 	private static final String DEPLOYMENT_QUERY_COUNT = "select count(*) from deployment";
