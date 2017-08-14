@@ -18,6 +18,8 @@ package model.job.type;
 import model.job.PiazzaJobType;
 
 public class ListServicesJob implements PiazzaJobType {
+	private static final long serialVersionUID = 1L;
+	
 	private boolean detailed = false;
 
 	public boolean isDetailed() {

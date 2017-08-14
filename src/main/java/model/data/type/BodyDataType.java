@@ -28,7 +28,8 @@ import io.swagger.annotations.ApiModelProperty;
 import model.data.DataType;
 
 public class BodyDataType implements DataType {
-
+	private static final long serialVersionUID = 1L;
+	
 	@ApiModelProperty(required = true, value = "The type of Data", allowableValues = "body")
 	@JsonIgnore
 	public String type;

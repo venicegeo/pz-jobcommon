@@ -19,6 +19,8 @@ import model.job.PiazzaJobType;
 import model.service.metadata.Service;
 
 public class RegisterServiceJob implements PiazzaJobType {
+	private static final long serialVersionUID = 1L;
+	
 	private Service data;
 
 	public RegisterServiceJob() {

@@ -34,7 +34,8 @@ import model.job.PiazzaJobType;
  */
 @ApiModel("LoadJob")
 public class IngestJob implements PiazzaJobType {
-
+	private static final long serialVersionUID = 1L;
+	
 	@ApiModelProperty(required = true, value = "The type of Job", allowableValues = "ingest")
 	public String type;
 

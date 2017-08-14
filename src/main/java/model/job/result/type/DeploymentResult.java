@@ -27,7 +27,8 @@ import model.job.result.ResultType;
  * 
  */
 public class DeploymentResult implements ResultType {
-
+	private static final long serialVersionUID = 1L;
+	
 	@ApiModelProperty(value = "Object containing metadata regarding a Piazza Deployment", required = true)
 	public Deployment deployment;
 

@@ -15,6 +15,8 @@
  **/
 package model.data;
 
+import java.io.Serializable;
+
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
@@ -52,7 +54,7 @@ import model.data.type.WfsDataType;
 		@Type(value = TextDataType.class, name = "text"),		
 		@Type(value = URLParameterDataType.class, name = "urlparameter"),
 		@Type(value = WfsDataType.class, name = "wfs")})
-public interface DataType {
+public interface DataType extends Serializable {
 
 	public String getMimeType();
 }

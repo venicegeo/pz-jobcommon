@@ -25,6 +25,8 @@ import model.job.PiazzaJobType;
  * 
  */
 public class SearchQueryJob implements PiazzaJobType {
+	private static final long serialVersionUID = 1L;
+	
 	/**
 	 * Hunk-o-memory for serialization of input DSL
 	 */

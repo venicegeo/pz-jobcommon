@@ -26,6 +26,7 @@ import model.job.result.ResultType;
  * 
  */
 public class ErrorResult implements ResultType {
+	private static final long serialVersionUID = 1L;
 	
 	@ApiModelProperty(value = "A description of the error describing the failure", required = true)
 	public Object message;

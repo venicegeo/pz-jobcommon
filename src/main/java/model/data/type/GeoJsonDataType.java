@@ -32,7 +32,8 @@ import model.data.location.FileLocation;
  */
 @JsonInclude(Include.NON_NULL)
 public class GeoJsonDataType implements DataType, FileRepresentation {
-
+	private static final long serialVersionUID = 1L;
+	
 	@ApiModelProperty(required = true, value = "The type of Data", allowableValues = "geojson")
 	@JsonIgnore
 	public String type;

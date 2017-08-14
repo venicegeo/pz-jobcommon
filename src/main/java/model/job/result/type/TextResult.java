@@ -25,6 +25,7 @@ import model.job.result.ResultType;
  * 
  */
 public class TextResult implements ResultType {
+	private static final long serialVersionUID = 1L;
 	
 	@ApiModelProperty(value = "The text content of the Data", required = true)
 	public Object text;

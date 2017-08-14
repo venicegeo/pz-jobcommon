@@ -18,6 +18,8 @@ package model.status;
 import model.job.JobProgress;
 import model.job.result.ResultType;
 
+import java.io.Serializable;
+
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
@@ -36,8 +38,9 @@ import io.swagger.annotations.ApiModelProperty;
  * 
  */
 @JsonInclude(Include.NON_NULL)
-public class StatusUpdate {
-
+public class StatusUpdate implements Serializable {
+	private static final long serialVersionUID = 1L;
+	
 	@JsonIgnore
 	public static final String STATUS_SUBMITTED = "Submitted";
 

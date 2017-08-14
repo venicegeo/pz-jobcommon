@@ -22,6 +22,8 @@ import model.job.result.type.FileResult;
 import model.job.result.type.JobResult;
 import model.job.result.type.TextResult;
 
+import java.io.Serializable;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
@@ -51,6 +53,6 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 		@Type(value = TextResult.class, name = "text")})
 @JsonInclude(Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
-public interface ResultType {
+public interface ResultType extends Serializable {
 
 }

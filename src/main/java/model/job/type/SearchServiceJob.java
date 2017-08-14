@@ -19,6 +19,8 @@ import model.job.PiazzaJobType;
 import model.service.SearchCriteria;
 
 public class SearchServiceJob implements PiazzaJobType {
+	private static final long serialVersionUID = 1L;
+	
 	private String jobId = null;
 	private SearchCriteria data;
 

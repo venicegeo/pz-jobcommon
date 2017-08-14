@@ -29,7 +29,8 @@ import model.job.PiazzaJobType;
  * 
  */
 public class AbortJob implements PiazzaJobType {
-
+	private static final long serialVersionUID = 1L;
+	
 	@ApiModelProperty(required = true, value = "The type of Job", allowableValues = "abort")
 	public String type;
 
