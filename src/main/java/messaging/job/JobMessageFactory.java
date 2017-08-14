@@ -140,9 +140,11 @@ public enum JobMessageFactory {
 	 * @param userName
 	 *            The authenticated UserName
 	 * @return The Kafka message for creating the Ingest Job, that can be Send via a producer.
+	 * @throws PiazzaJobException 
+	 * @throws JsonProcessingException 
 	 */
 	public static ProducerRecord<String, String> getIngestJobForDataResource(DataResource dataResource, String jobId, String userName,
-			String space) throws Exception {
+			String space) throws PiazzaJobException, JsonProcessingException {
 		// Data Resource must have an Id at this point
 		if (dataResource.getDataId() == null) {
 			throw new PiazzaJobException("The DataResource object must have a populated Id.");
@@ -186,10 +188,12 @@ public enum JobMessageFactory {
 	 * @param json
 	 *            JSON Payload from POST RequestBody
 	 * @return PiazzaRequest object for the JSON Payload.
+	 * @throws IOException 
+	 * @throws JsonMappingException 
+	 * @throws JsonParseException 
 	 * @throws Exception
 	 */
-	public static PiazzaJobRequest parseRequestJson(String json) throws Exception {
+	public static PiazzaJobRequest parseRequestJson(String json) throws JsonParseException, JsonMappingException, IOException {
 		return new ObjectMapper().readValue(json, PiazzaJobRequest.class);
 	}
-
 }

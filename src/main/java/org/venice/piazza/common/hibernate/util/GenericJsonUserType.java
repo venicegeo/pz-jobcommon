@@ -53,7 +53,8 @@ public abstract class GenericJsonUserType implements UserType {
 			ObjectMapper objectMapper = new ObjectMapper();
 			return objectMapper.readValue(jsonFromDatabase.getBytes("UTF-8"), returnedClass());
 		} catch (Exception exception) {
-			throw new RuntimeException(String.format("Failed to deserialize JSON Object to POJO from Database: %s", exception.getMessage()),
+			//sonar asking for a dedicated exception to be thrown
+			throw new SQLException(String.format("Failed to deserialize JSON Object to POJO from Database: %s", exception.getMessage()),
 					exception);
 		}
 	}
@@ -71,7 +72,8 @@ public abstract class GenericJsonUserType implements UserType {
 			writer.flush();
 			preparedStatement.setObject(index, writer.toString(), Types.OTHER);
 		} catch (Exception exception) {
-			throw new RuntimeException(String.format("Failed to serialize Model Object from Database to JSON: %s", exception.getMessage()),
+			//sonar asking for a dedicated exception to be thrown
+			throw new SQLException(String.format("Failed to serialize Model Object from Database to JSON: %s", exception.getMessage()),
 					exception);
 		}
 	}

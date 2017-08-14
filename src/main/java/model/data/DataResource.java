@@ -17,6 +17,8 @@ package model.data;
 
 import io.swagger.annotations.ApiModelProperty;
 
+import java.io.Serializable;
+
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
@@ -43,8 +45,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 @JsonInclude(Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class DataResource {
-
+public class DataResource implements Serializable {
+	private static final long serialVersionUID = 1L;
+	
 	@ApiModelProperty(value = "Provided by the System. The unique Id of the Data", required = false)
 	public String dataId;
 

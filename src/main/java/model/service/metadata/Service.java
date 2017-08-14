@@ -15,6 +15,7 @@
  **/
 package model.service.metadata;
 
+import java.io.Serializable;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
@@ -41,8 +42,9 @@ import model.job.metadata.ResourceMetadata;
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(Include.NON_NULL)
-public class Service {
-
+public class Service implements Serializable {
+	private static final long serialVersionUID = 1L;
+	
 	private final static Logger LOGGER = LoggerFactory.getLogger(Service.class);
 
 	public enum METHOD_TYPE {

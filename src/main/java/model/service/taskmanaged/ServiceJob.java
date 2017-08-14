@@ -15,6 +15,8 @@
  **/
 package model.service.taskmanaged;
 
+import java.io.Serializable;
+
 import org.joda.time.DateTime;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -33,7 +35,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * @author Patrick.Doody
  *
  */
-public class ServiceJob {
+public class ServiceJob implements Serializable {
+	private static final long serialVersionUID = 1L;
+	
 	/**
 	 * The ID of the Service this Job pertains to.
 	 */

@@ -15,6 +15,7 @@
  **/
 package model.job;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,7 +47,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 @JsonInclude(Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Job {
+public class Job implements Serializable {
+	private static final long serialVersionUID = 1L;
+	
 	private String jobId;
 	private PiazzaJobType jobType;
 	@JsonIgnore

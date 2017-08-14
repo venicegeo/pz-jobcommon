@@ -15,6 +15,8 @@
  **/
 package model.data.deployment;
 
+import java.io.Serializable;
+
 import javax.validation.constraints.NotNull;
 
 import org.joda.time.DateTime;
@@ -35,8 +37,9 @@ import io.swagger.annotations.ApiModelProperty;
  */
 @JsonInclude(Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Deployment {
-
+public class Deployment implements Serializable {
+	private static final long serialVersionUID = 1L;
+	
 	@ApiModelProperty(value = "The unique Id for this Deployment", required = true)
 	@NotNull
 	public String deploymentId;

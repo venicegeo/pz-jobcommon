@@ -15,6 +15,7 @@
  **/
 package model.security.authz;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -34,7 +35,9 @@ import model.security.authz.Throttle.Component;
  */
 @JsonInclude(Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class UserThrottles {
+public class UserThrottles implements Serializable {
+	private static final long serialVersionUID = 1L;
+	
 	public String username;
 	/**
 	 * Maps a Throttle component to the number of invocations for that component.
