@@ -15,6 +15,7 @@
  **/
 package model.service.metadata;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
@@ -32,8 +33,9 @@ import model.data.DataType;
  * @author bkrasner
  *
  */
-public class ExecuteServiceData {
-
+public class ExecuteServiceData implements Serializable {
+	private static final long serialVersionUID = 1L;
+	
 	@ApiModelProperty(value = "The Inputs for the execution", required = true, dataType = "model.swagger.SwaggerDataType")
 	@NotNull
 	@JsonProperty("dataInputs")

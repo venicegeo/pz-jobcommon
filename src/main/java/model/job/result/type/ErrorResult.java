@@ -29,7 +29,7 @@ public class ErrorResult implements ResultType {
 	private static final long serialVersionUID = 1L;
 	
 	@ApiModelProperty(value = "A description of the error describing the failure", required = true)
-	public Object message;
+	public Object message; // NOSONAR
 	
 	@ApiModelProperty(value = "Specific details regarding the error")
 	public String details;

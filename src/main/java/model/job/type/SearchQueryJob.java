@@ -30,7 +30,7 @@ public class SearchQueryJob implements PiazzaJobType {
 	/**
 	 * Hunk-o-memory for serialization of input DSL
 	 */
-	private Object data;
+	private Object data; // NOSONAR
 
 	public SearchQueryJob() {
 		// Empty constructor required by Jackson

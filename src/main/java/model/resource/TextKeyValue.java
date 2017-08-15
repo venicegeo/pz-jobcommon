@@ -16,10 +16,13 @@
  **/
 package model.resource;
 
+import java.io.Serializable;
+
 import io.swagger.annotations.ApiModelProperty;
 
-public class TextKeyValue {
-
+public class TextKeyValue implements Serializable {
+	private static final long serialVersionUID = 1L;
+	
 	@ApiModelProperty(value = "The pair key", required = true)
 	private String key;
 

@@ -28,7 +28,7 @@ public class TextResult implements ResultType {
 	private static final long serialVersionUID = 1L;
 	
 	@ApiModelProperty(value = "The text content of the Data", required = true)
-	public Object text;
+	public Object text; // NOSONAR
 
 	public TextResult() {
 		// Empty constructor required by Jackson\

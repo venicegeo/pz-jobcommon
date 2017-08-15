@@ -25,7 +25,8 @@ import io.swagger.annotations.ApiModelProperty;
  * 
  */
 public class S3FileStore implements FileLocation {
-
+	private static final long serialVersionUID = 1L;
+	
 	@ApiModelProperty(required = true, value = "The type of file location", allowableValues = "s3")
 	public String type;
 
