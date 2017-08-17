@@ -151,7 +151,11 @@ public class AsyncServiceInstance implements Serializable {
 
 	@JsonProperty("lastCheckedOn")
 	public void setCheckedOnEpoch(Long lastCheckedOn) {
-		this.lastCheckedOn = new DateTime(lastCheckedOn.longValue());
+		if (lastCheckedOn != null) {
+			this.lastCheckedOn = new DateTime(lastCheckedOn.longValue());
+		} else {
+			this.lastCheckedOn = null;
+		}
 	}
 
 	/**

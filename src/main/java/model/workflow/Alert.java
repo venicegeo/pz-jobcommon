@@ -28,17 +28,12 @@ import io.swagger.annotations.ApiModelProperty;
 /**
  * Created by sbortman on 6/2/16.
  * 
- *  a notification, automatically created when an model.workflow.Trigger happens
- *  
- * {@code
- * type model.workflow.Alert struct {
- *  Id Ident `json:"id"`
- *  TriggerId Ident `json:"trigger_id"`
- *  EventId Ident `json:"event_id"`
- * }
+ * a notification, automatically created when an model.workflow.Trigger happens
  * 
- * { "id": "8e6fa", "trigger_id": "987d6", "event_id": "53dac" }
- * }
+ * {@code type model.workflow.Alert struct { Id Ident `json:"id"` TriggerId Ident `json:"trigger_id"` EventId Ident
+ * `json:"event_id"` }
+ * 
+ * { "id": "8e6fa", "trigger_id": "987d6", "event_id": "53dac" } }
  */
 public class Alert {
 	@ApiModelProperty(value = "The unique Id for this Alert", required = true)
@@ -46,29 +41,29 @@ public class Alert {
 
 	@ApiModelProperty(value = "The unique Id for the Trigger that was fired", required = true)
 	@NotNull
-	@Size(min=1)
+	@Size(min = 1)
 	public String triggerId;
 
 	@ApiModelProperty(value = "The unique Id for the Event that fired the Trigger", required = true)
 	@NotNull
-	@Size(min=1)
+	@Size(min = 1)
 	public String eventId;
 
 	@ApiModelProperty(value = "The unique Id for the Job that was submitted", required = true)
 	public String jobId;
-	
+
 	@ApiModelProperty(value = "Supplied by system", required = true)
 	@JsonIgnore
 	public DateTime createdOn;
-	
+
 	@ApiModelProperty(value = "Supplied by system", required = true)
 	public String createdBy;
-	
+
 	@ApiModelProperty(value = "Supplied by system", required = true)
 	@JsonProperty("createdOn")
 	public String getCreatedOnString() {
 		// Defaults to ISO8601
-		if( createdOn != null ) {
+		if (createdOn != null) {
 			return createdOn.toString();
 		}
 		return null;
@@ -76,8 +71,10 @@ public class Alert {
 
 	@JsonProperty("createdOn")
 	public void setCreatedOnString(String createdOn) {
-		if( createdOn != null) {
+		if (createdOn != null) {
 			this.createdOn = new DateTime(createdOn);
+		} else {
+			this.createdOn = null;
 		}
 	}
 }

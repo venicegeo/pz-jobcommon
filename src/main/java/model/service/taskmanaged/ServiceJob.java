@@ -122,7 +122,11 @@ public class ServiceJob implements Serializable {
 
 	@JsonProperty("queuedOn")
 	public void setQueuedOnString(Long queuedOn) {
-		this.queuedOn = new DateTime(queuedOn);
+		if (queuedOn != null) {
+			this.queuedOn = new DateTime(queuedOn);
+		} else {
+			this.queuedOn = null;
+		}
 	}
 
 	public Integer getTimeouts() {

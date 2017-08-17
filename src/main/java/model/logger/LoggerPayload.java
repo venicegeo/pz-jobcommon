@@ -99,7 +99,11 @@ public class LoggerPayload {
 
 	@JsonProperty("timeStamp")
 	public void setCreatedOnString(String createdOn) {
-		this.timestamp = new DateTime(createdOn);
+		if (createdOn != null) {
+			this.timestamp = new DateTime(createdOn);
+		} else {
+			this.timestamp = null;
+		}
 	}
 
 	@JsonProperty("severity")

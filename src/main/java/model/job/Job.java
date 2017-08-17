@@ -49,7 +49,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Job implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	private String jobId;
 	private PiazzaJobType jobType;
 	@JsonIgnore
@@ -92,7 +92,11 @@ public class Job implements Serializable {
 
 	@JsonProperty("createdOn")
 	public void setCreatedOnString(String createdOn) {
-		this.createdOn = new DateTime(createdOn);
+		if (createdOn != null) {
+			this.createdOn = new DateTime(createdOn);
+		} else {
+			this.createdOn = null;
+		}
 	}
 
 	public PiazzaJobType getJobType() {
