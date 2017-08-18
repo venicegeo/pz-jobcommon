@@ -15,6 +15,8 @@
  **/
 package model.job;
 
+import java.io.Serializable;
+
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
@@ -29,8 +31,9 @@ import io.swagger.annotations.ApiModelProperty;
  * 
  */
 @JsonInclude(Include.NON_NULL)
-public class JobProgress {
-
+public class JobProgress implements Serializable {
+	private static final long serialVersionUID = 1L;
+	
 	@ApiModelProperty(value = "The percentage complete for the Job, in whole numbers, out of 100 percent")
 	public Integer percentComplete;
 

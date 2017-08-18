@@ -15,9 +15,6 @@
  **/
 package org.venice.piazza.common.hibernate.dao.service;
 
-import javax.transaction.Transactional;
-
-import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
@@ -31,20 +28,15 @@ import org.venice.piazza.common.hibernate.entity.ServiceEntity;
  */
 @Repository
 public interface ServiceDao extends CrudRepository<ServiceEntity, Long>, ServiceDaoCustom {
-	@Query(value = "select * from service where data ->> 'serviceId' = ?1 limit 1", nativeQuery = true)
+	@Query(value = "select * from user_service where data ->> 'serviceId' = ?1 limit 1", nativeQuery = true)
 	ServiceEntity getServiceById(String serviceId);
-
-	@Transactional
-	@Modifying
-	@Query(value = "delete from service where data ->> 'serviceId' = ?1", nativeQuery = true)
-	void deleteServiceByServiceId(String serviceId);
 
 	/**
 	 * Gets all services that are not OFFLINE
 	 */
-	@Query(value = "select * from service where data#>'{resourceMetadata,availability}' != '\"OFFLINE\"'", nativeQuery = true)
+	@Query(value = "select * from user_service where data#>'{resourceMetadata,availability}' != '\"OFFLINE\"'", nativeQuery = true)
 	Iterable<ServiceEntity> getAllAvailableServices();
-	
-	@Query(value = "select * from service where data ->> 'isTaskManaged' = 'true'", nativeQuery = true)
+
+	@Query(value = "select * from user_service where data ->> 'isTaskManaged' = 'true'", nativeQuery = true)
 	Iterable<ServiceEntity> getAllTaskManagedServices();
 }

@@ -15,6 +15,8 @@
  **/
 package model.data.deployment;
 
+import java.io.Serializable;
+
 import org.joda.time.DateTime;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -42,7 +44,9 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
  */
 @JsonInclude(Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Lease {
+public class Lease implements Serializable {
+	private static final long serialVersionUID = 1L;
+	
 	private String leaseId;
 	private String deploymentId;
 	

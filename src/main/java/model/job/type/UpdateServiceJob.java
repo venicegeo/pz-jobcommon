@@ -19,6 +19,7 @@ import model.job.PiazzaJobType;
 import model.service.metadata.Service;
 
 public class UpdateServiceJob implements PiazzaJobType {
+	private static final long serialVersionUID = 1L;
 
 	private String jobId = null;
 	private String serviceID;

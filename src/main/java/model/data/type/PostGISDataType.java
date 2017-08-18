@@ -29,7 +29,8 @@ import model.data.DataType;
  * 
  */
 public class PostGISDataType implements DataType {
-
+	private static final long serialVersionUID = 1L;
+	
 	@ApiModelProperty(required = true, value = "The type of Data", allowableValues = "postgis")
 	@JsonIgnore
 	public String type;

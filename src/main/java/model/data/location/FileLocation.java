@@ -15,6 +15,8 @@
  **/
 package model.data.location;
 
+import java.io.Serializable;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
@@ -43,7 +45,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 @JsonSubTypes({ @Type(value = S3FileStore.class, name = "s3"), @Type(value = FolderShare.class, name = "share") })
 @JsonInclude(Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
-public interface FileLocation {
+public interface FileLocation extends Serializable {
 	public String getFileName();
 
 	public Long getFileSize();

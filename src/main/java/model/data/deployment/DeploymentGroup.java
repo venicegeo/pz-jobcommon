@@ -17,6 +17,8 @@ package model.data.deployment;
 
 import io.swagger.annotations.ApiModelProperty;
 
+import java.io.Serializable;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
@@ -42,7 +44,9 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
  */
 @JsonInclude(Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class DeploymentGroup {
+public class DeploymentGroup implements Serializable {
+	private static final long serialVersionUID = 1L;
+	
 	@ApiModelProperty(value = "The unique identifier for this DeploymentGroup", required = true)
 	public String deploymentGroupId;
 

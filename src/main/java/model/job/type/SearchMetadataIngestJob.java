@@ -30,6 +30,7 @@ import model.job.PiazzaJobType;
  * 
  */
 public class SearchMetadataIngestJob implements PiazzaJobType {
+	private static final long serialVersionUID = 1L;
 	
 	@NotNull
 	public DataResource data;

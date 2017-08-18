@@ -16,6 +16,7 @@
 package model.job.metadata;
 
 import java.lang.reflect.InvocationTargetException;
+import java.io.Serializable;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -49,9 +50,8 @@ import model.security.SecurityClassification;
  * 
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class ResourceMetadata {
-
-
+public class ResourceMetadata implements Serializable {
+	private static final long serialVersionUID = 1L;
 	
 	@ApiModelProperty(value = "Human-readable name of the resource")
 	public String name;

@@ -15,9 +15,6 @@
  **/
 package org.venice.piazza.common.hibernate.dao;
 
-import javax.transaction.Transactional;
-
-import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
@@ -36,9 +33,4 @@ public interface UserProfileDao extends CrudRepository<UserProfileEntity, Long> 
 
 	@Query(value = "select * from user_profile where data ->> 'username' = ?1 and data ->> 'distinguishedName' = ?2 limit 1", nativeQuery = true)
 	UserProfileEntity getUserProfileByUserNameAndDn(String userName, String dn);
-
-	@Transactional
-	@Modifying
-	@Query(value = "delete from user_profile where data ->> 'username' = ?1", nativeQuery = true)
-	void deleteUserProfileByUserName(String userName);
 }

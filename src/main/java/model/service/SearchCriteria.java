@@ -15,6 +15,8 @@
  **/
 package model.service;
 
+import java.io.Serializable;
+
 /**
  * This class allows users to specify search criteria to search for a service
  * specifying a ResourceMetadata field and a regular expression.
@@ -22,8 +24,9 @@ package model.service;
  * @author mlynum
  *
  */
-public class SearchCriteria {
-
+public class SearchCriteria implements Serializable {
+	private static final long serialVersionUID = 1L;
+	
 	private String field;
 
 	private String pattern;

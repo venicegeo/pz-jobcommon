@@ -26,7 +26,8 @@ import io.swagger.annotations.ApiModelProperty;
 import model.data.DataType;
 
 public class LiteralDataType implements DataType {
-
+	private static final long serialVersionUID = 1L;
+	
 	public enum LITERAL {
 		DOUBLE, FLOAT, SHORT, LONG, BYTE, CHAR, BOOLEAN, STRING
 	}

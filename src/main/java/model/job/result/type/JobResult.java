@@ -29,6 +29,7 @@ import model.job.result.ResultType;
  * 
  */
 public class JobResult implements ResultType {
+	private static final long serialVersionUID = 1L;
 	
 	@ApiModelProperty(value = "The Id of the Job referenced in the request", required = true)
 	public String jobId;

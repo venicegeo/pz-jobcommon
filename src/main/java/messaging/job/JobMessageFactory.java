@@ -38,7 +38,7 @@ import model.status.StatusUpdate;
  * 
  */
 public enum JobMessageFactory {
-	;
+	; //NOSONAR
 	
 	public static final String REQUEST_JOB_TOPIC_NAME = "Request-Job";
 	public static final String CREATE_JOB_TOPIC_NAME = "Create-Job";
@@ -140,6 +140,8 @@ public enum JobMessageFactory {
 	 * @param userName
 	 *            The authenticated UserName
 	 * @return The Kafka message for creating the Ingest Job, that can be Send via a producer.
+	 * @throws PiazzaJobException 
+	 * @throws JsonProcessingException 
 	 */
 	public static ProducerRecord<String, String> getIngestJobForDataResource(DataResource dataResource, String jobId, String userName,
 			String space) throws PiazzaJobException, JsonProcessingException {
@@ -186,10 +188,12 @@ public enum JobMessageFactory {
 	 * @param json
 	 *            JSON Payload from POST RequestBody
 	 * @return PiazzaRequest object for the JSON Payload.
+	 * @throws IOException 
+	 * @throws JsonMappingException 
+	 * @throws JsonParseException 
 	 * @throws Exception
 	 */
-	public static PiazzaJobRequest parseRequestJson(String json) throws IOException, JsonParseException, JsonMappingException {
+	public static PiazzaJobRequest parseRequestJson(String json) throws JsonParseException, JsonMappingException, IOException {
 		return new ObjectMapper().readValue(json, PiazzaJobRequest.class);
 	}
-
 }

@@ -25,10 +25,12 @@ import model.job.PiazzaJobType;
  * 
  */
 public class SearchQueryJob implements PiazzaJobType {
+	private static final long serialVersionUID = 1L;
+	
 	/**
 	 * Hunk-o-memory for serialization of input DSL
 	 */
-	private Object data;
+	private Object data; // NOSONAR
 
 	public SearchQueryJob() {
 		// Empty constructor required by Jackson

@@ -15,6 +15,8 @@
  **/
 package model.security;
 
+import java.io.Serializable;
+
 import javax.validation.constraints.NotNull;
 
 import io.swagger.annotations.ApiModelProperty;
@@ -25,8 +27,9 @@ import io.swagger.annotations.ApiModelProperty;
  * @author Bkrasner
  * 
  */
-public class SecurityClassification {
-
+public class SecurityClassification implements Serializable {
+	private static final long serialVersionUID = 1L;
+	
 	@ApiModelProperty(value = "The security classification marking for the Data", required = true)
 	@NotNull
 	private String classification;

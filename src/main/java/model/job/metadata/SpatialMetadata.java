@@ -15,6 +15,8 @@
  **/
 package model.job.metadata;
 
+import java.io.Serializable;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -31,8 +33,9 @@ import io.swagger.annotations.ApiModelProperty;
  */
 @JsonInclude(Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class SpatialMetadata {
-
+public class SpatialMetadata implements Serializable {
+	private static final long serialVersionUID = 1L;
+	
 	@ApiModelProperty(value = "The CRS (Coordinate Reference System) of the data")
 	private String coordinateReferenceSystem;
 

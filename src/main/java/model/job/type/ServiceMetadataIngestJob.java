@@ -28,6 +28,7 @@ import model.service.metadata.Service;
  * 
  */
 public class ServiceMetadataIngestJob implements PiazzaJobType {
+	private static final long serialVersionUID = 1L;
 
 	private Service data;
 

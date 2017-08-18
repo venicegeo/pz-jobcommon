@@ -18,7 +18,8 @@ package model.job.type;
 import model.job.PiazzaJobType;
 
 public class DeleteServiceJob implements PiazzaJobType {
-
+	private static final long serialVersionUID = 1L;
+	
 	private String jobId = null;
 	private String serviceID;
 	private String reason;

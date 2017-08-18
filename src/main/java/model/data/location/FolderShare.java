@@ -36,7 +36,8 @@ import io.swagger.annotations.ApiModelProperty;
  * 
  */
 public class FolderShare implements FileLocation {
-
+	private static final long serialVersionUID = 1L;
+	
 	private final static Logger LOGGER = LoggerFactory.getLogger(FolderShare.class);
 	
 	@ApiModelProperty(required = true, value = "The type of file location", allowableValues = "share")

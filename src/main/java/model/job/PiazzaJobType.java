@@ -15,6 +15,8 @@
  **/
 package model.job;
 
+import java.io.Serializable;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
@@ -66,6 +68,6 @@ import model.job.type.UpdateServiceJob;
 })
 @JsonInclude(Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
-public interface PiazzaJobType {
+public interface PiazzaJobType extends Serializable {
 
 }

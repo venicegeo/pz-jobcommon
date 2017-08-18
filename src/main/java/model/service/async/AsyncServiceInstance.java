@@ -15,6 +15,8 @@
  **/
 package model.service.async;
 
+import java.io.Serializable;
+
 import org.joda.time.DateTime;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -38,7 +40,9 @@ import model.status.StatusUpdate;
  */
 @JsonInclude(Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class AsyncServiceInstance {
+public class AsyncServiceInstance implements Serializable {
+	private static final long serialVersionUID = 1L;
+
 	private String jobId;
 	private String serviceId;
 	private String instanceId;

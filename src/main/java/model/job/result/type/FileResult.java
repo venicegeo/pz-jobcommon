@@ -26,6 +26,7 @@ import model.job.result.ResultType;
  * 
  */
 public class FileResult implements ResultType {
+	private static final long serialVersionUID = 1L;
 	
 	@ApiModelProperty(value = "The unique Id of the Data resource", required = true)	
 	public String dataId;

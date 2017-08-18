@@ -24,7 +24,6 @@ import com.amazonaws.AmazonClientException;
 import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.regions.Region;
 import com.amazonaws.regions.Regions;
-import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.AmazonS3EncryptionClient;
 import com.amazonaws.services.s3.model.CryptoConfiguration;
@@ -46,9 +45,9 @@ public class FileAccessFactory {
 	private String s3pk = "";
 	private String s3ek = "";
 
-	private final static Logger LOGGER = LoggerFactory.getLogger(FileAccessFactory.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(FileAccessFactory.class);
 
-	private final String PROTOCOL_PREFIX = "https://";
+	private static final String PROTOCOL_PREFIX = "https://";
 
 	public FileAccessFactory() {
 		// Empty constructor required by Jackson
@@ -150,7 +149,7 @@ public class FileAccessFactory {
 		if (fileLocation instanceof FolderShare) {
 			return ((FolderShare) fileLocation).getFilePath();
 		} else if (fileLocation instanceof S3FileStore) {
-			S3FileStore s3FileStore = ((S3FileStore) fileLocation);
+			S3FileStore s3FileStore = (S3FileStore) fileLocation;
 			return String.format("%s%s/%s/%s", PROTOCOL_PREFIX, s3FileStore.getDomainName(), s3FileStore.getBucketName(),
 					s3FileStore.getFileName());
 		} else {

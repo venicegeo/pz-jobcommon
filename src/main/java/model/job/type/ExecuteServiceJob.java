@@ -25,7 +25,8 @@ import model.service.metadata.ExecuteServiceData;
 
 @ApiModel(value = "ExecuteJob")
 public class ExecuteServiceJob implements PiazzaJobType {
-
+	private static final long serialVersionUID = 1L;
+	
 	@ApiModelProperty(required = true, value = "The type of Job", allowableValues = "execute-service")
 	public String type;
 

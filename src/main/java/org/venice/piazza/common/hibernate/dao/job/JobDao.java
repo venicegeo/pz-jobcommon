@@ -15,9 +15,6 @@
  **/
 package org.venice.piazza.common.hibernate.dao.job;
 
-import javax.transaction.Transactional;
-
-import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
@@ -33,11 +30,6 @@ import org.venice.piazza.common.hibernate.entity.JobEntity;
 public interface JobDao extends CrudRepository<JobEntity, Long>, JobDaoCustom {
 	@Query(value = "select count(*) from job where data ->> 'status' = ?1", nativeQuery = true)
 	Long countJobByStatus(String status);
-
-	@Transactional
-	@Modifying
-	@Query(value = "delete from job where data ->> 'jobId' = ?1", nativeQuery = true)
-	void deleteJobById(String jobId);
 
 	@Query(value = "select * from job where data ->> 'jobId' = ?1 limit 1", nativeQuery = true)
 	JobEntity getJobByJobId(String jobId);

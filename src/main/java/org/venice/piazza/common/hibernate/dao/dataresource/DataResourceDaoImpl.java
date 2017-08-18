@@ -42,15 +42,15 @@ public class DataResourceDaoImpl implements DataResourceDaoCustom {
 	EntityManager entityManager;
 
 	private static final String WILDCARD_STRING_QUERY = "%%%s%%";
-	private static final String USERNAME_AND_KEYWORD_DATARESOURCE_QUERY = "select * from data_resource where (data#>>'{metadata,name}' like ?1 or data#>>'{metadata,description}' like ?2) and data#>>'{metadata,createdBy}' like ?3 order by data ->> ?4 %s limit ?5 offset ?6";
-	private static final String USERNAME_DATARESOURCE_QUERY = "select * from data_resource where data#>>'{metadata,createdBy}' like ?1 order by data ->> ?2 %s limit ?3 offset ?4";
+	private static final String USERNAME_AND_KEYWORD_DATARESOURCE_QUERY = "select * from data_resource where (data#>>'{metadata,name}' like ?1 or data#>>'{metadata,description}' like ?2) and data#>>'{metadata,createdBy}' like ?3 order by data #>> regexp_split_to_array(?4, E'\\\\.') %s limit ?5 offset ?6";
+	private static final String USERNAME_DATARESOURCE_QUERY = "select * from data_resource where data#>>'{metadata,createdBy}' like ?1 order by data #>> regexp_split_to_array(?2, E'\\\\.') %s limit ?3 offset ?4";
 	private static final String USERNAME_DATARESOURCE_QUERY_COUNT = "select count(*) from data_resource where data#>>'{metadata,createdBy}' like ?1";
 	private static final String USERNAME_AND_KEYWORD_DATARESOURCE_QUERY_COUNT = "select count(*) from data_resource where (data#>>'{metadata,name}' like ?1 or data#>>'{metadata,description}' like ?2) and data#>>'{metadata,createdBy}' like ?3";
-	private static final String KEYWORD_DATARESOURCE_QUERY = "select * from data_resource where data#>>'{metadata,name}' like ?1 or data#>>'{metadata,description}' like ?2 order by data ->> ?3 %s limit ?4 offset ?5";
+	private static final String KEYWORD_DATARESOURCE_QUERY = "select * from data_resource where data#>>'{metadata,name}' like ?1 or data#>>'{metadata,description}' like ?2 order by data #>> regexp_split_to_array(?3, E'\\\\.') %s limit ?4 offset ?5";
 	private static final String KEYWORD_DATARESOURCE_QUERY_COUNT = "select count(*) from data_resource where data#>>'{metadata,name}' like ?1 or data#>>'{metadata,description}' like ?2";
-	private static final String CREATED_BY_JOB_ID_DATARESOURCE_QUERY = "select * from data_resource where data#>>'{metadata,createdByJobId}' like ?1 order by data ->> ?2 %s limit ?3 offset ?4";
+	private static final String CREATED_BY_JOB_ID_DATARESOURCE_QUERY = "select * from data_resource where data#>>'{metadata,createdByJobId}' like ?1 order by data #>> regexp_split_to_array(?2, E'\\\\.') %s limit ?3 offset ?4";
 	private static final String CREATED_BY_JOB_ID_DATARESOURCE_QUERY_COUNT = "select count(*) from data_resource where data#>>'{metadata,createdByJobId}' like ?1";
-	private static final String DATARESOURCE_QUERY = "select * from data_resource order by data ->> ?1 %s limit ?2 offset ?3";
+	private static final String DATARESOURCE_QUERY = "select * from data_resource order by data #>> regexp_split_to_array(?1, E'\\\\.') %s limit ?2 offset ?3";
 	private static final String DATARESOURCE_QUERY_COUNT = "select count(*) from data_resource";
 	public Page<DataResourceEntity> getDataResourceForUserAndKeyword(String keyword, String userName, Pagination pagination) {
 		// Query
