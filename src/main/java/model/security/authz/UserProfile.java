@@ -52,11 +52,11 @@ public class UserProfile implements Serializable {
 	private String profileTemplateId;
 
 	private String adminCode;
-	
+
 	private String dutyCode;
-	
+
 	private String country;
-	
+
 	private boolean isNPE;
 
 	public String getUsername() {
@@ -86,7 +86,7 @@ public class UserProfile implements Serializable {
 	public void setLastUpdatedOn(final DateTime lastUpdatedOn) {
 		this.lastUpdatedOn = lastUpdatedOn;
 	}
-	
+
 	public String getCreatedBy() {
 		return createdBy;
 	}
@@ -115,7 +115,11 @@ public class UserProfile implements Serializable {
 
 	@JsonProperty("createdOn")
 	public void setCreatedOnString(final String createdOn) {
-		this.createdOn = new DateTime(createdOn);
+		if (createdOn != null) {
+			this.createdOn = new DateTime(createdOn);
+		} else {
+			this.createdOn = null;
+		}
 	}
 
 	@JsonProperty("lastUpdatedOn")
@@ -130,7 +134,11 @@ public class UserProfile implements Serializable {
 
 	@JsonProperty("lastUpdatedOn")
 	public void setLastUpdatedOnString(final String lastUpdatedOn) {
-		this.lastUpdatedOn = new DateTime(lastUpdatedOn);
+		if (lastUpdatedOn != null) {
+			this.lastUpdatedOn = new DateTime(lastUpdatedOn);
+		} else {
+			this.lastUpdatedOn = null;
+		}
 	}
 
 	public String getDistinguishedName() {
@@ -175,9 +183,8 @@ public class UserProfile implements Serializable {
 
 	@Override
 	public String toString() {
-		return "UserProfile [username=" + username + ", distinguishedName=" + distinguishedName + ", createdOn="
-				+ createdOn + ", lastUpdatedOn=" + lastUpdatedOn + ", createdBy=" + createdBy + ", profileTemplateId="
-				+ profileTemplateId + ", adminCode=" + adminCode + ", dutyCode=" + dutyCode + ", country=" + country
-				+ ", isNPE=" + isNPE + "]";
+		return "UserProfile [username=" + username + ", distinguishedName=" + distinguishedName + ", createdOn=" + createdOn
+				+ ", lastUpdatedOn=" + lastUpdatedOn + ", createdBy=" + createdBy + ", profileTemplateId=" + profileTemplateId
+				+ ", adminCode=" + adminCode + ", dutyCode=" + dutyCode + ", country=" + country + ", isNPE=" + isNPE + "]";
 	}
 }

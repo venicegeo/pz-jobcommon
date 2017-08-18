@@ -26,17 +26,14 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 /**
- * JSON Database Model, serialized by Jackson, that represents a Lease in the
- * Piazza System.
+ * JSON Database Model, serialized by Jackson, that represents a Lease in the Piazza System.
  * 
- * A Lease represents an amount of time that a Deployed resource is available in
- * the system for. Deployments should be guaranteed to be available as long as
- * they have an active Deployment lease. A Lease is considered active as long as
+ * A Lease represents an amount of time that a Deployed resource is available in the system for. Deployments should be
+ * guaranteed to be available as long as they have an active Deployment lease. A Lease is considered active as long as
  * its expiration date has not passed.
  * 
- * If the Expiration date of a lease has passed, then the resource may still be
- * available (perhaps it has not been subject to resource reaping yet) but it
- * will not be guaranteed. Periodically expired leases will be undeployed in
+ * If the Expiration date of a lease has passed, then the resource may still be available (perhaps it has not been
+ * subject to resource reaping yet) but it will not be guaranteed. Periodically expired leases will be undeployed in
  * order to avoid overtaxing the system with outdated or unused deployments.
  * 
  * @author Patrick.Doody
@@ -46,10 +43,10 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Lease implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	private String leaseId;
 	private String deploymentId;
-	
+
 	@JsonIgnore
 	public DateTime expiresOn;
 
@@ -114,6 +111,10 @@ public class Lease implements Serializable {
 
 	@JsonProperty("expiresOn")
 	public void setExpiresOnString(Long expiresOn) {
-		this.expiresOn = new DateTime(expiresOn);
+		if (expiresOn != null) {
+			this.expiresOn = new DateTime(expiresOn);
+		} else {
+			this.expiresOn = null;
+		}
 	}
 }

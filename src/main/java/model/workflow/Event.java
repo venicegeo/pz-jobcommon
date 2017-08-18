@@ -87,6 +87,8 @@ public class Event {
 	public void setCreatedOnString(String createdOn) {
 		if( createdOn != null) {
 			this.createdOn = new DateTime(createdOn);
+		} else {
+			this.createdOn = null;
 		}
 	}
 

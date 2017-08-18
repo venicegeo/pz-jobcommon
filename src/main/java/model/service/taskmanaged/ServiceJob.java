@@ -20,9 +20,6 @@ import java.io.Serializable;
 import org.joda.time.DateTime;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
@@ -37,7 +34,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 public class ServiceJob implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	/**
 	 * The ID of the Service this Job pertains to.
 	 */
@@ -96,7 +93,11 @@ public class ServiceJob implements Serializable {
 
 	@JsonProperty("startedOn")
 	public void setStartedOnString(Long startedOn) {
-		this.startedOn = new DateTime(startedOn);
+		if (startedOn != null) {
+			this.startedOn = new DateTime(startedOn);
+		} else {
+			this.startedOn = null;
+		}
 	}
 
 	@JsonIgnore
@@ -121,7 +122,11 @@ public class ServiceJob implements Serializable {
 
 	@JsonProperty("queuedOn")
 	public void setQueuedOnString(Long queuedOn) {
-		this.queuedOn = new DateTime(queuedOn);
+		if (queuedOn != null) {
+			this.queuedOn = new DateTime(queuedOn);
+		} else {
+			this.queuedOn = null;
+		}
 	}
 
 	public Integer getTimeouts() {

@@ -39,7 +39,7 @@ import io.swagger.annotations.ApiModelProperty;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Deployment implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	@ApiModelProperty(value = "The unique Id for this Deployment", required = true)
 	@NotNull
 	public String deploymentId;
@@ -65,7 +65,7 @@ public class Deployment implements Serializable {
 	/**
 	 * Creates a new Deployment.
 	 */
-	public Deployment() { //NOSONAR
+	public Deployment() { // NOSONAR
 		// Normal for empty constructor even with @NotNull fields
 	}
 
@@ -85,7 +85,7 @@ public class Deployment implements Serializable {
 	 * @param capabilitiesUrl
 	 *            The URL that will return the Capabilities document
 	 */
-	public Deployment(String deploymentId, String dataId, String host, String port, String layer, String capabilitiesUrl) {  //NOSONAR
+	public Deployment(String deploymentId, String dataId, String host, String port, String layer, String capabilitiesUrl) { // NOSONAR
 		this.deploymentId = deploymentId;
 		this.dataId = dataId;
 		this.host = host;
@@ -155,6 +155,10 @@ public class Deployment implements Serializable {
 
 	@JsonProperty("createdOn")
 	public void setCreatedOnString(String createdOn) {
-		this.createdOn = new DateTime(createdOn);
+		if (createdOn != null) {
+			this.createdOn = new DateTime(createdOn);
+		} else {
+			this.createdOn = null;
+		}
 	}
 }
