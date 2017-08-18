@@ -15,6 +15,7 @@
  **/
 package model.job.metadata;
 
+import java.lang.reflect.InvocationTargetException;
 import java.io.Serializable;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -34,6 +35,7 @@ import org.springframework.data.elasticsearch.annotations.FieldType;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import exception.InvalidInputException;
 import io.swagger.annotations.ApiModelProperty;
 import model.resource.NumericKeyValue;
 import model.resource.TextKeyValue;
@@ -317,8 +319,9 @@ public class ResourceMetadata implements Serializable {
 	 * @param overwriteNull
 	 *            True if null values in the other ResourceMetadata should
 	 *            overwrite values in this object. False if not.
+	 * @throws InvalidInputException 
 	 */
-	public void merge(ResourceMetadata other, boolean overwriteNull) {
+	public void merge(ResourceMetadata other, boolean overwriteNull) throws InvalidInputException {
 		final List<String> protectedNames = Arrays.asList("setCreatedBy", "setCreatedOn", "setCreatedByJobId");
 		
 		for (Method fromMethod : this.getClass().getMethods()) {
@@ -328,15 +331,33 @@ public class ResourceMetadata implements Serializable {
 		}
 	}
 	
-	private void mergeMethod(final ResourceMetadata other, boolean overwriteNull, final Method fromMethod, final List<String> protectedNames) {
-		
+	private void mergeMethod(final ResourceMetadata other, boolean overwriteNull, final Method fromMethod, final List<String> protectedNames) throws InvalidInputException {
 		String fromName = fromMethod.getName();
 		String toName = fromName.replace("get", "set");
+		String invalidInputFieldName = toName.replace("set", "");
 
+		// Block updates to specific ResourceMetadata fields
+		// if values are different, then throw exception
 		if (protectedNames.contains(toName)) {
+			Object currentValue;
+			Object newValue;
+			try {
+				currentValue = fromMethod.invoke(this, (Object[]) null);
+				newValue = fromMethod.invoke(other, (Object[]) null);
+			} catch (Exception e) {
+				throw new InvalidInputException(String.format("Illegal system managed field update for Metadata %s", invalidInputFieldName));
+			}
+
+			if (currentValue != null && newValue != null && !currentValue.equals(newValue)) {
+				throw new InvalidInputException(
+						String.format("Illegal system managed field update for Metadata %s", invalidInputFieldName));
+			}
+
+			//simply return if value is the same, no one is hacking
 			return;
 		}
 
+		// merge value if field is not protected
 		try {
 			Method toMethod = this.getClass().getMethod(toName, fromMethod.getReturnType());
 			Object value = fromMethod.invoke(other, (Object[]) null);

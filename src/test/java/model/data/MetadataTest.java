@@ -26,6 +26,8 @@ import org.junit.Test;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import exception.InvalidInputException;
+
 /**
  * Tests the Metadata models. Primarily tests the merging capabilities to ensure
  * correctness of merging.
@@ -60,7 +62,12 @@ public class MetadataTest {
 		assertTrue(toMerge.getDescription().equals("This is a map of North America."));
 
 		// Merge the two. Do not overwrite null values.
-		original.merge(toMerge, false);
+		try {
+			original.merge(toMerge, false);
+		} catch (InvalidInputException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		// Verify the merge was successful
 		assertTrue(original.getName().equals("North America"));
@@ -68,7 +75,12 @@ public class MetadataTest {
 		assertTrue(original.getFormat().equals("Raster"));
 
 		// Merge again, but overwrite null values this time.
-		original.merge(toMerge, true);
+		try {
+			original.merge(toMerge, true);
+		} catch (InvalidInputException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		// Verify
 		assertTrue(original.getName().equals("North America"));
