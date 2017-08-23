@@ -40,11 +40,11 @@ import model.status.StatusUpdate;
 public enum JobMessageFactory {
 	; //NOSONAR
 	
-	public static final String REQUEST_JOB_TOPIC_NAME = "Request-Job";
-	public static final String CREATE_JOB_TOPIC_NAME = "Create-Job";
-	public static final String ABORT_JOB_TOPIC_NAME = "Abort-Job";
-	public static final String UPDATE_JOB_TOPIC_NAME = "Update-Job";
-	public static final String KAFKA_TOPIC_TEMPLATE = "%s-%s";
+	public static final String REQUEST_JOB_TOPIC_NAME = "RequestJob";
+	public static final String CREATE_JOB_TOPIC_NAME = "CreateJob";
+	public static final String ABORT_JOB_TOPIC_NAME = "AbortJob";
+	public static final String UPDATE_JOB_TOPIC_NAME = "UpdateJob";
+	public static final String TOPIC_TEMPLATE = "%s-%s";
 
 	/**
 	 * Creates a Kafka message for a Piazza Job to be created. This Topic is listened to solely by the Job Manager and
@@ -61,7 +61,7 @@ public enum JobMessageFactory {
 	public static ProducerRecord<String, String> getRequestJobMessage(PiazzaJobRequest piazzaRequest, String jobId, String space)
 			throws JsonProcessingException {
 		ObjectMapper mapper = new ObjectMapper();
-		return new ProducerRecord<String, String>(String.format(KAFKA_TOPIC_TEMPLATE, REQUEST_JOB_TOPIC_NAME, space), jobId,
+		return new ProducerRecord<String, String>(String.format(TOPIC_TEMPLATE, REQUEST_JOB_TOPIC_NAME, space), jobId,
 				mapper.writeValueAsString(piazzaRequest));
 	}
 
@@ -78,7 +78,7 @@ public enum JobMessageFactory {
 	public static ProducerRecord<String, String> getAbortJobMessage(PiazzaJobRequest piazzaRequest, String jobId, String space)
 			throws JsonProcessingException {
 		ObjectMapper mapper = new ObjectMapper();
-		return new ProducerRecord<String, String>(String.format(KAFKA_TOPIC_TEMPLATE, ABORT_JOB_TOPIC_NAME, space), jobId,
+		return new ProducerRecord<String, String>(String.format(TOPIC_TEMPLATE, ABORT_JOB_TOPIC_NAME, space), jobId,
 				mapper.writeValueAsString(piazzaRequest));
 	}
 
@@ -99,7 +99,7 @@ public enum JobMessageFactory {
 	public static ProducerRecord<String, String> getUpdateStatusMessage(String jobId, StatusUpdate statusUpdate, String space)
 			throws JsonProcessingException {
 		ObjectMapper mapper = new ObjectMapper();
-		return new ProducerRecord<String, String>(String.format(KAFKA_TOPIC_TEMPLATE, UPDATE_JOB_TOPIC_NAME, space), jobId,
+		return new ProducerRecord<String, String>(String.format(TOPIC_TEMPLATE, UPDATE_JOB_TOPIC_NAME, space), jobId,
 				mapper.writeValueAsString(statusUpdate));
 	}
 
@@ -116,7 +116,7 @@ public enum JobMessageFactory {
 	 */
 	public static ProducerRecord<String, String> getJobManagerCreateJobMessage(Job job, String space) throws JsonProcessingException {
 		ObjectMapper mapper = new ObjectMapper();
-		return new ProducerRecord<String, String>(String.format(KAFKA_TOPIC_TEMPLATE, CREATE_JOB_TOPIC_NAME, space), job.getJobId(),
+		return new ProducerRecord<String, String>(String.format(TOPIC_TEMPLATE, CREATE_JOB_TOPIC_NAME, space), job.getJobId(),
 				mapper.writeValueAsString(job));
 	}
 
@@ -178,7 +178,7 @@ public enum JobMessageFactory {
 	 */
 	public static ProducerRecord<String, String> getWorkerJobCreateMessage(Job job, String space) throws JsonProcessingException {
 		ObjectMapper mapper = new ObjectMapper();
-		return new ProducerRecord<String, String>(String.format(KAFKA_TOPIC_TEMPLATE, job.getJobType().getClass().getSimpleName(), space),
+		return new ProducerRecord<String, String>(String.format(TOPIC_TEMPLATE, job.getJobType().getClass().getSimpleName(), space),
 				job.getJobId(), mapper.writeValueAsString(job));
 	}
 
