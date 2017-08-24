@@ -16,7 +16,7 @@
 package messaging.job;
 
 /**
- * Factory class to abstract the production of Job-related Kafka messages using this projects defined POJO Models.
+ * Factory class to abstract the production of Job-related messages using this projects defined POJO Models.
  * 
  * @author Patrick.Doody
  * 
@@ -29,5 +29,6 @@ public enum JobMessageFactory {
 	public static final String ABORT_JOB_TOPIC_NAME = "AbortJob";
 	public static final String UPDATE_JOB_TOPIC_NAME = "UpdateJob";
 	public static final String TOPIC_TEMPLATE = "%s-%s";
+	public static final String PIAZZA_EXCHANGE_NAME = "Piazza";
 
 }
