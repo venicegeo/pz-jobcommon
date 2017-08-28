@@ -345,12 +345,12 @@ public class ResourceMetadata implements Serializable {
 				currentValue = fromMethod.invoke(this, (Object[]) null);
 				newValue = fromMethod.invoke(other, (Object[]) null);
 			} catch (Exception e) {
-				throw new InvalidInputException(String.format("Illegal system managed field update for Metadata %s", invalidInputFieldName));
+				throw new InvalidInputException(String.format("Could not update system managed field %s", invalidInputFieldName));
 			}
 
 			if (currentValue != null && newValue != null && !currentValue.equals(newValue)) {
 				throw new InvalidInputException(
-						String.format("Illegal system managed field update for Metadata %s", invalidInputFieldName));
+						String.format("Could not update system managed field %s", invalidInputFieldName));
 			}
 
 			//simply return if value is the same, no one is hacking
