@@ -49,7 +49,7 @@ public class LeaseEntity implements Serializable {
 	private Lease lease;
 
 	public LeaseEntity() {
-
+		//public constructor sonar report finding
 	}
 
 	public LeaseEntity(Lease lease) {

@@ -49,7 +49,7 @@ public class DataResourceEntity implements Serializable {
 	private DataResource dataResource;
 
 	public DataResourceEntity() {
-
+		//public constructor sonar report finding
 	}
 
 	public DataResourceEntity(DataResource dataResource) {

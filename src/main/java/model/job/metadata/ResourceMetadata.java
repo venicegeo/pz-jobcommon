@@ -123,7 +123,7 @@ public class ResourceMetadata implements Serializable {
 
 
 	@ApiModelProperty(value = "A generic Map of String:String (key:value) pairs with additional metadata")
-	public Map<String, String> metadata;
+	private Map<String, String> metadata;
 
 	/*
 	 * Need the ability to accommodate arbitrary key/value pairs

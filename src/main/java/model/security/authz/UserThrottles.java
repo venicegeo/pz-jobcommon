@@ -42,7 +42,7 @@ public class UserThrottles implements Serializable {
 	/**
 	 * Maps a Throttle component to the number of invocations for that component.
 	 */
-	public Map<String, Integer> throttles = new HashMap<String, Integer>();
+	private Map<String, Integer> throttles = new HashMap<String, Integer>();
 
 	public UserThrottles() {
 		// Currently, there are three types of throttles per component. Automatically create this based on the enum in

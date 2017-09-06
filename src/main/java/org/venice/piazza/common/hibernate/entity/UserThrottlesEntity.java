@@ -49,7 +49,7 @@ public class UserThrottlesEntity implements Serializable {
 	private UserThrottles userThrottles;
 
 	public UserThrottlesEntity() {
-
+		//public constructor sonar report finding
 	}
 
 	public UserThrottlesEntity(UserThrottles userThrottles) {

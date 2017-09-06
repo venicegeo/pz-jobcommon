@@ -49,7 +49,7 @@ public class ApiKeyEntity implements Serializable {
 	private ApiKey apiKey;
 
 	public ApiKeyEntity() {
-
+		//public constructor sonar report finding
 	}
 
 	public ApiKeyEntity(ApiKey apiKey) {

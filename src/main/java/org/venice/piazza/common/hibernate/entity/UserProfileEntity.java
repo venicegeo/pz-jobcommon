@@ -49,7 +49,7 @@ public class UserProfileEntity implements Serializable {
 	private UserProfile userProfile;
 
 	public UserProfileEntity() {
-
+		//public constructor sonar report finding
 	}
 
 	public UserProfileEntity(UserProfile userProfile) {

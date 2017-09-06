@@ -49,7 +49,7 @@ public class ServiceEntity implements Serializable {
 	private Service service;
 
 	public ServiceEntity() {
-
+		//public constructor sonar report finding
 	}
 
 	public ServiceEntity(Service service) {
