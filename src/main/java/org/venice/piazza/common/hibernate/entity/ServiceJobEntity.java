@@ -53,6 +53,7 @@ public class ServiceJobEntity implements Serializable {
 
 	public ServiceJobEntity() {
 		//public constructor sonar report finding
+		super();
 	}
 
 	public ServiceJobEntity(String serviceId, ServiceJob serviceJob) {

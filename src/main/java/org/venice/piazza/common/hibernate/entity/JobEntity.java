@@ -50,6 +50,7 @@ public class JobEntity implements Serializable {
 
 	public JobEntity() {
 		//public constructor sonar report finding
+		super();
 	}
 
 	public JobEntity(Job job) {

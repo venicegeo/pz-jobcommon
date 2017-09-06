@@ -50,6 +50,7 @@ public class DeploymentGroupEntity implements Serializable {
 
 	public DeploymentGroupEntity() {
 		//public constructor sonar report finding
+		super();
 	}
 
 	public DeploymentGroupEntity(DeploymentGroup deploymentGroup) {

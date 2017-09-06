@@ -50,6 +50,7 @@ public class LeaseEntity implements Serializable {
 
 	public LeaseEntity() {
 		//public constructor sonar report finding
+		super();
 	}
 
 	public LeaseEntity(Lease lease) {

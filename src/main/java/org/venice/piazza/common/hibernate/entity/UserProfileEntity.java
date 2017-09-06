@@ -50,6 +50,7 @@ public class UserProfileEntity implements Serializable {
 
 	public UserProfileEntity() {
 		//public constructor sonar report finding
+		super();
 	}
 
 	public UserProfileEntity(UserProfile userProfile) {
