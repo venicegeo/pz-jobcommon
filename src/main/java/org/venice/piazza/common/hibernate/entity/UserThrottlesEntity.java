@@ -49,7 +49,8 @@ public class UserThrottlesEntity implements Serializable {
 	private UserThrottles userThrottles;
 
 	public UserThrottlesEntity() {
-
+		//public constructor sonar report finding
+		super();
 	}
 
 	public UserThrottlesEntity(UserThrottles userThrottles) {

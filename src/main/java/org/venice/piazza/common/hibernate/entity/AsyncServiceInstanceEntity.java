@@ -49,7 +49,7 @@ public class AsyncServiceInstanceEntity implements Serializable {
 	private AsyncServiceInstance asyncServiceInstance;
 
 	public AsyncServiceInstanceEntity() {
-
+		//public constructor sonar report finding
 	}
 
 	public AsyncServiceInstanceEntity(AsyncServiceInstance asyncServiceInstance) {
