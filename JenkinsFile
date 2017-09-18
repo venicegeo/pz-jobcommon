@@ -52,7 +52,7 @@ node {
 		withCredentials([string(credentialsId: "${env.SONAR_TOKEN}", variable: "USERNAME")]) {
 		  withEnv(["HOME=${root}", "_JAVA_OPTIONS=-Duser.home=${root}"]) {
 			def projectId = "venicegeo:piazza:pz-jobcommon"
-			sh "${mvn}/bin/mvn sonar:sonar -Dmaven.repo.local=${root} -Dsonar.host.url=${SONAR_URL} -Dsonar.projectKey=${projectId} -Dsonar.projectName=${projectId} -Dsonar.login=${USERNAME} -P nga"
+	//		sh "${mvn}/bin/mvn sonar:sonar -Dmaven.repo.local=${root} -Dsonar.host.url=${SONAR_URL} -Dsonar.projectKey=${projectId} -Dsonar.projectName=${projectId} -Dsonar.login=${USERNAME} -P nga"
 		  }
 		}
 	  }
