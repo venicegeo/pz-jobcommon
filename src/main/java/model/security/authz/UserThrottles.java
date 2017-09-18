@@ -38,7 +38,7 @@ import model.security.authz.Throttle.Component;
 public class UserThrottles implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
-	public String username;
+	private String username;
 	/**
 	 * Maps a Throttle component to the number of invocations for that component.
 	 */
