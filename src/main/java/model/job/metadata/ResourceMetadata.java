@@ -123,7 +123,7 @@ public class ResourceMetadata implements Serializable {
 
 
 	@ApiModelProperty(value = "A generic Map of String:String (key:value) pairs with additional metadata")
-	public Map<String, String> metadata;
+	private Map<String, String> metadata;
 
 	/*
 	 * Need the ability to accommodate arbitrary key/value pairs
@@ -345,6 +345,7 @@ public class ResourceMetadata implements Serializable {
 				currentValue = fromMethod.invoke(this, (Object[]) null);
 				newValue = fromMethod.invoke(other, (Object[]) null);
 			} catch (Exception e) {
+				LOGGER.error("Could not update System Managed Field. Skipping", e);
 				throw new InvalidInputException(String.format("Could not update system managed field %s", invalidInputFieldName));
 			}
 

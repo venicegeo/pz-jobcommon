@@ -49,7 +49,8 @@ public class ServiceEntity implements Serializable {
 	private Service service;
 
 	public ServiceEntity() {
-
+		//public constructor sonar report finding
+		super();
 	}
 
 	public ServiceEntity(Service service) {

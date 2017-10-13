@@ -49,7 +49,8 @@ public class ApiKeyEntity implements Serializable {
 	private ApiKey apiKey;
 
 	public ApiKeyEntity() {
-
+		//public constructor sonar report finding
+		super();
 	}
 
 	public ApiKeyEntity(ApiKey apiKey) {

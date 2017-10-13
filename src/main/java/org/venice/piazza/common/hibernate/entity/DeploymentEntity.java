@@ -49,7 +49,8 @@ public class DeploymentEntity implements Serializable {
 	private Deployment deployment;
 
 	public DeploymentEntity() {
-
+		//public constructor sonar report finding
+		super();
 	}
 
 	public DeploymentEntity(Deployment deployment) {

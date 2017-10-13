@@ -39,12 +39,12 @@ public class ExecuteServiceData implements Serializable {
 	@ApiModelProperty(value = "The Inputs for the execution", required = true, dataType = "model.swagger.SwaggerDataType")
 	@NotNull
 	@JsonProperty("dataInputs")
-	public Map<String, DataType> dataInputs;
+	private Map<String, DataType> dataInputs;
 
 	@ApiModelProperty(value = "The Output for the execution", required = true, dataType = "model.swagger.SwaggerDataType")
 	@NotNull
 	@JsonProperty("dataOutput")
-	public List<DataType> dataOutput;
+	private List<DataType> dataOutput;
 
 	@ApiModelProperty(value = "The Id of the Service to Execute", required = true)
 	@NotNull
