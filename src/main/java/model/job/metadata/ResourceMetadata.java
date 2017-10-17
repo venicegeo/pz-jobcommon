@@ -29,8 +29,8 @@ import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.data.elasticsearch.annotations.Field;
-import org.springframework.data.elasticsearch.annotations.FieldType;
+//import org.springframework.data.elasticsearch.annotations.Field;
+//import org.springframework.data.elasticsearch.annotations.FieldType;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -129,11 +129,11 @@ public class ResourceMetadata implements Serializable {
 	 * Need the ability to accommodate arbitrary key/value pairs
 	 */
 	@ApiModelProperty(value = "Allows for the optional specification of user-defined key-value pairs of numeric values", required = false)
-	@Field(type = FieldType.Nested)
+	//@Field(type = FieldType.Nested)
 	private List<NumericKeyValue> numericKeyValueList;
 
 	@ApiModelProperty(value = "Allows for the optional specification ofu ser-defined key-value pairs for string values", required = false)
-	@Field(type = FieldType.Nested)
+	//@Field(type = FieldType.Nested)
 	private List<TextKeyValue> textKeyValueList;
 
 	public List<NumericKeyValue> getNumericKeyValueList() {

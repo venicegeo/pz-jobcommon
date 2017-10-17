@@ -30,6 +30,8 @@ import org.elasticsearch.client.Client;
 import org.elasticsearch.client.transport.TransportClient;
 import org.elasticsearch.common.settings.Settings;
 import org.elasticsearch.common.transport.InetSocketTransportAddress;
+import org.elasticsearch.common.xcontent.XContentType;
+import org.elasticsearch.transport.client.PreBuiltTransportClient;
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -108,8 +110,8 @@ public class PiazzaLogger {
 	 */
 	@Bean
 	public Client getClient() throws UnknownHostException {
-		Settings settings = Settings.settingsBuilder().put("cluster.name", clustername).build();
-		TransportClient transportClient = TransportClient.builder().settings(settings).build();
+		Settings settings = Settings.builder().put("cluster.name", clustername).build();
+		TransportClient transportClient = new PreBuiltTransportClient(settings);
 		// Check if the ES Host property has multiple Hosts.
 		if (elasticSearchHost.contains(";")) {
 			// (In the form of "host;host2;host3")
@@ -123,8 +125,7 @@ public class PiazzaLogger {
 			// (A single host)
 			//
 			// Single host. Add this one host.
-			transportClient
-					.addTransportAddress(new InetSocketTransportAddress(new InetSocketAddress(elasticSearchHost, elasticSearchPort)));
+			transportClient.addTransportAddress(new InetSocketTransportAddress(new InetSocketAddress(elasticSearchHost, elasticSearchPort)));
 		}
 		return transportClient;
 	}
@@ -283,7 +284,7 @@ public class PiazzaLogger {
 			try {
 				// Index to elasticsearch
 				IndexRequest indexRequest = new IndexRequest(loggerIndexName, LOG_SCHEMA);
-				indexRequest.source(loggerPayloadJson);
+				indexRequest.source(loggerPayloadJson, XContentType.JSON);
 				elasticClient.index(indexRequest).actionGet();
 			} catch (Exception e) {
 				LOGGER.info(String.format("Unable to index logs into Elasticsearch: %s", e.getMessage()), e);
