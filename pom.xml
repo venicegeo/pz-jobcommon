@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.venice.piazza</groupId>
 	<artifactId>pz-jobcommon</artifactId>
-	<version>LATEST</version>
+	<version>RABBIT</version>
 
 	<packaging>jar</packaging>
 
@@ -164,12 +164,6 @@
 			<groupId>org.geotools</groupId>
 			<artifactId>gt-opengis</artifactId>
 			<version>${geotools.version}</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.apache.kafka</groupId>
-			<artifactId>kafka-clients</artifactId>
-			<version>0.9.0.1</version>
 		</dependency>
 
 		<dependency>
