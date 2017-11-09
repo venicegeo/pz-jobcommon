@@ -19,21 +19,25 @@ import io.swagger.annotations.ApiModelProperty;
 import model.job.PiazzaJobType;
 
 /**
- * The core format for a Job request into the Piazza system. Every Job request
- * contains an API Key. This is used to authenticate the user and ensure they
- * are authorized to execute the specified Job.
+ * The core format for a Job request into the Piazza system.
  * 
- * The PiazzaJobType is the interface container that is used to define the
- * format for every Job that the Piazza Gateway is capable of handling.
+ * The PiazzaJobType is the interface container that is used to define the format for every Job that the Piazza Gateway
+ * is capable of handling.
  * 
  * @author Patrick.Doody
  * 
  */
 public class PiazzaJobRequest {
-	
+
 	@ApiModelProperty(value = "The user that submitted the job")
 	public String createdBy;
-	
+
 	@ApiModelProperty(value = "The type of Job submitted", dataType = "model.swagger.SwaggerJobType")
 	public PiazzaJobType jobType;
+
+	/**
+	 * By defining a Job ID in a Job Request, the Job Manager can be signalled to use this particular ID when storing
+	 * the Job in persistence
+	 */
+	public String jobId;
 }

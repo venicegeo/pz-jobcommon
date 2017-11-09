@@ -15,20 +15,17 @@
  **/
 package model.status;
 
-import model.job.JobProgress;
-import model.job.result.ResultType;
-
 import java.io.Serializable;
 
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 import io.swagger.annotations.ApiModelProperty;
+import model.job.JobProgress;
+import model.job.result.ResultType;
 
 /**
  * A Status Update message for a Job. This is intended to be fired by Worker components throughout the processing of a
@@ -40,7 +37,7 @@ import io.swagger.annotations.ApiModelProperty;
 @JsonInclude(Include.NON_NULL)
 public class StatusUpdate implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	@JsonIgnore
 	public static final String STATUS_SUBMITTED = "Submitted";
 
@@ -74,6 +71,8 @@ public class StatusUpdate implements Serializable {
 
 	@ApiModelProperty(required = false, value = "The Result object of this Job.")
 	private ResultType result;
+
+	private String jobId;
 
 	public StatusUpdate() {
 		// Empty constructor required by Jackson
@@ -121,5 +120,13 @@ public class StatusUpdate implements Serializable {
 
 	public ResultType getResult() {
 		return result;
+	}
+
+	public String getJobId() {
+		return jobId;
+	}
+
+	public void setJobId(String jobId) {
+		this.jobId = jobId;
 	}
 }
