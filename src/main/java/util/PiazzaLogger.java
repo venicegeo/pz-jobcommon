@@ -71,7 +71,7 @@ public class PiazzaLogger {
 	@Autowired
 	private Client elasticClient;
 
-	private final static Logger LOGGER = LoggerFactory.getLogger(PiazzaLogger.class);
+	private final Logger LOGGER = LoggerFactory.getLogger(PiazzaLogger.class);
 	private final String LOG_SCHEMA = "LogData";
 	private boolean skipElasticSearchLogs = false;
 
@@ -99,34 +99,6 @@ public class PiazzaLogger {
 	public void init() {
 		// Create elasticsearch index with mapping
 		createIndexWithMapping(loggerIndexName, null);
-	}
-
-	/**
-	 * Spring bean for injecting elasticsearch client.
-	 * 
-	 * @return Elasticsearch client
-	 * @throws UnknownHostException
-	 */
-	@Bean
-	public Client getClient() throws UnknownHostException {
-		Settings settings = Settings.builder().put("cluster.name", clustername).build();
-		TransportClient transportClient = new PreBuiltTransportClient(settings);
-		// Check if the ES Host property has multiple Hosts.
-		if (elasticSearchHost.contains(";")) {
-			// (In the form of "host;host2;host3")
-			//
-			// Multiple hosts. Split the string and add each host.
-			List<String> hosts = Arrays.asList(elasticSearchHost.split(";"));
-			for (String host : hosts) {
-				transportClient.addTransportAddress(new InetSocketTransportAddress(new InetSocketAddress(host, elasticSearchPort)));
-			}
-		} else {
-			// (A single host)
-			//
-			// Single host. Add this one host.
-			transportClient.addTransportAddress(new InetSocketTransportAddress(new InetSocketAddress(elasticSearchHost, elasticSearchPort)));
-		}
-		return transportClient;
 	}
 
 	/**
