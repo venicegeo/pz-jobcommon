@@ -17,26 +17,18 @@ package util;
 
 import java.lang.management.ManagementFactory;
 import java.net.InetAddress;
-import java.net.InetSocketAddress;
-import java.net.UnknownHostException;
-import java.util.Arrays;
-import java.util.List;
-
 import javax.annotation.PostConstruct;
 
+import org.elasticsearch.action.admin.indices.create.CreateIndexRequestBuilder;
+import org.elasticsearch.action.admin.indices.create.CreateIndexResponse;
 import org.elasticsearch.action.index.IndexRequest;
 import org.elasticsearch.client.Client;
-import org.elasticsearch.client.transport.TransportClient;
-import org.elasticsearch.common.settings.Settings;
-import org.elasticsearch.common.transport.InetSocketTransportAddress;
 import org.elasticsearch.common.xcontent.XContentType;
-import org.elasticsearch.transport.client.PreBuiltTransportClient;
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -60,7 +52,7 @@ public class PiazzaLogger {
 	@Value("${logger.console:}")
 	private Boolean logToConsole;
 	@Value("${LOGGER_INDEX}")
-	private String loggerIndexName;
+	private String loggerIndex;
 	@Value("${vcap.services.pz-elasticsearch.credentials.transportClientPort}")
 	private Integer elasticSearchPort;
 	@Value("${vcap.services.pz-elasticsearch.credentials.hostname}")
@@ -98,7 +90,7 @@ public class PiazzaLogger {
 	@PostConstruct
 	public void init() {
 		// Create elasticsearch index with mapping
-		createIndexWithMapping(loggerIndexName, null);
+		createIndexWithMapping(loggerIndex, LOG_SCHEMA);
 	}
 
 	/**
@@ -125,7 +117,7 @@ public class PiazzaLogger {
 	 *            mapping object
 	 * @return boolean
 	 */
-	public boolean createIndexWithMapping(String indexName, String mapping) {
+	public boolean createIndexWithMappingOld(String indexName, String mapping) {
 		try {
 			if (!indexExists(indexName)) {
 				skipElasticSearchLogs =  true;
@@ -138,6 +130,47 @@ public class PiazzaLogger {
 		return false;
 	}
 
+	/**
+	 * Creates elasticsearch index with default mapping.
+	 * 
+	 * @param client
+	 *            elasticsearch client
+	 * @param indexName
+	 *            index to save to
+	 * @param mapping
+	 *            mapping object
+	 * @return boolean
+	 */
+	public boolean createIndexWithMapping(String indexName, String type) {
+		try {
+			if (!indexExists(indexName)) {
+				CreateIndexRequestBuilder createIndexRequestBuilder = elasticClient.admin().indices().prepareCreate(indexName);
+				createIndexRequestBuilder.addMapping(type);
+				CreateIndexResponse response = createIndexRequestBuilder.execute().actionGet();
+
+				return response.isAcknowledged();
+			}
+		} catch (Exception exception) {
+			LOGGER.info(String.format("Unable to create Elasticsearch index %s, it should already exist, error", indexName), exception);
+		}
+
+		/**
+        final IndicesAliasesRequest.AliasActions aliasAction = IndicesAliasesRequest.AliasActions.add()
+                .index(indexName)
+                .alias(loggerIndexAliasName);
+        
+        IndicesAliasesRequest indicesAliasesRequest = new IndicesAliasesRequest().addAliasAction(aliasAction);
+        IndicesAliasesResponse indicesAliasesResponse = elasticClient.admin().indices().aliases(indicesAliasesRequest).actionGet(10, TimeUnit.SECONDS);
+		*/
+		
+        //IndicesAliasesRequest request = new IndicesAliasesRequest();
+		//request.addAliasAction(new AliasAction(AliasAction.ADD).alias(loggerIndexAliasName).index(indexName).searchRouting("the_search_routing").indexRouting("the_index_routing"));
+		//request.add.addAliasAction(new AliasAction(AliasAction.Type.ADD).alias(loggerIndexAliasName).index(indexName)); 
+		//IndicesAliasesResponse response = elasticClient.admin().indices().aliases(request).get();
+		
+		return false;
+	}
+	
 	/**
 	 * Checks to see if elastic index exists
 	 * 
@@ -254,7 +287,7 @@ public class PiazzaLogger {
 
 			try {
 				// Index to elasticsearch
-				IndexRequest indexRequest = new IndexRequest(loggerIndexName, LOG_SCHEMA);
+				IndexRequest indexRequest = new IndexRequest(loggerIndex, LOG_SCHEMA);
 				indexRequest.source(loggerPayloadJson, XContentType.JSON);
 				elasticClient.index(indexRequest).actionGet();
 			} catch (Exception e) {
