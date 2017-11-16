@@ -117,30 +117,6 @@ public class PiazzaLogger {
 	 *            mapping object
 	 * @return boolean
 	 */
-	public boolean createIndexWithMappingOld(String indexName, String mapping) {
-		try {
-			if (!indexExists(indexName)) {
-				skipElasticSearchLogs =  true;
-				LOGGER.info("Piazza logger index {} does not exist, logging to Elasticsearch will not work. Restage the app after creating the index.", indexName);
-			}
-		} catch (Exception exception) {
-			LOGGER.info("Unable to create Elasticsearch index {}, it should already exist, error: {}", indexName, exception);
-		}
-
-		return false;
-	}
-
-	/**
-	 * Creates elasticsearch index with default mapping.
-	 * 
-	 * @param client
-	 *            elasticsearch client
-	 * @param indexName
-	 *            index to save to
-	 * @param mapping
-	 *            mapping object
-	 * @return boolean
-	 */
 	public boolean createIndexWithMapping(String indexName, String type) {
 		try {
 			if (!indexExists(indexName)) {
@@ -153,20 +129,6 @@ public class PiazzaLogger {
 		} catch (Exception exception) {
 			LOGGER.info(String.format("Unable to create Elasticsearch index %s, it should already exist, error", indexName), exception);
 		}
-
-		/**
-        final IndicesAliasesRequest.AliasActions aliasAction = IndicesAliasesRequest.AliasActions.add()
-                .index(indexName)
-                .alias(loggerIndexAliasName);
-        
-        IndicesAliasesRequest indicesAliasesRequest = new IndicesAliasesRequest().addAliasAction(aliasAction);
-        IndicesAliasesResponse indicesAliasesResponse = elasticClient.admin().indices().aliases(indicesAliasesRequest).actionGet(10, TimeUnit.SECONDS);
-		*/
-		
-        //IndicesAliasesRequest request = new IndicesAliasesRequest();
-		//request.addAliasAction(new AliasAction(AliasAction.ADD).alias(loggerIndexAliasName).index(indexName).searchRouting("the_search_routing").indexRouting("the_index_routing"));
-		//request.add.addAliasAction(new AliasAction(AliasAction.Type.ADD).alias(loggerIndexAliasName).index(indexName)); 
-		//IndicesAliasesResponse response = elasticClient.admin().indices().aliases(request).get();
 		
 		return false;
 	}
