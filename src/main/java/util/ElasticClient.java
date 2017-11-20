@@ -16,7 +16,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class ElasticClient {
-	@Value("${vcap.services.pz-elasticsearch.credentials.transportClientPort}")
+	@Value("${elasticsearch.transportClientPort}")
 	private Integer elasticSearchPort;
 	@Value("${vcap.services.pz-elasticsearch.credentials.hostname}")
 	private String elasticSearchHost;
