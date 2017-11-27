@@ -53,12 +53,6 @@ public class PiazzaLogger {
 	private Boolean logToConsole;
 	@Value("${LOGGER_INDEX}")
 	private String loggerIndex;
-	@Value("${elasticsearch.transportClientPort}")
-	private Integer elasticSearchPort;
-	@Value("${vcap.services.pz-elasticsearch.credentials.hostname}")
-	private String elasticSearchHost;
-	@Value("${vcap.services.pz-elasticsearch.credentials.clusterId}")
-	private String clustername;
 
 	@Autowired
 	private Client elasticClient;

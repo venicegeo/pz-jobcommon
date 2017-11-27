@@ -11,6 +11,8 @@ import org.elasticsearch.common.settings.Settings;
 import org.elasticsearch.common.transport.InetSocketTransportAddress;
 import org.elasticsearch.transport.client.PreBuiltTransportClient;
 import org.elasticsearch.xpack.client.PreBuiltXPackTransportClient;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
@@ -29,6 +31,8 @@ public class ElasticClient {
 	@Value("${vcap.services.pz-elasticsearch.credentials.password}")
 	private String elasticPassword;
 
+	private final Logger LOGGER = LoggerFactory.getLogger(PiazzaLogger.class);
+	
 	/**
 	 * Spring bean for injecting elasticsearch client.
 	 * 
@@ -37,6 +41,9 @@ public class ElasticClient {
 	 */
 	@Bean
 	public Client getClient() throws UnknownHostException {
+
+		LOGGER.info(String.format("elasticSearchPort: %s,  elasticSearchHost: %s, clustername: %s, elasticUsername: %s, elasticPassword: %s", elasticSearchPort, elasticSearchHost, clustername, elasticUsername, elasticPassword));
+		
 		String elasticCredentials = String.format("%s:%s", elasticUsername, elasticPassword);
 		Settings settings = Settings.builder().put("cluster.name", clustername).put("xpack.security.user", elasticCredentials).build();
 
