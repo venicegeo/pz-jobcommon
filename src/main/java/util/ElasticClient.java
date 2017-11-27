@@ -22,7 +22,7 @@ import org.springframework.stereotype.Component;
 public class ElasticClient {
 	@Value("${elasticsearch.transportClientPort}")
 	private Integer elasticSearchPort;
-	@Value("${vcap.services.pz-elasticsearch.credentials.hostname}")
+	@Value("${vcap.services.pz-elasticsearch.credentials.host}")
 	private String elasticSearchHost;
 	@Value("${vcap.services.pz-elasticsearch.credentials.clusterId}")
 	private String clustername;
