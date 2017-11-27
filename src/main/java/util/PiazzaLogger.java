@@ -57,7 +57,7 @@ public class PiazzaLogger {
 	private Integer elasticSearchPort;
 	@Value("${vcap.services.pz-elasticsearch.credentials.hostname}")
 	private String elasticSearchHost;
-	@Value("${elasticsearch.clustername}")
+	@Value("${vcap.services.pz-elasticsearch.credentials.clusterId}")
 	private String clustername;
 
 	@Autowired

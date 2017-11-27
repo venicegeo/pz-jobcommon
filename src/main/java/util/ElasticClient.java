@@ -22,11 +22,11 @@ public class ElasticClient {
 	private Integer elasticSearchPort;
 	@Value("${vcap.services.pz-elasticsearch.credentials.hostname}")
 	private String elasticSearchHost;
-	@Value("${elasticsearch.clustername}")
+	@Value("${vcap.services.pz-elasticsearch.credentials.clusterId}")
 	private String clustername;
-	@Value("${elasticsearch.username}")
+	@Value("${vcap.services.pz-elasticsearch.credentials.username}")
 	private String elasticUsername;
-	@Value("${elasticsearch.password}")
+	@Value("${vcap.services.pz-elasticsearch.credentials.password}")
 	private String elasticPassword;
 
 	/**
