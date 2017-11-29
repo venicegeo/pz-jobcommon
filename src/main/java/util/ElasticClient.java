@@ -56,14 +56,15 @@ public class ElasticClient {
 			// Multiple hosts. Split the string and add each host.
 			List<String> hosts = Arrays.asList(elasticSearchHost.split(";"));
 			for (String host : hosts) {
-				String hostName = String.format("%s.%s", clustername, host); 
+				String hostName = String.format("%s.%s", clustername, host);
 				transportClient.addTransportAddress(new InetSocketTransportAddress(new InetSocketAddress(hostName, elasticSearchPort)));
 			}
 		} else {
 			// (A single host)
 			//
 			// Single host. Add this one host.
-			transportClient.addTransportAddress(new InetSocketTransportAddress(new InetSocketAddress(elasticSearchHost, elasticSearchPort)));
+			String hostName = String.format("%s.%s", clustername, elasticSearchHost);
+			transportClient.addTransportAddress(new InetSocketTransportAddress(new InetSocketAddress(hostName, elasticSearchPort)));
 		}
 		return transportClient;
 	}
