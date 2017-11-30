@@ -45,14 +45,26 @@ public class ElasticClient {
 		LOGGER.info(String.format("elasticSearchPort: %s,  elasticSearchHost: %s, clustername: %s, elasticUsername: %s, elasticPassword: %s", elasticSearchPort, elasticSearchHost, clusterId, elasticUsername, elasticPassword));
 		
 		String elasticCredentials = String.format("%s:%s", elasticUsername, elasticPassword);
+//		Settings settings = Settings.builder()
+//				.put("cluster.name", clusterId)
+//				//.put("xpack.security.user", elasticCredentials)
+//				.put("shield.transport.ssl", true)
+//				.put("request.headers.X-Found-Cluster", clusterId)
+//				.put("shield.user", elasticCredentials) // your shield username and password
+//				.build();
+
 		Settings settings = Settings.builder()
+				.put("client.transport.nodes_sampler_interval", "5s")
 				.put("cluster.name", clusterId)
-				//.put("xpack.security.user", elasticCredentials)
+		        .put("client.transport.sniff", false)
+		        .put("transport.tcp.compress", true)
+		        .put("xpack.security.transport.ssl.enabled", true)
+				.put("xpack.security.user", elasticCredentials)
 				.put("shield.transport.ssl", true)
 				.put("request.headers.X-Found-Cluster", clusterId)
 				.put("shield.user", elasticCredentials) // your shield username and password
 				.build();
-
+        
 		//TransportClient transportClient = new PreBuiltTransportClient(settings);
 		TransportClient transportClient = new PreBuiltXPackTransportClient(settings);
 				
