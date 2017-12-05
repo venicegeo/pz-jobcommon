@@ -9,8 +9,8 @@ import org.elasticsearch.client.Client;
 import org.elasticsearch.client.transport.TransportClient;
 import org.elasticsearch.common.settings.Settings;
 import org.elasticsearch.common.transport.InetSocketTransportAddress;
-import org.elasticsearch.transport.client.PreBuiltTransportClient;
-//import org.elasticsearch.xpack.client.PreBuiltXPackTransportClient;
+//import org.elasticsearch.transport.client.PreBuiltTransportClient;
+import org.elasticsearch.xpack.client.PreBuiltXPackTransportClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -53,8 +53,7 @@ public class ElasticClient {
 		if(!"empty".equals(manualClusterName)){
 			clusterName = manualClusterName;
 		}
-		
-		
+
         // Build the settings for our client.
         Settings settings = Settings.builder()
             .put("client.transport.nodes_sampler_interval", "5s")
@@ -66,8 +65,8 @@ public class ElasticClient {
             .put("xpack.security.user", elasticCredentials)
             .build();
         
-		TransportClient transportClient = new PreBuiltTransportClient(settings);
-		//TransportClient transportClient = new PreBuiltXPackTransportClient(settings);
+		//TransportClient transportClient = new PreBuiltTransportClient(settings);
+		TransportClient transportClient = new PreBuiltXPackTransportClient(settings);
 				
 		// Check if the ES Host property has multiple Hosts.
 		if (elasticSearchHost.contains(";")) {
@@ -82,7 +81,6 @@ public class ElasticClient {
 					hostName = elasticSearchCustomHost;
 				}
 				LOGGER.info(" ================= " + " adding a multiple --hosts: " + hostName + " --Port: " + elasticSearchPort);
-
 				transportClient.addTransportAddress(new InetSocketTransportAddress(new InetSocketAddress(hostName, elasticSearchPort)));
 			}
 		} else {
@@ -98,7 +96,6 @@ public class ElasticClient {
 			LOGGER.info(" ================= " + String.format("elasticSearchPort: %s,  elasticSearchHost: %s, clustername: %s, elasticUsername: %s, elasticPassword: %s", elasticSearchPort, elasticSearchHost, clusterName, elasticUsername, elasticPassword));
 			
 			LOGGER.info(" ================= " + " adding a single --host: " + hostName + " --Port: " + elasticSearchPort);
-			
 			transportClient.addTransportAddress(new InetSocketTransportAddress(new InetSocketAddress(hostName, elasticSearchPort)));
 		}
 		return transportClient;
