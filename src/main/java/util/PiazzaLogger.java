@@ -54,12 +54,13 @@ public class PiazzaLogger {
 	@Value("${LOGGER_INDEX}")
 	private String loggerIndex;
 
-	@Autowired
-	private Client elasticClient;
+	//Commenting out until Elastic introduces working version 
+	// of ElasticSearch 5.4 ECE service cluster for CloudFoundry
+	//@Autowired
+	//private Client elasticClient;
 
 	private final Logger LOGGER = LoggerFactory.getLogger(PiazzaLogger.class);
 	private final String LOG_SCHEMA = "LogData";
-	private boolean skipElasticSearchLogs = false;
 
 	/**
 	 * Default constructor, required for bean instantiation.
@@ -113,6 +114,9 @@ public class PiazzaLogger {
 	 */
 	public boolean createIndexWithMapping(String indexName, String type) {
 		try {
+			//Commenting out until Elastic introduces working version 
+			// of ElasticSearch 5.4 ECE service cluster for CloudFoundry
+			/*
 			if (!indexExists(indexName)) {
 				CreateIndexRequestBuilder createIndexRequestBuilder = elasticClient.admin().indices().prepareCreate(indexName);
 				createIndexRequestBuilder.addMapping(type);
@@ -120,6 +124,7 @@ public class PiazzaLogger {
 
 				return response.isAcknowledged();
 			}
+			*/
 		} catch (Exception exception) {
 			LOGGER.info(String.format("Unable to create Elasticsearch index %s, it should already exist, error", indexName), exception);
 		}
@@ -134,7 +139,10 @@ public class PiazzaLogger {
 	 * @return boolean
 	 */
 	public boolean indexExists(String indexName) {
-		return elasticClient.admin().indices().prepareExists(indexName).execute().actionGet().isExists();
+		//Commenting out until Elastic introduces working version 
+		// of ElasticSearch 5.4 ECE service cluster for CloudFoundry
+		//return elasticClient.admin().indices().prepareExists(indexName).execute().actionGet().isExists();
+		return false;
 	}
 
 	/**
@@ -231,24 +239,25 @@ public class PiazzaLogger {
 		}
 
 		// saving log to elastic search
-		if (!skipElasticSearchLogs) {
-			String loggerPayloadJson = "";
-			try {
-				loggerPayloadJson = new ObjectMapper().writeValueAsString(loggerPayload);
-			} catch (JsonProcessingException e) {
-				LOGGER.error("Failed to serialize the log payload", e);
-			}
-
-			LOGGER.debug("Writing the following log object to elastic search: {}", loggerPayloadJson);
-
-			try {
-				// Index to elasticsearch
-				IndexRequest indexRequest = new IndexRequest(loggerIndex, LOG_SCHEMA);
-				indexRequest.source(loggerPayloadJson, XContentType.JSON);
-				elasticClient.index(indexRequest).actionGet();
-			} catch (Exception e) {
-				LOGGER.info(String.format("Unable to index logs into Elasticsearch: %s", e.getMessage()), e);
-			}
+		String loggerPayloadJson = "";
+		try {
+			loggerPayloadJson = new ObjectMapper().writeValueAsString(loggerPayload);
+		} catch (JsonProcessingException e) {
+			LOGGER.error("Failed to serialize the log payload", e);
 		}
+
+		//Commenting out until Elastic introduces working version 
+		// of ElasticSearch 5.4 ECE service cluster for CloudFoundry
+		/*
+		LOGGER.debug("Writing the following log object to elastic search: {}", loggerPayloadJson);
+		try {
+			// Index to elasticsearch
+			IndexRequest indexRequest = new IndexRequest(loggerIndex, LOG_SCHEMA);
+			indexRequest.source(loggerPayloadJson, XContentType.JSON);
+			elasticClient.index(indexRequest).actionGet();
+		} catch (Exception e) {
+			LOGGER.info(String.format("Unable to index logs into Elasticsearch: %s", e.getMessage()), e);
+		}
+		*/
 	}
 }
