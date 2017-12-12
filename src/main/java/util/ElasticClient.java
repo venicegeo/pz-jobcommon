@@ -2,9 +2,6 @@ package util;
 
 import java.net.InetSocketAddress;
 import java.net.UnknownHostException;
-import java.util.Arrays;
-import java.util.List;
-
 import org.elasticsearch.client.Client;
 import org.elasticsearch.client.transport.TransportClient;
 import org.elasticsearch.common.settings.Settings;
@@ -52,12 +49,22 @@ public class ElasticClient {
             .put("cluster.name", clusterId)
             .put("xpack.security.transport.ssl.enabled", true)
             .put("request.headers.X-Found-Cluster", clusterId)
-            .put("xpack.security.user", elasticCredentials)
+            //.put("xpack.security.user", elasticCredentials)
+            .put("xpack.security.user", elasticUsername)
             .build();
         
+        
+        TransportClient transportClient = new PreBuiltXPackTransportClient(settings);
 		//TransportClient transportClient = new PreBuiltTransportClient(settings);
-		TransportClient transportClient = new PreBuiltXPackTransportClient(settings);
-
+        
+		try {
+			transportClient.addTransportAddress(new InetSocketTransportAddress(new InetSocketAddress(elasticSearchHost, elasticSearchPort)));
+		} catch (Exception e) {
+			LOGGER.info("====================================== Unable to get the host" + e.getMessage());
+		}
+        
+		
+		/* Add multiple host support after fixing connection issues for version 5.4
 		// Check if the ES Host property has multiple Hosts.
 		if (elasticSearchHost.contains(";")) {
 			// (In the form of "host;host2;host3")
@@ -75,6 +82,8 @@ public class ElasticClient {
 			LOGGER.info("elastic search adding a single --host: " + elasticSearchHost + " --Port: " + elasticSearchPort);
 			transportClient.addTransportAddress(new InetSocketTransportAddress(new InetSocketAddress(elasticSearchHost, elasticSearchPort)));
 		}
+		*/
+		
 		return transportClient;
 
 	}

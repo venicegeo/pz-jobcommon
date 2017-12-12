@@ -19,16 +19,30 @@
 			<id>nexus</id>
 			<url>${env.ARTIFACT_STORAGE_URL}</url>
 		</repository>
-      <repository>
-         <id>elasticsearch-releases</id>
-         <url>https://maven.elasticsearch.org/releases</url>
-         <releases>
-            <enabled>true</enabled>
-         </releases>
-         <snapshots>
-            <enabled>false</enabled>
-         </snapshots>
-      </repository>
+
+
+        <repository>
+            <id>elastic</id>
+            <url>https://artifacts.elastic.co/maven</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+		</repository>
+		
+<!--       <repository> -->
+<!--          <id>elasticsearch-releases</id> -->
+<!--          <url>https://maven.elasticsearch.org/releases</url> -->
+<!--          <releases> -->
+<!--             <enabled>true</enabled> -->
+<!--          </releases> -->
+<!--          <snapshots> -->
+<!--             <enabled>false</enabled> -->
+<!--          </snapshots> -->
+<!--       </repository> -->
+
 	</repositories>
 
 	<dependencies>
@@ -52,25 +66,24 @@
 		    <version>5.4.0</version>
 		</dependency>
 		
-		<dependency>
-		   <groupId>org.elasticsearch.client</groupId>
-		   <artifactId>x-pack-transport</artifactId>
-		   <version>5.4.3</version>
+<!-- 		<dependency> -->
+<!-- 		   <groupId>org.elasticsearch.client</groupId> -->
+<!-- 		   <artifactId>x-pack-transport</artifactId> -->
+<!-- 		   <version>5.4.3</version> -->
+<!-- 		</dependency> -->
+		
+        <dependency>
+            <groupId>org.elasticsearch.client</groupId>
+            <artifactId>x-pack-transport</artifactId>
+            <version>5.1.1</version>
 		</dependency>
 		
 <!-- 		<dependency> -->
-<!-- 			<groupId>org.elasticsearch.client</groupId> -->
-<!-- 			<artifactId>x-pack-transport</artifactId> -->
-<!-- 			<version>5.1.1</version> -->
+<!-- 		    <groupId>org.elasticsearch.plugin</groupId> -->
+<!-- 		    <artifactId>shield</artifactId> -->
+<!-- 		    <version>2.4.6</version> -->
+<!-- 		    <scope>provided</scope> -->
 <!-- 		</dependency> -->
-		
-
-		<dependency>
-		    <groupId>org.elasticsearch.plugin</groupId>
-		    <artifactId>shield</artifactId>
-		    <version>2.4.6</version>
-		    <scope>provided</scope>
-		</dependency>
 
 		<dependency>
 		    <groupId>org.apache.logging.log4j</groupId>
