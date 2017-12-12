@@ -49,8 +49,7 @@ public class ElasticClient {
             .put("cluster.name", clusterId)
             .put("xpack.security.transport.ssl.enabled", true)
             .put("request.headers.X-Found-Cluster", clusterId)
-            //.put("xpack.security.user", elasticCredentials)
-            .put("xpack.security.user", elasticUsername)
+            .put("xpack.security.user", elasticCredentials)
             .build();
         
         
