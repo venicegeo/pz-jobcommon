@@ -19,6 +19,9 @@ import org.springframework.stereotype.Component;
 public class ElasticClient {
 	@Value("${elasticsearch.transportClientPort}")
 	private Integer elasticSearchPort;
+	@Value("${elasticsearch.hostoverride}")
+	private String elasticSearchHostOverride;
+	
 	@Value("${vcap.services.pz-elasticsearch.credentials.host}")
 	private String elasticSearchHost;
 	@Value("${vcap.services.pz-elasticsearch.credentials.clusterId}")
@@ -57,7 +60,14 @@ public class ElasticClient {
 		//TransportClient transportClient = new PreBuiltTransportClient(settings);
         
 		try {
-			transportClient.addTransportAddress(new InetSocketTransportAddress(new InetSocketAddress(elasticSearchHost, elasticSearchPort)));
+	        if(!"empty".equals(elasticSearchHostOverride))
+	        {
+	        	transportClient.addTransportAddress(new InetSocketTransportAddress(new InetSocketAddress(elasticSearchHostOverride, elasticSearchPort)));
+	        }
+	        else
+	        {
+	        	transportClient.addTransportAddress(new InetSocketTransportAddress(new InetSocketAddress(elasticSearchHost, elasticSearchPort)));
+	        }
 		} catch (Exception e) {
 			LOGGER.info("====================================== Unable to get the host" + e.getMessage());
 		}
