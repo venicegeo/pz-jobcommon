@@ -85,7 +85,7 @@ public class ElasticClient {
         
 		boolean loop = true;
 		int counter = 1;
-		while (true) {
+		while (loop) {
 			try {
 				LOGGER.info("Getting cluster health... ");
 				ActionFuture<ClusterHealthResponse> healthFuture = transportClient.admin().cluster().health(Requests.clusterHealthRequest());
