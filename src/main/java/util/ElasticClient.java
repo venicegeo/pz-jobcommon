@@ -2,7 +2,12 @@ package util;
 
 import java.net.InetSocketAddress;
 import java.net.UnknownHostException;
+import java.util.concurrent.TimeUnit;
+
+import org.elasticsearch.action.ActionFuture;
+import org.elasticsearch.action.admin.cluster.health.ClusterHealthResponse;
 import org.elasticsearch.client.Client;
+import org.elasticsearch.client.Requests;
 import org.elasticsearch.client.transport.TransportClient;
 import org.elasticsearch.common.settings.Settings;
 import org.elasticsearch.common.transport.InetSocketTransportAddress;
@@ -44,6 +49,8 @@ public class ElasticClient {
 
 		String elasticCredentials = String.format("%s:%s", elasticUsername, elasticPassword);
 
+		LOGGER.info("111111111111111 Starting elastic settings setup...");
+		
         // Build the settings for our client.
         Settings settings = Settings.builder()
             .put("client.transport.nodes_sampler_interval", "5s")
@@ -58,6 +65,8 @@ public class ElasticClient {
         
         TransportClient transportClient = new PreBuiltXPackTransportClient(settings);
 		//TransportClient transportClient = new PreBuiltTransportClient(settings);
+        LOGGER.info("22222222222222 Starting elastic ADDING transportaddress setup...");
+        
         
 		try {
 	        if(!"empty".equals(elasticSearchHostOverride))
@@ -68,10 +77,34 @@ public class ElasticClient {
 	        {
 	        	transportClient.addTransportAddress(new InetSocketTransportAddress(new InetSocketAddress(elasticSearchHost, elasticSearchPort)));
 	        }
+	        
+	        LOGGER.info("333333333333333333 Starting elastic ADDED transportaddress ...");    
 		} catch (Exception e) {
 			LOGGER.info("====================================== Unable to get the host" + e.getMessage());
 		}
         
+		boolean loop = true;
+		int counter = 1;
+		while (true) {
+			try {
+				LOGGER.info("Getting cluster health... ");
+				ActionFuture<ClusterHealthResponse> healthFuture = transportClient.admin().cluster().health(Requests.clusterHealthRequest());
+				ClusterHealthResponse healthResponse = healthFuture.get(5, TimeUnit.SECONDS);
+				LOGGER.info(counter + "_HHHHHHHHHHHHHHHHH Got cluster health response: [{}]", healthResponse.getStatus());
+
+				counter++;
+				if (counter > 4) {
+					loop = false;
+				}
+			} catch (Throwable t) {
+				LOGGER.info("====================Unable to get cluster health response: [{}]", t.getMessage());
+			}
+			try {
+				Thread.sleep(2000);
+			} catch (InterruptedException ie) {
+				ie.printStackTrace();
+			}
+		}
 		
 		/* Add multiple host support after fixing connection issues for version 5.4
 		// Check if the ES Host property has multiple Hosts.
