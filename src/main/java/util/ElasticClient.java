@@ -2,16 +2,12 @@ package util;
 
 import java.net.InetSocketAddress;
 import java.net.UnknownHostException;
-import java.util.concurrent.TimeUnit;
-
-import org.elasticsearch.action.ActionFuture;
-import org.elasticsearch.action.admin.cluster.health.ClusterHealthResponse;
+import java.util.Arrays;
+import java.util.List;
 import org.elasticsearch.client.Client;
-import org.elasticsearch.client.Requests;
 import org.elasticsearch.client.transport.TransportClient;
 import org.elasticsearch.common.settings.Settings;
 import org.elasticsearch.common.transport.InetSocketTransportAddress;
-//import org.elasticsearch.transport.client.PreBuiltTransportClient;
 import org.elasticsearch.xpack.client.PreBuiltXPackTransportClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,9 +20,6 @@ import org.springframework.stereotype.Component;
 public class ElasticClient {
 	@Value("${elasticsearch.transportClientPort}")
 	private Integer elasticSearchPort;
-	@Value("${elasticsearch.hostoverride}")
-	private String elasticSearchHostOverride;
-	
 	@Value("${vcap.services.pz-elasticsearch.credentials.host}")
 	private String elasticSearchHost;
 	@Value("${vcap.services.pz-elasticsearch.credentials.clusterId}")
@@ -47,10 +40,6 @@ public class ElasticClient {
 	@Bean
 	public Client getClient() throws UnknownHostException {
 
-		String elasticCredentials = String.format("%s:%s", elasticUsername, elasticPassword);
-
-		LOGGER.info("111111111111111 Starting elastic settings setup...");
-		
         // Build the settings for our client.
         Settings settings = Settings.builder()
             .put("client.transport.nodes_sampler_interval", "5s")
@@ -59,74 +48,26 @@ public class ElasticClient {
             .put("cluster.name", clusterId)
             .put("xpack.security.transport.ssl.enabled", true)
             .put("request.headers.X-Found-Cluster", clusterId)
-            .put("xpack.security.user", elasticCredentials)
+            .put("xpack.security.user", String.format("%s:%s", elasticUsername, elasticPassword))
             .build();
-        
-        
-        TransportClient transportClient = new PreBuiltXPackTransportClient(settings);
-		//TransportClient transportClient = new PreBuiltTransportClient(settings);
-        LOGGER.info("22222222222222 Starting elastic ADDING transportaddress setup...");
-        
-        
-		try {
-	        if(!"empty".equals(elasticSearchHostOverride))
-	        {
-	        	transportClient.addTransportAddress(new InetSocketTransportAddress(new InetSocketAddress(elasticSearchHostOverride, elasticSearchPort)));
-	        }
-	        else
-	        {
-	        	transportClient.addTransportAddress(new InetSocketTransportAddress(new InetSocketAddress(elasticSearchHost, elasticSearchPort)));
-	        }
-	        
-	        LOGGER.info("333333333333333333 Starting elastic ADDED transportaddress ...");    
-		} catch (Exception e) {
-			LOGGER.info("====================================== Unable to get the host" + e.getMessage());
-		}
-        
-		boolean loop = true;
-		int counter = 1;
-		while (loop) {
-			try {
-				LOGGER.info("Getting cluster health... ");
-				ActionFuture<ClusterHealthResponse> healthFuture = transportClient.admin().cluster().health(Requests.clusterHealthRequest());
-				ClusterHealthResponse healthResponse = healthFuture.get(5, TimeUnit.SECONDS);
-				LOGGER.info(counter + "_HHHHHHHHHHHHHHHHH Got cluster health response: [{}]", healthResponse.getStatus());
 
-				counter++;
-				if (counter > 4) {
-					loop = false;
-				}
-			} catch (Throwable t) {
-				LOGGER.info("====================Unable to get cluster health response: [{}]", t.getMessage());
-			}
-			try {
-				Thread.sleep(2000);
-			} catch (InterruptedException ie) {
-				ie.printStackTrace();
-			}
-		}
-		
-		/* Add multiple host support after fixing connection issues for version 5.4
+        @SuppressWarnings("unchecked")
+		TransportClient transportClient = new PreBuiltXPackTransportClient(settings);
+
 		// Check if the ES Host property has multiple Hosts.
 		if (elasticSearchHost.contains(";")) {
-			// (In the form of "host;host2;host3")
-			// Multiple hosts. Split the string and add each host.
+			// Multiple hosts, in the form of "host;host2;host3". Split the string and add each host.
 			List<String> hosts = Arrays.asList(elasticSearchHost.split(";"));
 			for (String host : hosts) {
-				//String hostName = String.format("%s.%s", clusterName, host);
-				LOGGER.info("elastic adding a multiple --hosts: " + host + " --Port: " + elasticSearchPort);
-				transportClient.addTransportAddress(new InetSocketTransportAddress(new InetSocketAddress(host, elasticSearchPort)));
+				String hostName = String.format("%s.%s", clusterId, host);
+				transportClient.addTransportAddress(new InetSocketTransportAddress(new InetSocketAddress(hostName, elasticSearchPort)));
 			}
 		} else {
-			// (A single host)
-			//
 			// Single host. Add this one host.
-			LOGGER.info("elastic search adding a single --host: " + elasticSearchHost + " --Port: " + elasticSearchPort);
-			transportClient.addTransportAddress(new InetSocketTransportAddress(new InetSocketAddress(elasticSearchHost, elasticSearchPort)));
+			String hostName = String.format("%s.%s", clusterId, elasticSearchHost);
+			transportClient.addTransportAddress(new InetSocketTransportAddress(new InetSocketAddress(hostName, elasticSearchPort)));
 		}
-		*/
-		
-		return transportClient;
 
+		return transportClient;
 	}
 }
