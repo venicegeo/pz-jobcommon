@@ -44,8 +44,8 @@ public class PiazzaLogger {
 	private final Logger LOGGER = LoggerFactory.getLogger(PiazzaLogger.class);
 
 	/**
-	 * Default constructor, required for bean instantiation.
 	 */
+	* Default constructor, required for bean instantiation.
 	public PiazzaLogger() {
 		// Empty constructor required by Jackson
 	}
