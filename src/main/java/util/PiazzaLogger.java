@@ -42,10 +42,10 @@ public class PiazzaLogger {
 	private Boolean logToConsole;
 
 	private final Logger LOGGER = LoggerFactory.getLogger(PiazzaLogger.class);
-
+	
 	/**
+	 * Default constructor, required for bean instantiation. 
 	 */
-	* Default constructor, required for bean instantiation.
 	public PiazzaLogger() {
 		// Empty constructor required by Jackson
 	}
