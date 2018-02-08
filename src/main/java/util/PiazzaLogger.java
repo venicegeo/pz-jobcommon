@@ -17,22 +17,11 @@ package util;
 
 import java.lang.management.ManagementFactory;
 import java.net.InetAddress;
-import javax.annotation.PostConstruct;
-
-import org.elasticsearch.action.admin.indices.create.CreateIndexRequestBuilder;
-import org.elasticsearch.action.admin.indices.create.CreateIndexResponse;
-import org.elasticsearch.action.index.IndexRequest;
-import org.elasticsearch.client.Client;
-import org.elasticsearch.common.xcontent.XContentType;
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 import model.logger.AuditElement;
 import model.logger.LoggerPayload;
@@ -40,7 +29,7 @@ import model.logger.MetricElement;
 import model.logger.Severity;
 
 /**
- * PiazzaLogger is a class to write syslog logs into Elasticsearch
+ * PiazzaLogger is used to format logs into syslog message 
  * 
  * @author Sonny.Saniev
  * @version 1.0
@@ -51,18 +40,12 @@ public class PiazzaLogger {
 	private String serviceName;
 	@Value("${logger.console:}")
 	private Boolean logToConsole;
-	@Value("${LOGGER_INDEX}")
-	private String loggerIndex;
-
-	@Autowired
-	private Client elasticClient;
 
 	private final Logger LOGGER = LoggerFactory.getLogger(PiazzaLogger.class);
-	private final String LOG_SCHEMA = "LogData";
 
 	/**
-	 * Default constructor, required for bean instantiation.
 	 */
+	* Default constructor, required for bean instantiation.
 	public PiazzaLogger() {
 		// Empty constructor required by Jackson
 	}
@@ -80,14 +63,8 @@ public class PiazzaLogger {
 		this.serviceName = serviceName;
 	}
 
-	@PostConstruct
-	public void init() {
-		// Create elasticsearch index with mapping
-		createIndexWithMapping(loggerIndex, LOG_SCHEMA);
-	}
-
 	/**
-	 * Writes syslog format log message to elasticsearch
+	 * Writes syslog format log message
 	 * 
 	 * @param logMessage
 	 *            the message you want to log
@@ -96,49 +73,11 @@ public class PiazzaLogger {
 	 */
 	public void log(String logMessage, Severity severity) {
 		LoggerPayload loggerPayload = getLoggerPayload();
-		indexLog(loggerPayload, logMessage, severity);
+		writeLog(loggerPayload, logMessage, severity);
 	}
 
 	/**
-	 * Creates elasticsearch index with default mapping.
-	 * 
-	 * @param client
-	 *            elasticsearch client
-	 * @param indexName
-	 *            index to save to
-	 * @param mapping
-	 *            mapping object
-	 * @return boolean
-	 */
-	public boolean createIndexWithMapping(String indexName, String type) {
-		try {
-			if (!indexExists(indexName)) {
-				CreateIndexRequestBuilder createIndexRequestBuilder = elasticClient.admin().indices().prepareCreate(indexName);
-				createIndexRequestBuilder.addMapping(type);
-				CreateIndexResponse response = createIndexRequestBuilder.execute().actionGet();
-
-				return response.isAcknowledged();
-			}
-
-		} catch (Exception exception) {
-			LOGGER.info(String.format("Unable to create Elasticsearch index %s, it should already exist, error", indexName), exception);
-		}
-		
-		return false;
-	}
-	
-	/**
-	 * Checks to see if elastic index exists
-	 * 
-	 * @param indexName
-	 * @return boolean
-	 */
-	public boolean indexExists(String indexName) {
-		return elasticClient.admin().indices().prepareExists(indexName).execute().actionGet().isExists();
-	}
-
-	/**
-	 * Saves an audit message to elasticsearch
+	 * Saves an audit message
 	 * 
 	 * @param logMessage
 	 *            the message you want to log
@@ -150,11 +89,11 @@ public class PiazzaLogger {
 	public void log(String logMessage, Severity severity, AuditElement auditElement) {
 		LoggerPayload loggerPayload = getLoggerPayload();
 		loggerPayload.setAuditData(auditElement);
-		indexLog(loggerPayload, logMessage, severity);
+		writeLog(loggerPayload, logMessage, severity);
 	}
 
 	/**
-	 * Saves a metric message to elasticsearch
+	 * Writes metric message 
 	 * 
 	 * @param logMessage
 	 *            the message you want to log
@@ -166,11 +105,11 @@ public class PiazzaLogger {
 	public void log(String logMessage, Severity severity, MetricElement metricElement) {
 		LoggerPayload loggerPayload = getLoggerPayload();
 		loggerPayload.setMetricData(metricElement);
-		indexLog(loggerPayload, logMessage, severity);
+		writeLog(loggerPayload, logMessage, severity);
 	}
 
 	/**
-	 * Saves full log payload with metric and audit elements present to elasticsearch
+	 * Writes full log message with metric and audit elements 
 	 * 
 	 * @param logMessage
 	 *            the message you want to log
@@ -185,7 +124,7 @@ public class PiazzaLogger {
 		LoggerPayload loggerPayload = getLoggerPayload();
 		loggerPayload.setAuditData(auditElement);
 		loggerPayload.setMetricData(metricElement);
-		indexLog(loggerPayload, logMessage, severity);
+		writeLog(loggerPayload, logMessage, severity);
 	}
 
 	/**
@@ -206,7 +145,7 @@ public class PiazzaLogger {
 	}
 
 	/**
-	 * Method to index the log payload into elasticsearch.
+	 * Method to build the log message
 	 * 
 	 * @param loggerPayload
 	 *            Syslog RFC 5424 standard log payload
@@ -215,7 +154,7 @@ public class PiazzaLogger {
 	 * @param severity
 	 *            Syslog RFC-5424 Protocol severity codes
 	 */
-	private void indexLog(LoggerPayload loggerPayload, String logMessage, Severity severity) {
+	private void writeLog(LoggerPayload loggerPayload, String logMessage, Severity severity) {
 		// Setting generic fields on logger payload
 		loggerPayload.setSeverity(severity);
 		loggerPayload.setMessage(logMessage);
@@ -228,24 +167,6 @@ public class PiazzaLogger {
 			}
 		} catch (Exception exception) { /* Do nothing. */
 			LOGGER.error("Could not log message to console. Application property is not set", exception);
-		}
-
-		// saving log to elastic search
-		String loggerPayloadJson = "";
-		try {
-			loggerPayloadJson = new ObjectMapper().writeValueAsString(loggerPayload);
-		} catch (JsonProcessingException e) {
-			LOGGER.error("Failed to serialize the log payload", e);
-		}
-
-		LOGGER.debug("Writing the following log object to elastic search: {}", loggerPayloadJson);
-		try {
-			// Index to elasticsearch
-			IndexRequest indexRequest = new IndexRequest(loggerIndex, LOG_SCHEMA);
-			indexRequest.source(loggerPayloadJson, XContentType.JSON);
-			elasticClient.index(indexRequest).actionGet();
-		} catch (Exception e) {
-			LOGGER.info(String.format("Unable to index logs into Elasticsearch: %s", e.getMessage()), e);
 		}
 	}
 }
