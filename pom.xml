@@ -3,15 +3,15 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.venice.piazza</groupId>
 	<artifactId>pz-jobcommon</artifactId>
-	<version>LATEST</version>
+	<version>TWO-VERS</version>
 
 	<packaging>jar</packaging>
 
 	<properties>
 		<java.version>1.8</java.version>
 		<geotools.version>14.2</geotools.version>
-		<jackson.version>2.6.3</jackson.version>
-		<spring.version>4.3.5.RELEASE</spring.version>
+		<jackson.version>2.8.9</jackson.version>
+		<spring.version>4.3.12.RELEASE</spring.version>
 	</properties>
 
 	<repositories>
@@ -19,30 +19,6 @@
 			<id>nexus</id>
 			<url>${env.ARTIFACT_STORAGE_URL}</url>
 		</repository>
-
-
-        <repository>
-            <id>elastic</id>
-            <url>https://artifacts.elastic.co/maven</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-		</repository>
-		
-<!--       <repository> -->
-<!--          <id>elasticsearch-releases</id> -->
-<!--          <url>https://maven.elasticsearch.org/releases</url> -->
-<!--          <releases> -->
-<!--             <enabled>true</enabled> -->
-<!--          </releases> -->
-<!--          <snapshots> -->
-<!--             <enabled>false</enabled> -->
-<!--          </snapshots> -->
-<!--       </repository> -->
-
 	</repositories>
 
 	<dependencies>
@@ -50,58 +26,27 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
-			<version>1.5.6.RELEASE</version>
-		</dependency>
-
-		<!-- Following required for elastic 5.4.0 upgrade -->
-		<dependency>
-		    <groupId>org.elasticsearch</groupId>
-		    <artifactId>elasticsearch</artifactId>
-		    <version>5.4.0</version>
+			<version>1.5.9.RELEASE</version>
 		</dependency>
 
 		<dependency>
-		    <groupId>org.elasticsearch.client</groupId>
-		    <artifactId>transport</artifactId>
-		    <version>5.4.0</version>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<version>1.5.9.RELEASE</version>
 		</dependency>
-		
-		<dependency>
-		   <groupId>org.elasticsearch.client</groupId>
-		   <artifactId>x-pack-transport</artifactId>
-		   <version>5.4.3</version>
-		</dependency>
-		
-<!--         <dependency> -->
-<!--             <groupId>org.elasticsearch.client</groupId> -->
-<!--             <artifactId>x-pack-transport</artifactId> -->
-<!--             <version>5.1.1</version> -->
-<!-- 		</dependency> -->
-		
-<!-- 		<dependency> -->
-<!-- 		    <groupId>org.elasticsearch.plugin</groupId> -->
-<!-- 		    <artifactId>shield</artifactId> -->
-<!-- 		    <version>2.4.6</version> -->
-<!-- 		    <scope>provided</scope> -->
-<!-- 		</dependency> -->
 
 		<dependency>
-		    <groupId>org.apache.logging.log4j</groupId>
-		    <artifactId>log4j-to-slf4j</artifactId>
-		    <version>2.7</version>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-to-slf4j</artifactId>
+			<version>2.7</version>
 		</dependency>
+
 		<dependency>
-		    <groupId>ch.qos.logback</groupId>
-		    <artifactId>logback-classic</artifactId>
-		    <version>1.1.7</version>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<version>1.1.7</version>
 		</dependency>
-		<!-- ============================================ -->
-		
-		<dependency>
-			<groupId>org.springframework.data</groupId>
-			<artifactId>spring-data-commons</artifactId>
-			<version>1.12.3.RELEASE</version>
-		</dependency>
+
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-web</artifactId>
@@ -176,12 +121,6 @@
 
 		<dependency>
 			<groupId>com.fasterxml.jackson.datatype</groupId>
-			<artifactId>jackson-datatype-jdk7</artifactId>
-			<version>${jackson.version}</version>
-		</dependency>
-
-		<dependency>
-			<groupId>com.fasterxml.jackson.datatype</groupId>
 			<artifactId>jackson-datatype-jdk8</artifactId>
 			<version>${jackson.version}</version>
 		</dependency>
@@ -243,21 +182,14 @@
 		<dependency>
 			<groupId>io.springfox</groupId>
 			<artifactId>springfox-swagger2</artifactId>
-			<version>2.5.0</version>
+			<version>2.7.0</version>
 			<scope>compile</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>org.mockito</groupId>
-			<artifactId>mockito-core</artifactId>
-			<version>1.10.19</version>
-			<scope>test</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-test</artifactId>
-			<version>4.3.5.RELEASE</version>
+			<version>{spring.version}</version>
 			<scope>test</scope>
 		</dependency>
 
@@ -278,7 +210,7 @@
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-surefire-plugin</artifactId>
-						<version>2.17</version>
+						<version>2.19.1</version>
 						<configuration>
 							<properties>
 								<property>
