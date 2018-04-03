@@ -15,7 +15,13 @@ node {
       sh "mv ${configDir}/${ENVIRONMENT}-config.json ${configFile}"
     }
     // read the current configuration
-    def env = new groovy.json.JsonSlurper().parseText(readFile("${configFile}"))
+    def config = new groovy.json.JsonSlurper().parseText(readFile("${configFile}"))
+    // TODO: This is debug. In the real file, we would have config at top-level. I'm just re-using the JobDSL JSON now.
+    def env = [:]
+    for (param in config.projects[0].credparams) { env[param.name] = param.defaultvalue }
+    for (param in config.projects[0].jobparams) { env[param.name] = param.defaultvalue }
+    
+    
 
     // github is open gitlab requires credentials to clone
     if(env.GITLAB_CREDS) {
