@@ -30,8 +30,7 @@ node {
     }
     
     // TODO: Let's not build anything crazy with the .io params, now
-    error("That's enough. Stuff like ${NEXUS_DESTINATION_CREDS} and ${PZ_KAFKA_HOST} were read.") // Remove
-    
+    error("That's enough. Stuff like ${env.NEXUS_DESTINATION_CREDS} and ${env.PZ_KAFKA_HOST} were read.") // Remove
   }
 
   def appvers = sh(script: "git describe --long --tags --always | sed 's/\\./-/'g", returnStdout: true)
