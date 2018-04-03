@@ -11,7 +11,7 @@ node {
     def configDir = "${root}/configuration"
     def configFile = "${root}/config.json"
     dir(configDir) {
-      git url: "${env.CONFIGURATION_URL}", branch: "master", credentialsId: "${env.CONFIGURATION_CREDS}"
+      git url: "${env.CONFIGURATION_URL}", branch: "${env.CONFIGUATION_BRANCH}", credentialsId: "${env.CONFIGURATION_CREDS}"
       sh "mv ${configDir}/${ENVIRONMENT}-config.json ${configFile}"
     }
     // read the current configuration
@@ -20,8 +20,6 @@ node {
     def env = [:]
     for (param in config.projects[0].credparams) { env[param.name] = param.defaultvalue }
     for (param in config.projects[0].jobparams) { env[param.name] = param.defaultvalue }
-    
-    
 
     // github is open gitlab requires credentials to clone
     if(env.GITLAB_CREDS) {
@@ -29,6 +27,9 @@ node {
     } else {
       git url: "${env.GIT_URL}", branch: "${env.GIT_BRANCH}"
     }
+    
+    // TODO: Let's not build anything crazy with the .io params, now
+    error("That's enough. Stuff like ${NEXUS_DESTINATION_CREDS} and ${PZ_KAFKA_HOST} were read.") // Remove
     
   }
 
