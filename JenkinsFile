@@ -9,12 +9,13 @@ node {
     deleteDir()
     // clone the configuration repository and copy the current configuration
     def configDir = "${root}/configuration"
+    def configFile = "${root}/config.json"
     dir(configDir) {
       git url: "${env.CONFIGURATION_URL}", branch: "master", credentialsId: "${env.CONFIGURATION_CREDS}"
-      sh "mv ${configDir}/${ENVIRONMENT}-config.json ${root}/config.json"
+      sh "mv ${configDir}/${ENVIRONMENT}-config.json ${configFile}"
     }
     // read the current configuration
-    def env = new groovy.json.JsonSlurper().parseText(readFile("${root}/config.json"))
+    def env = new groovy.json.JsonSlurper().parseText(readFile("${configFile}"))
 
     // github is open gitlab requires credentials to clone
     if(env.GITLAB_CREDS) {
