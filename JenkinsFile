@@ -12,7 +12,8 @@ node {
     def configFile = "${root}/config.json"
     dir(configDir) {
       git url: "${env.CONFIGURATION_URL}", branch: "${env.CONFIGUATION_BRANCH}", credentialsId: "${env.CONFIGURATION_CREDS}"
-      sh "mv ${configDir}/${ENVIRONMENT}-config.json ${configFile}"
+      //sh "mv ${configDir}/${ENVIRONMENT}-config.json ${configFile}"
+      sh "mv ${configDir}/venice.json ${configFile}" // No env files for now, just read the venice.json
     }
     // read the current configuration
     def config = new groovy.json.JsonSlurper().parseText(readFile("${configFile}"))
