@@ -21,6 +21,8 @@ node {
     for (param in config.projects[0].credparams) { env[param.name] = param.defaultvalue }
     for (param in config.projects[0].jobparams) { env[param.name] = param.defaultvalue }
 
+    echo("Loaded Config.")
+    
     // github is open gitlab requires credentials to clone
     if(env.GITLAB_CREDS) {
       git url: "${env.GIT_URL}", branch: "${env.GIT_BRANCH}", credentialsId: "${env.GITLAB_CREDS}"
