@@ -14,7 +14,7 @@ node {
     echo("Using ${env.CONFIGURATION_BRANCH} for Config")
     
     dir(configDir) {
-      git url: "${env.CONFIGURATION_URL}", branch: "${env.CONFIGUATION_BRANCH}", credentialsId: "${env.CONFIGURATION_CREDS}"
+      git url: "${env.CONFIGURATION_URL}", credentialsId: "${env.CONFIGURATION_CREDS}"
       //sh "mv ${configDir}/${ENVIRONMENT}-config.json ${configFile}"
       sh "mv ${configDir}/venice.json ${configFile}" // No env files for now, just read the venice.json
     }
