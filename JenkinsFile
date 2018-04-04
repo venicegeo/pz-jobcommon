@@ -24,22 +24,21 @@ node {
     def configText = readFile("${configFile}")
     def slurper = new groovy.json.JsonSlurper()
     def configJson = slurper.parseText(configText)
-    def config = [:]
     // TODO: This is debug. In the real file, we would have config at top-level. I'm just re-using the JobDSL JSON now.
     for (param in configJson.projects[0].credparams) { 
-      config."${param.name}" = (param.type == "booleanParam") ? "${param.defaultvalue}".toBoolean() : "${param.defaultvalue}"
+      env."${param.name}" = (param.type == "booleanParam") ? "${param.defaultvalue}".toBoolean() : "${param.defaultvalue}"
     }
     for (param in configJson.projects[0].jobparams) {
-      config."${param.name}" = (param.type == "booleanParam") ? "${param.defaultvalue}".toBoolean() : "${param.defaultvalue}"
+      env."${param.name}" = (param.type == "booleanParam") ? "${param.defaultvalue}".toBoolean() : "${param.defaultvalue}"
     }
 
     echo("Loaded Config.")
     
     // github is open gitlab requires credentials to clone
-    if(config.GITLAB_CREDS) {
-      git url: "${env.GIT_URL}", branch: "${config.GIT_BRANCH}", credentialsId: "${config.GITLAB_CREDS}"
+    if(env.GITLAB_CREDS && env.GIT_URL.contains("gitlab")) {
+      git url: "${env.GIT_URL}", branch: "${env.GIT_BRANCH}", credentialsId: "${env.GITLAB_CREDS}"
     } else {
-      git url: "${env.GIT_URL}", branch: "${config.GIT_BRANCH}"
+      git url: "${env.GIT_URL}", branch: "${env.GIT_BRANCH}"
     }
     
     // TODO: Let's not build anything crazy with the .io params, now
