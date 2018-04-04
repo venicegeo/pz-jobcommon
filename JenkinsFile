@@ -23,9 +23,14 @@ node {
     def configText = readFile("${configFile}")
     echo "${configText}"
     def config = new groovy.json.JsonSlurper().parseText(configText)
+    echo "Class for Env " + env.getClass()
     // TODO: This is debug. In the real file, we would have config at top-level. I'm just re-using the JobDSL JSON now.
-    for (param in config.projects[0].credparams) { env[param.name] = param.defaultvalue }
-    for (param in config.projects[0].jobparams) { env[param.name] = param.defaultvalue }
+    for (param in config.projects[0].credparams) { 
+      env[param.name] = param.defaultvalue
+    }
+    for (param in config.projects[0].jobparams) {
+      env[param.name] = param.defaultvalue
+    }
 
     echo("Loaded Config.")
     
