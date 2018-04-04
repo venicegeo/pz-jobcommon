@@ -20,7 +20,9 @@ node {
     echo("Loading Config.")
     
     // read the current configuration
-    def config = new groovy.json.JsonSlurper().parseText(readFile("${configFile}"))
+    def configText = readFile("${configFile}")
+    echo "${configText}"
+    def config = new groovy.json.JsonSlurper().parseText(configText)
     // TODO: This is debug. In the real file, we would have config at top-level. I'm just re-using the JobDSL JSON now.
     for (param in config.projects[0].credparams) { env[param.name] = param.defaultvalue }
     for (param in config.projects[0].jobparams) { env[param.name] = param.defaultvalue }
