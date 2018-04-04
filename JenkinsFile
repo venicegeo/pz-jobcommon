@@ -15,31 +15,29 @@ node {
       git url: "${env.CONFIGURATION_URL}", credentialsId: "${env.CONFIGURATION_CREDS}"
       //sh "mv ${configDir}/${ENVIRONMENT}-config.json ${configFile}"
       sh "mv ${configDir}/venice.json ${configFile}" // No env files for now, just read the venice.json
+      deleteDir()
     }
     
     echo("Loading Config.")
     
     // read the current configuration
-    def configText = readFile("${configFile}")
-    def config = new groovy.json.JsonSlurper().parseText(configText)
-    echo "Class for Env " + env.getClass()
+    def configJson = new groovy.json.JsonSlurper().parseText(readFile("${configFile}"))
+    def config = [:]
     // TODO: This is debug. In the real file, we would have config at top-level. I'm just re-using the JobDSL JSON now.
-    for (param in config.projects[0].credparams) { 
-      env.setProperty(param.name, param.defaultvalue)
-      //env[param.name] = param.defaultvalue
+    for (param in configJson.projects[0].credparams) { 
+      config."${param.name}" = (param.type == "booleanParam") ? "${param.defaultvalue}".toBoolean() : "${param.defaultvalue}"
     }
-    for (param in config.projects[0].jobparams) {
-      env.setProperty(param.name, param.defaultvalue)
-      //env[param.name] = param.defaultvalue
+    for (param in configJson.projects[0].jobparams) {
+      config."${param.name}" = (param.type == "booleanParam") ? "${param.defaultvalue}".toBoolean() : "${param.defaultvalue}"
     }
 
     echo("Loaded Config.")
     
     // github is open gitlab requires credentials to clone
-    if(env.GITLAB_CREDS) {
-      git url: "${env.GIT_URL}", branch: "${env.GIT_BRANCH}", credentialsId: "${env.GITLAB_CREDS}"
+    if(config.GITLAB_CREDS) {
+      git url: "${env.GIT_URL}", branch: "${config.GIT_BRANCH}", credentialsId: "${config.GITLAB_CREDS}"
     } else {
-      git url: "${env.GIT_URL}", branch: "${env.GIT_BRANCH}"
+      git url: "${env.GIT_URL}", branch: "${config.GIT_BRANCH}"
     }
     
     // TODO: Let's not build anything crazy with the .io params, now
