@@ -139,11 +139,11 @@ public class PojoTest {
                 UserThrottlesEntity.class
         );
 
-        hydrateBeans();
-        serializeBeans();
+        testGettersAndSetters();
+        //serializeBeans();
         testConstructors();
 
-        System.out.println(allObjects);
+        //System.out.println(allObjects);
     }
 
     private void testConstructors() {
@@ -188,7 +188,7 @@ public class PojoTest {
         }
     }
 
-    private void hydrateBeans() throws InvocationTargetException, IllegalAccessException {
+    private void testGettersAndSetters() throws InvocationTargetException, IllegalAccessException {
         for (Map.Entry<Class, Supplier<Object>> kvp : allObjects.entrySet()) {
             if (!isBean(kvp.getKey()))
                 continue;
@@ -210,6 +210,17 @@ public class PojoTest {
                         setter.invoke(obj, propValue);
                     } catch (Exception ex) {
                         throw ex;
+                    }
+
+                    Method getter = prop.getReadMethod();
+                    if (getter != null) {
+                        try {
+                            Object retrievedValue = getter.invoke(obj);
+                            if (!retrievedValue.equals(propValue))
+                                System.out.println("Setter returned different value. " + getter);
+                        } catch (Exception ex) {
+                            throw ex;
+                        }
                     }
                 }
             }
