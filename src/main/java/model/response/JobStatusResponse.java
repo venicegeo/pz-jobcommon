@@ -39,7 +39,7 @@ public class JobStatusResponse extends PiazzaResponse {
 	@ApiModelProperty(value = "Contains the Job Status Information", required = true)
 	public JobStatusData data = new JobStatusData();
 
-	private final static Logger LOGGER = LoggerFactory.getLogger(JobStatusResponse.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(JobStatusResponse.class);
 
 	public JobStatusResponse() {
 		// Empty constructor required by Jackson

@@ -19,7 +19,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
-import java.util.Arrays;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -38,7 +37,7 @@ import io.swagger.annotations.ApiModelProperty;
 public class FolderShare implements FileLocation {
 	private static final long serialVersionUID = 1L;
 	
-	private final static Logger LOGGER = LoggerFactory.getLogger(FolderShare.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(FolderShare.class);
 	
 	@ApiModelProperty(required = true, value = "The type of file location", allowableValues = "share")
 	public String type;

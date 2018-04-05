@@ -41,7 +41,7 @@ public class PiazzaLogger {
 	@Value("${logger.console:}")
 	private Boolean logToConsole;
 
-	private final Logger LOGGER = LoggerFactory.getLogger(PiazzaLogger.class);
+	private final Logger logger = LoggerFactory.getLogger(PiazzaLogger.class);
 	
 	/**
 	 * Default constructor, required for bean instantiation. 
@@ -139,7 +139,7 @@ public class PiazzaLogger {
 		try {
 			loggerPayload.setHostName(InetAddress.getLocalHost().getHostName());
 		} catch (Exception exception) {
-			LOGGER.error("Could not get hostname for component.", exception);
+			logger.error("Could not get hostname for component.", exception);
 		}
 		return loggerPayload;
 	}
@@ -162,11 +162,11 @@ public class PiazzaLogger {
 
 		// Log to console if requested
 		try {
-			if (logToConsole.booleanValue() && LOGGER.isInfoEnabled()) {
-				LOGGER.info(loggerPayload.toRfc5424());
+			if (logToConsole.booleanValue() && logger.isInfoEnabled()) {
+				logger.info(loggerPayload.toRfc5424());
 			}
 		} catch (Exception exception) { /* Do nothing. */
-			LOGGER.error("Could not log message to console. Application property is not set", exception);
+			logger.error("Could not log message to console. Application property is not set", exception);
 		}
 	}
 }

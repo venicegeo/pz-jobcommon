@@ -61,7 +61,7 @@ public class JobDaoImpl implements JobDaoCustom {
 		// Count
 		query = entityManager.createNativeQuery(JOB_QUERY_COUNT);
 		long count = ((BigInteger) query.getSingleResult()).longValue();
-		return new PageImpl<JobEntity>(results, null, count);
+		return new PageImpl<>(results, null, count);
 	}
 
 	public Page<JobEntity> getJobListForUserAndStatus(String status, String userName, Pagination pagination) {
@@ -79,7 +79,7 @@ public class JobDaoImpl implements JobDaoCustom {
 		query.setParameter(1, userName);
 		query.setParameter(2, status);
 		long count = ((BigInteger) query.getSingleResult()).longValue();
-		return new PageImpl<JobEntity>(results, null, count);
+		return new PageImpl<>(results, null, count);
 	}
 
 	public Page<JobEntity> getJobListByUser(String userName, Pagination pagination) {
@@ -95,7 +95,7 @@ public class JobDaoImpl implements JobDaoCustom {
 		query = entityManager.createNativeQuery(USERNAME_JOB_QUERY_COUNT);
 		query.setParameter(1, userName);
 		long count = ((BigInteger) query.getSingleResult()).longValue();
-		return new PageImpl<JobEntity>(results, null, count);
+		return new PageImpl<>(results, null, count);
 	}
 
 	public Page<JobEntity> getJobListByStatus(String status, Pagination pagination) {
@@ -111,7 +111,7 @@ public class JobDaoImpl implements JobDaoCustom {
 		query = entityManager.createNativeQuery(STATUS_JOB_QUERY_COUNT);
 		query.setParameter(1, status);
 		long count = ((BigInteger) query.getSingleResult()).longValue();
-		return new PageImpl<JobEntity>(results, null, count);
+		return new PageImpl<>(results, null, count);
 	}
 
 }

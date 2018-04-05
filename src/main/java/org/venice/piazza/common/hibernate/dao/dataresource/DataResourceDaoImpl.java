@@ -69,7 +69,7 @@ public class DataResourceDaoImpl implements DataResourceDaoCustom {
 		query.setParameter(2, String.format(WILDCARD_STRING_QUERY, keyword));
 		query.setParameter(3, String.format(WILDCARD_STRING_QUERY, userName));
 		long count = ((BigInteger) query.getSingleResult()).longValue();
-		return new PageImpl<DataResourceEntity>(results, null, count);
+		return new PageImpl<>(results, null, count);
 	}
 	
 	public Page<DataResourceEntity> getDataResourceListByUser(String userName, Pagination pagination) {
@@ -85,7 +85,7 @@ public class DataResourceDaoImpl implements DataResourceDaoCustom {
 		query = entityManager.createNativeQuery(USERNAME_DATARESOURCE_QUERY_COUNT);
 		query.setParameter(1, String.format(WILDCARD_STRING_QUERY, userName));
 		long count = ((BigInteger) query.getSingleResult()).longValue();
-		return new PageImpl<DataResourceEntity>(results, null, count);
+		return new PageImpl<>(results, null, count);
 	}
 	
 	public Page<DataResourceEntity> getDataResourceListByKeyword(String keyword, Pagination pagination) {
@@ -103,7 +103,7 @@ public class DataResourceDaoImpl implements DataResourceDaoCustom {
 		query.setParameter(1, String.format(WILDCARD_STRING_QUERY, keyword));
 		query.setParameter(2, String.format(WILDCARD_STRING_QUERY, keyword));
 		long count = ((BigInteger) query.getSingleResult()).longValue();
-		return new PageImpl<DataResourceEntity>(results, null, count);
+		return new PageImpl<>(results, null, count);
 	}
 	
 	public Page<DataResourceEntity> getDataResourceListByCreatedJobId(String createdByJobId, Pagination pagination) {
@@ -119,7 +119,7 @@ public class DataResourceDaoImpl implements DataResourceDaoCustom {
 		query = entityManager.createNativeQuery(CREATED_BY_JOB_ID_DATARESOURCE_QUERY_COUNT);
 		query.setParameter(1, String.format(WILDCARD_STRING_QUERY, createdByJobId));
 		long count = ((BigInteger) query.getSingleResult()).longValue();
-		return new PageImpl<DataResourceEntity>(results, null, count);
+		return new PageImpl<>(results, null, count);
 	}
 	
 	public Page<DataResourceEntity> getDataResourceList(Pagination pagination) {
@@ -133,6 +133,6 @@ public class DataResourceDaoImpl implements DataResourceDaoCustom {
 		// Count
 		query = entityManager.createNativeQuery(DATARESOURCE_QUERY_COUNT);
 		long count = ((BigInteger) query.getSingleResult()).longValue();
-		return new PageImpl<DataResourceEntity>(results, null, count);
+		return new PageImpl<>(results, null, count);
 	}
 }

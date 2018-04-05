@@ -50,7 +50,7 @@ public class UUIDFactory {
 	 * @return List of UUIDs
 	 */
 	public List<String> getUUID(Integer count) {
-		List<String> uuidList = new ArrayList<String>();
+		List<String> uuidList = new ArrayList<>();
 		for (int i = 0; i < count; i++) {
 			uuidList.add(java.util.UUID.randomUUID().toString());
 		}

@@ -61,7 +61,7 @@ public class DeploymentDaoImpl implements DeploymentDaoCustom {
 		query = entityManager.createNativeQuery(KEYWORD_DEPLOYMENT_ID_QUERY_COUNT);
 		query.setParameter(1, String.format(WILDCARD_STRING_QUERY, keyword));
 		long count = ((BigInteger) query.getSingleResult()).longValue();
-		return new PageImpl<DeploymentEntity>(results, null, count);
+		return new PageImpl<>(results, null, count);
 	}
 
 	public Page<DeploymentEntity> getDeploymentListByDataId(String keyword, Pagination pagination) {
@@ -77,7 +77,7 @@ public class DeploymentDaoImpl implements DeploymentDaoCustom {
 		query = entityManager.createNativeQuery(KEYWORD_DATA_ID_QUERY_COUNT);
 		query.setParameter(1, String.format(WILDCARD_STRING_QUERY, keyword));
 		long count = ((BigInteger) query.getSingleResult()).longValue();
-		return new PageImpl<DeploymentEntity>(results, null, count);
+		return new PageImpl<>(results, null, count);
 	}
 
 	public Page<DeploymentEntity> getDeploymentListByCapabilitiesUrl(String keyword, Pagination pagination) {
@@ -93,7 +93,7 @@ public class DeploymentDaoImpl implements DeploymentDaoCustom {
 		query = entityManager.createNativeQuery(KEYWORD_CAPABILITIES_URL_QUERY_COUNT);
 		query.setParameter(1, String.format(WILDCARD_STRING_QUERY, keyword));
 		long count = ((BigInteger) query.getSingleResult()).longValue();
-		return new PageImpl<DeploymentEntity>(results, null, count);
+		return new PageImpl<>(results, null, count);
 	}
 	
 	public Page<DeploymentEntity> getDeploymentList(Pagination pagination) {
@@ -107,6 +107,6 @@ public class DeploymentDaoImpl implements DeploymentDaoCustom {
 		// Count
 		query = entityManager.createNativeQuery(DEPLOYMENT_QUERY_COUNT);
 		long count = ((BigInteger) query.getSingleResult()).longValue();
-		return new PageImpl<DeploymentEntity>(results, null, count);
+		return new PageImpl<>(results, null, count);
 	}
 }
