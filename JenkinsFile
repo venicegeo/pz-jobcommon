@@ -11,14 +11,12 @@ node {
     def configFile = "${root}/config.json"
     dir(configDir) {
       git url: "${env.CONFIGURATION_URL}", credentialsId: "${env.CONFIGURATION_CREDS}"
-      //sh "mv ${configDir}/${ENVIRONMENT}-config.json ${configFile}"
-      sh "mv ${configDir}/venice.json ${configFile}" // No env files for now, just read the venice.json
+      sh "mv ${configDir}/${ENVIRONMENT}-config.json ${configFile}"
       deleteDir()
     }
     // read the current configuration
     def configJson = readJSON file: "${configFile}"
-    // TODO: This is debug. In the real file, we would have config at top-level. I'm just re-using the JobDSL JSON now.
-    for (param in configJson.projects[0].credparams + configJson.projects[0].jobparams) { 
+    for (param in configJson.credparams + configJson.jobparams) { 
       env."${param.name}" = (param.type == "booleanParam") ? "${param.defaultvalue}".toBoolean() : "${param.defaultvalue}"
     }
   }
@@ -32,9 +30,6 @@ node {
     } else {
       git url: "${env.GIT_URL}", branch: "${env.GIT_BRANCH}"
     }
-    
-    // TODO: Let's not build anything crazy with the .io params, now
-    error("That's enough. Stuff like ${env.NEXUS_DESTINATION_CREDS} and ${env.PZ_KAFKA_HOST} were read.") // Remove
   }
 
   def appvers = sh(script: "git describe --long --tags --always | sed 's/\\./-/'g", returnStdout: true)
