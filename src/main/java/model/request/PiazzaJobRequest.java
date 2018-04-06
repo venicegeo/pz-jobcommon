@@ -39,5 +39,6 @@ public class PiazzaJobRequest {
 	 * By defining a Job ID in a Job Request, the Job Manager can be signalled to use this particular ID when storing
 	 * the Job in persistence
 	 */
+	@ApiModelProperty(value = "The id of Job Submitted", dataType = "string")
 	public String jobId;
 }
