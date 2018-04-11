@@ -25,7 +25,7 @@ node {
     deleteDir()
 
     // github is open gitlab requires credentials to clone
-    if(env.USE_GIT_CREDS) {
+    if(env.USE_GIT_CREDS.toBoolean()) {
       git url: "${env.GIT_URL}", branch: "${env.GIT_BRANCH}", credentialsId: "${env.GITLAB_CREDS}"
     } else {
       git url: "${env.GIT_URL}", branch: "${env.GIT_BRANCH}"
@@ -36,7 +36,7 @@ node {
   appvers = appvers.trim()
   def appName = "pz-jobcommon-${appvers}"
 
-  if(!env.SKIP_SCANS) {
+  if(!env.SKIP_SCANS.toBoolean()) {
 	  stage('Scans') {
 		withCredentials([[$class: "StringBinding", credentialsId: "${env.THREADFIX_API_KEY}", variable: "THREADFIX_KEY"]]) {
 		  sh "/jslave/dependency-check/dependency-check/bin/dependency-check.sh --version"
