@@ -53,7 +53,7 @@ public class PojoTest {
 
         //Make sure all the types that we want to test are registered.
         //Order is not important.
-        //A type can be included multiple times, e.g. as a depndency of another class, without issue.
+        //A type can be included multiple times, e.g. as a dependency of another class, without issue.
         registerAll(
                 LogRequest.class,
                 FileResult.class,
