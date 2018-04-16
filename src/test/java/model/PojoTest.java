@@ -30,7 +30,7 @@ import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 /**
- * Instantiates and hydrates domain objects.
+ * Instantiates and hydrates domain objects using reflection.
  */
 public class PojoTest {
 
@@ -38,6 +38,7 @@ public class PojoTest {
      * A map of object types, including interfaces, and a supplier that can return an instance.
      * For most types the same reference will be returned for multiple invocations. For simpler types, a unique/random value may
      * be instantiated each time.
+     * These objects are used for dependency injection.
      */
     private Map<Class, Supplier<Object>> allObjects = new HashMap<>();
 
@@ -45,7 +46,7 @@ public class PojoTest {
     public void testObjects() throws
             Exception {
 
-        registerCommonDependencyTypes();
+        registerNonTestedDependencyTypes();
         this.allObjects.put(Service.METHOD_TYPE.class, () -> Service.METHOD_TYPE.POST);
         this.allObjects.put(ResourceMetadata.STATUS_TYPE.class, () -> ResourceMetadata.STATUS_TYPE.ONLINE);
         this.allObjects.put(Severity.class, () -> model.logger.Severity.WARNING);
@@ -153,6 +154,7 @@ public class PojoTest {
 
     /**
      * For each tested object registered in the object map, attempt to invoke every property getter and setter.
+     * This will "hydrate" all the properties of the tested objects.
      * @throws InvocationTargetException
      * @throws IllegalAccessException
      */
@@ -188,7 +190,11 @@ public class PojoTest {
         }
     }
 
-    private void registerCommonDependencyTypes() {
+    /**
+     * Dependencies that return true for {@link #isTestedClass(Class)} will be registered automatically.
+     * This method registers other types that may be needed.
+     */
+    private void registerNonTestedDependencyTypes() {
         //For simple types we can return random values to make serialization more interesting.
 
         this.allObjects.put(Integer.class, () -> ThreadLocalRandom.current().nextInt(0, 1000000));
@@ -199,6 +205,8 @@ public class PojoTest {
         this.allObjects.put(double.class, () -> ThreadLocalRandom.current().nextDouble(0.0, 100000.0));
         this.allObjects.put(Boolean.class, () -> ThreadLocalRandom.current().nextBoolean());
         this.allObjects.put(boolean.class, () -> ThreadLocalRandom.current().nextBoolean());
+
+        //One of the tested classes tries to parse a string as a date. So let's just return a date.
         this.allObjects.put(String.class, () -> DateTime.now().plusMillis(ThreadLocalRandom.current().nextInt()).toString());
         this.allObjects.put(DateTime.class, () -> DateTime.now().plusMillis(ThreadLocalRandom.current().nextInt()));
         this.allObjects.put(List.class, () -> new ArrayList<>());
@@ -207,7 +215,7 @@ public class PojoTest {
     }
 
     /**
-     * Addes all the objects to the object map as well as all dependencies.
+     * Adds all the objects to the object map as well as all dependencies.
      * @param types
      * @throws InstantiationException
      * @throws IllegalAccessException
@@ -266,7 +274,6 @@ public class PojoTest {
 
     /**
      * Indicates whether the class should be tested.
-     * This method should always return false for objects with no default constructor.
      *
      * @param clazz
      * @return
