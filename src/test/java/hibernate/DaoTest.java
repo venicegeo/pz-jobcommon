@@ -1,6 +1,7 @@
 package hibernate;
 
 import model.response.Pagination;
+import org.junit.Assert;
 import org.junit.Test;
 import org.mockito.Mockito;
 import org.springframework.data.domain.Page;
@@ -31,12 +32,25 @@ public class DaoTest {
         ReflectionTestUtils.setField(dao, "entityManager", entityManager);
         Pagination pagination = new Pagination(100L, 2, 10, "id", "asc");
 
-        Page<DataResourceEntity> page1 = dao.getDataResourceForUserAndKeyword("my_keyword", "my_username", pagination);
-        Page<DataResourceEntity> page2 = dao.getDataResourceListByUser("my_username", pagination);
-        Page<DataResourceEntity> page3 = dao.getDataResourceListByKeyword("my_keyword", pagination);
-        Page<DataResourceEntity> page4 = dao.getDataResourceListByCreatedJobId("my_created_by_job_id", pagination);
-        Page<DataResourceEntity> page5 = dao.getDataResourceList(pagination);
+        Page<DataResourceEntity> page = dao.getDataResourceForUserAndKeyword("my_keyword", "my_username", pagination);
+        Assert.assertNotNull(page);
+        Mockito.verify(query, Mockito.times(1)).getResultList();
 
+        page = dao.getDataResourceListByUser("my_username", pagination);
+        Assert.assertNotNull(page);
+        Mockito.verify(query, Mockito.times(2)).getResultList();
+
+        page = dao.getDataResourceListByKeyword("my_keyword", pagination);
+        Assert.assertNotNull(page);
+        Mockito.verify(query, Mockito.times(3)).getResultList();
+
+        page = dao.getDataResourceListByCreatedJobId("my_created_by_job_id", pagination);
+        Assert.assertNotNull(page);
+        Mockito.verify(query, Mockito.times(4)).getResultList();
+
+        page = dao.getDataResourceList(pagination);
+        Assert.assertNotNull(page);
+        Mockito.verify(query, Mockito.times(5)).getResultList();
     }
 
     @Test
@@ -51,9 +65,20 @@ public class DaoTest {
         ReflectionTestUtils.setField(dao, "entityManager", entityManager);
         Pagination pagination = new Pagination(100L, 2, 10, "id", "asc");
 
-        Page<ServiceEntity> page1 = dao.getServiceListForUserAndKeyword("my_keyword", "my_username", pagination);
-        Page<ServiceEntity> page2 = dao.getServiceListByUser("my_username", pagination);
-        Page<ServiceEntity> page3 = dao.getServiceListByKeyword("my_keyword", pagination);
-        Page<ServiceEntity> page4 = dao.getServiceList(pagination);
+        Page<ServiceEntity> page = dao.getServiceListForUserAndKeyword("my_keyword", "my_username", pagination);
+        Assert.assertNotNull(page);
+        Mockito.verify(query, Mockito.times(1)).getResultList();
+
+        page = dao.getServiceListByUser("my_username", pagination);
+        Assert.assertNotNull(page);
+        Mockito.verify(query, Mockito.times(2)).getResultList();
+
+        page = dao.getServiceListByKeyword("my_keyword", pagination);
+        Assert.assertNotNull(page);
+        Mockito.verify(query, Mockito.times(3)).getResultList();
+
+        page = dao.getServiceList(pagination);
+        Assert.assertNotNull(page);
+        Mockito.verify(query, Mockito.times(4)).getResultList();
     }
 }

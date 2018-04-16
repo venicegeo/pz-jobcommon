@@ -25,6 +25,7 @@ import model.data.deployment.Lease;
 
 import model.response.Pagination;
 import org.joda.time.DateTime;
+import org.junit.Assert;
 import org.junit.Test;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -99,9 +100,20 @@ public class DeploymentTest {
 		ReflectionTestUtils.setField(dao, "entityManager", entityManager);
 		Pagination pagination = new Pagination(100L, 2, 10, "id", "asc");
 
-		Page<DeploymentEntity> page1 = dao.getDeploymentListByDeploymentId("my_keyword", pagination);
-		Page<DeploymentEntity> page2 = dao.getDeploymentListByDataId("my_keyword", pagination);
-		Page<DeploymentEntity> page3 = dao.getDeploymentListByCapabilitiesUrl("my_keyword", pagination);
-		Page<DeploymentEntity> page4 = dao.getDeploymentList(pagination);
+		Page<DeploymentEntity> page = dao.getDeploymentListByDeploymentId("my_keyword", pagination);
+		Assert.assertNotNull(page);
+		Mockito.verify(query, Mockito.times(1)).getResultList();
+
+		page = dao.getDeploymentListByDataId("my_keyword", pagination);
+		Assert.assertNotNull(page);
+		Mockito.verify(query, Mockito.times(2)).getResultList();
+
+		page = dao.getDeploymentListByCapabilitiesUrl("my_keyword", pagination);
+		Assert.assertNotNull(page);
+		Mockito.verify(query, Mockito.times(3)).getResultList();
+
+		page = dao.getDeploymentList(pagination);
+		Assert.assertNotNull(page);
+		Mockito.verify(query, Mockito.times(4)).getResultList();
 	}
 }
