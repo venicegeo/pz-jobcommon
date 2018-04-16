@@ -81,7 +81,7 @@ public enum GeoToolsUtil {
 	 */
 	public static DataStore getPostGisDataStore(String host, String port, String schema, String database, String user, String password)
 			throws IOException {
-		Map<String, Object> params = new HashMap<String, Object>();
+		Map<String, Object> params = new HashMap<>();
 		params.put("dbtype", POSTGIS_DATASTORE_TYPE);
 		params.put("host", host);
 		params.put("port", port);
@@ -89,7 +89,6 @@ public enum GeoToolsUtil {
 		params.put("database", database);
 		params.put("user", user);
 		params.put("passwd", password);
-		DataStore postGisStore = DataStoreFinder.getDataStore(params);
-		return postGisStore;
+		return DataStoreFinder.getDataStore(params);
 	}
 }

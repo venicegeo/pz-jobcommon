@@ -57,7 +57,7 @@ public class Job implements Serializable {
 	private String createdBy;
 	private String status;
 	private JobProgress progress = new JobProgress();
-	private List<JobProgress> history = new ArrayList<JobProgress>();
+	private List<JobProgress> history = new ArrayList<>();
 	private ResultType result;
 
 	public Job() {

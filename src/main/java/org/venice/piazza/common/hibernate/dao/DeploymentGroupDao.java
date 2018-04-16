@@ -20,7 +20,6 @@ import javax.transaction.Transactional;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.venice.piazza.common.hibernate.entity.DeploymentGroupEntity;
-import org.venice.piazza.common.hibernate.entity.LeaseEntity;
 
 /**
  * Data Access Object for Deployment Group Entities

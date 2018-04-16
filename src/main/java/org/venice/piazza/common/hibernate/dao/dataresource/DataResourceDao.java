@@ -19,7 +19,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 import org.venice.piazza.common.hibernate.entity.DataResourceEntity;
-import org.venice.piazza.common.hibernate.entity.DeploymentEntity;
 
 /**
  * Data Access Object for DataResource Entities

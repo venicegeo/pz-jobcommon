@@ -18,14 +18,28 @@ package model.data.deployment.test;
 import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
+import java.math.BigInteger;
 
 import model.data.deployment.Deployment;
 import model.data.deployment.Lease;
 
+import model.response.Pagination;
 import org.joda.time.DateTime;
+import org.junit.Assert;
 import org.junit.Test;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.mockito.Mockito;
+import org.reflections.ReflectionUtils;
+import org.springframework.data.domain.Page;
+import org.springframework.test.util.ReflectionTestUtils;
+import org.venice.piazza.common.hibernate.dao.dataresource.DataResourceDaoImpl;
+import org.venice.piazza.common.hibernate.dao.deployment.DeploymentDao;
+import org.venice.piazza.common.hibernate.dao.deployment.DeploymentDaoImpl;
+import org.venice.piazza.common.hibernate.entity.DeploymentEntity;
+
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
 
 /**
  * Tests deployment and lease serializations
@@ -72,5 +86,34 @@ public class DeploymentTest {
 		assertTrue(lease.getDeploymentId().equals(mockLease.getDeploymentId()));
 		assertTrue(lease.getExpiresOn().equals(mockLease.getExpiresOn()));
 		assertTrue(lease.getLeaseId().equals(mockLease.getLeaseId()));
+	}
+
+	@Test
+	public void testDao() {
+		EntityManager entityManager = Mockito.mock(EntityManager.class);
+		Query query = Mockito.mock(Query.class);
+		Mockito.when(entityManager.createNativeQuery(Mockito.anyString(), Mockito.any(Class.class))).thenReturn(query);
+		Mockito.when(entityManager.createNativeQuery(Mockito.anyString())).thenReturn(query);
+		Mockito.when(query.getSingleResult()).thenReturn(BigInteger.ZERO);
+
+		DeploymentDaoImpl dao = new DeploymentDaoImpl();
+		ReflectionTestUtils.setField(dao, "entityManager", entityManager);
+		Pagination pagination = new Pagination(100L, 2, 10, "id", "asc");
+
+		Page<DeploymentEntity> page = dao.getDeploymentListByDeploymentId("my_keyword", pagination);
+		Assert.assertNotNull(page);
+		Mockito.verify(query, Mockito.times(1)).getResultList();
+
+		page = dao.getDeploymentListByDataId("my_keyword", pagination);
+		Assert.assertNotNull(page);
+		Mockito.verify(query, Mockito.times(2)).getResultList();
+
+		page = dao.getDeploymentListByCapabilitiesUrl("my_keyword", pagination);
+		Assert.assertNotNull(page);
+		Mockito.verify(query, Mockito.times(3)).getResultList();
+
+		page = dao.getDeploymentList(pagination);
+		Assert.assertNotNull(page);
+		Mockito.verify(query, Mockito.times(4)).getResultList();
 	}
 }

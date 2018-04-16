@@ -46,7 +46,7 @@ import model.job.metadata.ResourceMetadata;
 public class Service implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
-	private final static Logger LOGGER = LoggerFactory.getLogger(Service.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(Service.class);
 
 	public enum METHOD_TYPE {
 		GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
@@ -203,7 +203,7 @@ public class Service implements Serializable {
 	public void merge(Service other, boolean overwriteNull) throws InvalidInputException {
 		// Protected method names that are not automatically transferred (Id is protected, and ResourceMetadata merging
 		// is delegated to that object.
-		List<String> protectedNames = new ArrayList<String>();
+		List<String> protectedNames = new ArrayList<>();
 		protectedNames.add("setResourceMetadata");
 		protectedNames.add("setServiceId");
 
@@ -237,7 +237,7 @@ public class Service implements Serializable {
 		try {
 			Method toMethod = this.getClass().getMethod(toName, fromMethod.getReturnType());
 			Object value = fromMethod.invoke(other, (Object[]) null);
-			if ((value != null) || (overwriteNull == true)) {
+			if ((value != null) || (overwriteNull)) {
 				toMethod.invoke(this, value);
 			}
 		} catch (Exception exception) {

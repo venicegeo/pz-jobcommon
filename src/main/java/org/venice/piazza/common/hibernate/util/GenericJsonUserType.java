@@ -42,9 +42,18 @@ public abstract class GenericJsonUserType implements UserType {
 		return new int[] { Types.JAVA_OBJECT };
 	}
 
-	@SuppressWarnings("unchecked")
+	/**
+	 *
+	 * @param resultSet
+	 * @param names
+	 * @param session
+	 * @param owner
+	 * @return
+	 * @throws HibernateException
+	 * @throws SQLException
+	 */
 	public Object nullSafeGet(final ResultSet resultSet, final String[] names, final SessionImplementor session, final Object owner)
-			throws HibernateException, SQLException {
+			throws SQLException {
 		String jsonFromDatabase = resultSet.getString(names[0]);
 		if (jsonFromDatabase == null) {
 			return null;
@@ -59,8 +68,17 @@ public abstract class GenericJsonUserType implements UserType {
 		}
 	}
 
+	/**
+	 *
+	 * @param preparedStatement
+	 * @param value
+	 * @param index
+	 * @param session
+	 * @throws HibernateException
+	 * @throws SQLException
+	 */
 	public void nullSafeSet(final PreparedStatement preparedStatement, final Object value, final int index,
-			final SessionImplementor session) throws HibernateException, SQLException {
+			final SessionImplementor session) throws SQLException {
 		if (value == null) {
 			preparedStatement.setNull(index, Types.OTHER);
 			return;
@@ -78,8 +96,13 @@ public abstract class GenericJsonUserType implements UserType {
 		}
 	}
 
-	@SuppressWarnings("unchecked")
-	public Object deepCopy(final Object value) throws HibernateException {
+	/**
+	 *
+	 * @param value
+	 * @return
+	 * @throws HibernateException
+	 */
+	public Object deepCopy(final Object value)  {
 		try {
 			ObjectMapper objectMapper = new ObjectMapper();
 			String clonedString = objectMapper.writeValueAsString(value);
@@ -93,26 +116,60 @@ public abstract class GenericJsonUserType implements UserType {
 		return true;
 	}
 
-	public Serializable disassemble(final Object value) throws HibernateException {
+	/**
+	 *
+	 * @param value
+	 * @return
+	 * @throws HibernateException
+	 */
+	public Serializable disassemble(final Object value) {
 		return (Serializable) this.deepCopy(value);
 	}
 
-	public Object assemble(final Serializable cached, final Object owner) throws HibernateException {
+	/**
+	 *
+	 * @param cached
+	 * @param owner
+	 * @return
+	 * @throws HibernateException
+	 */
+	public Object assemble(final Serializable cached, final Object owner) {
 		return this.deepCopy(cached);
 	}
 
-	public Object replace(final Object original, final Object target, final Object owner) throws HibernateException {
+	/**
+	 *
+	 * @param original
+	 * @param target
+	 * @param owner
+	 * @return
+	 * @throws HibernateException
+	 */
+	public Object replace(final Object original, final Object target, final Object owner) {
 		return this.deepCopy(original);
 	}
 
-	public boolean equals(final Object left, final Object right) throws HibernateException {
+	/**
+	 *
+	 * @param left
+	 * @param right
+	 * @return
+	 * @throws HibernateException
+	 */
+	public boolean equals(final Object left, final Object right) {
 		if (left == null) {
 			return right == null;
 		}
 		return left.equals(right);
 	}
 
-	public int hashCode(final Object obj) throws HibernateException {
+	/**
+	 *
+	 * @param obj
+	 * @return
+	 * @throws HibernateException
+	 */
+	public int hashCode(final Object obj) {
 		return obj.hashCode();
 	}
 }

@@ -68,7 +68,7 @@ public class ServiceDaoImpl implements ServiceDaoCustom {
 		query.setParameter(2, String.format(WILDCARD_STRING_QUERY, keyword));
 		query.setParameter(3, String.format(WILDCARD_STRING_QUERY, userName));
 		long count = ((BigInteger) query.getSingleResult()).longValue();
-		return new PageImpl<ServiceEntity>(results, null, count);
+		return new PageImpl<>(results, null, count);
 	}
 
 	public Page<ServiceEntity> getServiceList(Pagination pagination) {
@@ -82,7 +82,7 @@ public class ServiceDaoImpl implements ServiceDaoCustom {
 		// Count
 		query = entityManager.createNativeQuery(SERVICE_QUERY_COUNT);
 		long count = ((BigInteger) query.getSingleResult()).longValue();
-		return new PageImpl<ServiceEntity>(results, null, count);
+		return new PageImpl<>(results, null, count);
 	}
 
 	public Page<ServiceEntity> getServiceListByUser(String userName, Pagination pagination) {
@@ -98,7 +98,7 @@ public class ServiceDaoImpl implements ServiceDaoCustom {
 		query = entityManager.createNativeQuery(USERNAME_SERVICE_QUERY_COUNT);
 		query.setParameter(1, String.format(WILDCARD_STRING_QUERY, userName));
 		long count = ((BigInteger) query.getSingleResult()).longValue();
-		return new PageImpl<ServiceEntity>(results, null, count);
+		return new PageImpl<>(results, null, count);
 	}
 
 	public Page<ServiceEntity> getServiceListByKeyword(String keyword, Pagination pagination) {
@@ -116,7 +116,7 @@ public class ServiceDaoImpl implements ServiceDaoCustom {
 		query.setParameter(1, String.format(WILDCARD_STRING_QUERY, keyword));
 		query.setParameter(2, String.format(WILDCARD_STRING_QUERY, keyword));
 		long count = ((BigInteger) query.getSingleResult()).longValue();
-		return new PageImpl<ServiceEntity>(results, null, count);
+		return new PageImpl<>(results, null, count);
 	}
 
 }

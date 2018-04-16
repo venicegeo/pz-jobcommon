@@ -17,7 +17,6 @@ package model.response;
 
 import io.swagger.annotations.ApiModelProperty;
 import model.job.type.ExecuteServiceJob;
-import model.service.taskmanaged.ServiceJob;
 
 /**
  * Response containing a Service Job, and the input data for execution
