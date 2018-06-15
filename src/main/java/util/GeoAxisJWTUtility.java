@@ -1,7 +1,7 @@
 package util;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
@@ -27,11 +27,12 @@ public class GeoAxisJWTUtility {
 
 	private static final Logger log = LoggerFactory.getLogger(GeoAxisJWTUtility.class);
 
-	private static final String PATH_TO_GX_CERT = "file://TBD";
+	private static final String PATH_TO_GX_CERT = "GxJWTCertificate.pem";
 
 	public String getJWTHeader(final String encodedJWT) {
 
 		if( isJWTStructureValid(encodedJWT) ) {
+
 			final String encodedJWTHeader = Arrays.asList(encodedJWT.split("\\.")).get(0);
 			return new String(Base64.getUrlDecoder().decode(encodedJWTHeader));
 		}
@@ -42,6 +43,7 @@ public class GeoAxisJWTUtility {
 	public String getJWTPayload(final String encodedJWT) {
 
 		if( isJWTStructureValid(encodedJWT) ) {
+
 			final String encodedJWTPayload = Arrays.asList(encodedJWT.split("\\.")).get(1);
 			return new String(Base64.getUrlDecoder().decode(encodedJWTPayload));
 		}
@@ -52,9 +54,11 @@ public class GeoAxisJWTUtility {
 	public boolean isJWTValid(final String encodedJWT) {
 
 		if( isJWTStructureValid(encodedJWT) ) {
-			final String jwtSignature = Arrays.asList(encodedJWT.split("\\.")).get(2);
 
-			if( isJWTSignatureVerified(jwtSignature) ) {
+			final String encodedJWTSignature = Arrays.asList(encodedJWT.split("\\.")).get(2);
+			final byte[] decodedJWTSignature = Base64.getUrlDecoder().decode(encodedJWTSignature);
+
+			if( isJWTSignatureVerified(decodedJWTSignature) ) {
 				return true;
 			}
 		}
@@ -101,13 +105,13 @@ public class GeoAxisJWTUtility {
 		return true;
 	}
 
-	private boolean isJWTSignatureVerified(final String sigToVerify) {
+	private boolean isJWTSignatureVerified(final byte[] sigToVerify) {
 
 		try {
 			final Signature sig = Signature.getInstance("SHA384withRSA", "SunRsaSign");
 			sig.initVerify(loadGeoAxisPublicCertificate());
 
-			return sig.verify(sigToVerify.getBytes());
+			return sig.verify(sigToVerify);
 
 		} catch (NoSuchAlgorithmException e) {
 			// TODO Auto-generated catch block
@@ -124,7 +128,7 @@ public class GeoAxisJWTUtility {
 		} catch (CertificateException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (FileNotFoundException e) {
+		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -132,10 +136,10 @@ public class GeoAxisJWTUtility {
 		return false;
 	}
 
-	private PublicKey loadGeoAxisPublicCertificate() throws CertificateException, FileNotFoundException {
+	private PublicKey loadGeoAxisPublicCertificate() throws CertificateException, IOException {
 
 	    final CertificateFactory certFactory = CertificateFactory.getInstance("X.509");
-	    final FileInputStream fileInputStream = new FileInputStream(PATH_TO_GX_CERT);
+	    final InputStream fileInputStream = this.getClass().getClassLoader().getResource(PATH_TO_GX_CERT).openStream();
 	    final X509Certificate cer = (X509Certificate)certFactory.generateCertificate(fileInputStream);
 
 	    return cer.getPublicKey();
