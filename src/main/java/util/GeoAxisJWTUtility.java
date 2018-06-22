@@ -22,22 +22,35 @@ import java.security.cert.CertificateFactory;
 import java.security.cert.X509Certificate;
 import java.security.interfaces.RSAPublicKey;
 
+import javax.annotation.PostConstruct;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.jwt.Jwt;
 import org.springframework.security.jwt.JwtHelper;
 import org.springframework.security.jwt.crypto.sign.RsaVerifier;
+import org.springframework.stereotype.Component;
 
 /**
  * Utility class aiding in parsing information out of Java Web Tokens (JWT).
  */
+@Component
 public class GeoAxisJWTUtility {
-
-	private static final Logger LOG = LoggerFactory.getLogger(GeoAxisJWTUtility.class);
-
 	@Value("${GEOAXIS_JWT_CERT}")
 	private String gxJwtCert;
+	private RSAPublicKey gxPublicJWTCert;
+	private static final Logger LOG = LoggerFactory.getLogger(GeoAxisJWTUtility.class);
+
+	@PostConstruct
+	public void loadCert() {
+		try {
+			gxPublicJWTCert = this.loadGeoAxisPublicCertificate();
+		} catch (CertificateException exception) {
+			LOG.error("Failed to read JWT public certificate. Cannot verify JWT requests.");
+			exception.printStackTrace();
+		}
+	}
 
 	/**
 	 * Retrieves the JWT payload, containing the payload of the token. This contains the "exp" expiration block (epoch
@@ -54,12 +67,10 @@ public class GeoAxisJWTUtility {
 	 */
 	public Jwt decodeAndVerify(final String encodedJWT) {
 		try {
-			final RSAPublicKey gxPublicJWTCert = this.loadGeoAxisPublicCertificate();
 			final RsaVerifier rsaVerifier = new RsaVerifier(gxPublicJWTCert, "SHA384withRSA");
 
 			return JwtHelper.decodeAndVerify(encodedJWT, rsaVerifier);
-		}
-		catch (RuntimeException | CertificateException e) {
+		} catch (RuntimeException e) {
 			LOG.error("Failed to validate JWT: {}", e);
 			e.printStackTrace();
 		}
@@ -68,11 +79,10 @@ public class GeoAxisJWTUtility {
 	}
 
 	private RSAPublicKey loadGeoAxisPublicCertificate() throws CertificateException {
+		final CertificateFactory certFactory = CertificateFactory.getInstance("X.509");
+		final InputStream fileInputStream = new ByteArrayInputStream(gxJwtCert.getBytes());
+		final X509Certificate cer = (X509Certificate) certFactory.generateCertificate(fileInputStream);
 
-	    final CertificateFactory certFactory = CertificateFactory.getInstance("X.509");
-	    final InputStream fileInputStream = new ByteArrayInputStream(gxJwtCert.getBytes());
-	    final X509Certificate cer = (X509Certificate)certFactory.generateCertificate(fileInputStream);
-
-	    return (RSAPublicKey) cer.getPublicKey();
+		return (RSAPublicKey) cer.getPublicKey();
 	}
 }
