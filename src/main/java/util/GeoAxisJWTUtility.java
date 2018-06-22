@@ -39,7 +39,7 @@ import org.springframework.stereotype.Component;
 public class GeoAxisJWTUtility {
 	@Value("${GEOAXIS_JWT_CERT}")
 	private String gxJwtCert;
-	private RSAPublicKey gxPublicJWTCert;
+	private RSAPublicKey gxPublicJWTCert = null;
 	private static final Logger LOG = LoggerFactory.getLogger(GeoAxisJWTUtility.class);
 
 	@PostConstruct
@@ -67,8 +67,10 @@ public class GeoAxisJWTUtility {
 	 */
 	public Jwt decodeAndVerify(final String encodedJWT) {
 		try {
+			if (gxPublicJWTCert == null) {
+				throw new RuntimeException("JWT public cert was not loaded. Cannot verify JWT requests.");
+			}
 			final RsaVerifier rsaVerifier = new RsaVerifier(gxPublicJWTCert, "SHA384withRSA");
-
 			return JwtHelper.decodeAndVerify(encodedJWT, rsaVerifier);
 		} catch (RuntimeException e) {
 			LOG.error("Failed to validate JWT: {}", e);
