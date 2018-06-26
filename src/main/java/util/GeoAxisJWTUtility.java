@@ -34,6 +34,8 @@ public class GeoAxisJWTUtility {
 	private RSAPublicKey gxPublicJWTCert = null;
 	private static final Logger LOG = LoggerFactory.getLogger(GeoAxisJWTUtility.class);
 
+	public GeoAxisJWTUtility() {}
+	
 	/**
 	 * Initializes the utility.
 	 * 
