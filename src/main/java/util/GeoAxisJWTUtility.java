@@ -15,7 +15,6 @@
  **/
 package util;
 
-import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.security.cert.CertificateException;
 import java.security.cert.CertificateFactory;
@@ -39,10 +38,10 @@ public class GeoAxisJWTUtility {
 	 * Initializes the utility.
 	 * 
 	 * @param certificate
-	 *            The Certificate text bytes (not file path)
+	 *            The Certificate bytes
 	 * @throws CertificateException
 	 */
-	public GeoAxisJWTUtility(String certificate) throws CertificateException {
+	public GeoAxisJWTUtility(InputStream certificate) throws CertificateException {
 		gxPublicJWTCert = loadGeoAxisPublicCertificate(certificate);
 	}
 
@@ -74,10 +73,9 @@ public class GeoAxisJWTUtility {
 		return null;
 	}
 
-	private RSAPublicKey loadGeoAxisPublicCertificate(String certificate) throws CertificateException {
+	private RSAPublicKey loadGeoAxisPublicCertificate(InputStream certificate) throws CertificateException {
 		final CertificateFactory certFactory = CertificateFactory.getInstance("X.509");
-		final InputStream fileInputStream = new ByteArrayInputStream(certificate.getBytes());
-		final X509Certificate cer = (X509Certificate) certFactory.generateCertificate(fileInputStream);
+		final X509Certificate cer = (X509Certificate) certFactory.generateCertificate(certificate);
 
 		return (RSAPublicKey) cer.getPublicKey();
 	}
