@@ -22,34 +22,28 @@ import java.security.cert.CertificateFactory;
 import java.security.cert.X509Certificate;
 import java.security.interfaces.RSAPublicKey;
 
-import javax.annotation.PostConstruct;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.jwt.Jwt;
 import org.springframework.security.jwt.JwtHelper;
 import org.springframework.security.jwt.crypto.sign.RsaVerifier;
-import org.springframework.stereotype.Component;
 
 /**
  * Utility class aiding in parsing information out of Java Web Tokens (JWT).
  */
-@Component
 public class GeoAxisJWTUtility {
-	@Value("${GEOAXIS_JWT_CERT}")
-	private String gxJwtCert;
 	private RSAPublicKey gxPublicJWTCert = null;
 	private static final Logger LOG = LoggerFactory.getLogger(GeoAxisJWTUtility.class);
 
-	@PostConstruct
-	public void loadCert() {
-		try {
-			gxPublicJWTCert = this.loadGeoAxisPublicCertificate();
-		} catch (CertificateException exception) {
-			LOG.error("Failed to read JWT public certificate. Cannot verify JWT requests.");
-			exception.printStackTrace();
-		}
+	/**
+	 * Initializes the utility.
+	 * 
+	 * @param certificate
+	 *            The Certificate text bytes (not file path)
+	 * @throws CertificateException
+	 */
+	public GeoAxisJWTUtility(String certificate) throws CertificateException {
+		gxPublicJWTCert = loadGeoAxisPublicCertificate(certificate);
 	}
 
 	/**
@@ -80,9 +74,9 @@ public class GeoAxisJWTUtility {
 		return null;
 	}
 
-	private RSAPublicKey loadGeoAxisPublicCertificate() throws CertificateException {
+	private RSAPublicKey loadGeoAxisPublicCertificate(String certificate) throws CertificateException {
 		final CertificateFactory certFactory = CertificateFactory.getInstance("X.509");
-		final InputStream fileInputStream = new ByteArrayInputStream(gxJwtCert.getBytes());
+		final InputStream fileInputStream = new ByteArrayInputStream(certificate.getBytes());
 		final X509Certificate cer = (X509Certificate) certFactory.generateCertificate(fileInputStream);
 
 		return (RSAPublicKey) cer.getPublicKey();
