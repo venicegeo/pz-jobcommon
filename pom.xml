@@ -14,6 +14,7 @@
 		<geotools.version>15.4</geotools.version>
 		<jackson.version>2.8.9</jackson.version>
 		<spring.version>4.3.12.RELEASE</spring.version>
+		<spring.security.jwt>1.0.9.RELEASE</spring.security.jwt>
 	</properties>
 
 	<repositories>
@@ -71,6 +72,12 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-aop</artifactId>
 			<version>${spring.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-jwt</artifactId>
+			<version>${spring.security.jwt}</version>
 		</dependency>
 
 		<dependency>
